@@ -77,7 +77,11 @@ ai:
   # LLM提供商配置
   # 支持的provider: openai, volcengine(火山引擎), anthropic, qwen等
   provider: "volcengine"  # 默认使用火山引擎
-
+  
+  # LangChain 配置
+  langchain:
+    enabled: true  # 是否启用 LangChain（推荐）
+    
   # 火山引擎配置 (推荐)
   volcengine:
     api_key: ""  # 通过环境变量 ARK_API_KEY 设置，或直接填写
@@ -100,12 +104,34 @@ ai:
     max_tokens: 4000
     temperature: 0.1
 
+  # Anthropic配置 (Claude)
+  anthropic:
+    api_key: ""  # 通过环境变量 ANTHROPIC_API_KEY 设置，或直接填写
+    base_url: "https://api.anthropic.com/v1"
+    model: "claude-3-opus-20240229"
+    max_tokens: 4000
+    temperature: 0.1
+
+  # 通义千问配置
+  qwen:
+    api_key: ""  # 通过环境变量 DASHSCOPE_API_KEY 设置
+    model: "qwen-max"
+    max_tokens: 4000
+    temperature: 0.1
+
   # 通用配置(向后兼容)
   api_key: ""  # 如果provider配置中没有，会读取此值
   base_url: ""
   model: ""
   max_tokens: 4000
   temperature: 0.1
+  
+  # Agent 编排配置
+  agent:
+    enabled: true  # 是否启用 Agent 编排
+    orchestrator_type: "graph"  # "graph" (完整编排) 或 "simple" (简化版)
+    max_iterations: 10  # 最大迭代次数
+    timeout_seconds: 300  # 超时时间
 
 optimization:
   enabled: true
