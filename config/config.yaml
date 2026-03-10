@@ -1,0 +1,131 @@
+# 知识提取智能体配置文件
+
+project:
+  name: "知识提取智能体项目"
+  description: "自动化分析代码和文档目录，生成结构化知识图谱"
+  root_dir: "./"
+
+analysis:
+  # 包含的代码文件模式
+  include_code:
+    - "**/*.py"
+    - "**/*.js"
+    - "**/*.jsx"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.java"
+    - "**/*.cpp"
+    - "**/*.cc"
+    - "**/*.cxx"
+    - "**/*.h"
+    - "**/*.hpp"
+    - "**/*.go"
+    - "**/*.rs"
+    - "**/*.php"
+    - "**/*.rb"
+    - "**/*.cs"
+  
+  # 包含的文档文件模式
+  include_docs:
+    - "**/*.md"
+    - "**/*.txt"
+    - "**/*.rst"
+    - "**/*.docx"
+    - "**/*.pdf"
+    - "**/*.html"
+    - "**/*.htm"
+  
+  # 排除的文件模式
+  exclude:
+    - "**/node_modules/**"
+    - "**/.git/**"
+    - "**/__pycache__/**"
+    - "**/dist/**"
+    - "**/build/**"
+    - "**/target/**"
+    - "**/venv/**"
+    - "**/.venv/**"
+    - "**/*.min.js"
+    - "**/vendor/**"
+    - "**/third_party/**"
+
+output:
+  path: "output/knowledge_graph"
+  sections:
+    - "project_overview"
+    - "architecture"
+    - "core_modules"
+    - "api_reference"
+    - "configuration"
+    - "usage_guide"
+    - "tech_stack"
+    - "development_standards"
+
+storage:
+  db_path: ".gitnexus_cache.db"
+
+performance:
+  max_workers: 8  # 并行处理的最大工作进程数，默认使用CPU核心数
+  batch_size: 200  # 批次处理大小
+  memory_limit_gb: 16  # 内存限制，超过会自动触发GC
+  chunk_size_mb: 100  # 大文件分块处理大小
+
+parallel:
+  max_workers: 8  # 并行处理的最大工作进程数
+
+ai:
+  # LLM提供商配置
+  # 支持的provider: openai, volcengine(火山引擎), anthropic, qwen等
+  provider: "volcengine"  # 默认使用火山引擎
+
+  # 火山引擎配置 (推荐)
+  volcengine:
+    api_key: ""  # 通过环境变量 ARK_API_KEY 设置，或直接填写
+    base_url: "https://ark.cn-beijing.volces.com/api/v3"
+    model: "deepseek-v3-2-251201"  # 支持的模型: deepseek-v3-2-251201 等
+    max_tokens: 4000
+    temperature: 0.1
+    # 工具配置
+    tools:
+      enabled: false  # 是否启用工具(如web_search)
+      web_search:
+        enabled: false
+        max_keyword: 2
+
+  # OpenAI配置 (备选)
+  openai:
+    api_key: ""  # 通过环境变量 OPENAI_API_KEY 设置，或直接填写
+    base_url: "https://api.openai.com/v1"
+    model: "gpt-4o"
+    max_tokens: 4000
+    temperature: 0.1
+
+  # 通用配置(向后兼容)
+  api_key: ""  # 如果provider配置中没有，会读取此值
+  base_url: ""
+  model: ""
+  max_tokens: 4000
+  temperature: 0.1
+
+optimization:
+  enabled: true
+  add_complexity_analysis: true
+  add_refactoring_suggestions: true
+  enrich_relationships: true
+  deduplicate_entities: true
+
+validation:
+  enabled: true
+  accuracy_threshold: 0.8  # 准确率阈值，低于此值需要重新分析
+  sample_size: 100  # 验证抽样大小
+
+testing:
+  enabled: true
+  test_framework: "pytest"
+  timeout_seconds: 30
+  complexity_threshold: 10  # 超过此复杂度的实体自动生成测试用例
+
+web:
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
