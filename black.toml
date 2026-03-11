@@ -1,0 +1,47 @@
+# 基于design-v1.md规范的Black配置
+
+# 目标Python版本
+target-version = ['py311']
+
+# 行长度限制
+line-length = 100
+
+# 跳过格式化字符串规范化
+skip-string-normalization = true
+
+# 强制使用双引号
+force-double-quotes = true
+
+# 缩进样式
+skip-magic-trailing-comma = false
+
+# 导入语句格式化
+[tool.black]
+# 导入语句分组
+known-first-party = ["kn_fetch"]
+known-third-party = [
+    "pydantic",
+    "sqlalchemy", 
+    "fastapi",
+    "openai",
+    "langchain",
+    "git",
+    "tree_sitter",
+    "pandas",
+    "networkx",
+    "loguru",
+    "celery",
+    "redis",
+    "neo4j",
+    "pymilvus",
+]
+
+# 多行导入的格式化
+multi-line-output = 3
+include-trailing-comma = true
+
+# 其他格式化选项
+preview = true
+
+# 字符串引号处理
+string-normalization = false

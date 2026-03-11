@@ -1,6 +1,7 @@
 """
 业务语义逆向提取Agent - 核心层
 实现：业务语义摘要、业务规则契约提取、业务领域标签、语义向量生成
+集成LLM增强分析、多模型交叉验证
 """
 import json
 import logging
@@ -12,6 +13,7 @@ import hashlib
 
 from ..gitnexus.models import CodeEntity, EntityType, KnowledgeGraph
 from ..ai.llm_client import LLMClient
+from .llm_enhanced_semantic import LLMEnhancedSemanticExtractor
 
 logger = logging.getLogger(__name__)
 
@@ -130,6 +132,9 @@ class SemanticExtractor:
         self.config = config or {}
         self.llm = LLMClient(self.config.get('ai', {})) if self.config else None
         
+        # LLM增强模块
+        self.llm_enhancer = LLMEnhancedSemanticExtractor(config) if config else None
+        
         # 缓存
         self._semantic_cache: Dict[str, EnhancedBusinessSemantic] = {}
     
@@ -188,18 +193,25 @@ class SemanticExtractor:
             semantic = self.extract_semantic(entity, graph)
             results[entity.id] = semantic
         
-        # 如果LLM可用，增强核心实体
-        if use_llm and self.llm and self.llm.is_available():
+        # 如果LLM增强模块可用，使用多模型交叉验证
+        if use_llm and self.llm_enhancer and self.llm_enhancer.llm_clients:
             # 选择需要LLM增强的实体（优先级：核心业务 > 公共API > 复杂逻辑）
             entities_to_enhance = self._select_entities_for_llm_enhancement(entities, results)
             entities_to_enhance = entities_to_enhance[:max_llm_calls]
             
-            for entity in entities_to_enhance:
-                try:
-                    enhanced_semantic = self._enhance_with_llm(entity, results[entity.id])
-                    results[entity.id] = enhanced_semantic
-                except Exception as e:
-                    logger.warning(f"LLM增强失败 {entity.name}: {e}")
+            # 使用LLM增强模块进行多模型并行处理
+            try:
+                llm_results = self.llm_enhancer.extract_enhanced_semantics_batch(entities_to_enhance)
+                
+                # 集成LLM结果到基础语义
+                for entity_id, llm_result in llm_results.items():
+                    if entity_id in results:
+                        enhanced_semantic = self.llm_enhancer.integrate_with_base_semantic(
+                            results[entity_id], llm_result
+                        )
+                        results[entity_id] = enhanced_semantic
+            except Exception as e:
+                logger.warning(f"LLM增强批量处理失败: {e}")
         
         return results
     

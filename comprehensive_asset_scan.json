@@ -1,0 +1,53 @@
+{
+  "project_info": {
+    "name": "",
+    "path": "d:\\mywork\\workspace\\kn-fetch"
+  },
+  "file_statistics": {
+    "total_files": 999,
+    "by_type": {
+      "": 129,
+      ".example": 1,
+      ".db": 1,
+      ".json": 5,
+      ".toml": 3,
+      ".md": 602,
+      ".py": 143,
+      ".ini": 1,
+      ".txt": 2,
+      ".bat": 1,
+      ".yaml": 3,
+      ".html": 2,
+      ".sample": 14,
+      ".sh": 1,
+      ".pyc": 91
+    },
+    "by_size_category": {
+      "small": 160,
+      "medium": 706,
+      "large": 133
+    }
+  },
+  "code_analysis": {
+    "languages": {
+      "Python": 143
+    },
+    "modules": [],
+    "packages": []
+  },
+  "documentation_analysis": {
+    "total_docs": 606,
+    "doc_types": {
+      ".md": 602,
+      ".txt": 2,
+      ".html": 2
+    },
+    "readme_files": [
+      "README.md",
+      "README_API_KEY_SETUP.md",
+      "docs\\extract\\README.md",
+      "output\\example\\stock-sentiment-analyzer\\README.md",
+      "output\\example\\stock-sentiment-analyzer\\README_GITNEXUS.md"
+    ]
+  }
+}

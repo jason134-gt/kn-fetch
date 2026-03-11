@@ -12,7 +12,7 @@ except ImportError:
     from tree_sitter import Language, Parser
     TREE_SITTER_VERSION = "old"
 
-from .models import CodeEntity, EntityType
+from .models import CodeEntity, EntityType, Relationship, RelationshipType, AnalysisResult
 from .exceptions import ParseError
 
 def _get_language(module):
@@ -110,24 +110,54 @@ class CodeParser:
         
         return "unknown"
     
-    def parse(self, content: str, file_path: str) -> List[CodeEntity]:
-        """解析代码文件，提取代码实体"""
+    def parse(self, content: str, file_path: str) -> AnalysisResult:
+        """解析代码文件，提取代码实体和关系"""
         language = self.detect_language(content, file_path)
         
         if language == "unknown":
-            return []
+            return AnalysisResult(
+                file_path=file_path,
+                file_hash=self._get_file_hash(content),
+                language=language,
+                entities=[],
+                relationships=[],
+                lines_of_code=len(content.splitlines())
+            )
         
         try:
             if language == "python":
-                return self._parse_python(content, file_path)
+                entities = self._parse_python(content, file_path)
+                # 从元数据中提取关系
+                relationships = []
+                for entity in entities:
+                    if entity.metadata and "relationships" in entity.metadata:
+                        relationships.extend([Relationship(**r) for r in entity.metadata["relationships"]])
+                
+                return AnalysisResult(
+                    file_path=file_path,
+                    file_hash=self._get_file_hash(content),
+                    language=language,
+                    entities=entities,
+                    relationships=relationships,
+                    lines_of_code=len(content.splitlines())
+                )
             else:
-                return self._parse_with_tree_sitter(content, file_path, language)
+                entities = self._parse_with_tree_sitter(content, file_path, language)
+                return AnalysisResult(
+                    file_path=file_path,
+                    file_hash=self._get_file_hash(content),
+                    language=language,
+                    entities=entities,
+                    relationships=[],
+                    lines_of_code=len(content.splitlines())
+                )
         except Exception as e:
             raise ParseError(f"解析文件 {file_path} 失败: {str(e)}")
     
     def _parse_python(self, content: str, file_path: str) -> List[CodeEntity]:
         """使用Python AST解析Python代码"""
         entities = []
+        
         try:
             tree = ast.parse(content)
         except SyntaxError as e:
@@ -139,70 +169,74 @@ class CodeParser:
             return ast.get_docstring(node)
         
         def process_node(node: Any, parent_id: Optional[str] = None):
-            if isinstance(node, ast.ClassDef):
-                entity_id = self._generate_entity_id(file_path, node.name, node.lineno)
-                docstring = extract_docstring(node)
-                end_lineno = node.end_lineno if hasattr(node, "end_lineno") else node.lineno
-                
-                entity = CodeEntity(
-                    id=entity_id,
-                    entity_type=EntityType.CLASS,
-                    name=node.name,
-                    file_path=file_path,
-                    start_line=node.lineno,
-                    end_line=end_lineno,
-                    content="\n".join(lines[node.lineno-1:end_lineno]),
-                    docstring=docstring,
-                    modifiers=[decorator.id for decorator in node.decorator_list if isinstance(decorator, ast.Name)],
-                    parent_id=parent_id,
-                    lines_of_code=end_lineno - node.lineno + 1
-                )
-                entities.append(entity)
-                
-                # 处理类成员
-                for item in node.body:
-                    process_node(item, parent_id=entity_id)
+            """处理AST节点，避免类型检查错误"""
+            try:
+                if isinstance(node, ast.ClassDef):
+                    entity_id = self._generate_entity_id(file_path, node.name, node.lineno)
+                    docstring = extract_docstring(node)
+                    end_lineno = node.end_lineno if hasattr(node, "end_lineno") else node.lineno
                     
-            elif isinstance(node, ast.FunctionDef) or isinstance(node, ast.AsyncFunctionDef):
-                is_method = parent_id is not None and any(isinstance(n, ast.ClassDef) for n in ast.walk(tree) if hasattr(n, 'body') and node in n.body)
-                entity_type = EntityType.METHOD if is_method else EntityType.FUNCTION
-                
-                entity_id = self._generate_entity_id(file_path, node.name, node.lineno)
-                docstring = extract_docstring(node)
-                end_lineno = node.end_lineno if hasattr(node, "end_lineno") else node.lineno
-                
-                # 提取参数
-                params = []
-                for arg in node.args.args:
-                    params.append({
-                        "name": arg.arg,
-                        "annotation": ast.unparse(arg.annotation) if arg.annotation else None
-                    })
-                
-                return_type = ast.unparse(node.returns) if node.returns else None
-                
-                entity = CodeEntity(
-                    id=entity_id,
-                    entity_type=entity_type,
-                    name=node.name,
-                    file_path=file_path,
-                    start_line=node.lineno,
-                    end_line=end_lineno,
-                    content="\n".join(lines[node.lineno-1:end_lineno]),
-                    docstring=docstring,
-                    modifiers=[decorator.id for decorator in node.decorator_list if isinstance(decorator, ast.Name)],
-                    parameters=params,
-                    return_type=return_type,
-                    parent_id=parent_id,
-                    lines_of_code=end_lineno - node.lineno + 1
-                )
-                entities.append(entity)
-                
-                # 处理嵌套函数
-                for item in node.body:
-                    if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                    entity = CodeEntity(
+                        id=entity_id,
+                        entity_type=EntityType.CLASS,
+                        name=node.name,
+                        file_path=file_path,
+                        start_line=node.lineno,
+                        end_line=end_lineno,
+                        content="\n".join(lines[node.lineno-1:end_lineno]),
+                        docstring=docstring,
+                        modifiers=[],
+                        parent_id=parent_id,
+                        lines_of_code=end_lineno - node.lineno + 1
+                    )
+                    entities.append(entity)
+                    
+                    # 处理类成员
+                    for item in node.body:
                         process_node(item, parent_id=entity_id)
+                        
+                elif isinstance(node, ast.FunctionDef) or isinstance(node, ast.AsyncFunctionDef):
+                    is_method = parent_id is not None
+                    entity_type = EntityType.METHOD if is_method else EntityType.FUNCTION
+                    
+                    entity_id = self._generate_entity_id(file_path, node.name, node.lineno)
+                    docstring = extract_docstring(node)
+                    end_lineno = node.end_lineno if hasattr(node, "end_lineno") else node.lineno
+                    
+                    # 提取参数
+                    params = []
+                    for arg in node.args.args:
+                        params.append({
+                            "name": arg.arg,
+                            "annotation": None
+                        })
+                    
+                    entity = CodeEntity(
+                        id=entity_id,
+                        entity_type=entity_type,
+                        name=node.name,
+                        file_path=file_path,
+                        start_line=node.lineno,
+                        end_line=end_lineno,
+                        content="\n".join(lines[node.lineno-1:end_lineno]),
+                        docstring=docstring,
+                        modifiers=[],
+                        parameters=params,
+                        return_type=None,
+                        parent_id=parent_id,
+                        lines_of_code=end_lineno - node.lineno + 1
+                    )
+                    entities.append(entity)
+                    
+                    # 处理嵌套函数
+                    for item in node.body:
+                        if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                            process_node(item, parent_id=entity_id)
+            except Exception as e:
+                # 忽略单个节点的解析错误，继续处理其他节点
+                print(f"解析节点 {type(node).__name__} 时出错: {e}")
         
+        # 处理顶层实体
         for node in ast.walk(tree):
             if isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
                 # 只处理顶层节点，内部节点由递归处理
@@ -308,3 +342,7 @@ class CodeParser:
         """生成实体唯一ID"""
         key = f"{file_path}:{name}:{line}"
         return hashlib.md5(key.encode()).hexdigest()[:16]
+    
+    def _get_file_hash(self, content: str) -> str:
+        """计算文件内容哈希值"""
+        return hashlib.md5(content.encode()).hexdigest()

@@ -31,6 +31,66 @@ class DeepKnowledgeAnalyzer:
         """检查LLM是否可用"""
         return self.llm.is_available()
     
+    def analyze_code_entity(self, code: str, file_path: str) -> List[Dict[str, Any]]:
+        """分析单个代码实体"""
+        if not self.is_available():
+            logger.warning("LLM不可用，跳过代码实体分析")
+            return []
+        
+        try:
+            prompt = f"""请分析以下Python代码，提取其中的主要实体（类、函数、方法）及其关系：
+
+文件路径: {file_path}
+
+```python
+{code}
+```
+
+请返回JSON格式的实体列表，每个实体包含以下字段：
+- name: 实体名称
+- type: 实体类型（class/function/method）
+- description: 实体描述
+- file_path: 文件路径
+- start_line: 起始行号
+- end_line: 结束行号
+
+只返回JSON格式的数据，不要有其他内容。"""
+            
+            response = self.llm.chat_sync(
+                system_prompt="你是一个代码分析专家，擅长从代码中提取结构化信息。",
+                user_prompt=prompt,
+                max_tokens=2000,
+                temperature=0.1
+            )
+            
+            if response:
+                # 尝试解析JSON响应
+                import json
+                try:
+                    # 提取JSON部分（可能包含代码块标记）
+                    if "```json" in response:
+                        json_str = response.split("```json")[1].split("```")[0].strip()
+                    elif "```" in response:
+                        json_str = response.split("```")[1].split("```")[0].strip()
+                    else:
+                        json_str = response.strip()
+                    
+                    entities = json.loads(json_str)
+                    if isinstance(entities, list):
+                        return entities
+                    else:
+                        logger.warning("LLM返回的实体格式不正确")
+                        return []
+                except json.JSONDecodeError as e:
+                    logger.warning(f"LLM返回的JSON解析失败: {e}")
+                    return []
+            else:
+                return []
+                
+        except Exception as e:
+            logger.error(f"代码实体分析失败: {e}")
+            return []
+    
     def analyze_all(self, graph, source_dir: str = None) -> Dict[str, Any]:
         """执行完整的深度分析"""
         results = {}
@@ -342,7 +402,7 @@ class DeepKnowledgeAnalyzer:
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(frontmatter + content)
         
-        print(f"  ✓ 已保存: {relative_path}")
+        print(f"  已保存: {relative_path}")
     
     def _get_entities_summary(self, graph) -> Dict[str, int]:
         """获取实体类型统计"""

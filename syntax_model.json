@@ -1,0 +1,157 @@
+{
+  "project_name": "",
+  "languages": {
+    "Python": 142
+  },
+  "file_structures": [
+    {
+      "file_path": "debug_llm_config.py",
+      "size": 3283,
+      "lines": 127,
+      "imports": [
+        "import os",
+        "import sys",
+        "import yaml",
+        "from src.ai.llm_client import LLMClient",
+        "import traceback",
+        "from src.ai.deep_knowledge_analyzer import DeepKnowledgeAnalyzer",
+        "import traceback"
+      ],
+      "functions": [
+        {
+          "name": "test_function",
+          "line": 99
+        }
+      ],
+      "classes": []
+    },
+    {
+      "file_path": "debug_simple.py",
+      "size": 1231,
+      "lines": 55,
+      "imports": [
+        "import os",
+        "import sys",
+        "import yaml",
+        "from src.ai.llm_client import LLMClient",
+        "from src.ai.deep_knowledge_analyzer import DeepKnowledgeAnalyzer",
+        "import traceback"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "file_path": "kn-fetch.py",
+      "size": 217,
+      "lines": 13,
+      "imports": [
+        "import sys",
+        "from pathlib import Path",
+        "from src.cli.cli import main"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "file_path": "start_web.py",
+      "size": 198,
+      "lines": 8,
+      "imports": [
+        "import uvicorn",
+        "from src.web.app import app"
+      ],
+      "functions": [],
+      "classes": []
+    },
+    {
+      "file_path": "test_basic_design_v1.py",
+      "size": 4943,
+      "lines": 192,
+      "imports": [
+        "import os",
+        "import sys",
+        "from pathlib import Path",
+        "from src.models.code_metadata import (",
+        "from src.infrastructure.config_manager import ConfigManager",
+        "from src.agents.file_scanner import FileScannerAgent"
+      ],
+      "functions": [
+        {
+          "name": "test_import_modules",
+          "line": 15
+        },
+        {
+          "name": "test_models_creation",
+          "line": 37
+        },
+        {
+          "name": "test_config_manager",
+          "line": 96
+        },
+        {
+          "name": "test_sample_project_analysis",
+          "line": 119
+        },
+        {
+          "name": "main",
+          "line": 155
+        }
+      ],
+      "classes": []
+    }
+  ],
+  "import_dependencies": [
+    "import os",
+    "import sys",
+    "import yaml",
+    "from src.ai.llm_client import LLMClient",
+    "import traceback",
+    "from src.ai.deep_knowledge_analyzer import DeepKnowledgeAnalyzer",
+    "import traceback",
+    "import os",
+    "import sys",
+    "import yaml",
+    "from src.ai.llm_client import LLMClient",
+    "from src.ai.deep_knowledge_analyzer import DeepKnowledgeAnalyzer",
+    "import traceback",
+    "import sys",
+    "from pathlib import Path",
+    "from src.cli.cli import main",
+    "import uvicorn",
+    "from src.web.app import app",
+    "import os",
+    "import sys",
+    "from pathlib import Path",
+    "from src.models.code_metadata import (",
+    "from src.infrastructure.config_manager import ConfigManager",
+    "from src.agents.file_scanner import FileScannerAgent"
+  ],
+  "function_definitions": [
+    {
+      "name": "test_function",
+      "line": 99
+    },
+    {
+      "name": "test_import_modules",
+      "line": 15
+    },
+    {
+      "name": "test_models_creation",
+      "line": 37
+    },
+    {
+      "name": "test_config_manager",
+      "line": 96
+    },
+    {
+      "name": "test_sample_project_analysis",
+      "line": 119
+    },
+    {
+      "name": "main",
+      "line": 155
+    }
+  ],
+  "class_definitions": [],
+  "variable_declarations": []
+}

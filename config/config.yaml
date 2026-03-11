@@ -84,14 +84,14 @@ ai:
     
   # 火山引擎配置 (推荐)
   volcengine:
-    api_key: ""  # 通过环境变量 ARK_API_KEY 设置，或直接填写
+    api_key: ""  # 必须通过环境变量 ARK_API_KEY 设置
     base_url: "https://ark.cn-beijing.volces.com/api/v3"
-    model: "deepseek-v3-2-251201"  # 支持的模型: deepseek-v3-2-251201 等
+    model: "deepseek-v3-1-terminus"  # 支持的模型: deepseek-v3-1-terminus, deepseek-v3-2-251201 等
     max_tokens: 4000
     temperature: 0.1
     # 工具配置
     tools:
-      enabled: false  # 是否启用工具(如web_search)
+      enabled: false  # 禁用工具，避免web_search未激活导致错误
       web_search:
         enabled: false
         max_keyword: 2

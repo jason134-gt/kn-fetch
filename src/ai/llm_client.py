@@ -18,7 +18,7 @@ class LLMClient:
     PROVIDER_DEFAULTS = {
         "volcengine": {
             "base_url": "https://ark.cn-beijing.volces.com/api/v3",
-            "model": "deepseek-v3-2-251201",
+            "model": "deepseek-v3-1-terminus",
             "env_key": "ARK_API_KEY"
         },
         "openai": {

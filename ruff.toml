@@ -1,0 +1,93 @@
+# 基于design-v1.md规范的Ruff配置
+
+# 行长度限制
+line-length = 100
+
+# 选择要启用的检查规则
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "S",  # flake8-bandit (安全相关)
+    "T10", # flake8-debugger
+    "RUF", # Ruff特定规则
+]
+
+# 忽略的规则
+ignore = [
+    "B008", # 函数调用中不允许使用可变默认参数
+    "B009", # 不允许使用getattr与常量参数
+    "B010", # 不允许使用setattr与常量参数
+    "E501", # 行过长（由line-length控制）
+    "W503", # 运算符在行首
+    "W504", # 运算符在行尾
+    "RUF001", # 模棱两可的Unicode字符
+]
+
+# 允许的魔法值
+allowed-magic-values = [0, 1, -1, "", True, False, None]
+
+# 每行允许的最大复杂度
+max-complexity = 15
+
+# 每个函数的参数数量限制
+max-args = 10
+
+# 每个语句的最大表达式数量
+max-expressions = 10
+
+# 嵌套块的最大深度
+max-depth = 4
+
+# 每个函数的最大语句数量
+max-statements = 50
+
+# 每个类的最大方法数量
+max-methods = 20
+
+# isort配置
+[tool.ruff.isort]
+known-first-party = ["kn_fetch"]
+known-third-party = [
+    "pydantic",
+    "sqlalchemy",
+    "fastapi",
+    "openai",
+    "langchain",
+    "git",
+    "tree_sitter",
+    "pandas",
+    "networkx",
+    "loguru",
+    "celery",
+    "redis",
+    "neo4j",
+    "pymilvus",
+]
+
+# 格式化配置
+[tool.ruff.format]
+# 引号样式："single" 或 "double"
+quote-style = "double"
+
+# 缩进样式
+indent-style = "space"
+
+# 每级缩进的空格数
+indent-width = 4
+
+# 目标Python版本
+target-version = "py311"
+
+# 特定规则配置
+[tool.ruff.flake8-bugbear]
+# 扩展的flake8-bugbear规则
+extend-immutable-calls = ["frozenset", "MappingProxyType"]
+
+[tool.ruff.flake8-comprehensions]
+# 禁止不必要的推导式理解
+allow-dict-calls-with-keyword-arguments = false
