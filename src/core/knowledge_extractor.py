@@ -12,6 +12,7 @@ from ..gitnexus import GitNexusClient, KnowledgeGraph, AnalysisResult
 from ..gitnexus.models import CodeEntity
 from .document_parser import DocumentParser
 from .knowledge_document_generator import KnowledgeDocumentGenerator
+from .refactoring_analyzer import RefactoringAnalyzer
 from ..ai.deep_knowledge_analyzer import DeepKnowledgeAnalyzer
 
 class KnowledgeExtractor:
@@ -42,7 +43,8 @@ class KnowledgeExtractor:
         include_code: bool = True,
         include_docs: bool = True,
         force: bool = False,
-        deep_analysis: bool = False
+        deep_analysis: bool = False,
+        refactoring_analysis: bool = False
     ) -> KnowledgeGraph:
         """从指定目录提取结构化知识
         Args:
@@ -51,6 +53,7 @@ class KnowledgeExtractor:
             include_docs: 是否包含文档分析
             force: 是否强制重新分析，忽略缓存
             deep_analysis: 是否启用LLM深度分析（生成设计文档）
+            refactoring_analysis: 是否启用重构分析（风险分级、技术债务扫描等）
         Returns:
             完整的知识图谱
         """
@@ -178,7 +181,7 @@ class KnowledgeExtractor:
         
         return graph
     
-    def _save_knowledge_graph(self, graph: KnowledgeGraph, source_dir: str = None, deep_analysis: bool = False):
+    def _save_knowledge_graph(self, graph: KnowledgeGraph, source_dir: str = None, deep_analysis: bool = False, refactoring_analysis: bool = False):
         """保存知识图谱到存储"""
         output_config = self.config.get("output", {})
         output_path = Path(output_config.get("path", "output/knowledge_graph.json"))
@@ -195,6 +198,13 @@ class KnowledgeExtractor:
         print(f"  - 索引: {doc_result['index']}")
         print(f"  - 实体文档: {len(doc_result['entities'])} 个")
         print(f"  - 模块文档: {len(doc_result['modules'])} 个")
+        
+        # 重构分析（风险分级、技术债务扫描、架构诊断）
+        if refactoring_analysis:
+            print("\n启动重构分析...")
+            refactoring_analyzer = RefactoringAnalyzer(graph, self.config)
+            refactoring_results = refactoring_analyzer.analyze_full()
+            refactoring_analyzer.save_analysis_report(refactoring_results, "output/refactoring")
         
         # LLM深度分析（生成设计文档）
         if deep_analysis:
@@ -213,3 +223,32 @@ class KnowledgeExtractor:
     def get_statistics(self) -> Dict[str, Any]:
         """获取分析统计信息"""
         return self.gitnexus_client.get_statistics()
+    
+    def analyze_refactoring(self, knowledge_graph_path: str = None) -> Dict[str, Any]:
+        """执行重构分析（可单独调用）
+        Args:
+            knowledge_graph_path: 已有知识图谱路径，如果为None则使用最近分析的结果
+        Returns:
+            重构分析结果
+        """
+        if knowledge_graph_path:
+            # 加载已有知识图谱
+            with open(knowledge_graph_path, "r", encoding="utf-8") as f:
+                graph_data = json.load(f)
+                graph = KnowledgeGraph(**graph_data)
+        else:
+            # 使用缓存的知识图谱
+            output_config = self.config.get("output", {})
+            default_path = Path(output_config.get("path", "output/knowledge_graph.json"))
+            if not default_path.exists():
+                raise FileNotFoundError("未找到知识图谱文件，请先执行代码分析")
+            with open(default_path, "r", encoding="utf-8") as f:
+                graph_data = json.load(f)
+                graph = KnowledgeGraph(**graph_data)
+        
+        # 执行重构分析
+        refactoring_analyzer = RefactoringAnalyzer(graph, self.config)
+        results = refactoring_analyzer.analyze_full()
+        refactoring_analyzer.save_analysis_report(results, "output/refactoring")
+        
+        return results

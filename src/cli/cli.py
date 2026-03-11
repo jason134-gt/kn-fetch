@@ -44,6 +44,7 @@ def main():
     analyze_parser.add_argument("--incremental", action="store_true", help="启用增量分析")
     analyze_parser.add_argument("--resume", action="store_true", help="断点续传模式")
     analyze_parser.add_argument("--deep", "-d", action="store_true", help="启用LLM深度分析，生成详细设计文档（需要配置API Key）")
+    analyze_parser.add_argument("--refactoring", "-r", action="store_true", help="启用重构分析，包括风险分级、技术债务扫描、架构诊断")
     
     # 导出命令
     export_parser = subparsers.add_parser("export", help="导出分析结果")
@@ -92,6 +93,12 @@ def main():
     refactor_parser.add_argument("--config", "-c", default="config/config.yaml", help="配置文件路径")
     refactor_parser.add_argument("--output", "-o", help="输出文件路径")
     refactor_parser.add_argument("--enhanced", "-e", action="store_true", help="使用增强版分析（ArchAI+GitUML）")
+    
+    # 重构分析命令（新增）
+    refactoring_parser = subparsers.add_parser("refactoring", help="重构分析：风险分级、技术债务扫描、架构诊断")
+    refactoring_parser.add_argument("--config", "-c", default="config/config.yaml", help="配置文件路径")
+    refactoring_parser.add_argument("--graph", "-g", help="知识图谱JSON文件路径（可选，默认使用最近分析结果）")
+    refactoring_parser.add_argument("--output", "-o", default="output/refactoring", help="输出目录")
     
     # 增强分析命令 (ArchAI CodeExplainer)
     enhanced_parser = subparsers.add_parser("enhanced", help="增强版知识提取（ArchAI+GitUML）")
@@ -144,6 +151,8 @@ def main():
         handle_uml(args)
     elif args.command == "refactor":
         handle_refactor(args)
+    elif args.command == "refactoring":
+        handle_refactoring_analysis(args)
     elif args.command == "enhanced":
         handle_enhanced(args)
     elif args.command == "explain":
@@ -173,7 +182,8 @@ def handle_analyze(args):
             include_code=not args.no_code,
             include_docs=not args.no_docs,
             force=args.force,
-            deep_analysis=args.deep if hasattr(args, 'deep') else False
+            deep_analysis=args.deep if hasattr(args, 'deep') else False,
+            refactoring_analysis=args.refactoring if hasattr(args, 'refactoring') else False
         )
     
     print(f"\n分析完成！")
@@ -300,6 +310,80 @@ def handle_web(args):
     
     print(f"启动Web管理界面，访问地址: http://{args.host}:{args.port}")
     uvicorn.run(app, host=args.host, port=args.port)
+
+
+def handle_refactoring_analysis(args):
+    """处理重构分析命令"""
+    from src.core.refactoring_analyzer import RefactoringAnalyzer
+    from src.gitnexus import GitNexusClient
+    from pathlib import Path
+    
+    # 加载知识图谱
+    if args.graph:
+        with open(args.graph, "r", encoding="utf-8") as f:
+            graph_data = json.load(f)
+            graph = KnowledgeGraph(**graph_data)
+        print(f"从 {args.graph} 加载知识图谱...")
+    else:
+        client = GitNexusClient(args.config)
+        graph = client._load_knowledge_graph()
+        if not graph or not graph.entities:
+            print("错误：暂无知识图谱数据，请先运行分析")
+            sys.exit(1)
+        print("使用缓存的知识图谱...")
+    
+    print(f"\n开始重构分析...")
+    print(f"实体数量: {len(graph.entities)}")
+    print(f"关系数量: {len(graph.relationships)}")
+    
+    # 执行重构分析
+    config = {}
+    try:
+        import yaml
+        with open(args.config, "r", encoding="utf-8") as f:
+            config = yaml.safe_load(f)
+    except:
+        pass
+    
+    analyzer = RefactoringAnalyzer(graph, config)
+    results = analyzer.analyze_full()
+    
+    # 保存结果
+    output_dir = Path(args.output)
+    analyzer.save_analysis_report(results, str(output_dir))
+    
+    # 打印摘要
+    print("\n" + "="*60)
+    print("重构分析完成！")
+    print("="*60)
+    
+    # 风险分级统计
+    risk = results.get("risk_assessment", {})
+    print("\n【风险分级统计】")
+    for level in ["P0", "P1", "P2", "P3"]:
+        count = len(risk.get(level, []))
+        if level == "P0":
+            print(f"  P0 核心模块: {count} 个（禁止AI全自动重构）")
+        elif level == "P1":
+            print(f"  P1 重要模块: {count} 个（需人工审核核心逻辑）")
+        elif level == "P2":
+            print(f"  P2 通用模块: {count} 个（AI可全自动重构）")
+        else:
+            print(f"  P3 边缘模块: {count} 个（可直接评估下线）")
+    
+    # 技术债务统计
+    debts = results.get("technical_debts", [])
+    print(f"\n【技术债务】共 {len(debts)} 项")
+    
+    # 架构诊断
+    arch = results.get("architecture_diagnosis")
+    if arch:
+        print(f"\n【架构诊断】")
+        print(f"  架构风格: {arch.architecture_style}")
+        print(f"  架构问题: {len(arch.issues)} 项")
+        print(f"  循环依赖: {len(arch.cyclic_dependencies)} 个")
+    
+    print(f"\n详细报告已保存到: {output_dir}")
 
 
 def handle_architecture(args):

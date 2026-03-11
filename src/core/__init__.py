@@ -5,6 +5,7 @@ from .knowledge_optimizer import KnowledgeOptimizer
 from .architecture_analyzer import ArchitectureAnalyzer
 from .uml_generator import UMLGenerator
 from .architecture_reporter import ArchitectureReporter
+from .refactoring_analyzer import RefactoringAnalyzer, RiskLevel, TechnicalDebt, BusinessSemantic, ArchitectureDiagnosis
 
 __all__ = [
     "KnowledgeExtractor",
@@ -13,5 +14,10 @@ __all__ = [
     "KnowledgeOptimizer",
     "ArchitectureAnalyzer",
     "UMLGenerator",
-    "ArchitectureReporter"
+    "ArchitectureReporter",
+    "RefactoringAnalyzer",
+    "RiskLevel",
+    "TechnicalDebt",
+    "BusinessSemantic",
+    "ArchitectureDiagnosis"
 ]
