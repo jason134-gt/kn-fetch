@@ -1,6 +1,7 @@
 """
 重构分析器 - 百万行级存量项目AI驱动重构支持模块
 实现：代码模块风险分级、业务语义逆向提取、技术债务扫描、架构腐化诊断
+集成：代码资产全景图、安全扫描、重复代码检测、元数据仓库
 """
 import json
 import logging
@@ -16,6 +17,13 @@ from ..gitnexus.models import (
     ModuleInfo, ArchitectureInfo
 )
 from ..ai.llm_client import LLMClient
+
+# 导入新增模块
+from .semantic_extractor import SemanticExtractor, EnhancedBusinessSemantic
+from .code_asset_visualizer import CodeAssetVisualizer
+from .duplicate_detector import DuplicateDetector, DuplicateReport
+from .security_scanner import SecurityScanner, SecurityScanResult
+from .metadata_repository import MetadataRepository
 
 logger = logging.getLogger(__name__)
 
@@ -96,12 +104,30 @@ class ArchitectureDiagnosis:
 
 
 class RefactoringAnalyzer:
-    """重构分析器 - 支持百万行级项目重构"""
+    """重构分析器 - 支持百万行级项目重构
+    
+    实现多Agent协作架构：
+    1. 代码解析与预处理Agent（基础层）
+    2. 语义理解与业务抽象Agent（核心层）
+    3. 依赖分析与架构逆向Agent
+    4. 风险评估与优先级排序Agent
+    5. 业务-代码映射Agent
+    6. 可视化与报告生成Agent
+    7. 元数据仓库与API层
+    """
     
     def __init__(self, graph: KnowledgeGraph, config: Dict[str, Any] = None):
         self.graph = graph
         self.config = config or {}
         self.llm = LLMClient(self.config.get('ai', {})) if self.config else None
+        
+        # 初始化子模块
+        self.semantic_extractor = SemanticExtractor(self.config)
+        self.duplicate_detector = DuplicateDetector(self.config)
+        self.security_scanner = SecurityScanner(self.config)
+        self.metadata_repo = MetadataRepository(
+            self.config.get("storage", {}).get("metadata_db", "output/metadata.db")
+        )
         
         # 索引
         self._build_indexes()
@@ -146,36 +172,63 @@ class RefactoringAnalyzer:
     
     # ==================== 阶段1：前置准备与资产盘点 ====================
     
-    def analyze_full(self) -> Dict[str, Any]:
-        """完整重构分析"""
+    def analyze_full(self, enable_security_scan: bool = True, enable_duplicate_detect: bool = True) -> Dict[str, Any]:
+        """完整重构分析 - 多Agent协作
+        
+        Args:
+            enable_security_scan: 是否启用安全扫描
+            enable_duplicate_detect: 是否启用重复代码检测
+        """
         print("\n" + "="*60)
-        print("开始重构分析...")
+        print("开始重构分析（多Agent协作模式）...")
         print("="*60)
         
         results = {}
         
-        # 1. 代码模块风险分级
-        print("\n[1/5] 代码模块风险分级...")
+        # 1. 代码模块风险分级（风险评估Agent）
+        print("\n[1/8] 代码模块风险分级...")
         results["risk_assessment"] = self.analyze_risk_levels()
         
-        # 2. 业务语义逆向提取
-        print("[2/5] 业务语义逆向提取...")
-        results["business_semantics"] = self.extract_business_semantics()
+        # 2. 业务语义逆向提取（语义理解Agent）
+        print("[2/8] 业务语义逆向提取...")
+        results["business_semantics"] = self.extract_business_semantics_enhanced()
         
-        # 3. 技术债务扫描
-        print("[3/5] 技术债务扫描...")
+        # 3. 技术债务扫描（风险评估Agent）
+        print("[3/8] 技术债务扫描...")
         results["technical_debts"] = self.scan_technical_debts()
         
-        # 4. 热点与风险代码识别
-        print("[4/5] 热点与风险代码识别...")
+        # 4. 热点与风险代码识别（风险评估Agent）
+        print("[4/8] 热点与风险代码识别...")
         results["hotspots"] = self.identify_hotspots()
         
-        # 5. 架构腐化诊断
-        print("[5/5] 架构腐化诊断...")
+        # 5. 架构腐化诊断（依赖分析Agent）
+        print("[5/8] 架构腐化诊断...")
         results["architecture_diagnosis"] = self.diagnose_architecture()
+        
+        # 6. 安全漏洞扫描（新增）
+        if enable_security_scan:
+            print("[6/8] 安全漏洞扫描...")
+            results["security_scan"] = self.scan_security_vulnerabilities()
+        else:
+            print("[6/8] 安全漏洞扫描... 跳过")
+        
+        # 7. 重复代码检测（新增）
+        if enable_duplicate_detect:
+            print("[7/8] 重复代码检测...")
+            results["duplicate_detection"] = self.detect_duplicate_code()
+        else:
+            print("[7/8] 重复代码检测... 跳过")
+        
+        # 8. 生成代码资产全景图（可视化Agent）
+        print("[8/8] 生成代码资产全景图...")
+        results["visualization"] = self.generate_code_asset_visualization()
         
         # 生成重构范围边界说明书
         results["boundary_report"] = self._generate_boundary_report(results)
+        
+        # 存储到元数据仓库
+        print("\n存储到元数据仓库...")
+        self.metadata_repo.store_knowledge_graph(self.graph, results)
         
         print("\n重构分析完成！")
         return results
@@ -1086,6 +1139,105 @@ class RefactoringAnalyzer:
         
         return "".join(report)
     
+    # ==================== 新增：集成分析方法 ====================
+    
+    def extract_business_semantics_enhanced(self) -> Dict[str, EnhancedBusinessSemantic]:
+        """增强版业务语义逆向提取"""
+        entities = list(self.graph.entities.values())
+        
+        # 使用SemanticExtractor提取语义
+        semantics = self.semantic_extractor.extract_semantics_batch(
+            entities, 
+            self.graph,
+            use_llm=self.llm is not None and self.llm.is_available(),
+            max_llm_calls=30  # 限制LLM调用次数
+        )
+        
+        print(f"  提取 {len(semantics)} 个实体的业务语义")
+        
+        # 统计业务域分布
+        domain_counts = Counter(s.business_domain for s in semantics.values())
+        for domain, count in domain_counts.most_common(5):
+            print(f"    - {domain}: {count}")
+        
+        return semantics
+    
+    def scan_security_vulnerabilities(self) -> SecurityScanResult:
+        """安全漏洞扫描"""
+        entities = list(self.graph.entities.values())
+        
+        # 使用SecurityScanner扫描
+        result = self.security_scanner.scan(entities)
+        
+        # 打印摘要
+        stats = result.statistics
+        print(f"  安全评分: {stats.get('security_score', 0)}/100")
+        print(f"  风险等级: {stats.get('risk_level', '未知')}")
+        print(f"  发现漏洞: {stats.get('total_vulnerabilities', 0)}")
+        
+        severity = stats.get("severity_distribution", {})
+        for level, count in severity.items():
+            print(f"    - {level}: {count}")
+        
+        return result
+    
+    def detect_duplicate_code(self) -> DuplicateReport:
+        """重复代码检测"""
+        entities = list(self.graph.entities.values())
+        
+        # 使用DuplicateDetector检测
+        report = self.duplicate_detector.detect(entities)
+        
+        # 打印摘要
+        stats = report.statistics
+        print(f"  检测实体: {stats.get('total_entities', 0)}")
+        print(f"  重复对数: {stats.get('duplicate_pair_count', 0)}")
+        print(f"  重复率: {stats.get('duplicate_percentage', 0):.1f}%")
+        
+        return report
+    
+    def generate_code_asset_visualization(self, output_dir: str = "output/visualization") -> Dict[str, str]:
+        """生成代码资产全景图"""
+        visualizer = CodeAssetVisualizer(self.graph, self.config)
+        results = visualizer.generate_full_visualization(output_dir)
+        
+        print(f"  生成文件:")
+        for name, path in results.items():
+            print(f"    - {name}: {path}")
+        
+        return results
+    
+    def get_business_code_mapping(self) -> Dict[str, List[str]]:
+        """获取业务-代码映射台账"""
+        semantics = self.extract_business_semantics_enhanced()
+        
+        # 按业务域分组
+        domain_to_entities = defaultdict(list)
+        
+        for entity_id, semantic in semantics.items():
+            domain = semantic.business_domain
+            domain_to_entities[domain].append({
+                "entity_id": entity_id,
+                "entity_name": semantic.entity_name,
+                "file_path": semantic.file_path,
+                "business_summary": semantic.business_summary,
+                "business_tags": semantic.business_domain_tags
+            })
+        
+        return dict(domain_to_entities)
+    
+    def query_by_business_domain(self, domain: str) -> List[Dict[str, Any]]:
+        """按业务域查询实体"""
+        return self.metadata_repo.get_entities_by_domain(domain)
+    
+    def query_high_risk_entities(self, limit: int = 20) -> List[Any]:
+        """查询高风险实体"""
+        return self.metadata_repo.get_high_risk_entities(limit)
+    
+    def search_entities(self, keyword: str) -> List[Any]:
+        """搜索实体"""
+        return self.metadata_repo.search_entities(keyword)
+    
     def save_analysis_report(self, results: Dict[str, Any], output_dir: str = "output/refactoring"):
         """保存分析报告"""
         output_path = Path(output_dir)
@@ -1125,6 +1277,29 @@ class RefactoringAnalyzer:
                     f.write(f"- 描述：{debt.description}\n")
                     f.write(f"- 建议：{debt.suggestion}\n")
                     f.write(f"- 预估工作量：{debt.estimated_effort}\n\n")
+        
+        # 保存安全扫描报告
+        security_result = results.get("security_scan")
+        if security_result:
+            security_report = self.security_scanner.generate_markdown_report(security_result)
+            with open(output_path / "security_report.md", "w", encoding="utf-8") as f:
+                f.write(security_report)
+        
+        # 保存重复代码报告
+        duplicate_report = results.get("duplicate_detection")
+        if duplicate_report:
+            self.duplicate_detector.export_report(
+                duplicate_report, 
+                str(output_path / "duplicate_report.json")
+            )
+        
+        # 保存业务-代码映射台账
+        business_mapping = self.get_business_code_mapping()
+        with open(output_path / "business_code_mapping.json", "w", encoding="utf-8") as f:
+            json.dump(business_mapping, f, ensure_ascii=False, indent=2)
+        
+        # 导出元数据仓库
+        self.metadata_repo.export_to_json(str(output_path / "metadata.json"))
         
         print(f"\n分析报告已保存到：{output_path}")
         return output_path
