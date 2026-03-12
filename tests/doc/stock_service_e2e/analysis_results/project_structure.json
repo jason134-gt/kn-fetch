@@ -1,0 +1,2509 @@
+{
+  "project_name": "Stock_service",
+  "analysis_time": "2026-03-12T10:46:03.102752",
+  "file_statistics": {
+    "total_files": 301,
+    "file_types": {
+      ".xml": 16,
+      ".properties": 1,
+      ".java": 284
+    },
+    "java_files_count": 284
+  },
+  "directory_structure": {
+    ".": {
+      "directories": [
+        "src"
+      ],
+      "files": [
+        "pom.xml"
+      ],
+      "java_files": []
+    },
+    "src": {
+      "directories": [
+        "com",
+        "maps",
+        "org",
+        "topic"
+      ],
+      "files": [
+        "library.properties"
+      ],
+      "java_files": []
+    },
+    "src\\com": {
+      "directories": [
+        "aliyun",
+        "yfzx",
+        "yz"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\aliyun": {
+      "directories": [
+        "openservices"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\aliyun\\openservices": {
+      "directories": [
+        "oss",
+        "ots"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\aliyun\\openservices\\oss": {
+      "directories": [
+        "samples"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\aliyun\\openservices\\oss\\samples": {
+      "directories": [],
+      "files": [
+        "OSSMultipartSample.java",
+        "OSSObjectSample.java"
+      ],
+      "java_files": [
+        "OSSMultipartSample.java",
+        "OSSObjectSample.java"
+      ]
+    },
+    "src\\com\\aliyun\\openservices\\ots": {
+      "directories": [
+        "samples"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\aliyun\\openservices\\ots\\samples": {
+      "directories": [],
+      "files": [
+        "OTSMultiDataSample.java",
+        "OTSSingleDataSample.java"
+      ],
+      "java_files": [
+        "OTSMultiDataSample.java",
+        "OTSSingleDataSample.java"
+      ]
+    },
+    "src\\com\\yfzx": {
+      "directories": [
+        "service"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yfzx\\service": {
+      "directories": [
+        "agent",
+        "ansj",
+        "cache",
+        "chance",
+        "client",
+        "comet",
+        "count",
+        "db",
+        "factory",
+        "hfunction",
+        "mobile",
+        "msg",
+        "msgpush",
+        "nosql",
+        "product",
+        "realtime",
+        "share",
+        "spider",
+        "stockgame",
+        "trade",
+        "util"
+      ],
+      "files": [
+        "StockCenter.java",
+        "StockDto.java"
+      ],
+      "java_files": [
+        "StockCenter.java",
+        "StockDto.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\agent": {
+      "directories": [],
+      "files": [
+        "CompileDefaultDataFetcherImpl.java",
+        "IndexValueAgent.java"
+      ],
+      "java_files": [
+        "CompileDefaultDataFetcherImpl.java",
+        "IndexValueAgent.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\ansj": {
+      "directories": [],
+      "files": [
+        "KeywordsExtratorService.java"
+      ],
+      "java_files": [
+        "KeywordsExtratorService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\cache": {
+      "directories": [],
+      "files": [
+        "CacheUtilService.java",
+        "DataLoadTimeMng.java",
+        "ExtCacheService.java",
+        "IndexCacheLoadService.java",
+        "IndexCacheService.java",
+        "IndustryCacheLoadService.java",
+        "IndustryExtCacheService.java",
+        "PageCacheLoadService.java"
+      ],
+      "java_files": [
+        "CacheUtilService.java",
+        "DataLoadTimeMng.java",
+        "ExtCacheService.java",
+        "IndexCacheLoadService.java",
+        "IndexCacheService.java",
+        "IndustryCacheLoadService.java",
+        "IndustryExtCacheService.java",
+        "PageCacheLoadService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\chance": {
+      "directories": [],
+      "files": [
+        "ChanceCategoryService.java"
+      ],
+      "java_files": [
+        "ChanceCategoryService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\client": {
+      "directories": [
+        "es"
+      ],
+      "files": [
+        "DcssCompanyExtIndexServiceClient.java",
+        "DcssDefaultServiceClient.java",
+        "DcssIndustryExtIndexServiceClient.java",
+        "DcssTradeIndexServiceClient.java",
+        "MessageSenderServiceClient.java",
+        "PushClient.java",
+        "RemindServiceClient.java",
+        "TopicServiceClient.java",
+        "UserServiceClient.java"
+      ],
+      "java_files": [
+        "DcssCompanyExtIndexServiceClient.java",
+        "DcssDefaultServiceClient.java",
+        "DcssIndustryExtIndexServiceClient.java",
+        "DcssTradeIndexServiceClient.java",
+        "MessageSenderServiceClient.java",
+        "PushClient.java",
+        "RemindServiceClient.java",
+        "TopicServiceClient.java",
+        "UserServiceClient.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\client\\es": {
+      "directories": [],
+      "files": [
+        "ESClient.java",
+        "ESIndexData.java",
+        "ESIndexMapping.java",
+        "StockWordExtrator.java",
+        "TextSplitService.java"
+      ],
+      "java_files": [
+        "ESClient.java",
+        "ESIndexData.java",
+        "ESIndexMapping.java",
+        "StockWordExtrator.java",
+        "TextSplitService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\comet": {
+      "directories": [],
+      "files": [
+        "CometPushMsgType.java",
+        "CometService.java"
+      ],
+      "java_files": [
+        "CometPushMsgType.java",
+        "CometService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\count": {
+      "directories": [],
+      "files": [
+        "StatisticsService.java"
+      ],
+      "java_files": [
+        "StatisticsService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\db": {
+      "directories": [
+        "company",
+        "mapdb",
+        "tree",
+        "user"
+      ],
+      "files": [
+        "AssertService.java",
+        "BaseIndexService.java",
+        "CashFlowService.java",
+        "CfScoreRuleService.java",
+        "CIndexService.java",
+        "CompanyService.java",
+        "ComposeIndexService.java",
+        "ConditionDefineService.java",
+        "CRuleService.java",
+        "DcheckService.java",
+        "DelegateOrderService.java",
+        "DictService.java",
+        "Fund0002Service.java",
+        "IIndexService.java",
+        "IIService.java",
+        "IndexCacheService.java",
+        "IndexCategoryService.java",
+        "IndexGroupService.java",
+        "IndexService.java",
+        "IndexUtilService.java",
+        "IndustryService.java",
+        "MAnalysisService.java",
+        "MarketService.java",
+        "MatchinfoService.java",
+        "MenberExtService.java",
+        "MessageCenterSerivce.java",
+        "MsgconstService.java",
+        "ProfileService.java",
+        "RankingService.java",
+        "RankResultService.java",
+        "RealTimeService.java",
+        "ReferenceService.java",
+        "RelativeIndexsService.java",
+        "SelectStockService.java",
+        "StatisticsService.java",
+        "Stock0001Service.java",
+        "Stock0004Service.java",
+        "Stock0007Service.java",
+        "Stock0008Service.java",
+        "Stock0009Service.java",
+        "StockPoolService.java",
+        "StockServiceFactory.java",
+        "SystemPropertiesService.java",
+        "TableSystemService.java",
+        "TagruleService.java",
+        "TagService.java",
+        "TemplateService.java",
+        "TopicApplicantService.java",
+        "TopicBackupService.java",
+        "TopicHostService.java",
+        "TopicService.java",
+        "TopicUserService.java",
+        "TUextService.java",
+        "UIndexService.java",
+        "UserNoteService.java",
+        "USubjectService.java",
+        "ValuationService.java"
+      ],
+      "java_files": [
+        "AssertService.java",
+        "BaseIndexService.java",
+        "CashFlowService.java",
+        "CfScoreRuleService.java",
+        "CIndexService.java",
+        "CompanyService.java",
+        "ComposeIndexService.java",
+        "ConditionDefineService.java",
+        "CRuleService.java",
+        "DcheckService.java",
+        "DelegateOrderService.java",
+        "DictService.java",
+        "Fund0002Service.java",
+        "IIndexService.java",
+        "IIService.java",
+        "IndexCacheService.java",
+        "IndexCategoryService.java",
+        "IndexGroupService.java",
+        "IndexService.java",
+        "IndexUtilService.java",
+        "IndustryService.java",
+        "MAnalysisService.java",
+        "MarketService.java",
+        "MatchinfoService.java",
+        "MenberExtService.java",
+        "MessageCenterSerivce.java",
+        "MsgconstService.java",
+        "ProfileService.java",
+        "RankingService.java",
+        "RankResultService.java",
+        "RealTimeService.java",
+        "ReferenceService.java",
+        "RelativeIndexsService.java",
+        "SelectStockService.java",
+        "StatisticsService.java",
+        "Stock0001Service.java",
+        "Stock0004Service.java",
+        "Stock0007Service.java",
+        "Stock0008Service.java",
+        "Stock0009Service.java",
+        "StockPoolService.java",
+        "StockServiceFactory.java",
+        "SystemPropertiesService.java",
+        "TableSystemService.java",
+        "TagruleService.java",
+        "TagService.java",
+        "TemplateService.java",
+        "TopicApplicantService.java",
+        "TopicBackupService.java",
+        "TopicHostService.java",
+        "TopicService.java",
+        "TopicUserService.java",
+        "TUextService.java",
+        "UIndexService.java",
+        "UserNoteService.java",
+        "USubjectService.java",
+        "ValuationService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\db\\company": {
+      "directories": [],
+      "files": [
+        "Company0010Service.java",
+        "Company0012Service.java",
+        "Company0013Service.java",
+        "Company0018Service.java",
+        "Company0019Service.java",
+        "Company0021Service.java",
+        "Company0022Service.java",
+        "CompanyExtService.java",
+        "CompanyPageBuildService.java",
+        "Stock0010Service.java",
+        "Stock0011Service.java",
+        "Stock0013Service.java"
+      ],
+      "java_files": [
+        "Company0010Service.java",
+        "Company0012Service.java",
+        "Company0013Service.java",
+        "Company0018Service.java",
+        "Company0019Service.java",
+        "Company0021Service.java",
+        "Company0022Service.java",
+        "CompanyExtService.java",
+        "CompanyPageBuildService.java",
+        "Stock0010Service.java",
+        "Stock0011Service.java",
+        "Stock0013Service.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\db\\mapdb": {
+      "directories": [],
+      "files": [
+        "StockMapdb.java"
+      ],
+      "java_files": [
+        "StockMapdb.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\db\\tree": {
+      "directories": [],
+      "files": [
+        "RuleTreeService.java"
+      ],
+      "java_files": [
+        "RuleTreeService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\db\\user": {
+      "directories": [],
+      "files": [
+        "ArticleCommentListWapper.java",
+        "CreditRuleLogService.java",
+        "CreditRuleService.java",
+        "Email_Auth.java",
+        "MembersService.java",
+        "ResetMemberModel.java",
+        "ResetMemberService.java",
+        "RoleactionService.java",
+        "RolemoduleService.java",
+        "RoleService.java",
+        "SimpleArticleListWapper.java",
+        "StockSeqService.java",
+        "ThirdUserService.java",
+        "UserService.java",
+        "UserStockService.java"
+      ],
+      "java_files": [
+        "ArticleCommentListWapper.java",
+        "CreditRuleLogService.java",
+        "CreditRuleService.java",
+        "Email_Auth.java",
+        "MembersService.java",
+        "ResetMemberModel.java",
+        "ResetMemberService.java",
+        "RoleactionService.java",
+        "RolemoduleService.java",
+        "RoleService.java",
+        "SimpleArticleListWapper.java",
+        "StockSeqService.java",
+        "ThirdUserService.java",
+        "UserService.java",
+        "UserStockService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\factory": {
+      "directories": [],
+      "files": [
+        "SMsgFactory.java"
+      ],
+      "java_files": [
+        "SMsgFactory.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\hfunction": {
+      "directories": [],
+      "files": [
+        "HAbbcService.java",
+        "HAppearService.java",
+        "HAvgService.java",
+        "HBollService.java",
+        "HCcService.java",
+        "HCountService.java",
+        "HCXGXDService.java",
+        "HDateService.java",
+        "HDayAvgService.java",
+        "HDayService.java",
+        "HDaySumService.java",
+        "HExpCountService.java",
+        "HExpService.java",
+        "HFqlhzService.java",
+        "HGetMaxMinService.java",
+        "HGetsfbsService.java",
+        "HGetTimesService.java",
+        "HGService.java",
+        "HIndexValueBelowBVDayCountService.java",
+        "HIndexValueCountService.java",
+        "HKdjService.java",
+        "HLxndService.java",
+        "HMacdService.java",
+        "HMonthAvgService.java",
+        "HMonthService.java",
+        "HNdlhzService.java",
+        "HpdlongService.java",
+        "HPoweiService.java",
+        "HPzService.java",
+        "HRsiService.java",
+        "HRsvService.java",
+        "HSlhtService.java",
+        "HSplService.java",
+        "HUtilService.java",
+        "HWeekAvgService.java",
+        "HWeekService.java",
+        "IFInvoker.java",
+        "IFService.java"
+      ],
+      "java_files": [
+        "HAbbcService.java",
+        "HAppearService.java",
+        "HAvgService.java",
+        "HBollService.java",
+        "HCcService.java",
+        "HCountService.java",
+        "HCXGXDService.java",
+        "HDateService.java",
+        "HDayAvgService.java",
+        "HDayService.java",
+        "HDaySumService.java",
+        "HExpCountService.java",
+        "HExpService.java",
+        "HFqlhzService.java",
+        "HGetMaxMinService.java",
+        "HGetsfbsService.java",
+        "HGetTimesService.java",
+        "HGService.java",
+        "HIndexValueBelowBVDayCountService.java",
+        "HIndexValueCountService.java",
+        "HKdjService.java",
+        "HLxndService.java",
+        "HMacdService.java",
+        "HMonthAvgService.java",
+        "HMonthService.java",
+        "HNdlhzService.java",
+        "HpdlongService.java",
+        "HPoweiService.java",
+        "HPzService.java",
+        "HRsiService.java",
+        "HRsvService.java",
+        "HSlhtService.java",
+        "HSplService.java",
+        "HUtilService.java",
+        "HWeekAvgService.java",
+        "HWeekService.java",
+        "IFInvoker.java",
+        "IFService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\mobile": {
+      "directories": [],
+      "files": [
+        "MobileAgentService.java",
+        "MobileMessageService.java",
+        "SmsService.java"
+      ],
+      "java_files": [
+        "MobileAgentService.java",
+        "MobileMessageService.java",
+        "SmsService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg": {
+      "directories": [
+        "event",
+        "handler",
+        "impl"
+      ],
+      "files": [
+        "TalkMessageService.java",
+        "UserEventService.java",
+        "UsubjectEventService.java"
+      ],
+      "java_files": [
+        "TalkMessageService.java",
+        "UserEventService.java",
+        "UsubjectEventService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg\\event": {
+      "directories": [],
+      "files": [
+        "EventQueueWapper.java",
+        "IMessageListWapper.java",
+        "MyTalkMessageListWapper.java",
+        "ShareTimerTradeDataWapper.java",
+        "ShareTimerTradeDateTest.java",
+        "TopicListWapper.java"
+      ],
+      "java_files": [
+        "EventQueueWapper.java",
+        "IMessageListWapper.java",
+        "MyTalkMessageListWapper.java",
+        "ShareTimerTradeDataWapper.java",
+        "ShareTimerTradeDateTest.java",
+        "TopicListWapper.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg\\handler": {
+      "directories": [
+        "c",
+        "m",
+        "mb",
+        "mp",
+        "s"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yfzx\\service\\msg\\handler\\c": {
+      "directories": [],
+      "files": [
+        "DelegateOrderClientHandler.java",
+        "MobileClientHandler.java",
+        "RemindClientHandler.java",
+        "UserNotifyClientHandler.java",
+        "USubjectNotifyClientHandler.java"
+      ],
+      "java_files": [
+        "DelegateOrderClientHandler.java",
+        "MobileClientHandler.java",
+        "RemindClientHandler.java",
+        "UserNotifyClientHandler.java",
+        "USubjectNotifyClientHandler.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg\\handler\\m": {
+      "directories": [],
+      "files": [
+        "RealtimeComputeDataUpdateMsgHandler.java",
+        "StatictisMsgHandler.java",
+        "StockPriceUpdateMsgHandler.java",
+        "TradeMsgType0Handler.java",
+        "TradeMsgType1Handler.java",
+        "UserType0MsgHandler.java",
+        "UserType12MsgHandler.java",
+        "UserType13MsgHandler.java",
+        "UserType14MsgHandler.java",
+        "UserType15MsgHandler.java",
+        "UserType16MsgHandler.java",
+        "UserType2MsgHandler.java",
+        "UserType3MsgHandler.java",
+        "UserType4MsgHandler.java",
+        "UserType5MsgHandler.java",
+        "UserType6MsgHandler.java",
+        "UserType7MsgHandler.java",
+        "UserType8MsgHandler.java",
+        "UserType9MsgHandler.java",
+        "UsubjectType0MsgHandler.java",
+        "UsubjectType1MsgHandler.java"
+      ],
+      "java_files": [
+        "RealtimeComputeDataUpdateMsgHandler.java",
+        "StatictisMsgHandler.java",
+        "StockPriceUpdateMsgHandler.java",
+        "TradeMsgType0Handler.java",
+        "TradeMsgType1Handler.java",
+        "UserType0MsgHandler.java",
+        "UserType12MsgHandler.java",
+        "UserType13MsgHandler.java",
+        "UserType14MsgHandler.java",
+        "UserType15MsgHandler.java",
+        "UserType16MsgHandler.java",
+        "UserType2MsgHandler.java",
+        "UserType3MsgHandler.java",
+        "UserType4MsgHandler.java",
+        "UserType5MsgHandler.java",
+        "UserType6MsgHandler.java",
+        "UserType7MsgHandler.java",
+        "UserType8MsgHandler.java",
+        "UserType9MsgHandler.java",
+        "UsubjectType0MsgHandler.java",
+        "UsubjectType1MsgHandler.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg\\handler\\mb": {
+      "directories": [],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yfzx\\service\\msg\\handler\\mp": {
+      "directories": [],
+      "files": [
+        "MobilePushHandler.java"
+      ],
+      "java_files": [
+        "MobilePushHandler.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg\\handler\\s": {
+      "directories": [],
+      "files": [
+        "MobileServerHandler.java",
+        "RemindClientServerHandler.java",
+        "StockPriceUpdateServerHandler.java",
+        "TradeNotifyServerHandler.java",
+        "UserNotifyServerHandler.java",
+        "UsubjectNotifyServerHandler.java"
+      ],
+      "java_files": [
+        "MobileServerHandler.java",
+        "RemindClientServerHandler.java",
+        "StockPriceUpdateServerHandler.java",
+        "TradeNotifyServerHandler.java",
+        "UserNotifyServerHandler.java",
+        "UsubjectNotifyServerHandler.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msg\\impl": {
+      "directories": [],
+      "files": [
+        "MessageSenderServiceImpl.java"
+      ],
+      "java_files": [
+        "MessageSenderServiceImpl.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msgpush": {
+      "directories": [
+        "asyntask"
+      ],
+      "files": [
+        "IOSFailureMsgService.java",
+        "MobileMsgPushService.java",
+        "MobileTokenCacheService.java"
+      ],
+      "java_files": [
+        "IOSFailureMsgService.java",
+        "MobileMsgPushService.java",
+        "MobileTokenCacheService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\msgpush\\asyntask": {
+      "directories": [],
+      "files": [
+        "AsyncTaskService.java"
+      ],
+      "java_files": [
+        "AsyncTaskService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\nosql": {
+      "directories": [],
+      "files": [
+        "NosqlService.java"
+      ],
+      "java_files": [
+        "NosqlService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\product": {
+      "directories": [],
+      "files": [
+        "AlipayInfoService.java",
+        "OrderService.java",
+        "ProductService.java",
+        "ResourceService.java"
+      ],
+      "java_files": [
+        "AlipayInfoService.java",
+        "OrderService.java",
+        "ProductService.java",
+        "ResourceService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\realtime": {
+      "directories": [],
+      "files": [
+        "RealtimeDataItem.java",
+        "RealTradeService.java",
+        "SinaStockService.java",
+        "WStockMessageListWapper.java",
+        "WStockService.java"
+      ],
+      "java_files": [
+        "RealtimeDataItem.java",
+        "RealTradeService.java",
+        "SinaStockService.java",
+        "WStockMessageListWapper.java",
+        "WStockService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\share": {
+      "directories": [
+        "task"
+      ],
+      "files": [
+        "MicorBlogService.java",
+        "MsgTimeLineService.java",
+        "NoticeService.java",
+        "ReportService.java",
+        "SquareStockChanceService.java",
+        "TimeLineService.java",
+        "ViewpointService.java"
+      ],
+      "java_files": [
+        "MicorBlogService.java",
+        "MsgTimeLineService.java",
+        "NoticeService.java",
+        "ReportService.java",
+        "SquareStockChanceService.java",
+        "TimeLineService.java",
+        "ViewpointService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\share\\task": {
+      "directories": [],
+      "files": [
+        "HotAnalysisTask.java"
+      ],
+      "java_files": [
+        "HotAnalysisTask.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\spider": {
+      "directories": [],
+      "files": [
+        "CninfoNoticeTaskProcessor.java",
+        "ComparatorTagBean.java",
+        "EastmoneyCompanyTaskProcessor.java",
+        "HttpRequestProxy.java",
+        "ITaskProcessor.java",
+        "P5wCWQZTaskProcessor.java",
+        "P5wNoticeTaskProcessor.java",
+        "QQCompanyNoticeTaskProcessor.java",
+        "QQCompanyTaskProcessor.java",
+        "QQZxgTaskProcessor.java",
+        "SpiderConfigBean.java",
+        "SpiderConfigMain.java",
+        "SpiderScheduler.java",
+        "SpiderStorage.java",
+        "SpiderStorageBean.java",
+        "StockSpider.java",
+        "TagBean.java",
+        "TalkMockService.java",
+        "UidCompany.java",
+        "WeiboUserTaskProcessor.java",
+        "XueqiuTalkTaskProcessor.java",
+        "XueqiuTodayTaskProcessor.java",
+        "XueqiuUserTaskProcessor.java"
+      ],
+      "java_files": [
+        "CninfoNoticeTaskProcessor.java",
+        "ComparatorTagBean.java",
+        "EastmoneyCompanyTaskProcessor.java",
+        "HttpRequestProxy.java",
+        "ITaskProcessor.java",
+        "P5wCWQZTaskProcessor.java",
+        "P5wNoticeTaskProcessor.java",
+        "QQCompanyNoticeTaskProcessor.java",
+        "QQCompanyTaskProcessor.java",
+        "QQZxgTaskProcessor.java",
+        "SpiderConfigBean.java",
+        "SpiderConfigMain.java",
+        "SpiderScheduler.java",
+        "SpiderStorage.java",
+        "SpiderStorageBean.java",
+        "StockSpider.java",
+        "TagBean.java",
+        "TalkMockService.java",
+        "UidCompany.java",
+        "WeiboUserTaskProcessor.java",
+        "XueqiuTalkTaskProcessor.java",
+        "XueqiuTodayTaskProcessor.java",
+        "XueqiuUserTaskProcessor.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\stockgame": {
+      "directories": [],
+      "files": [
+        "StockChargeBillService.java",
+        "StockDelegationService.java",
+        "StockEquityService.java",
+        "StockGameCacheService.java",
+        "StockGameFollowService.java",
+        "StockRevenueService.java",
+        "StockSnapshootService.java",
+        "StockTransactionService.java"
+      ],
+      "java_files": [
+        "StockChargeBillService.java",
+        "StockDelegationService.java",
+        "StockEquityService.java",
+        "StockGameCacheService.java",
+        "StockGameFollowService.java",
+        "StockRevenueService.java",
+        "StockSnapshootService.java",
+        "StockTransactionService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\trade": {
+      "directories": [],
+      "files": [
+        "ShareTimerTradeService.java",
+        "StockTradeService.java",
+        "Trade0001Service.java",
+        "TradeBitMapService.java",
+        "TradeCenter.java",
+        "TradeService.java"
+      ],
+      "java_files": [
+        "ShareTimerTradeService.java",
+        "StockTradeService.java",
+        "Trade0001Service.java",
+        "TradeBitMapService.java",
+        "TradeCenter.java",
+        "TradeService.java"
+      ]
+    },
+    "src\\com\\yfzx\\service\\util": {
+      "directories": [],
+      "files": [
+        "SCacheUtil.java",
+        "ServiceUtil.java",
+        "StockChanceUtil.java"
+      ],
+      "java_files": [
+        "SCacheUtil.java",
+        "ServiceUtil.java",
+        "StockChanceUtil.java"
+      ]
+    },
+    "src\\com\\yz": {
+      "directories": [
+        "stock"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yz\\stock": {
+      "directories": [
+        "portal"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yz\\stock\\portal": {
+      "directories": [
+        "service"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yz\\stock\\portal\\service": {
+      "directories": [
+        "company"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yz\\stock\\portal\\service\\company": {
+      "directories": [
+        "spider"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\com\\yz\\stock\\portal\\service\\company\\spider": {
+      "directories": [],
+      "files": [
+        "DownloadPage.java",
+        "FunctionUtils.java",
+        "HrefOfPage.java",
+        "JacksonMapper.java",
+        "QQWBSpider.java",
+        "SinaWBSpider.java",
+        "SpiderFacade.java",
+        "Test.java",
+        "UrlDataHanding.java",
+        "UrlQueue.java",
+        "VisitedUrlQueue.java",
+        "WBSpiderFacade.java",
+        "XueQiuWBSpider.java"
+      ],
+      "java_files": [
+        "DownloadPage.java",
+        "FunctionUtils.java",
+        "HrefOfPage.java",
+        "JacksonMapper.java",
+        "QQWBSpider.java",
+        "SinaWBSpider.java",
+        "SpiderFacade.java",
+        "Test.java",
+        "UrlDataHanding.java",
+        "UrlQueue.java",
+        "VisitedUrlQueue.java",
+        "WBSpiderFacade.java",
+        "XueQiuWBSpider.java"
+      ]
+    },
+    "src\\maps": {
+      "directories": [
+        "chance",
+        "msg",
+        "stockgame",
+        "user"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\maps\\chance": {
+      "directories": [],
+      "files": [
+        "ChanceCategoryMapper.xml"
+      ],
+      "java_files": []
+    },
+    "src\\maps\\msg": {
+      "directories": [],
+      "files": [
+        "IOSFailureMsgMapper.xml"
+      ],
+      "java_files": []
+    },
+    "src\\maps\\stockgame": {
+      "directories": [],
+      "files": [
+        "StockChargeBillMapper.xml",
+        "StockSnapshootMapper.xml"
+      ],
+      "java_files": []
+    },
+    "src\\maps\\user": {
+      "directories": [],
+      "files": [
+        "CreditRuleLogMapper.xml",
+        "CreditRuleMapper.xml",
+        "MembersMapper.xml",
+        "MystockMapper.xml",
+        "ReportMapper.xml",
+        "ResetMemberMapper.xml",
+        "RoleactionMapper.xml",
+        "RoleMapper.xml",
+        "RolemoduleMapper.xml",
+        "ThirdUserMapper.xml",
+        "UserStockMapper.xml"
+      ],
+      "java_files": []
+    },
+    "src\\org": {
+      "directories": [
+        "ansj"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\org\\ansj": {
+      "directories": [
+        "app"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\org\\ansj\\app": {
+      "directories": [
+        "keyword"
+      ],
+      "files": [],
+      "java_files": []
+    },
+    "src\\org\\ansj\\app\\keyword": {
+      "directories": [],
+      "files": [
+        "Keyword.java",
+        "KeyWordComputer.java"
+      ],
+      "java_files": [
+        "Keyword.java",
+        "KeyWordComputer.java"
+      ]
+    },
+    "src\\topic": {
+      "directories": [],
+      "files": [
+        "TopicConst.java"
+      ],
+      "java_files": [
+        "TopicConst.java"
+      ]
+    }
+  },
+  "java_files": [
+    {
+      "path": "src\\topic\\TopicConst.java",
+      "size": 247,
+      "lines": 9
+    },
+    {
+      "path": "src\\com\\aliyun\\openservices\\oss\\samples\\OSSMultipartSample.java",
+      "size": 11820,
+      "lines": 285
+    },
+    {
+      "path": "src\\com\\aliyun\\openservices\\oss\\samples\\OSSObjectSample.java",
+      "size": 4946,
+      "lines": 130
+    },
+    {
+      "path": "src\\com\\aliyun\\openservices\\ots\\samples\\OTSMultiDataSample.java",
+      "size": 6391,
+      "lines": 138
+    },
+    {
+      "path": "src\\com\\aliyun\\openservices\\ots\\samples\\OTSSingleDataSample.java",
+      "size": 5958,
+      "lines": 135
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\StockCenter.java",
+      "size": 1104,
+      "lines": 49
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\StockDto.java",
+      "size": 1908,
+      "lines": 98
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\agent\\CompileDefaultDataFetcherImpl.java",
+      "size": 14244,
+      "lines": 387
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\agent\\IndexValueAgent.java",
+      "size": 6315,
+      "lines": 212
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\ansj\\KeywordsExtratorService.java",
+      "size": 18147,
+      "lines": 114
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\CacheUtilService.java",
+      "size": 16790,
+      "lines": 497
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\DataLoadTimeMng.java",
+      "size": 2401,
+      "lines": 95
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\ExtCacheService.java",
+      "size": 3063,
+      "lines": 110
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\IndexCacheLoadService.java",
+      "size": 1511,
+      "lines": 52
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\IndexCacheService.java",
+      "size": 3526,
+      "lines": 127
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\IndustryCacheLoadService.java",
+      "size": 3160,
+      "lines": 79
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\IndustryExtCacheService.java",
+      "size": 2512,
+      "lines": 89
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\cache\\PageCacheLoadService.java",
+      "size": 2013,
+      "lines": 78
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\chance\\ChanceCategoryService.java",
+      "size": 32029,
+      "lines": 906
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\DcssCompanyExtIndexServiceClient.java",
+      "size": 4847,
+      "lines": 171
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\DcssDefaultServiceClient.java",
+      "size": 4636,
+      "lines": 166
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\DcssIndustryExtIndexServiceClient.java",
+      "size": 4742,
+      "lines": 165
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\DcssTradeIndexServiceClient.java",
+      "size": 7746,
+      "lines": 251
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\MessageSenderServiceClient.java",
+      "size": 7558,
+      "lines": 278
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\PushClient.java",
+      "size": 7430,
+      "lines": 234
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\RemindServiceClient.java",
+      "size": 41318,
+      "lines": 1287
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\TopicServiceClient.java",
+      "size": 4825,
+      "lines": 172
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\UserServiceClient.java",
+      "size": 15540,
+      "lines": 573
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\comet\\CometPushMsgType.java",
+      "size": 281,
+      "lines": 11
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\comet\\CometService.java",
+      "size": 746,
+      "lines": 28
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\count\\StatisticsService.java",
+      "size": 2360,
+      "lines": 90
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\AssertService.java",
+      "size": 1328,
+      "lines": 50
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\BaseIndexService.java",
+      "size": 2173,
+      "lines": 81
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\CashFlowService.java",
+      "size": 563,
+      "lines": 31
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\CfScoreRuleService.java",
+      "size": 2689,
+      "lines": 97
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\CIndexService.java",
+      "size": 1691,
+      "lines": 55
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\CompanyService.java",
+      "size": 74837,
+      "lines": 2472
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\ComposeIndexService.java",
+      "size": 2731,
+      "lines": 95
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\ConditionDefineService.java",
+      "size": 3655,
+      "lines": 129
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\CRuleService.java",
+      "size": 19769,
+      "lines": 637
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\DcheckService.java",
+      "size": 2694,
+      "lines": 109
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\DelegateOrderService.java",
+      "size": 5548,
+      "lines": 221
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\DictService.java",
+      "size": 12682,
+      "lines": 391
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\Fund0002Service.java",
+      "size": 5045,
+      "lines": 151
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IIndexService.java",
+      "size": 748,
+      "lines": 39
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IIService.java",
+      "size": 376,
+      "lines": 16
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IndexCacheService.java",
+      "size": 3884,
+      "lines": 123
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IndexCategoryService.java",
+      "size": 2991,
+      "lines": 116
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IndexGroupService.java",
+      "size": 2140,
+      "lines": 79
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IndexService.java",
+      "size": 129058,
+      "lines": 4063
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IndexUtilService.java",
+      "size": 70,
+      "lines": 5
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\IndustryService.java",
+      "size": 52196,
+      "lines": 1610
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\MAnalysisService.java",
+      "size": 682,
+      "lines": 34
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\MarketService.java",
+      "size": 18098,
+      "lines": 574
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\MatchinfoService.java",
+      "size": 3217,
+      "lines": 114
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\MenberExtService.java",
+      "size": 3631,
+      "lines": 117
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\MessageCenterSerivce.java",
+      "size": 16643,
+      "lines": 459
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\MsgconstService.java",
+      "size": 1868,
+      "lines": 72
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\ProfileService.java",
+      "size": 1264,
+      "lines": 46
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\RankingService.java",
+      "size": 5021,
+      "lines": 169
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\RankResultService.java",
+      "size": 6871,
+      "lines": 226
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\RealTimeService.java",
+      "size": 2918,
+      "lines": 96
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\ReferenceService.java",
+      "size": 5972,
+      "lines": 180
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\RelativeIndexsService.java",
+      "size": 2240,
+      "lines": 87
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\SelectStockService.java",
+      "size": 9458,
+      "lines": 287
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\StatisticsService.java",
+      "size": 2080,
+      "lines": 76
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\Stock0001Service.java",
+      "size": 5894,
+      "lines": 195
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\Stock0004Service.java",
+      "size": 1257,
+      "lines": 57
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\Stock0007Service.java",
+      "size": 1190,
+      "lines": 44
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\Stock0008Service.java",
+      "size": 1190,
+      "lines": 44
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\Stock0009Service.java",
+      "size": 1716,
+      "lines": 60
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\StockPoolService.java",
+      "size": 6120,
+      "lines": 232
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\StockServiceFactory.java",
+      "size": 1589,
+      "lines": 55
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\SystemPropertiesService.java",
+      "size": 1408,
+      "lines": 51
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TableSystemService.java",
+      "size": 1584,
+      "lines": 54
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TagruleService.java",
+      "size": 9032,
+      "lines": 315
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TagService.java",
+      "size": 16330,
+      "lines": 622
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TemplateService.java",
+      "size": 1826,
+      "lines": 58
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TopicApplicantService.java",
+      "size": 4281,
+      "lines": 125
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TopicBackupService.java",
+      "size": 3651,
+      "lines": 122
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TopicHostService.java",
+      "size": 4460,
+      "lines": 130
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TopicService.java",
+      "size": 45673,
+      "lines": 1314
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TopicUserService.java",
+      "size": 4914,
+      "lines": 147
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\TUextService.java",
+      "size": 14854,
+      "lines": 537
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\UIndexService.java",
+      "size": 745,
+      "lines": 38
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\UserNoteService.java",
+      "size": 1633,
+      "lines": 55
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\USubjectService.java",
+      "size": 16505,
+      "lines": 522
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\ValuationService.java",
+      "size": 6540,
+      "lines": 237
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\factory\\SMsgFactory.java",
+      "size": 3244,
+      "lines": 113
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HAbbcService.java",
+      "size": 3813,
+      "lines": 150
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HAppearService.java",
+      "size": 2983,
+      "lines": 101
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HAvgService.java",
+      "size": 2257,
+      "lines": 82
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HBollService.java",
+      "size": 7665,
+      "lines": 256
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HCcService.java",
+      "size": 3007,
+      "lines": 115
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HCountService.java",
+      "size": 6094,
+      "lines": 225
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HCXGXDService.java",
+      "size": 3764,
+      "lines": 136
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HDateService.java",
+      "size": 2465,
+      "lines": 85
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HDayAvgService.java",
+      "size": 6170,
+      "lines": 208
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HDayService.java",
+      "size": 17822,
+      "lines": 536
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HDaySumService.java",
+      "size": 3584,
+      "lines": 125
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HExpCountService.java",
+      "size": 2564,
+      "lines": 87
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HExpService.java",
+      "size": 1069,
+      "lines": 45
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HFqlhzService.java",
+      "size": 3562,
+      "lines": 144
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HGetMaxMinService.java",
+      "size": 2773,
+      "lines": 110
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HGetsfbsService.java",
+      "size": 2151,
+      "lines": 80
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HGetTimesService.java",
+      "size": 1329,
+      "lines": 56
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HGService.java",
+      "size": 2130,
+      "lines": 80
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HIndexValueBelowBVDayCountService.java",
+      "size": 2354,
+      "lines": 84
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HIndexValueCountService.java",
+      "size": 2412,
+      "lines": 85
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HKdjService.java",
+      "size": 9485,
+      "lines": 316
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HLxndService.java",
+      "size": 3418,
+      "lines": 140
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HMacdService.java",
+      "size": 7624,
+      "lines": 246
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HMonthAvgService.java",
+      "size": 2769,
+      "lines": 94
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HMonthService.java",
+      "size": 12080,
+      "lines": 417
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HNdlhzService.java",
+      "size": 3294,
+      "lines": 142
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HpdlongService.java",
+      "size": 984,
+      "lines": 43
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HPoweiService.java",
+      "size": 3899,
+      "lines": 129
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HPzService.java",
+      "size": 2556,
+      "lines": 108
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HRsiService.java",
+      "size": 11833,
+      "lines": 383
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HRsvService.java",
+      "size": 3321,
+      "lines": 122
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HSlhtService.java",
+      "size": 3937,
+      "lines": 133
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HSplService.java",
+      "size": 3333,
+      "lines": 121
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HUtilService.java",
+      "size": 16610,
+      "lines": 550
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HWeekAvgService.java",
+      "size": 2772,
+      "lines": 94
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\HWeekService.java",
+      "size": 12168,
+      "lines": 420
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\IFInvoker.java",
+      "size": 795,
+      "lines": 58
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\hfunction\\IFService.java",
+      "size": 314,
+      "lines": 17
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\mobile\\MobileAgentService.java",
+      "size": 1202,
+      "lines": 40
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\mobile\\MobileMessageService.java",
+      "size": 2816,
+      "lines": 65
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\mobile\\SmsService.java",
+      "size": 24387,
+      "lines": 738
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\TalkMessageService.java",
+      "size": 7966,
+      "lines": 225
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\UserEventService.java",
+      "size": 8559,
+      "lines": 289
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\UsubjectEventService.java",
+      "size": 6628,
+      "lines": 222
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msgpush\\IOSFailureMsgService.java",
+      "size": 2769,
+      "lines": 82
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msgpush\\MobileMsgPushService.java",
+      "size": 25412,
+      "lines": 763
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msgpush\\MobileTokenCacheService.java",
+      "size": 1476,
+      "lines": 54
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\nosql\\NosqlService.java",
+      "size": 34678,
+      "lines": 940
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\product\\AlipayInfoService.java",
+      "size": 3196,
+      "lines": 97
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\product\\OrderService.java",
+      "size": 4283,
+      "lines": 122
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\product\\ProductService.java",
+      "size": 2880,
+      "lines": 80
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\product\\ResourceService.java",
+      "size": 2573,
+      "lines": 72
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\realtime\\RealtimeDataItem.java",
+      "size": 7590,
+      "lines": 335
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\realtime\\RealTradeService.java",
+      "size": 28531,
+      "lines": 816
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\realtime\\SinaStockService.java",
+      "size": 6654,
+      "lines": 192
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\realtime\\WStockMessageListWapper.java",
+      "size": 4465,
+      "lines": 211
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\realtime\\WStockService.java",
+      "size": 20902,
+      "lines": 493
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\MicorBlogService.java",
+      "size": 190727,
+      "lines": 5176
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\MsgTimeLineService.java",
+      "size": 5610,
+      "lines": 157
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\NoticeService.java",
+      "size": 5946,
+      "lines": 175
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\ReportService.java",
+      "size": 3898,
+      "lines": 140
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\SquareStockChanceService.java",
+      "size": 4566,
+      "lines": 116
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\TimeLineService.java",
+      "size": 7050,
+      "lines": 196
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\ViewpointService.java",
+      "size": 23195,
+      "lines": 657
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\CninfoNoticeTaskProcessor.java",
+      "size": 7034,
+      "lines": 182
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\ComparatorTagBean.java",
+      "size": 611,
+      "lines": 28
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\EastmoneyCompanyTaskProcessor.java",
+      "size": 5278,
+      "lines": 146
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\HttpRequestProxy.java",
+      "size": 9981,
+      "lines": 297
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\ITaskProcessor.java",
+      "size": 134,
+      "lines": 7
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\P5wCWQZTaskProcessor.java",
+      "size": 3276,
+      "lines": 96
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\P5wNoticeTaskProcessor.java",
+      "size": 1616,
+      "lines": 53
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\QQCompanyNoticeTaskProcessor.java",
+      "size": 6263,
+      "lines": 152
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\QQCompanyTaskProcessor.java",
+      "size": 9098,
+      "lines": 224
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\QQZxgTaskProcessor.java",
+      "size": 7197,
+      "lines": 178
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\SpiderConfigBean.java",
+      "size": 2164,
+      "lines": 111
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\SpiderConfigMain.java",
+      "size": 13950,
+      "lines": 267
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\SpiderScheduler.java",
+      "size": 5009,
+      "lines": 157
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\SpiderStorage.java",
+      "size": 22811,
+      "lines": 628
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\SpiderStorageBean.java",
+      "size": 1544,
+      "lines": 50
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\StockSpider.java",
+      "size": 23384,
+      "lines": 546
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\TagBean.java",
+      "size": 313,
+      "lines": 19
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\TalkMockService.java",
+      "size": 39118,
+      "lines": 1021
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\UidCompany.java",
+      "size": 946,
+      "lines": 58
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\WeiboUserTaskProcessor.java",
+      "size": 8362,
+      "lines": 214
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\XueqiuTalkTaskProcessor.java",
+      "size": 13057,
+      "lines": 335
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\XueqiuTodayTaskProcessor.java",
+      "size": 3216,
+      "lines": 85
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\spider\\XueqiuUserTaskProcessor.java",
+      "size": 5739,
+      "lines": 140
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockChargeBillService.java",
+      "size": 2012,
+      "lines": 57
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockDelegationService.java",
+      "size": 28457,
+      "lines": 670
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockEquityService.java",
+      "size": 4480,
+      "lines": 130
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockGameCacheService.java",
+      "size": 4236,
+      "lines": 128
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockGameFollowService.java",
+      "size": 3776,
+      "lines": 102
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockRevenueService.java",
+      "size": 17584,
+      "lines": 470
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockSnapshootService.java",
+      "size": 1938,
+      "lines": 54
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\stockgame\\StockTransactionService.java",
+      "size": 5817,
+      "lines": 158
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\trade\\ShareTimerTradeService.java",
+      "size": 7996,
+      "lines": 261
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\trade\\StockTradeService.java",
+      "size": 873,
+      "lines": 36
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\trade\\Trade0001Service.java",
+      "size": 6454,
+      "lines": 206
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\trade\\TradeBitMapService.java",
+      "size": 17500,
+      "lines": 636
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\trade\\TradeCenter.java",
+      "size": 10240,
+      "lines": 341
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\trade\\TradeService.java",
+      "size": 39452,
+      "lines": 1173
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\util\\SCacheUtil.java",
+      "size": 4102,
+      "lines": 130
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\util\\ServiceUtil.java",
+      "size": 1383,
+      "lines": 54
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\util\\StockChanceUtil.java",
+      "size": 1894,
+      "lines": 63
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\es\\ESClient.java",
+      "size": 4608,
+      "lines": 152
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\es\\ESIndexData.java",
+      "size": 21862,
+      "lines": 625
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\es\\ESIndexMapping.java",
+      "size": 19296,
+      "lines": 368
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\es\\StockWordExtrator.java",
+      "size": 3222,
+      "lines": 100
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\client\\es\\TextSplitService.java",
+      "size": 12604,
+      "lines": 290
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0010Service.java",
+      "size": 1792,
+      "lines": 60
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0012Service.java",
+      "size": 2362,
+      "lines": 80
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0013Service.java",
+      "size": 1849,
+      "lines": 62
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0018Service.java",
+      "size": 4752,
+      "lines": 141
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0019Service.java",
+      "size": 4180,
+      "lines": 124
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0021Service.java",
+      "size": 2481,
+      "lines": 86
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Company0022Service.java",
+      "size": 2822,
+      "lines": 96
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\CompanyExtService.java",
+      "size": 2854,
+      "lines": 102
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\CompanyPageBuildService.java",
+      "size": 10934,
+      "lines": 308
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Stock0010Service.java",
+      "size": 1422,
+      "lines": 53
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Stock0011Service.java",
+      "size": 1458,
+      "lines": 54
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\company\\Stock0013Service.java",
+      "size": 1712,
+      "lines": 61
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\mapdb\\StockMapdb.java",
+      "size": 4535,
+      "lines": 221
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\tree\\RuleTreeService.java",
+      "size": 16636,
+      "lines": 582
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\ArticleCommentListWapper.java",
+      "size": 5118,
+      "lines": 232
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\CreditRuleLogService.java",
+      "size": 2726,
+      "lines": 90
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\CreditRuleService.java",
+      "size": 7326,
+      "lines": 215
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\Email_Auth.java",
+      "size": 465,
+      "lines": 16
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\MembersService.java",
+      "size": 28395,
+      "lines": 817
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\ResetMemberModel.java",
+      "size": 2109,
+      "lines": 93
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\ResetMemberService.java",
+      "size": 10522,
+      "lines": 256
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\RoleactionService.java",
+      "size": 2463,
+      "lines": 75
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\RolemoduleService.java",
+      "size": 1174,
+      "lines": 33
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\RoleService.java",
+      "size": 2909,
+      "lines": 108
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\SimpleArticleListWapper.java",
+      "size": 3632,
+      "lines": 140
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\StockSeqService.java",
+      "size": 6353,
+      "lines": 202
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\ThirdUserService.java",
+      "size": 4370,
+      "lines": 153
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\UserService.java",
+      "size": 2929,
+      "lines": 85
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\db\\user\\UserStockService.java",
+      "size": 9907,
+      "lines": 305
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\event\\EventQueueWapper.java",
+      "size": 2487,
+      "lines": 124
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\event\\IMessageListWapper.java",
+      "size": 14614,
+      "lines": 632
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\event\\MyTalkMessageListWapper.java",
+      "size": 7989,
+      "lines": 298
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDataWapper.java",
+      "size": 28195,
+      "lines": 833
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDateTest.java",
+      "size": 11782,
+      "lines": 314
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\event\\TopicListWapper.java",
+      "size": 16442,
+      "lines": 655
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\impl\\MessageSenderServiceImpl.java",
+      "size": 1584,
+      "lines": 67
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\c\\DelegateOrderClientHandler.java",
+      "size": 669,
+      "lines": 25
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\c\\MobileClientHandler.java",
+      "size": 8772,
+      "lines": 266
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\c\\RemindClientHandler.java",
+      "size": 6815,
+      "lines": 225
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\c\\UserNotifyClientHandler.java",
+      "size": 10874,
+      "lines": 314
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\c\\USubjectNotifyClientHandler.java",
+      "size": 8378,
+      "lines": 250
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\RealtimeComputeDataUpdateMsgHandler.java",
+      "size": 585,
+      "lines": 20
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\StatictisMsgHandler.java",
+      "size": 569,
+      "lines": 20
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\StockPriceUpdateMsgHandler.java",
+      "size": 3901,
+      "lines": 104
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType0Handler.java",
+      "size": 2138,
+      "lines": 48
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType1Handler.java",
+      "size": 3808,
+      "lines": 104
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType0MsgHandler.java",
+      "size": 6166,
+      "lines": 180
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType12MsgHandler.java",
+      "size": 1221,
+      "lines": 41
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType13MsgHandler.java",
+      "size": 906,
+      "lines": 29
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType14MsgHandler.java",
+      "size": 570,
+      "lines": 22
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType15MsgHandler.java",
+      "size": 1457,
+      "lines": 48
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType16MsgHandler.java",
+      "size": 5953,
+      "lines": 174
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType2MsgHandler.java",
+      "size": 990,
+      "lines": 34
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType3MsgHandler.java",
+      "size": 986,
+      "lines": 34
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType4MsgHandler.java",
+      "size": 985,
+      "lines": 33
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType5MsgHandler.java",
+      "size": 1040,
+      "lines": 34
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType6MsgHandler.java",
+      "size": 901,
+      "lines": 31
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType7MsgHandler.java",
+      "size": 17828,
+      "lines": 498
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType8MsgHandler.java",
+      "size": 12944,
+      "lines": 311
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType9MsgHandler.java",
+      "size": 1138,
+      "lines": 36
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType0MsgHandler.java",
+      "size": 7146,
+      "lines": 199
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType1MsgHandler.java",
+      "size": 2242,
+      "lines": 66
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\mp\\MobilePushHandler.java",
+      "size": 411,
+      "lines": 20
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\s\\MobileServerHandler.java",
+      "size": 1085,
+      "lines": 43
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\s\\RemindClientServerHandler.java",
+      "size": 1097,
+      "lines": 43
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\s\\StockPriceUpdateServerHandler.java",
+      "size": 1107,
+      "lines": 44
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\s\\TradeNotifyServerHandler.java",
+      "size": 1094,
+      "lines": 44
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\s\\UserNotifyServerHandler.java",
+      "size": 6567,
+      "lines": 185
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msg\\handler\\s\\UsubjectNotifyServerHandler.java",
+      "size": 1097,
+      "lines": 44
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\msgpush\\asyntask\\AsyncTaskService.java",
+      "size": 658,
+      "lines": 21
+    },
+    {
+      "path": "src\\com\\yfzx\\service\\share\\task\\HotAnalysisTask.java",
+      "size": 6296,
+      "lines": 176
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\DownloadPage.java",
+      "size": 3739,
+      "lines": 116
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\FunctionUtils.java",
+      "size": 3573,
+      "lines": 129
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\HrefOfPage.java",
+      "size": 868,
+      "lines": 27
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\JacksonMapper.java",
+      "size": 505,
+      "lines": 20
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\QQWBSpider.java",
+      "size": 8635,
+      "lines": 232
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SinaWBSpider.java",
+      "size": 15926,
+      "lines": 377
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SpiderFacade.java",
+      "size": 5617,
+      "lines": 169
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\Test.java",
+      "size": 6176,
+      "lines": 113
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlDataHanding.java",
+      "size": 524,
+      "lines": 17
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlQueue.java",
+      "size": 713,
+      "lines": 30
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\VisitedUrlQueue.java",
+      "size": 531,
+      "lines": 24
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\WBSpiderFacade.java",
+      "size": 8027,
+      "lines": 270
+    },
+    {
+      "path": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\XueQiuWBSpider.java",
+      "size": 11038,
+      "lines": 267
+    },
+    {
+      "path": "src\\org\\ansj\\app\\keyword\\Keyword.java",
+      "size": 2045,
+      "lines": 104
+    },
+    {
+      "path": "src\\org\\ansj\\app\\keyword\\KeyWordComputer.java",
+      "size": 3965,
+      "lines": 166
+    }
+  ]
+}

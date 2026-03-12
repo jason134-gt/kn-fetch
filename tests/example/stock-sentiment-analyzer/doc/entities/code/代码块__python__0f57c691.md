@@ -1,0 +1,127 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: code
+entity_id: 0f57c691e66fb2a0
+signature: 2bd6d6a127cac26df56abbab4befffd3
+created: '2026-03-10T20:58:25.697861'
+file_path: D:\mywork\workspace\stock-sentiment-analyzer\docs\REFACTORING_SUGGESTIONS.md
+start_line: 44
+end_line: 117
+lines_of_code: 74
+tags:
+- entity
+- code
+- 代码块 (python)
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 代码块 (python)
+
+> **类型**: `EntityType.CODE` | **文件**: `D:\mywork\workspace\stock-sentiment-analyzer\docs\REFACTORING_SUGGESTIONS.md` | **行数**: 44-117 (74行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+  # 抽象基类
+  class BaseCollector(ABC):
+      @abstractmethod
+      async def collect(self) -> List[NewsItem]:
+          pass
+  # 自动注册
+  collector_registry = {}
+  def register_collector(name: str):
+      def decorator(cls):
+          collector_registry[name] = cls
+          return cls
+      return decorator
+  ```
+  - 现有4个采集器继承BaseCollector
+  - 主类中通过配置动态加载启用的采集器
+#### 2. 引入依赖注入容器
+- **任务**：使用dependency-injector框架实现依赖注入，解耦主类与各模块的直接依赖
+- **收益**：主类代码量减少60%，模块可单独测试和替换
+- **实施方案**：
+  - 定义容器类，管理所有模块的生命周期
+  - 模块依赖通过构造函数注入，不再直接实例化
+  - 单元测试可轻松mock依赖，测试效率大幅提升
+#### 3. 并行化改造
+- **任务**：将串行执行的采集和评估流程改为并行执行
+- **收益**：单次分析耗时降低至少40%，系统吞吐量提升
+- **实施方案**：
+  - 资讯采集：使用asyncio.gather并行执行所有启用的采集器
+  - 专家评估：使用asyncio.Semaphore控制并发量，批量处理多条资讯
+  - 结果汇总和决策：支持批量处理接口，减少循环调用开销
+#### 4. 统一异常体系
+- **任务**：定义标准化异常类和错误码，完善异常上下文信息
+- **收益**：错误定位效率提升100%，可实现局部熔断降级
+- **实施方案**：
+  - 定义BaseException基类，包含错误码、上下文信息、堆栈跟踪
+  - 各模块抛出标准化异常，不再直接抛出Exception
+  - 实现全局异常处理器，统一日志记录和错误处理
+### 🟢 低优先级（逐步做，预计10人天）
+#### 1. 配置契约化改造
+- **任务**：每个模块定义自己的配置schema，只接收需要的配置字段
+- **收益**：配置变更影响范围可控，减少配置错误导致的线上问题
+- **实施方案**：
+  - 使用pydantic定义各模块的配置模型
+  - 配置加载时自动验证，不合法配置提前报错
+  - 模块只接收自己的配置对象，不再传递完整config字典
+#### 2. AI调用网关实现
+- **任务**：统一AI接口调用逻辑，实现多模型支持、流量控制、成本管控
+- **收益**：AI调用逻辑集中管理，支持动态切换模型，成本可监控
+- **实施方案**：
+  - 抽象AIClient接口，支持OpenAI、Anthropic等多种实现
+  - 实现调用统计、限流、降级、重试逻辑
+  - 增加成本核算，记录每个模型的调用费用
+#### 3. 流程编排改造
+- **任务**：使用工作流引擎替代硬编码的主流程
+- **收益**：支持动态调整分析步骤，无需修改核心代码
+- **实施方案**：
+  - 定义分析流程的各个节点和依赖关系
+  - 使用工作流引擎编排执行顺序
+  - 支持自定义流程，满足不同场景的分析需求
+#### 4. 增量分析支持
+- **任务**：实现数据增量标记，避免重复处理相同资讯
+- **收益**：重复分析耗时降低80%，减少AI调用成本
+- **实施方案**：
+  - 基于URL和内容哈希实现去重
+  - 记录已处理资讯的标记，增量分析时跳过
+  - 支持缓存中间结果，减少重复计算
+## 三、分模块具体重构建议
+### 1. 主程序模块 (`src/main.py`)
+#### 现有问题
+- 过度耦合，直接实例化所有模块
+- 包含不属于主类的去重逻辑
+- 流程硬编码，扩展性差
+#### 重构目标
+```
+
+## 🔧 重构建议
+
+- 方法过长 (74 行)，建议拆分
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\stock-sentiment-analyzer\docs\REFACTORING_SUGGESTIONS.md`
+- **起始行号**: 44
+- **搜索关键词**: `代码块 (python)`
+
+### 签名追踪
+- **签名**: `2bd6d6a127cac26d...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

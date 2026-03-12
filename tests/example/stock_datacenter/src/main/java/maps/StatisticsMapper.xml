@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.snn.Statistics" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.snn.Statistics" >
+    <id column="eid" property="eid" jdbcType="VARCHAR" />
+    <result column="generation" property="generation" jdbcType="INTEGER" />
+    <result column="htimes" property="htimes" jdbcType="BIGINT" />
+    <result column="sdesc" property="desc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    eid, generation, times, sdesc
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="eid != null" >
+          and eid = #{eid,jdbcType=VARCHAR}
+      </if>
+      <if test="generation != null" >
+          and generation = #{generation,jdbcType=INTEGER}
+      </if>
+      <if test="times != null" >
+          and times = #{times,jdbcType=BIGINT}
+      </if>
+      <if test="desc != null" >
+          and sdesc = #{desc,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="generation != null" >
+        generation = #{generation,jdbcType=INTEGER},
+      </if>
+      <if test="times != null" >
+        times = #{times,jdbcType=BIGINT},
+      </if>
+      <if test="desc != null" >
+        sdesc = #{desc,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insertStatisticsByEid" parameterType="com.stock.common.model.snn.Statistics" >
+    insert into t_statistics (eid, generation, times, 
+      sdesc)
+    values (#{eid,jdbcType=VARCHAR}, #{generation,jdbcType=INTEGER}, #{htimes,jdbcType=BIGINT}, 
+      #{desc,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_statistics
+    where eid = #{eid,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_statistics
+    where eid = #{eid,jdbcType=VARCHAR}
+  </select>
+  <select id="getStatisticsByEid" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_statistics
+     where eid = #{eid,jdbcType=VARCHAR}
+  </select>
+  <select id="queryAllStatistics" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_statistics
+    
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.snn.Statistics" >
+    select count(*)
+    from t_statistics
+    <include refid="Base_Where" />
+  </select>
+  <update id="modifyStatisticsByEid" parameterType="com.stock.common.model.snn.Statistics" >
+    update t_statistics
+    <include refid="Base_Update_Set" />
+    where eid = #{eid,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.snn.Statistics" >
+    update t_statistics
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+      <!-- 加载数据到缓存-->
+   <select id="loadstatistics2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_statistics
+  </select>
+  
+</mapper>

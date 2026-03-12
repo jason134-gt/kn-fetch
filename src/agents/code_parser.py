@@ -14,7 +14,8 @@ import re
 from typing import List, Dict, Any, Optional, Union
 from .base_agent import BaseAgent
 from src.models.code_metadata import (
-    CodeMetadata, FunctionMetadata, ClassMetadata, CodeLanguage
+    CodeMetadata, FunctionMetadata, ClassMetadata, CodeLanguage, FileMetadata, 
+    ImportMetadata, VariableMetadata, CodeComplexity
 )
 from pathlib import Path
 
@@ -34,7 +35,7 @@ class CodeParserAgent(BaseAgent):
             ".go": self._parse_go,
         }
     
-    async def _execute_impl(self, input_data: Any) -> FileMetadata:
+    async def _execute_impl(self, input_data: Any) -> CodeMetadata:
         """执行代码解析"""
         if isinstance(input_data, dict):
             file_path = input_data.get("file_path")
@@ -312,41 +313,144 @@ class CodeParserAgent(BaseAgent):
                 return value_node.func.id
         return "unknown"
     
-    # 其他语言的解析器（简化实现）
+    # 使用增强的多语言解析器
     async def _parse_javascript(self, file_path: str, content: str) -> FileMetadata:
-        """解析JavaScript代码（简化实现）"""
-        file_metadata = FileMetadata(file_path=file_path, language=CodeLanguage.JAVASCRIPT)
-        # TODO: 实现完整的JavaScript解析
-        return file_metadata
+        """解析JavaScript代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_javascript(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.JAVASCRIPT)
     
     async def _parse_typescript(self, file_path: str, content: str) -> FileMetadata:
-        """解析TypeScript代码（简化实现）"""
-        file_metadata = FileMetadata(file_path=file_path, language=CodeLanguage.TYPESCRIPT)
-        # TODO: 实现完整的TypeScript解析
-        return file_metadata
+        """解析TypeScript代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_typescript(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.TYPESCRIPT)
     
     async def _parse_java(self, file_path: str, content: str) -> FileMetadata:
-        """解析Java代码（简化实现）"""
-        file_metadata = FileMetadata(file_path=file_path, language=CodeLanguage.JAVA)
-        # TODO: 实现完整的Java解析
-        return file_metadata
+        """解析Java代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_java(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.JAVA)
     
     async def _parse_cpp(self, file_path: str, content: str) -> FileMetadata:
-        """解析C++代码（简化实现）"""
-        file_metadata = FileMetadata(file_path=file_path, language=CodeLanguage.CPP)
-        # TODO: 实现完整的C++解析
-        return file_metadata
+        """解析C++代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_cpp(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.CPP)
     
     async def _parse_c(self, file_path: str, content: str) -> FileMetadata:
-        """解析C代码（简化实现）"""
-        file_metadata = FileMetadata(file_path=file_path, language=CodeLanguage.CPP)  # C使用CPP语言类型
-        # TODO: 实现完整的C解析
-        return file_metadata
+        """解析C代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_c(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.C)
     
     async def _parse_go(self, file_path: str, content: str) -> FileMetadata:
-        """解析Go代码（简化实现）"""
-        file_metadata = FileMetadata(file_path=file_path, language=CodeLanguage.GO)
-        # TODO: 实现完整的Go解析
+        """解析Go代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_go(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.GO)
+    
+    async def _parse_rust(self, file_path: str, content: str) -> FileMetadata:
+        """解析Rust代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_rust(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.RUST)
+    
+    async def _parse_php(self, file_path: str, content: str) -> FileMetadata:
+        """解析PHP代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_php(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.PHP)
+    
+    async def _parse_ruby(self, file_path: str, content: str) -> FileMetadata:
+        """解析Ruby代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_ruby(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.RUBY)
+    
+    async def _parse_csharp(self, file_path: str, content: str) -> FileMetadata:
+        """解析C#代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_csharp(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.CSHARP)
+    
+    async def _parse_swift(self, file_path: str, content: str) -> FileMetadata:
+        """解析Swift代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_swift(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.SWIFT)
+    
+    async def _parse_kotlin(self, file_path: str, content: str) -> FileMetadata:
+        """解析Kotlin代码"""
+        from .enhanced_language_parsers import EnhancedLanguageParser
+        
+        parser = EnhancedLanguageParser()
+        metadata = parser.parse_kotlin(file_path, content)
+        
+        return self._convert_to_file_metadata(metadata, CodeLanguage.KOTLIN)
+    
+    def _convert_to_file_metadata(self, metadata: Dict[str, Any], language: CodeLanguage) -> FileMetadata:
+        """将解析结果转换为FileMetadata对象"""
+        file_metadata = FileMetadata(
+            file_path=metadata["file_path"],
+            language=language,
+            has_syntax_errors=metadata.get("has_errors", False)
+        )
+        
+        # 转换函数信息
+        for func_data in metadata.get("functions", []):
+            func_metadata = FunctionMetadata(
+                name=func_data.get("name", ""),
+                start_line=func_data.get("start_line", 0),
+                end_line=func_data.get("end_line", 0),
+                parameters=func_data.get("parameters", []),
+                is_public=True
+            )
+            file_metadata.functions.append(func_metadata)
+        
+        # 转换类信息
+        for class_data in metadata.get("classes", []):
+            class_metadata = ClassMetadata(
+                name=class_data.get("name", ""),
+                start_line=class_data.get("start_line", 0),
+                end_line=class_data.get("end_line", 0),
+                base_classes=class_data.get("base_classes", [])
+            )
+            file_metadata.classes.append(class_metadata)
+        
         return file_metadata
 
 

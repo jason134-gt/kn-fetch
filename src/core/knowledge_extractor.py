@@ -43,7 +43,7 @@ class KnowledgeExtractor:
         include_code: bool = True,
         include_docs: bool = True,
         force: bool = False,
-        deep_analysis: bool = False,
+        deep_analysis: bool = True,  # 默认启用LLM深度分析
         refactoring_analysis: bool = False
     ) -> KnowledgeGraph:
         """从指定目录提取结构化知识
@@ -192,7 +192,8 @@ class KnowledgeExtractor:
         
         # 生成 Skill 格式的知识文档
         print("生成知识文档...")
-        doc_generator = KnowledgeDocumentGenerator(output_dir="output/doc")
+        output_dir = self.config.get("output", {}).get("doc_dir", "output/doc")
+        doc_generator = KnowledgeDocumentGenerator(output_dir=output_dir)
         doc_result = doc_generator.generate_all_documents(graph)
         print(f"知识文档生成完成:")
         print(f"  - 索引: {doc_result['index']}")
@@ -204,12 +205,12 @@ class KnowledgeExtractor:
             print("\n启动重构分析...")
             refactoring_analyzer = RefactoringAnalyzer(graph, self.config)
             refactoring_results = refactoring_analyzer.analyze_full()
-            refactoring_analyzer.save_analysis_report(refactoring_results, "output/refactoring")
+            refactoring_analyzer.save_analysis_report(refactoring_results, f"{output_dir}/refactoring")
         
         # LLM深度分析（生成设计文档）
         if deep_analysis:
             print("\n启动LLM深度分析...")
-            deep_analyzer = DeepKnowledgeAnalyzer(self.config, output_dir="output/doc")
+            deep_analyzer = DeepKnowledgeAnalyzer(self.config, output_dir=output_dir)
             if deep_analyzer.is_available():
                 deep_result = deep_analyzer.analyze_all(graph, source_dir)
                 print(f"\n深度分析文档生成完成:")

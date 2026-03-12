@@ -1,0 +1,313 @@
+# Stock_service 项目分析报告
+
+## 项目概览
+- **项目名称**: Stock_service
+- **分析时间**: 2026-03-12T10:04:42.627812
+- **文件总数**: 301
+- **Java文件数**: 284
+
+## 文件类型分布
+- .xml: 16 个文件
+- .properties: 1 个文件
+- .java: 284 个文件
+
+## 架构分析
+
+### 包结构
+- **总包数**: 41
+
+### 类层次结构
+- **总类数**: 282
+
+### 依赖关系
+- **总导入数**: 632
+- **外部依赖**: 529
+- **Java标准库**: 103
+
+## 代码质量指标
+- **总代码行数**: 68824
+- **平均每文件行数**: 242.3
+- **文件大小范围**: 70 - 190727 字节
+
+## 关键组件识别
+- **Service**: src\com\aliyun\openservices\oss\samples\OSSMultipartSample.java - 业务服务层组件
+- **Service**: src\com\aliyun\openservices\oss\samples\OSSObjectSample.java - 业务服务层组件
+- **Service**: src\com\aliyun\openservices\ots\samples\OTSMultiDataSample.java - 业务服务层组件
+- **Service**: src\com\aliyun\openservices\ots\samples\OTSSingleDataSample.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\StockCenter.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\StockDto.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\agent\CompileDefaultDataFetcherImpl.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\agent\IndexValueAgent.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\ansj\KeywordsExtratorService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\CacheUtilService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\DataLoadTimeMng.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\ExtCacheService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\IndexCacheLoadService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\IndexCacheService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\IndustryCacheLoadService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\IndustryExtCacheService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\cache\PageCacheLoadService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\chance\ChanceCategoryService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\DcssCompanyExtIndexServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\DcssDefaultServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\DcssIndustryExtIndexServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\DcssTradeIndexServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\MessageSenderServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\PushClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\RemindServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\TopicServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\UserServiceClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\comet\CometPushMsgType.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\comet\CometService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\count\StatisticsService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\AssertService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\BaseIndexService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\CashFlowService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\CfScoreRuleService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\CIndexService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\CompanyService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\ComposeIndexService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\ConditionDefineService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\CRuleService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\DcheckService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\DelegateOrderService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\DictService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\Fund0002Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IIndexService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IIService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IndexCacheService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IndexCategoryService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IndexGroupService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IndexService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IndexUtilService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\IndustryService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\MAnalysisService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\MarketService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\MatchinfoService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\MenberExtService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\MessageCenterSerivce.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\MsgconstService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\ProfileService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\RankingService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\RankResultService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\RealTimeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\ReferenceService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\RelativeIndexsService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\SelectStockService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\StatisticsService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\Stock0001Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\Stock0004Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\Stock0007Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\Stock0008Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\Stock0009Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\StockPoolService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\StockServiceFactory.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\SystemPropertiesService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TableSystemService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TagruleService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TagService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TemplateService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TopicApplicantService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TopicBackupService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TopicHostService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TopicService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TopicUserService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\TUextService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\UIndexService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\UserNoteService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\USubjectService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\ValuationService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\factory\SMsgFactory.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HAbbcService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HAppearService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HAvgService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HBollService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HCcService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HCountService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HCXGXDService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HDateService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HDayAvgService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HDayService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HDaySumService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HExpCountService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HExpService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HFqlhzService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HGetMaxMinService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HGetsfbsService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HGetTimesService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HGService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HIndexValueBelowBVDayCountService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HIndexValueCountService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HKdjService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HLxndService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HMacdService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HMonthAvgService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HMonthService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HNdlhzService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HpdlongService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HPoweiService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HPzService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HRsiService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HRsvService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HSlhtService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HSplService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HUtilService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HWeekAvgService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\HWeekService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\IFInvoker.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\hfunction\IFService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\mobile\MobileAgentService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\mobile\MobileMessageService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\mobile\SmsService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\TalkMessageService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\UserEventService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\UsubjectEventService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msgpush\IOSFailureMsgService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msgpush\MobileMsgPushService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msgpush\MobileTokenCacheService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\nosql\NosqlService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\product\AlipayInfoService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\product\OrderService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\product\ProductService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\product\ResourceService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\realtime\RealtimeDataItem.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\realtime\RealTradeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\realtime\SinaStockService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\realtime\WStockMessageListWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\realtime\WStockService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\MicorBlogService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\MsgTimeLineService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\NoticeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\ReportService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\SquareStockChanceService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\TimeLineService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\ViewpointService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\CninfoNoticeTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\ComparatorTagBean.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\EastmoneyCompanyTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\HttpRequestProxy.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\ITaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\P5wCWQZTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\P5wNoticeTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\QQCompanyNoticeTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\QQCompanyTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\QQZxgTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\SpiderConfigBean.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\SpiderConfigMain.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\SpiderScheduler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\SpiderStorage.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\SpiderStorageBean.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\StockSpider.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\TagBean.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\TalkMockService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\UidCompany.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\WeiboUserTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\XueqiuTalkTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\XueqiuTodayTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\spider\XueqiuUserTaskProcessor.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockChargeBillService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockDelegationService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockEquityService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockGameCacheService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockGameFollowService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockRevenueService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockSnapshootService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\stockgame\StockTransactionService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\trade\ShareTimerTradeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\trade\StockTradeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\trade\Trade0001Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\trade\TradeBitMapService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\trade\TradeCenter.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\trade\TradeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\util\SCacheUtil.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\util\ServiceUtil.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\util\StockChanceUtil.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\es\ESClient.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\es\ESIndexData.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\es\ESIndexMapping.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\es\StockWordExtrator.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\client\es\TextSplitService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0010Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0012Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0013Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0018Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0019Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0021Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Company0022Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\CompanyExtService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\CompanyPageBuildService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Stock0010Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Stock0011Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\company\Stock0013Service.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\mapdb\StockMapdb.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\tree\RuleTreeService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\ArticleCommentListWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\CreditRuleLogService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\CreditRuleService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\Email_Auth.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\MembersService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\ResetMemberModel.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\ResetMemberService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\RoleactionService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\RolemoduleService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\RoleService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\SimpleArticleListWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\StockSeqService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\ThirdUserService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\UserService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\db\user\UserStockService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\event\EventQueueWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\event\IMessageListWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\event\MyTalkMessageListWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\event\ShareTimerTradeDataWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\event\ShareTimerTradeDateTest.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\event\TopicListWapper.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\impl\MessageSenderServiceImpl.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\c\DelegateOrderClientHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\c\MobileClientHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\c\RemindClientHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\c\UserNotifyClientHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\c\USubjectNotifyClientHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\RealtimeComputeDataUpdateMsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\StatictisMsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\StockPriceUpdateMsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\TradeMsgType0Handler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\TradeMsgType1Handler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType0MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType12MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType13MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType14MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType15MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType16MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType2MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType3MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType4MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType5MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType6MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType7MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType8MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UserType9MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UsubjectType0MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\m\UsubjectType1MsgHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\mp\MobilePushHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\s\MobileServerHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\s\RemindClientServerHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\s\StockPriceUpdateServerHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\s\TradeNotifyServerHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\s\UserNotifyServerHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msg\handler\s\UsubjectNotifyServerHandler.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\msgpush\asyntask\AsyncTaskService.java - 业务服务层组件
+- **Service**: src\com\yfzx\service\share\task\HotAnalysisTask.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\DownloadPage.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\FunctionUtils.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\HrefOfPage.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\JacksonMapper.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\QQWBSpider.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\SinaWBSpider.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\SpiderFacade.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\Test.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\UrlDataHanding.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\UrlQueue.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\VisitedUrlQueue.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\WBSpiderFacade.java - 业务服务层组件
+- **Service**: src\com\yz\stock\portal\service\company\spider\XueQiuWBSpider.java - 业务服务层组件

@@ -80,3 +80,118 @@ class HealthCheckResponse(BaseModel):
         json_encoders = {
             datetime: lambda v: v.isoformat()
         }
+
+
+class ProjectCreate(BaseModel):
+    """项目创建请求"""
+    name: str = Field(description="项目名称")
+    description: Optional[str] = Field(None, description="项目描述")
+    path: str = Field(description="项目路径")
+    
+
+class ProjectResponse(BaseModel):
+    """项目响应"""
+    id: str = Field(description="项目ID")
+    name: str = Field(description="项目名称")
+    description: Optional[str] = Field(None, description="项目描述")
+    path: str = Field(description="项目路径")
+    created_at: datetime = Field(description="创建时间")
+    updated_at: datetime = Field(description="更新时间")
+    
+    class Config:
+        json_encoders = {
+            datetime: lambda v: v.isoformat()
+        }
+
+
+class ProjectListResponse(BaseModel):
+    """项目列表响应"""
+    projects: List[ProjectResponse] = Field(description="项目列表")
+    pagination: Dict[str, Any] = Field(description="分页信息")
+
+
+class AgentStatus(str, Enum):
+    """Agent状态枚举"""
+    IDLE = "idle"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+    DISABLED = "disabled"
+
+
+class AgentType(str, Enum):
+    """Agent类型枚举"""
+    FILE_SCANNER = "file_scanner"
+    CODE_PARSER = "code_parser"
+    SEMANTIC_EXTRACTOR = "semantic_extractor"
+    ARCHITECTURE_ANALYZER = "architecture_analyzer"
+    BUSINESS_LOGIC = "business_logic"
+    DOCUMENTATION = "documentation"
+    QUALITY_ASSESSOR = "quality_assessor"
+
+
+class AgentResponse(BaseModel):
+    """Agent响应"""
+    id: str = Field(description="Agent ID")
+    name: str = Field(description="Agent名称")
+    type: AgentType = Field(description="Agent类型")
+    status: AgentStatus = Field(description="Agent状态")
+    last_execution: Optional[datetime] = Field(None, description="最后执行时间")
+    metrics: Dict[str, Any] = Field(description="性能指标")
+    
+    class Config:
+        use_enum_values = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat()
+        }
+
+
+class AgentListResponse(BaseModel):
+    """Agent列表响应"""
+    agents: List[AgentResponse] = Field(description="Agent列表")
+    total_count: int = Field(description="总数")
+
+
+class AgentConfigUpdate(BaseModel):
+    """Agent配置更新"""
+    config: Dict[str, Any] = Field(description="配置更新")
+
+
+class SystemMetrics(BaseModel):
+    """系统指标"""
+    cpu_usage: float = Field(description="CPU使用率")
+    memory_usage: float = Field(description="内存使用率")
+    disk_usage: float = Field(description="磁盘使用率")
+    active_connections: int = Field(description="活跃连接数")
+    
+
+class PerformanceMetrics(BaseModel):
+    """性能指标"""
+    average_response_time: float = Field(description="平均响应时间")
+    requests_per_second: float = Field(description="每秒请求数")
+    error_rate: float = Field(description="错误率")
+    uptime: int = Field(description="运行时间")
+    
+
+class SystemStatusResponse(BaseModel):
+    """系统状态响应"""
+    application: Dict[str, Any] = Field(description="应用信息")
+    system: Dict[str, Any] = Field(description="系统信息")
+    performance: PerformanceMetrics = Field(description="性能指标")
+    resources: Dict[str, Any] = Field(description="资源使用")
+
+
+class ErrorResponse(BaseModel):
+    """错误响应"""
+    error: str = Field(description="错误消息")
+    code: int = Field(description="错误代码")
+    details: Optional[Dict[str, Any]] = Field(None, description="错误详情")
+    
+    class Config:
+        schema_extra = {
+            "example": {
+                "error": "资源未找到",
+                "code": 404,
+                "details": {"resource_id": "12345"}
+            }
+        }

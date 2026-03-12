@@ -1,0 +1,37 @@
+# 股票舆情分析系统依赖
+
+# HTTP请求
+aiohttp>=3.9.0
+
+# HTML解析
+beautifulsoup4>=4.12.0
+
+# YAML配置
+pyyaml>=6.0
+
+# 异步支持
+asyncio>=3.4.3
+
+# 日期时间处理
+python-dateutil>=2.8.2
+
+# 数据处理
+pandas>=2.0.0
+numpy>=1.24.0
+
+# GitNexus 知识提取工具依赖
+gitpython>=3.1.40
+pydantic>=2.0.0
+click>=8.0.0
+tree-sitter>=0.20.0
+tree-sitter-python>=0.20.4
+tree-sitter-javascript>=0.20.1
+tree-sitter-typescript>=0.20.3
+tree-sitter-java>=0.20.2
+tree-sitter-cpp>=0.20.0
+tree-sitter-go>=0.20.0
+networkx>=3.1
+sqlalchemy>=2.0.0
+tqdm>=4.65.0
+jinja2>=3.1.0
+markdown>=3.4.0

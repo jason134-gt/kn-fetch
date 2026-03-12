@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Stockpool" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Stockpool" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="uptime" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="pool" property="pool" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    name, type, uptime,pool
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="name != null" >
+          and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null" >
+          and type = #{type,jdbcType=INTEGER}
+      </if>
+      <if test="uptime != null" >
+          and uptime = #{uptime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pool != null" >
+          and pool = #{pool,jdbcType=LONGVARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+       uptime = now(),
+      <if test="pool != null" >
+        pool = #{pool,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insertStockpool" parameterType="com.stock.common.model.Stockpool" >
+    insert into t_stock_pool (name, type, uptime, 
+      pool)
+    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, now(), 
+      #{pool,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <select id="getStockPoolByName" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    *
+    from t_stock_pool
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="getAllStockPoolList" resultMap="BaseResultMap" parameterType="map" >
+    select *  from t_stock_pool
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Stockpool" >
+    select count(*)
+    from t_stock_pool
+    <include refid="Base_Where" />
+  </select>
+  
+  <update id="modifyStockpoolByName" parameterType="com.stock.common.model.Stockpool" >
+    update t_stock_pool
+    <include refid="Base_Update_Set" />
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="deleteStockpoolByName" parameterType="java.lang.String" >
+    delete from t_stock_pool
+    where name = #{name,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteStockpoolByType" parameterType="java.lang.Integer" >
+    delete from t_stock_pool
+    where type = #{type,jdbcType=INTEGER}
+  </delete>
+  
+  <select id="loadstockpool2cache" resultMap="BaseResultMap" parameterType="map" >
+    select *  from t_stock_pool
+  </select>
+</mapper>

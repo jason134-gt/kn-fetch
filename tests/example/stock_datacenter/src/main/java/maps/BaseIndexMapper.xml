@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.stock.portal.model.baseindex.BaseIndex" >
+  <resultMap id="BaseResultMap" type="com.yz.stock.portal.model.baseindex.BaseIndex" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="LAST_DATA" property="lastData" jdbcType="DATE" />
+    <result column="PROFIT_INCREASE_INCOME_INCREASE" property="profitIncreaseIncomeIncrease" jdbcType="DOUBLE" />
+    <result column="EXPENSE_INCREASE_INCOME_INCREASE" property="expenseIncreaseIncomeIncrease" jdbcType="DOUBLE" />
+    <result column="SELL_GROSS_PROFIT" property="sellGrossProfit" jdbcType="DOUBLE" />
+    <result column="SELL_FINAL_PROFIT" property="sellFinalProfit" jdbcType="DOUBLE" />
+    <result column="NET_ASSET_YIELD_RATE" property="netAssetYieldRate" jdbcType="DOUBLE" />
+    <result column="TOTAL_ASSET_YIELD_RATE" property="totalAssetYieldRate" jdbcType="DOUBLE" />
+    <result column="THEORY_BILL_TURNOVER_RATE" property="theoryBillTurnoverRate" jdbcType="DOUBLE" />
+    <result column="STOCK_TURNOVER_RATE" property="stockTurnoverRate" jdbcType="DOUBLE" />
+    <result column="FLOW_RATE" property="flowRate" jdbcType="DOUBLE" />
+    <result column="QUICKRATE" property="quickrate" jdbcType="DOUBLE" />
+    <result column="ASSET_INDEBTED_RATE" property="assetIndebtedRate" jdbcType="DOUBLE" />
+    <result column="FINAL_INDEBETED_RATE" property="finalIndebetedRate" jdbcType="DOUBLE" />
+    <result column="OTHER_RATE" property="otherRate" jdbcType="DOUBLE" />
+    <result column="PROFIT_PERMANMENT_ASSET_RATIO" property="profitPermanmentAssetRatio" jdbcType="DOUBLE" />
+    <result column="ADVER_EXPENSE_INCOME_RATIO" property="adverExpenseIncomeRatio" jdbcType="DOUBLE" />
+    <result column="CUSTOMER_EVALUE_RATIO" property="customerEvalueRatio" jdbcType="DOUBLE" />
+    <result column="DERIVE_TOOL_RISK_RATIO" property="deriveToolRiskRatio" jdbcType="DOUBLE" />
+    <result column="LATEST_PRICE" property="latestPrice" jdbcType="DOUBLE" />
+    <result column="TOTAL_PRICE" property="totalPrice" jdbcType="DOUBLE" />
+    <result column="EARNING_PER_PART" property="earningPerPart" jdbcType="DOUBLE" />
+    <result column="ASSET_PER_PART" property="assetPerPart" jdbcType="DOUBLE" />
+    <result column="CASH_FLOW_PER_PART" property="cashFlowPerPart" jdbcType="DOUBLE" />
+    <result column="TOTAL_PRICE_FREE_CASH_FLOW" property="totalPriceFreeCashFlow" jdbcType="DOUBLE" />
+    <result column="EV_FREE_CASE_FLOW" property="evFreeCaseFlow" jdbcType="DOUBLE" />
+    <result column="EV_EBITDA" property="evEbitda" jdbcType="DOUBLE" />
+    <result column="PRICE_RATIO" property="priceRatio" jdbcType="DOUBLE" />
+    <result column="FINAL_RATIO" property="finalRatio" jdbcType="DOUBLE" />
+    <result column="TTM" property="ttm" jdbcType="DOUBLE" />
+    <result column="STATIC_PEG" property="staticPeg" jdbcType="DOUBLE" />
+    <result column="DYNAMIC_PEG" property="dynamicPeg" jdbcType="DOUBLE" />
+    <result column="AVR_INCREASE_RATIO_YEAR" property="avrIncreaseRatioYear" jdbcType="DOUBLE" />
+    <result column="TIME" property="time" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="EXPECT_FUTURE_INCREASE_RATIO" property="expectFutureIncreaseRatio" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, COMPANY_CODE, LAST_DATA, PROFIT_INCREASE_INCOME_INCREASE, EXPENSE_INCREASE_INCOME_INCREASE, 
+    SELL_GROSS_PROFIT, SELL_FINAL_PROFIT, NET_ASSET_YIELD_RATE, TOTAL_ASSET_YIELD_RATE, 
+    THEORY_BILL_TURNOVER_RATE, STOCK_TURNOVER_RATE, FLOW_RATE, QUICKRATE, ASSET_INDEBTED_RATE, 
+    FINAL_INDEBETED_RATE, OTHER_RATE, PROFIT_PERMANMENT_ASSET_RATIO, ADVER_EXPENSE_INCOME_RATIO, 
+    CUSTOMER_EVALUE_RATIO, DERIVE_TOOL_RISK_RATIO, LATEST_PRICE, TOTAL_PRICE, EARNING_PER_PART, 
+    ASSET_PER_PART, CASH_FLOW_PER_PART, TOTAL_PRICE_FREE_CASH_FLOW, EV_FREE_CASE_FLOW, 
+    EV_EBITDA, PRICE_RATIO, FINAL_RATIO, TTM, STATIC_PEG, DYNAMIC_PEG, AVR_INCREASE_RATIO_YEAR, 
+    TIME, UPDATE_TIME, EXPECT_FUTURE_INCREASE_RATIO
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="id != null" >
+          and id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="companyCode != null" >
+          and COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="lastData != null" >
+          and LAST_DATA = #{lastData,jdbcType=DATE}
+      </if>
+      <if test="profitIncreaseIncomeIncrease != null" >
+          and PROFIT_INCREASE_INCOME_INCREASE = #{profitIncreaseIncomeIncrease,jdbcType=DOUBLE}
+      </if>
+      <if test="expenseIncreaseIncomeIncrease != null" >
+          and EXPENSE_INCREASE_INCOME_INCREASE = #{expenseIncreaseIncomeIncrease,jdbcType=DOUBLE}
+      </if>
+      <if test="sellGrossProfit != null" >
+          and SELL_GROSS_PROFIT = #{sellGrossProfit,jdbcType=DOUBLE}
+      </if>
+      <if test="sellFinalProfit != null" >
+          and SELL_FINAL_PROFIT = #{sellFinalProfit,jdbcType=DOUBLE}
+      </if>
+      <if test="netAssetYieldRate != null" >
+          and NET_ASSET_YIELD_RATE = #{netAssetYieldRate,jdbcType=DOUBLE}
+      </if>
+      <if test="totalAssetYieldRate != null" >
+          and TOTAL_ASSET_YIELD_RATE = #{totalAssetYieldRate,jdbcType=DOUBLE}
+      </if>
+      <if test="theoryBillTurnoverRate != null" >
+          and THEORY_BILL_TURNOVER_RATE = #{theoryBillTurnoverRate,jdbcType=DOUBLE}
+      </if>
+      <if test="stockTurnoverRate != null" >
+          and STOCK_TURNOVER_RATE = #{stockTurnoverRate,jdbcType=DOUBLE}
+      </if>
+      <if test="flowRate != null" >
+          and FLOW_RATE = #{flowRate,jdbcType=DOUBLE}
+      </if>
+      <if test="quickrate != null" >
+          and QUICKRATE = #{quickrate,jdbcType=DOUBLE}
+      </if>
+      <if test="assetIndebtedRate != null" >
+          and ASSET_INDEBTED_RATE = #{assetIndebtedRate,jdbcType=DOUBLE}
+      </if>
+      <if test="finalIndebetedRate != null" >
+          and FINAL_INDEBETED_RATE = #{finalIndebetedRate,jdbcType=DOUBLE}
+      </if>
+      <if test="otherRate != null" >
+          and OTHER_RATE = #{otherRate,jdbcType=DOUBLE}
+      </if>
+      <if test="profitPermanmentAssetRatio != null" >
+          and PROFIT_PERMANMENT_ASSET_RATIO = #{profitPermanmentAssetRatio,jdbcType=DOUBLE}
+      </if>
+      <if test="adverExpenseIncomeRatio != null" >
+          and ADVER_EXPENSE_INCOME_RATIO = #{adverExpenseIncomeRatio,jdbcType=DOUBLE}
+      </if>
+      <if test="customerEvalueRatio != null" >
+          and CUSTOMER_EVALUE_RATIO = #{customerEvalueRatio,jdbcType=DOUBLE}
+      </if>
+      <if test="deriveToolRiskRatio != null" >
+          and DERIVE_TOOL_RISK_RATIO = #{deriveToolRiskRatio,jdbcType=DOUBLE}
+      </if>
+      <if test="latestPrice != null" >
+          and LATEST_PRICE = #{latestPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="totalPrice != null" >
+          and TOTAL_PRICE = #{totalPrice,jdbcType=DOUBLE}
+      </if>
+      <if test="earningPerPart != null" >
+          and EARNING_PER_PART = #{earningPerPart,jdbcType=DOUBLE}
+      </if>
+      <if test="assetPerPart != null" >
+          and ASSET_PER_PART = #{assetPerPart,jdbcType=DOUBLE}
+      </if>
+      <if test="cashFlowPerPart != null" >
+          and CASH_FLOW_PER_PART = #{cashFlowPerPart,jdbcType=DOUBLE}
+      </if>
+      <if test="totalPriceFreeCashFlow != null" >
+          and TOTAL_PRICE_FREE_CASH_FLOW = #{totalPriceFreeCashFlow,jdbcType=DOUBLE}
+      </if>
+      <if test="evFreeCaseFlow != null" >
+          and EV_FREE_CASE_FLOW = #{evFreeCaseFlow,jdbcType=DOUBLE}
+      </if>
+      <if test="evEbitda != null" >
+          and EV_EBITDA = #{evEbitda,jdbcType=DOUBLE}
+      </if>
+      <if test="priceRatio != null" >
+          and PRICE_RATIO = #{priceRatio,jdbcType=DOUBLE}
+      </if>
+      <if test="finalRatio != null" >
+          and FINAL_RATIO = #{finalRatio,jdbcType=DOUBLE}
+      </if>
+      <if test="ttm != null" >
+          and TTM = #{ttm,jdbcType=DOUBLE}
+      </if>
+      <if test="staticPeg != null" >
+          and STATIC_PEG = #{staticPeg,jdbcType=DOUBLE}
+      </if>
+      <if test="dynamicPeg != null" >
+          and DYNAMIC_PEG = #{dynamicPeg,jdbcType=DOUBLE}
+      </if>
+      <if test="avrIncreaseRatioYear != null" >
+          and AVR_INCREASE_RATIO_YEAR = #{avrIncreaseRatioYear,jdbcType=DOUBLE}
+      </if>
+      <if test="time != null" >
+          and TIME = #{time,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null" >
+          and UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="expectFutureIncreaseRatio != null" >
+          and EXPECT_FUTURE_INCREASE_RATIO = #{expectFutureIncreaseRatio,jdbcType=DOUBLE}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lastData != null" >
+        LAST_DATA = #{lastData,jdbcType=DATE},
+      </if>
+      <if test="profitIncreaseIncomeIncrease != null" >
+        PROFIT_INCREASE_INCOME_INCREASE = #{profitIncreaseIncomeIncrease,jdbcType=DOUBLE},
+      </if>
+      <if test="expenseIncreaseIncomeIncrease != null" >
+        EXPENSE_INCREASE_INCOME_INCREASE = #{expenseIncreaseIncomeIncrease,jdbcType=DOUBLE},
+      </if>
+      <if test="sellGrossProfit != null" >
+        SELL_GROSS_PROFIT = #{sellGrossProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="sellFinalProfit != null" >
+        SELL_FINAL_PROFIT = #{sellFinalProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="netAssetYieldRate != null" >
+        NET_ASSET_YIELD_RATE = #{netAssetYieldRate,jdbcType=DOUBLE},
+      </if>
+      <if test="totalAssetYieldRate != null" >
+        TOTAL_ASSET_YIELD_RATE = #{totalAssetYieldRate,jdbcType=DOUBLE},
+      </if>
+      <if test="theoryBillTurnoverRate != null" >
+        THEORY_BILL_TURNOVER_RATE = #{theoryBillTurnoverRate,jdbcType=DOUBLE},
+      </if>
+      <if test="stockTurnoverRate != null" >
+        STOCK_TURNOVER_RATE = #{stockTurnoverRate,jdbcType=DOUBLE},
+      </if>
+      <if test="flowRate != null" >
+        FLOW_RATE = #{flowRate,jdbcType=DOUBLE},
+      </if>
+      <if test="quickrate != null" >
+        QUICKRATE = #{quickrate,jdbcType=DOUBLE},
+      </if>
+      <if test="assetIndebtedRate != null" >
+        ASSET_INDEBTED_RATE = #{assetIndebtedRate,jdbcType=DOUBLE},
+      </if>
+      <if test="finalIndebetedRate != null" >
+        FINAL_INDEBETED_RATE = #{finalIndebetedRate,jdbcType=DOUBLE},
+      </if>
+      <if test="otherRate != null" >
+        OTHER_RATE = #{otherRate,jdbcType=DOUBLE},
+      </if>
+      <if test="profitPermanmentAssetRatio != null" >
+        PROFIT_PERMANMENT_ASSET_RATIO = #{profitPermanmentAssetRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="adverExpenseIncomeRatio != null" >
+        ADVER_EXPENSE_INCOME_RATIO = #{adverExpenseIncomeRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="customerEvalueRatio != null" >
+        CUSTOMER_EVALUE_RATIO = #{customerEvalueRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="deriveToolRiskRatio != null" >
+        DERIVE_TOOL_RISK_RATIO = #{deriveToolRiskRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="latestPrice != null" >
+        LATEST_PRICE = #{latestPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null" >
+        TOTAL_PRICE = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="earningPerPart != null" >
+        EARNING_PER_PART = #{earningPerPart,jdbcType=DOUBLE},
+      </if>
+      <if test="assetPerPart != null" >
+        ASSET_PER_PART = #{assetPerPart,jdbcType=DOUBLE},
+      </if>
+      <if test="cashFlowPerPart != null" >
+        CASH_FLOW_PER_PART = #{cashFlowPerPart,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPriceFreeCashFlow != null" >
+        TOTAL_PRICE_FREE_CASH_FLOW = #{totalPriceFreeCashFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="evFreeCaseFlow != null" >
+        EV_FREE_CASE_FLOW = #{evFreeCaseFlow,jdbcType=DOUBLE},
+      </if>
+      <if test="evEbitda != null" >
+        EV_EBITDA = #{evEbitda,jdbcType=DOUBLE},
+      </if>
+      <if test="priceRatio != null" >
+        PRICE_RATIO = #{priceRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="finalRatio != null" >
+        FINAL_RATIO = #{finalRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="ttm != null" >
+        TTM = #{ttm,jdbcType=DOUBLE},
+      </if>
+      <if test="staticPeg != null" >
+        STATIC_PEG = #{staticPeg,jdbcType=DOUBLE},
+      </if>
+      <if test="dynamicPeg != null" >
+        DYNAMIC_PEG = #{dynamicPeg,jdbcType=DOUBLE},
+      </if>
+      <if test="avrIncreaseRatioYear != null" >
+        AVR_INCREASE_RATIO_YEAR = #{avrIncreaseRatioYear,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null" >
+        TIME = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectFutureIncreaseRatio != null" >
+        EXPECT_FUTURE_INCREASE_RATIO = #{expectFutureIncreaseRatio,jdbcType=DOUBLE},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.yz.stock.portal.model.baseindex.BaseIndex" >
+    insert into t_c_base_financial_index (id, COMPANY_CODE, LAST_DATA, 
+      PROFIT_INCREASE_INCOME_INCREASE, EXPENSE_INCREASE_INCOME_INCREASE, 
+      SELL_GROSS_PROFIT, SELL_FINAL_PROFIT, NET_ASSET_YIELD_RATE, 
+      TOTAL_ASSET_YIELD_RATE, THEORY_BILL_TURNOVER_RATE, 
+      STOCK_TURNOVER_RATE, FLOW_RATE, QUICKRATE, 
+      ASSET_INDEBTED_RATE, FINAL_INDEBETED_RATE, OTHER_RATE, 
+      PROFIT_PERMANMENT_ASSET_RATIO, ADVER_EXPENSE_INCOME_RATIO, 
+      CUSTOMER_EVALUE_RATIO, DERIVE_TOOL_RISK_RATIO, 
+      LATEST_PRICE, TOTAL_PRICE, EARNING_PER_PART, 
+      ASSET_PER_PART, CASH_FLOW_PER_PART, TOTAL_PRICE_FREE_CASH_FLOW, 
+      EV_FREE_CASE_FLOW, EV_EBITDA, PRICE_RATIO, 
+      FINAL_RATIO, TTM, STATIC_PEG, 
+      DYNAMIC_PEG, AVR_INCREASE_RATIO_YEAR, TIME, 
+      UPDATE_TIME, EXPECT_FUTURE_INCREASE_RATIO)
+    values (#{id,jdbcType=BIGINT}, #{companyCode,jdbcType=VARCHAR}, #{lastData,jdbcType=DATE}, 
+      #{profitIncreaseIncomeIncrease,jdbcType=DOUBLE}, #{expenseIncreaseIncomeIncrease,jdbcType=DOUBLE}, 
+      #{sellGrossProfit,jdbcType=DOUBLE}, #{sellFinalProfit,jdbcType=DOUBLE}, #{netAssetYieldRate,jdbcType=DOUBLE}, 
+      #{totalAssetYieldRate,jdbcType=DOUBLE}, #{theoryBillTurnoverRate,jdbcType=DOUBLE}, 
+      #{stockTurnoverRate,jdbcType=DOUBLE}, #{flowRate,jdbcType=DOUBLE}, #{quickrate,jdbcType=DOUBLE}, 
+      #{assetIndebtedRate,jdbcType=DOUBLE}, #{finalIndebetedRate,jdbcType=DOUBLE}, #{otherRate,jdbcType=DOUBLE}, 
+      #{profitPermanmentAssetRatio,jdbcType=DOUBLE}, #{adverExpenseIncomeRatio,jdbcType=DOUBLE}, 
+      #{customerEvalueRatio,jdbcType=DOUBLE}, #{deriveToolRiskRatio,jdbcType=DOUBLE}, 
+      #{latestPrice,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE}, #{earningPerPart,jdbcType=DOUBLE}, 
+      #{assetPerPart,jdbcType=DOUBLE}, #{cashFlowPerPart,jdbcType=DOUBLE}, #{totalPriceFreeCashFlow,jdbcType=DOUBLE}, 
+      #{evFreeCaseFlow,jdbcType=DOUBLE}, #{evEbitda,jdbcType=DOUBLE}, #{priceRatio,jdbcType=DOUBLE}, 
+      #{finalRatio,jdbcType=DOUBLE}, #{ttm,jdbcType=DOUBLE}, #{staticPeg,jdbcType=DOUBLE}, 
+      #{dynamicPeg,jdbcType=DOUBLE}, #{avrIncreaseRatioYear,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{expectFutureIncreaseRatio,jdbcType=DOUBLE})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_c_base_financial_index
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_base_financial_index
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.baseindex.BaseIndex" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_base_financial_index
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_base_financial_index
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.yz.stock.portal.model.baseindex.BaseIndex" >
+    select count(*)
+    from t_c_base_financial_index
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.yz.stock.portal.model.baseindex.BaseIndex" >
+    update t_c_base_financial_index
+    <include refid="Base_Update_Set" />
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="update" parameterType="com.yz.stock.portal.model.baseindex.BaseIndex" >
+    update t_c_base_financial_index
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+  <select id="getBaseIndexList" resultMap="BaseResultMap" parameterType="com.stock.common.model.IndexMessage" >
+    select 
+    <include refid="Base_Column_List" />
+    from ${tableName}
+     <![CDATA[ 
+    where company_code = #{companyCode,jdbcType=VARCHAR}
+		and DATE(TIME) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{endTime,jdbcType=TIMESTAMP}) 
+		order by time asc
+		]]>
+  </select>
+  
+   <select id="getBaseIndexList_v2_Map_columnModel" resultType="java.util.HashMap" parameterType="com.stock.common.model.IndexMessage" >
+    select * from ${tableName}
+     <![CDATA[ 
+    where company_code = #{companyCode,jdbcType=VARCHAR}
+		and DATE(TIME) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{endTime,jdbcType=TIMESTAMP}) 
+		order by time asc
+		]]>
+  </select>
+  
+</mapper>

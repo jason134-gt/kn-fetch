@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.convention.action.disableScanning" value="false"/> 
+	<constant name="struts.convention.action.disableJarScanning" value="false"/> 
+	<constant name="struts.convention.result.path" value="/WEB-INF/content" />
+	<constant name="struts.convention.package.locators" value="action,actions,struts,struts2" /> 
+	<constant name="struts.convention.action.name.separator" value="-" /> 
+	
+	<!-- 
+		 如果此值设为true，如果一个action的命名空间为/login，名称为HelloWorldAction。result返回值是success，默认会找到/WEB-INF/pages/login/hello_world.jsp（如果有hello_world_success.jsp就找这个文件，连接符“_”是在<constant name="struts.convention.action.name.separator" value="_"/>中配置的）。如果有一个action的result返回值是“error”，就会找/WEB-INF/pages /login/hello_world_error.jsp。 
+
+		  如果此值设为false，如果一个action的命名空间为/login，名称为HelloWorldAction。result返回值是success，默认会找到/WEB- INF/pages/login/hello_world/index.jsp（如果有success.jsp就找这个文件）。如果有一个action的result返回值是“error”，就会找/WEB-INF/pages /login/hello_world/error.jsp。 
+		 -->
+	<constant name="struts.convention.result.flatLayout" value="true"/>
+	<!-- 启用动态方法调用 -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    
+	<!-- 将struts bean的创建托管给Spring -->
+	<constant name="struts.objectFactory" value="spring"/>
+    
+      <!-- 默认包 -->
+    <constant name="struts.convention.default.parent.package" value="default"/> 
+    
+    <package name="default" extends="json-default">
+	        <global-results>
+            <result name="error" type="json">
+            	<param name="ignoreHierarchy">false</param>  
+                <param name="includeProperties">
+                    result,error.*
+                </param>
+            </result>
+            <result name="success" type="json">
+            	 <param name="ignoreHierarchy">false</param>  
+				<param name="includeProperties">
+					success,totalCount,data.*,error.*
+				</param>
+            </result>
+            <result name="input" type="json">
+            	 <param name="ignoreHierarchy">false</param>  
+				<param name="includeProperties">
+					success,totalCount,data.*,error.*
+				</param>
+            </result>   
+            <result name="GOURL" type="json">
+            	 <param name="ignoreHierarchy">false</param>  
+				<param name="includeProperties">
+					success,totalCount,data.*,error.*
+				</param>
+            </result>   
+        </global-results>
+          </package>    
+          
+  	<package name="default2" extends="struts-default">	 	
+        <default-interceptor-ref name="defaultStack"/> 
+          	
+	 	<action name="login" class="com.yz.stock.autoc.action.login.LoginAction" method="login">
+            <result name="userURL" type="redirectAction"></result>   
+            <result name="loginInput">jsp/back/login/login.jsp</result>         
+			<result name="success">index.html</result>
+			<result name="logout">login.jsp</result>
+			<result name="input">Error.jsp</result>
+		</action>
+		
+	 	<action name="logOut" class="com.yz.stock.autoc.action.login.LoginAction" method="logout">
+			<result name="success" type="redirectAction">login</result>
+			<result name="input">Error.jsp</result>
+			<interceptor-ref name="defaultStack" />
+		</action>        
+        
+      </package>
+
+</struts>

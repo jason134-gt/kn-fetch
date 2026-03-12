@@ -1,0 +1,37 @@
+ai:
+  provider: volcengine
+  volcengine:
+    api_key: 7c53500f-cf96-485d-bfe2-78db6827f926
+    base_url: https://ark.cn-beijing.volces.com/api/v3
+    max_tokens: 4000
+    model: deepseek-v3-1-terminus
+    temperature: 0.1
+analysis:
+  exclude:
+  - '**/node_modules/**'
+  - '**/.git/**'
+  - '**/__pycache__/**'
+  - '**/dist/**'
+  - '**/build/**'
+  - '**/target/**'
+  - '**/venv/**'
+  include_code:
+  - '**/*.py'
+  - '**/*.js'
+  - '**/*.ts'
+  - '**/*.java'
+  - '**/*.cpp'
+  - '**/*.go'
+  - '**/*.rs'
+  - '**/*.php'
+  include_docs:
+  - '**/*.md'
+  - '**/*.txt'
+  - '**/*.rst'
+output:
+  doc_dir: output/doc/stock_datacenter
+  path: output/knowledge_graph_stock_datacenter
+performance:
+  batch_size: 100
+  max_workers: 8
+  memory_limit_gb: 8

@@ -1,0 +1,62 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: code
+entity_id: 530dd48c090ec167
+signature: 5390ea42ceda364d10ed9a9dca97b87a
+created: '2026-03-11T10:11:02.281226'
+file_path: D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\DEPLOYMENT.md
+start_line: 281
+end_line: 293
+lines_of_code: 13
+tags:
+- entity
+- code
+- 代码块 (bash)
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 代码块 (bash)
+
+> **类型**: `EntityType.CODE` | **文件**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\DEPLOYMENT.md` | **行数**: 281-293 (13行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+# 1. 备份当前版本
+cp -r . ../stock-sentiment-analyzer.backup
+
+# 2. 拉取新代码
+git pull
+
+# 3. 更新依赖
+pip3 install -r requirements.txt
+
+# 4. 重启服务
+sudo systemctl restart stock-analyzer
+```
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\DEPLOYMENT.md`
+- **起始行号**: 281
+- **搜索关键词**: `代码块 (bash)`
+
+### 签名追踪
+- **签名**: `5390ea42ceda364d...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

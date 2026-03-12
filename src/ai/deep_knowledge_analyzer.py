@@ -137,6 +137,9 @@ class DeepKnowledgeAnalyzer:
         main_classes = self._get_main_classes(graph)
         main_functions = self._get_main_functions(graph)
         
+        # 获取关键类的完整代码
+        class_code_samples = self._get_class_code_samples(main_classes[:5], graph)
+        
         prompt = f"""请分析以下代码项目，生成一份详细的项目概述文档。
 
 ## 项目统计
@@ -153,14 +156,18 @@ class DeepKnowledgeAnalyzer:
 ## 实体类型分布
 {json.dumps(entities_summary, ensure_ascii=False, indent=2)}
 
+## 关键类代码示例
+{class_code_samples}
+
 请生成以下内容（使用Markdown格式）：
 1. **项目定位** - 这个项目是做什么的？解决什么问题？
 2. **技术栈** - 使用了哪些技术和框架？
-3. **核心功能** - 主要功能模块有哪些？
-4. **设计理念** - 从代码结构推断设计思路
+3. **核心功能** - 主要功能模块有哪些？每个模块的职责是什么？
+4. **设计理念** - 从代码结构推断设计思路和架构模式
 5. **适用场景** - 适合什么场景使用？
+6. **关键API** - 列出主要的对外服务接口
 
-请用中文回答，内容要专业、详细。"""
+请用中文回答，内容要专业、详细、结构化。"""
 
         result = self._call_llm(prompt, "你是一个资深的软件架构师，擅长分析代码结构和设计理念。")
         
@@ -172,6 +179,15 @@ class DeepKnowledgeAnalyzer:
             })
         
         return {"content": result, "file": "design/project_overview.md"}
+    
+    def _get_class_code_samples(self, classes, graph) -> str:
+        """获取类的代码示例"""
+        samples = []
+        for cls in classes:
+            if hasattr(cls, 'content') and cls.content:
+                sample = f"### {cls.name}\n```java\n{cls.content[:1500]}\n```\n"
+                samples.append(sample)
+        return "\n".join(samples[:3])
     
     def _analyze_business_flows(self, graph) -> Dict[str, Any]:
         """分析业务流程"""
@@ -392,17 +408,54 @@ class DeepKnowledgeAnalyzer:
             return ""
     
     def _save_document(self, relative_path: str, content: str, metadata: Dict[str, Any]):
-        """保存文档"""
+        """保存文档 - Skill格式"""
         file_path = self.output_dir / relative_path
+        
+        # 确保符合Skill格式标准
+        skill_metadata = {
+            "type": "skill",
+            "version": "1.0",
+            "category": metadata.get("category", "design"),
+            "created": metadata.get("generated_at", datetime.now().isoformat()),
+            "tags": self._generate_tags(relative_path, metadata)
+        }
+        
+        # 如果有entity_id，添加到元数据
+        if "entity_id" in metadata:
+            skill_metadata["entity_id"] = metadata["entity_id"]
         
         # 添加YAML前置元数据
         import yaml
-        frontmatter = "---\n" + yaml.dump(metadata, allow_unicode=True, default_flow_style=False) + "---\n\n"
+        frontmatter = "---\n" + yaml.dump(skill_metadata, allow_unicode=True, default_flow_style=False, sort_keys=False) + "---\n\n"
         
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(frontmatter + content)
         
         print(f"  已保存: {relative_path}")
+    
+    def _generate_tags(self, relative_path: str, metadata: Dict[str, Any]) -> List[str]:
+        """根据文档类型生成标签"""
+        tags = []
+        
+        # 根据路径推断标签
+        if "design" in relative_path:
+            tags.append("design")
+        if "business" in relative_path:
+            tags.append("business")
+        if "architecture" in relative_path:
+            tags.append("architecture")
+        
+        # 根据category添加标签
+        category = metadata.get("category", "")
+        if category:
+            tags.append(category)
+        
+        # 去重并确保有标签
+        tags = list(dict.fromkeys(tags))
+        if not tags:
+            tags = ["document"]
+        
+        return tags
     
     def _get_entities_summary(self, graph) -> Dict[str, int]:
         """获取实体类型统计"""
@@ -556,24 +609,65 @@ class DeepKnowledgeAnalyzer:
         return "\n".join(info)
     
     def _extract_api_info(self, graph) -> str:
-        """提取API信息"""
+        """提取API信息 - 增强版"""
         info = []
         
-        # 查找API相关实体
-        api_keywords = ['api', 'route', 'endpoint', 'handler', 'controller', 'view']
+        # 查找Service类
+        service_classes = []
         for entity in graph.entities.values():
-            name_lower = entity.name.lower()
-            file_lower = entity.file_path.lower()
+            if entity.entity_type.value == 'class':
+                name = entity.name
+                if 'Service' in name or 'Client' in name or 'Handler' in name:
+                    # 过滤不合法名称
+                    if name and len(name) > 2 and '\n' not in name and '{' not in name:
+                        service_classes.append(entity)
+        
+        # 按代码行数排序，取主要的
+        service_classes.sort(key=lambda x: x.lines_of_code or 0, reverse=True)
+        
+        for entity in service_classes[:30]:  # 最多30个Service类
+            name = entity.name
+            doc = entity.docstring or "无说明"
             
-            if any(k in name_lower or k in file_lower for k in api_keywords):
-                doc = entity.docstring or "无说明"
-                params = entity.parameters or []
-                info.append(f"""
-### {entity.name}
+            # 收集该类的方法
+            methods_info = []
+            for method in graph.entities.values():
+                if method.entity_type.value == 'method':
+                    # 检查是否属于该类
+                    if (method.file_path == entity.file_path and 
+                        method.start_line >= entity.start_line and 
+                        method.start_line <= (entity.end_line or 999999)):
+                        
+                        params = method.parameters or []
+                        params_str = ", ".join([p.get('name', '?') if isinstance(p, dict) else str(p) for p in params]) if params else ""
+                        
+                        method_doc = method.docstring or ""
+                        
+                        # 获取代码片段
+                        code_snippet = ""
+                        if hasattr(method, 'content') and method.content:
+                            code_snippet = method.content[:500]
+                        
+                        methods_info.append(f"""
+    - `{method.name}({params_str})` 
+      - 位置: {method.file_path}:{method.start_line}
+      - 说明: {method_doc[:100] if method_doc else '无说明'}
+""")
+            
+            # 获取类的代码片段
+            class_code = ""
+            if hasattr(entity, 'content') and entity.content:
+                class_code = f"\n```java\n{entity.content[:1000]}\n```\n"
+            
+            info.append(f"""
+### {name}
 - 文件: {entity.file_path}
-- 类型: {entity.entity_type.value}
-- 参数: {params[:5]}
-- 说明: {doc[:200]}
+- 行号: {entity.start_line}-{entity.end_line or '?'}
+- 代码行数: {entity.lines_of_code or 0}
+- 类说明: {doc[:300]}
+{class_code}
+**主要方法** ({len(methods_info)}个):
+{''.join(methods_info[:15])}
 """)
         
         return "\n".join(info) if info else ""

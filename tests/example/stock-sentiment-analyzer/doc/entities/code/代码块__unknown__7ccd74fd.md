@@ -1,0 +1,52 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: code
+entity_id: 7ccd74fd75dbbd08
+signature: b3c2228a9b97fda755c01a3b643ee4db
+created: '2026-03-10T20:58:25.648576'
+file_path: D:\mywork\workspace\stock-sentiment-analyzer\docs\PROJECT_KNOWLEDGE_BASE.md
+start_line: 287
+end_line: 289
+lines_of_code: 3
+tags:
+- entity
+- code
+- 代码块 (unknown)
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 代码块 (unknown)
+
+> **类型**: `EntityType.CODE` | **文件**: `D:\mywork\workspace\stock-sentiment-analyzer\docs\PROJECT_KNOWLEDGE_BASE.md` | **行数**: 287-289 (3行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+#### 2. 专家评估结果结构 (ExpertResult Object)
+```
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\stock-sentiment-analyzer\docs\PROJECT_KNOWLEDGE_BASE.md`
+- **起始行号**: 287
+- **搜索关键词**: `代码块 (unknown)`
+
+### 签名追踪
+- **签名**: `b3c2228a9b97fda7...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

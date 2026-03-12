@@ -491,13 +491,54 @@ class DocumentationAgent(BaseAgent):
             f.write(index_content)
     
     async def _save_documents_to_files(self, generated_docs: Dict[str, str]):
-        """保存文档到文件"""
+        """保存文档到文件 - Skill格式"""
+        import yaml
+        
         for doc_type, content in generated_docs.items():
             file_path = os.path.join(self.output_dir, f"{doc_type}.md")
             
             try:
+                # 生成Skill格式的YAML前置元数据
+                skill_metadata = {
+                    "type": "skill",
+                    "version": "1.0",
+                    "category": self._get_doc_category(doc_type),
+                    "created": datetime.now().isoformat(),
+                    "tags": self._get_doc_tags(doc_type)
+                }
+                
+                frontmatter = "---\n" + yaml.dump(skill_metadata, allow_unicode=True, default_flow_style=False, sort_keys=False) + "---\n\n"
+                
                 with open(file_path, 'w', encoding='utf-8') as f:
-                    f.write(content)
+                    f.write(frontmatter + content)
                 self.logger.info(f"保存文档: {file_path}")
             except Exception as e:
                 self.logger.error(f"保存文档失败 {file_path}: {e}")
+    
+    def _get_doc_category(self, doc_type: str) -> str:
+        """获取文档分类"""
+        categories = {
+            "technical_overview": "technical",
+            "architecture_design": "architecture",
+            "api_reference": "api",
+            "business_overview": "business",
+            "business_flows": "business",
+            "development_guide": "guide",
+            "deployment_guide": "guide",
+            "knowledge_graph": "graph"
+        }
+        return categories.get(doc_type, "document")
+    
+    def _get_doc_tags(self, doc_type: str) -> List[str]:
+        """获取文档标签"""
+        tags_map = {
+            "technical_overview": ["technical", "overview"],
+            "architecture_design": ["architecture", "design"],
+            "api_reference": ["api", "reference"],
+            "business_overview": ["business", "overview"],
+            "business_flows": ["business", "flow"],
+            "development_guide": ["guide", "development"],
+            "deployment_guide": ["guide", "deployment"],
+            "knowledge_graph": ["knowledge", "graph"]
+        }
+        return tags_map.get(doc_type, ["document"])

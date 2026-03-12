@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Company" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Company" >
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+	<result column="OBJECTID" property="objectid" jdbcType="BIGINT" />
+    <result column="CH_NAME" property="chName" jdbcType="VARCHAR" />
+    <result column="SIMPILE_NAME" property="simpileName" jdbcType="VARCHAR" />
+    <result column="tsc" property="tsc" jdbcType="VARCHAR" />
+    <result column="pyjx" property="pyjx" jdbcType="VARCHAR" />
+    <result column="F001V" property="f001v" jdbcType="VARCHAR" />
+    <result column="F002V" property="f002v" jdbcType="VARCHAR" />
+    <result column="F003V" property="f003v" jdbcType="VARCHAR" />
+    <result column="F004V" property="f004v" jdbcType="VARCHAR" />
+    <result column="F005V" property="f005v" jdbcType="VARCHAR" />
+    <result column="F006V" property="f006v" jdbcType="VARCHAR" />
+    <result column="F007N" property="f007n" jdbcType="DECIMAL" />
+    <result column="F008V" property="f008v" jdbcType="VARCHAR" />
+    <result column="F009V" property="f009v" jdbcType="VARCHAR" />
+    <result column="F010D" property="f010d" jdbcType="TIMESTAMP" />
+    <result column="F011V" property="f011v" jdbcType="VARCHAR" />
+    <result column="F012V" property="f012v" jdbcType="VARCHAR" />
+    <result column="F013V" property="f013v" jdbcType="VARCHAR" />
+    <result column="F014V" property="f014v" jdbcType="VARCHAR" />
+    <result column="F015V" property="f015v" jdbcType="VARCHAR" />
+    <result column="F016V" property="f016v" jdbcType="VARCHAR" />
+    <result column="F019V" property="f019v" jdbcType="VARCHAR" />
+    <result column="F026V" property="f026v" jdbcType="VARCHAR" />
+    <result column="F027V" property="f027v" jdbcType="VARCHAR" />
+    <result column="F028V" property="f028v" jdbcType="VARCHAR" />
+    <result column="F029V" property="f029v" jdbcType="VARCHAR" />
+    <result column="F030V" property="f030v" jdbcType="VARCHAR" />
+    <result column="F031V" property="f031v" jdbcType="VARCHAR" />
+    <result column="F032V" property="f032v" jdbcType="VARCHAR" />
+    <result column="F033V" property="f033v" jdbcType="VARCHAR" />
+    <result column="F034V" property="f034v" jdbcType="VARCHAR" />
+    <result column="F035V" property="f035v" jdbcType="VARCHAR" />
+    <result column="F036V" property="f036v" jdbcType="VARCHAR" />
+    <result column="F037V" property="f037v" jdbcType="VARCHAR" />
+    <result column="F038V" property="f038v" jdbcType="VARCHAR" />
+    <result column="F039V" property="f039v" jdbcType="VARCHAR" />
+    <result column="F040V" property="f040v" jdbcType="VARCHAR" />
+    <result column="F041V" property="f041v" jdbcType="VARCHAR" />
+    <result column="F042V" property="f042v" jdbcType="VARCHAR" />
+    <result column="F043V" property="f043v" jdbcType="VARCHAR" />
+    <result column="F045V" property="f045v" jdbcType="VARCHAR" />
+    <result column="F046V" property="f046v" jdbcType="VARCHAR" />
+    <result column="F047V" property="f047v" jdbcType="VARCHAR" />
+    <result column="F048V" property="f048v" jdbcType="VARCHAR" />
+    <result column="F049V" property="f049v" jdbcType="VARCHAR" />
+    <result column="F050V" property="f050v" jdbcType="VARCHAR" />
+    <result column="F051V" property="f051v" jdbcType="VARCHAR" />
+    <result column="F052V" property="f052v" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_REGION" property="accountRegion" jdbcType="VARCHAR" />
+    <result column="TAGS" property="tags" jdbcType="VARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="MODTIME" property="modtime" jdbcType="TIMESTAMP" />
+    <result column="RECTIME" property="rectime" jdbcType="TIMESTAMP" />
+    <result column="ISVALID" property="isvalid" jdbcType="CHAR" />
+    <result column="SEQID" property="seqid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+     company_code, stock_code, OBJECTID, CH_NAME, SIMPILE_NAME,pyjx,tsc, F001V, F002V, F003V, F004V, 
+    F005V, F006V, F007N, F008V, F009V, F010D, F011V, F012V, F013V, F014V, F015V, F016V, 
+    F019V, F026V, F027V, F028V, F029V, F030V, F031V, F032V, F033V, F034V, F035V, F036V, 
+    F037V, F038V, F039V, F040V, F041V, F042V, F043V, F045V, F046V, F047V, F048V, F049V, 
+    F050V, F051V, F052V, ACCOUNT_REGION, TAGS, MEMO, MODTIME, RECTIME, ISVALID, SEQID
+  </sql>
+
+ <sql id="Base_Update_Set" >
+    <set >
+      <if test="objectid != null" >
+        OBJECTID = #{objectid,jdbcType=BIGINT},
+      </if>
+      <if test="chName != null" >
+        CH_NAME = #{chName,jdbcType=VARCHAR},
+      </if>
+      <if test="simpileName != null" >
+        SIMPILE_NAME = #{simpileName,jdbcType=VARCHAR},
+      </if>
+      <if test="f001v != null" >
+        F001V = #{f001v,jdbcType=VARCHAR},
+      </if>
+      <if test="f002v != null" >
+        F002V = #{f002v,jdbcType=VARCHAR},
+      </if>
+      <if test="f003v != null" >
+        F003V = #{f003v,jdbcType=VARCHAR},
+      </if>
+      <if test="f004v != null" >
+        F004V = #{f004v,jdbcType=VARCHAR},
+      </if>
+      <if test="f005v != null" >
+        F005V = #{f005v,jdbcType=VARCHAR},
+      </if>
+      <if test="f006v != null" >
+        F006V = #{f006v,jdbcType=VARCHAR},
+      </if>
+      <if test="f007n != null" >
+        F007N = #{f007n,jdbcType=DECIMAL},
+      </if>
+      <if test="f008v != null" >
+        F008V = #{f008v,jdbcType=VARCHAR},
+      </if>
+      <if test="f009v != null" >
+        F009V = #{f009v,jdbcType=VARCHAR},
+      </if>
+      <if test="f010d != null" >
+        F010D = #{f010d,jdbcType=TIMESTAMP},
+      </if>
+      <if test="f011v != null" >
+        F011V = #{f011v,jdbcType=VARCHAR},
+      </if>
+      <if test="f012v != null" >
+        F012V = #{f012v,jdbcType=VARCHAR},
+      </if>
+      <if test="f013v != null" >
+        F013V = #{f013v,jdbcType=VARCHAR},
+      </if>
+      <if test="f014v != null" >
+        F014V = #{f014v,jdbcType=VARCHAR},
+      </if>
+      <if test="f015v != null" >
+        F015V = #{f015v,jdbcType=VARCHAR},
+      </if>
+      <if test="f016v != null" >
+        F016V = #{f016v,jdbcType=VARCHAR},
+      </if>
+      <if test="f019v != null" >
+        F019V = #{f019v,jdbcType=VARCHAR},
+      </if>
+      <if test="f026v != null" >
+        F026V = #{f026v,jdbcType=VARCHAR},
+      </if>
+      <if test="f027v != null" >
+        F027V = #{f027v,jdbcType=VARCHAR},
+      </if>
+      <if test="f028v != null" >
+        F028V = #{f028v,jdbcType=VARCHAR},
+      </if>
+      <if test="f029v != null" >
+        F029V = #{f029v,jdbcType=VARCHAR},
+      </if>
+      <if test="f030v != null" >
+        F030V = #{f030v,jdbcType=VARCHAR},
+      </if>
+      <if test="f031v != null" >
+        F031V = #{f031v,jdbcType=VARCHAR},
+      </if>
+      <if test="f032v != null" >
+        F032V = #{f032v,jdbcType=VARCHAR},
+      </if>
+      <if test="f033v != null" >
+        F033V = #{f033v,jdbcType=VARCHAR},
+      </if>
+      <if test="f034v != null" >
+        F034V = #{f034v,jdbcType=VARCHAR},
+      </if>
+      <if test="f035v != null" >
+        F035V = #{f035v,jdbcType=VARCHAR},
+      </if>
+      <if test="f036v != null" >
+        F036V = #{f036v,jdbcType=VARCHAR},
+      </if>
+      <if test="f037v != null" >
+        F037V = #{f037v,jdbcType=VARCHAR},
+      </if>
+      <if test="f038v != null" >
+        F038V = #{f038v,jdbcType=VARCHAR},
+      </if>
+      <if test="f039v != null" >
+        F039V = #{f039v,jdbcType=VARCHAR},
+      </if>
+      <if test="f040v != null" >
+        F040V = #{f040v,jdbcType=VARCHAR},
+      </if>
+      <if test="f041v != null" >
+        F041V = #{f041v,jdbcType=VARCHAR},
+      </if>
+      <if test="f042v != null" >
+        F042V = #{f042v,jdbcType=VARCHAR},
+      </if>
+      <if test="f043v != null" >
+        F043V = #{f043v,jdbcType=VARCHAR},
+      </if>
+      <if test="f045v != null" >
+        F045V = #{f045v,jdbcType=VARCHAR},
+      </if>
+      <if test="f046v != null" >
+        F046V = #{f046v,jdbcType=VARCHAR},
+      </if>
+      <if test="f047v != null" >
+        F047V = #{f047v,jdbcType=VARCHAR},
+      </if>
+      <if test="f048v != null" >
+        F048V = #{f048v,jdbcType=VARCHAR},
+      </if>
+      <if test="f049v != null" >
+        F049V = #{f049v,jdbcType=VARCHAR},
+      </if>
+      <if test="f050v != null" >
+        F050V = #{f050v,jdbcType=VARCHAR},
+      </if>
+      <if test="f051v != null" >
+        F051V = #{f051v,jdbcType=VARCHAR},
+      </if>
+      <if test="f052v != null" >
+        F052V = #{f052v,jdbcType=VARCHAR},
+      </if>
+      <if test="accountRegion != null" >
+        ACCOUNT_REGION = #{accountRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null" >
+        TAGS = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modtime != null" >
+        MODTIME = #{modtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rectime != null" >
+        RECTIME = #{rectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null" >
+        ISVALID = #{isvalid,jdbcType=CHAR},
+      </if>
+      <if test="seqid != null" >
+        SEQID = #{seqid,jdbcType=BIGINT},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Company" >
+    insert into t_company0001 (company_code, stock_code, OBJECTID, 
+      CH_NAME, SIMPILE_NAME, F001V, 
+      F002V, F003V, F004V, 
+      F005V, F006V, F007N, 
+      F008V, F009V, F010D, 
+      F011V, F012V, F013V, 
+      F014V, F015V, F016V, 
+      F019V, F026V, F027V, 
+      F028V, F029V, F030V, 
+      F031V, F032V, F033V, 
+      F034V, F035V, F036V, 
+      F037V, F038V, F039V, 
+      F040V, F041V, F042V, 
+      F043V, F045V, F046V, 
+      F047V, F048V, F049V, 
+      F050V, F051V, F052V, 
+      ACCOUNT_REGION, TAGS, MEMO, 
+      MODTIME, RECTIME, ISVALID, 
+      SEQID)
+    values (#{companyCode,jdbcType=VARCHAR}, #{stockCode,jdbcType=VARCHAR}, #{objectid,jdbcType=BIGINT}, 
+      #{chName,jdbcType=VARCHAR}, #{simpileName,jdbcType=VARCHAR}, #{f001v,jdbcType=VARCHAR}, 
+      #{f002v,jdbcType=VARCHAR}, #{f003v,jdbcType=VARCHAR}, #{f004v,jdbcType=VARCHAR}, 
+      #{f005v,jdbcType=VARCHAR}, #{f006v,jdbcType=VARCHAR}, #{f007n,jdbcType=DECIMAL}, 
+      #{f008v,jdbcType=VARCHAR}, #{f009v,jdbcType=VARCHAR}, #{f010d,jdbcType=TIMESTAMP}, 
+      #{f011v,jdbcType=VARCHAR}, #{f012v,jdbcType=VARCHAR}, #{f013v,jdbcType=VARCHAR}, 
+      #{f014v,jdbcType=VARCHAR}, #{f015v,jdbcType=VARCHAR}, #{f016v,jdbcType=VARCHAR}, 
+      #{f019v,jdbcType=VARCHAR}, #{f026v,jdbcType=VARCHAR}, #{f027v,jdbcType=VARCHAR}, 
+      #{f028v,jdbcType=VARCHAR}, #{f029v,jdbcType=VARCHAR}, #{f030v,jdbcType=VARCHAR}, 
+      #{f031v,jdbcType=VARCHAR}, #{f032v,jdbcType=VARCHAR}, #{f033v,jdbcType=VARCHAR}, 
+      #{f034v,jdbcType=VARCHAR}, #{f035v,jdbcType=VARCHAR}, #{f036v,jdbcType=VARCHAR}, 
+      #{f037v,jdbcType=VARCHAR}, #{f038v,jdbcType=VARCHAR}, #{f039v,jdbcType=VARCHAR}, 
+      #{f040v,jdbcType=VARCHAR}, #{f041v,jdbcType=VARCHAR}, #{f042v,jdbcType=VARCHAR}, 
+      #{f043v,jdbcType=VARCHAR}, #{f045v,jdbcType=VARCHAR}, #{f046v,jdbcType=VARCHAR}, 
+      #{f047v,jdbcType=VARCHAR}, #{f048v,jdbcType=VARCHAR}, #{f049v,jdbcType=VARCHAR}, 
+      #{f050v,jdbcType=VARCHAR}, #{f051v,jdbcType=VARCHAR}, #{f052v,jdbcType=VARCHAR}, 
+      #{accountRegion,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{modtime,jdbcType=TIMESTAMP}, #{rectime,jdbcType=TIMESTAMP}, #{isvalid,jdbcType=CHAR}, 
+      #{seqid,jdbcType=BIGINT})
+  </insert>
+
+    <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Company" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_company0001
+    where COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateByCode" parameterType="com.stock.common.model.Company" >
+    update t_company0001
+    <include refid="Base_Update_Set" />
+    where COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+  </update>
+  
+    <!-- 加载数据到缓存-->
+   <select id="loadcompany2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_company0001
+  </select>
+  <!--加载公司名与编码的list-->
+    <select id="select_name_code_list" resultMap="BaseResultMap" parameterType="map" >
+    select COMPANY_CODE, TAGS, SIMPILE_NAME, COMPANY_NAME_ENG ,ACCOUNT_REGION from t_company0001
+  </select>
+  
+  <select id="getCompanyByIndustryCode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+     <include refid="Base_Column_List" />
+    from t_company0001 where TAGS LIKE CONCAT('%',#{tags,jdbcType=VARCHAR},'%') 
+  </select>
+    <select id="getCompanyByName" resultMap="BaseResultMap" parameterType="com.stock.common.model.Company" >
+    select COMPANY_CODE, TAGS, SIMPILE_NAME, COMPANY_NAME_ENG ,ACCOUNT_REGION from t_company0001 where SIMPILE_NAME like #{simpileName,jdbcType=VARCHAR}
+  </select>
+   <!--此处只查资产表,更新时间列名约定为modtime-->
+  <select id="getUpdateDataCompany" parameterType="map"  resultType="java.lang.String"  >  
+	<![CDATA[ 
+		select distinct company_code from ${tableName} t where  t.modtime >= #{modtime,jdbcType=TIMESTAMP} 
+	]]>
+	</select> 
+	
+   <select id="getAssetLatestModtime" parameterType="map"  resultType="java.sql.Date"  >  
+	<![CDATA[ 
+		select max(modtime) from `t_finace0001`  
+	]]>
+	</select> 
+	
+  <update id="updateSw3rdTag" parameterType="map" >
+    update t_company0001
+   	set  F048V = #{tag,jdbcType=VARCHAR} 
+    where COMPANY_CODE = #{companycode,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateSw2rdTag" parameterType="map" >
+    update t_company0001
+   	set  F047V = #{tag,jdbcType=VARCHAR} 
+    where COMPANY_CODE = #{companycode,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateSw1rdTag" parameterType="map" >
+    update t_company0001
+   	set  F046V = #{tag,jdbcType=VARCHAR} 
+    where COMPANY_CODE = #{companycode,jdbcType=VARCHAR}
+  </update>
+  
+   <update id="updateCompanyTags" parameterType="map">
+    update t_company0001
+    set TAGS = #{tags,jdbcType=LONGVARCHAR}
+    where COMPANY_CODE = #{companycode,jdbcType=VARCHAR}
+  </update>
+</mapper>

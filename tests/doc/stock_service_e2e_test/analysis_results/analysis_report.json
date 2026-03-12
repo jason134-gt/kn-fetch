@@ -1,0 +1,4420 @@
+{
+  "project_overview": {
+    "name": "Stock_service",
+    "analysis_time": "2026-03-12T10:04:42.627812",
+    "total_files": 301,
+    "file_types_distribution": {
+      ".xml": 16,
+      ".properties": 1,
+      ".java": 284
+    },
+    "java_files_count": 284
+  },
+  "architecture_analysis": {
+    "package_structure": {
+      "total_packages": 41,
+      "packages": {
+        "topic": [
+          "src\\topic\\TopicConst.java"
+        ],
+        "com.aliyun.openservices.oss.samples": [
+          "src\\com\\aliyun\\openservices\\oss\\samples\\OSSMultipartSample.java",
+          "src\\com\\aliyun\\openservices\\oss\\samples\\OSSObjectSample.java"
+        ],
+        "com.aliyun.openservices.ots.samples": [
+          "src\\com\\aliyun\\openservices\\ots\\samples\\OTSMultiDataSample.java",
+          "src\\com\\aliyun\\openservices\\ots\\samples\\OTSSingleDataSample.java"
+        ],
+        "com.yfzx.service": [
+          "src\\com\\yfzx\\service\\StockCenter.java",
+          "src\\com\\yfzx\\service\\StockDto.java"
+        ],
+        "com.yfzx.service.agent": [
+          "src\\com\\yfzx\\service\\agent\\CompileDefaultDataFetcherImpl.java",
+          "src\\com\\yfzx\\service\\agent\\IndexValueAgent.java"
+        ],
+        "com.yfzx.service.ansj": [
+          "src\\com\\yfzx\\service\\ansj\\KeywordsExtratorService.java"
+        ],
+        "com.yfzx.service.cache": [
+          "src\\com\\yfzx\\service\\cache\\CacheUtilService.java",
+          "src\\com\\yfzx\\service\\cache\\DataLoadTimeMng.java",
+          "src\\com\\yfzx\\service\\cache\\ExtCacheService.java",
+          "src\\com\\yfzx\\service\\cache\\IndexCacheLoadService.java",
+          "src\\com\\yfzx\\service\\cache\\IndexCacheService.java",
+          "src\\com\\yfzx\\service\\cache\\IndustryCacheLoadService.java",
+          "src\\com\\yfzx\\service\\cache\\IndustryExtCacheService.java",
+          "src\\com\\yfzx\\service\\cache\\PageCacheLoadService.java"
+        ],
+        "com.yfzx.service.chance": [
+          "src\\com\\yfzx\\service\\chance\\ChanceCategoryService.java"
+        ],
+        "com.yfzx.service.client": [
+          "src\\com\\yfzx\\service\\client\\DcssCompanyExtIndexServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\DcssDefaultServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\DcssIndustryExtIndexServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\DcssTradeIndexServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\MessageSenderServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\PushClient.java",
+          "src\\com\\yfzx\\service\\client\\RemindServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\TopicServiceClient.java",
+          "src\\com\\yfzx\\service\\client\\UserServiceClient.java"
+        ],
+        "com.yfzx.service.comet": [
+          "src\\com\\yfzx\\service\\comet\\CometPushMsgType.java",
+          "src\\com\\yfzx\\service\\comet\\CometService.java"
+        ],
+        "com.yfzx.service.count": [
+          "src\\com\\yfzx\\service\\count\\StatisticsService.java"
+        ],
+        "com.yfzx.service.db": [
+          "src\\com\\yfzx\\service\\db\\AssertService.java",
+          "src\\com\\yfzx\\service\\db\\BaseIndexService.java",
+          "src\\com\\yfzx\\service\\db\\CashFlowService.java",
+          "src\\com\\yfzx\\service\\db\\CfScoreRuleService.java",
+          "src\\com\\yfzx\\service\\db\\CIndexService.java",
+          "src\\com\\yfzx\\service\\db\\CompanyService.java",
+          "src\\com\\yfzx\\service\\db\\ComposeIndexService.java",
+          "src\\com\\yfzx\\service\\db\\ConditionDefineService.java",
+          "src\\com\\yfzx\\service\\db\\CRuleService.java",
+          "src\\com\\yfzx\\service\\db\\DcheckService.java",
+          "src\\com\\yfzx\\service\\db\\DelegateOrderService.java",
+          "src\\com\\yfzx\\service\\db\\DictService.java",
+          "src\\com\\yfzx\\service\\db\\Fund0002Service.java",
+          "src\\com\\yfzx\\service\\db\\IIndexService.java",
+          "src\\com\\yfzx\\service\\db\\IIService.java",
+          "src\\com\\yfzx\\service\\db\\IndexCacheService.java",
+          "src\\com\\yfzx\\service\\db\\IndexCategoryService.java",
+          "src\\com\\yfzx\\service\\db\\IndexGroupService.java",
+          "src\\com\\yfzx\\service\\db\\IndexService.java",
+          "src\\com\\yfzx\\service\\db\\IndexUtilService.java",
+          "src\\com\\yfzx\\service\\db\\IndustryService.java",
+          "src\\com\\yfzx\\service\\db\\MAnalysisService.java",
+          "src\\com\\yfzx\\service\\db\\MarketService.java",
+          "src\\com\\yfzx\\service\\db\\MatchinfoService.java",
+          "src\\com\\yfzx\\service\\db\\MenberExtService.java",
+          "src\\com\\yfzx\\service\\db\\MessageCenterSerivce.java",
+          "src\\com\\yfzx\\service\\db\\MsgconstService.java",
+          "src\\com\\yfzx\\service\\db\\ProfileService.java",
+          "src\\com\\yfzx\\service\\db\\RankingService.java",
+          "src\\com\\yfzx\\service\\db\\RankResultService.java",
+          "src\\com\\yfzx\\service\\db\\RealTimeService.java",
+          "src\\com\\yfzx\\service\\db\\ReferenceService.java",
+          "src\\com\\yfzx\\service\\db\\RelativeIndexsService.java",
+          "src\\com\\yfzx\\service\\db\\SelectStockService.java",
+          "src\\com\\yfzx\\service\\db\\StatisticsService.java",
+          "src\\com\\yfzx\\service\\db\\Stock0001Service.java",
+          "src\\com\\yfzx\\service\\db\\Stock0004Service.java",
+          "src\\com\\yfzx\\service\\db\\Stock0007Service.java",
+          "src\\com\\yfzx\\service\\db\\Stock0008Service.java",
+          "src\\com\\yfzx\\service\\db\\Stock0009Service.java",
+          "src\\com\\yfzx\\service\\db\\StockPoolService.java",
+          "src\\com\\yfzx\\service\\db\\StockServiceFactory.java",
+          "src\\com\\yfzx\\service\\db\\SystemPropertiesService.java",
+          "src\\com\\yfzx\\service\\db\\TableSystemService.java",
+          "src\\com\\yfzx\\service\\db\\TagruleService.java",
+          "src\\com\\yfzx\\service\\db\\TagService.java",
+          "src\\com\\yfzx\\service\\db\\TemplateService.java",
+          "src\\com\\yfzx\\service\\db\\TopicApplicantService.java",
+          "src\\com\\yfzx\\service\\db\\TopicBackupService.java",
+          "src\\com\\yfzx\\service\\db\\TopicHostService.java",
+          "src\\com\\yfzx\\service\\db\\TopicService.java",
+          "src\\com\\yfzx\\service\\db\\TopicUserService.java",
+          "src\\com\\yfzx\\service\\db\\TUextService.java",
+          "src\\com\\yfzx\\service\\db\\UIndexService.java",
+          "src\\com\\yfzx\\service\\db\\UserNoteService.java",
+          "src\\com\\yfzx\\service\\db\\USubjectService.java",
+          "src\\com\\yfzx\\service\\db\\ValuationService.java"
+        ],
+        "com.yfzx.service.factory": [
+          "src\\com\\yfzx\\service\\factory\\SMsgFactory.java"
+        ],
+        "com.yfzx.service.hfunction": [
+          "src\\com\\yfzx\\service\\hfunction\\HAbbcService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HAppearService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HAvgService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HBollService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HCcService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HCountService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HCXGXDService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HDateService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HDayAvgService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HDayService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HDaySumService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HExpCountService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HExpService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HFqlhzService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HGetMaxMinService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HGetsfbsService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HGetTimesService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HGService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HIndexValueBelowBVDayCountService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HIndexValueCountService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HKdjService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HLxndService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HMacdService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HMonthAvgService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HMonthService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HNdlhzService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HpdlongService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HPoweiService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HPzService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HRsiService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HRsvService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HSlhtService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HSplService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HUtilService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HWeekAvgService.java",
+          "src\\com\\yfzx\\service\\hfunction\\HWeekService.java",
+          "src\\com\\yfzx\\service\\hfunction\\IFInvoker.java",
+          "src\\com\\yfzx\\service\\hfunction\\IFService.java"
+        ],
+        "com.yfzx.service.mobile": [
+          "src\\com\\yfzx\\service\\mobile\\MobileAgentService.java",
+          "src\\com\\yfzx\\service\\mobile\\MobileMessageService.java",
+          "src\\com\\yfzx\\service\\mobile\\SmsService.java"
+        ],
+        "com.yfzx.service.msg": [
+          "src\\com\\yfzx\\service\\msg\\TalkMessageService.java",
+          "src\\com\\yfzx\\service\\msg\\UserEventService.java",
+          "src\\com\\yfzx\\service\\msg\\UsubjectEventService.java"
+        ],
+        "com.yfzx.service.msgpush": [
+          "src\\com\\yfzx\\service\\msgpush\\IOSFailureMsgService.java",
+          "src\\com\\yfzx\\service\\msgpush\\MobileMsgPushService.java",
+          "src\\com\\yfzx\\service\\msgpush\\MobileTokenCacheService.java"
+        ],
+        "com.yfzx.service.nosql": [
+          "src\\com\\yfzx\\service\\nosql\\NosqlService.java"
+        ],
+        "com.yfzx.service.product": [
+          "src\\com\\yfzx\\service\\product\\AlipayInfoService.java",
+          "src\\com\\yfzx\\service\\product\\OrderService.java",
+          "src\\com\\yfzx\\service\\product\\ProductService.java",
+          "src\\com\\yfzx\\service\\product\\ResourceService.java"
+        ],
+        "com.yfzx.service.realtime": [
+          "src\\com\\yfzx\\service\\realtime\\RealtimeDataItem.java",
+          "src\\com\\yfzx\\service\\realtime\\RealTradeService.java",
+          "src\\com\\yfzx\\service\\realtime\\SinaStockService.java",
+          "src\\com\\yfzx\\service\\realtime\\WStockMessageListWapper.java",
+          "src\\com\\yfzx\\service\\realtime\\WStockService.java"
+        ],
+        "com.yfzx.service.share": [
+          "src\\com\\yfzx\\service\\share\\MicorBlogService.java",
+          "src\\com\\yfzx\\service\\share\\MsgTimeLineService.java",
+          "src\\com\\yfzx\\service\\share\\NoticeService.java",
+          "src\\com\\yfzx\\service\\share\\ReportService.java",
+          "src\\com\\yfzx\\service\\share\\SquareStockChanceService.java",
+          "src\\com\\yfzx\\service\\share\\TimeLineService.java",
+          "src\\com\\yfzx\\service\\share\\ViewpointService.java"
+        ],
+        "com.yfzx.service.spider": [
+          "src\\com\\yfzx\\service\\spider\\CninfoNoticeTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\ComparatorTagBean.java",
+          "src\\com\\yfzx\\service\\spider\\EastmoneyCompanyTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\HttpRequestProxy.java",
+          "src\\com\\yfzx\\service\\spider\\ITaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\P5wCWQZTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\P5wNoticeTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\QQCompanyNoticeTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\QQCompanyTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\QQZxgTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\SpiderConfigBean.java",
+          "src\\com\\yfzx\\service\\spider\\SpiderConfigMain.java",
+          "src\\com\\yfzx\\service\\spider\\SpiderScheduler.java",
+          "src\\com\\yfzx\\service\\spider\\SpiderStorage.java",
+          "src\\com\\yfzx\\service\\spider\\SpiderStorageBean.java",
+          "src\\com\\yfzx\\service\\spider\\StockSpider.java",
+          "src\\com\\yfzx\\service\\spider\\TagBean.java",
+          "src\\com\\yfzx\\service\\spider\\TalkMockService.java",
+          "src\\com\\yfzx\\service\\spider\\UidCompany.java",
+          "src\\com\\yfzx\\service\\spider\\WeiboUserTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\XueqiuTalkTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\XueqiuTodayTaskProcessor.java",
+          "src\\com\\yfzx\\service\\spider\\XueqiuUserTaskProcessor.java"
+        ],
+        "com.yfzx.service.stockgame": [
+          "src\\com\\yfzx\\service\\stockgame\\StockChargeBillService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockDelegationService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockEquityService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockGameCacheService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockGameFollowService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockRevenueService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockSnapshootService.java",
+          "src\\com\\yfzx\\service\\stockgame\\StockTransactionService.java"
+        ],
+        "com.yfzx.service.trade": [
+          "src\\com\\yfzx\\service\\trade\\ShareTimerTradeService.java",
+          "src\\com\\yfzx\\service\\trade\\StockTradeService.java",
+          "src\\com\\yfzx\\service\\trade\\Trade0001Service.java",
+          "src\\com\\yfzx\\service\\trade\\TradeBitMapService.java",
+          "src\\com\\yfzx\\service\\trade\\TradeCenter.java",
+          "src\\com\\yfzx\\service\\trade\\TradeService.java"
+        ],
+        "com.yfzx.service.util": [
+          "src\\com\\yfzx\\service\\util\\SCacheUtil.java",
+          "src\\com\\yfzx\\service\\util\\ServiceUtil.java",
+          "src\\com\\yfzx\\service\\util\\StockChanceUtil.java"
+        ],
+        "com.yfzx.service.client.es": [
+          "src\\com\\yfzx\\service\\client\\es\\ESClient.java",
+          "src\\com\\yfzx\\service\\client\\es\\ESIndexData.java",
+          "src\\com\\yfzx\\service\\client\\es\\ESIndexMapping.java",
+          "src\\com\\yfzx\\service\\client\\es\\StockWordExtrator.java",
+          "src\\com\\yfzx\\service\\client\\es\\TextSplitService.java"
+        ],
+        "com.yfzx.service.db.company": [
+          "src\\com\\yfzx\\service\\db\\company\\Company0010Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Company0012Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Company0013Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Company0018Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Company0019Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Company0021Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Company0022Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\CompanyExtService.java",
+          "src\\com\\yfzx\\service\\db\\company\\CompanyPageBuildService.java",
+          "src\\com\\yfzx\\service\\db\\company\\Stock0010Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Stock0011Service.java",
+          "src\\com\\yfzx\\service\\db\\company\\Stock0013Service.java"
+        ],
+        "com.yfzx.service.db.mapdb": [
+          "src\\com\\yfzx\\service\\db\\mapdb\\StockMapdb.java"
+        ],
+        "com.yfzx.service.db.tree": [
+          "src\\com\\yfzx\\service\\db\\tree\\RuleTreeService.java"
+        ],
+        "com.yfzx.service.db.user": [
+          "src\\com\\yfzx\\service\\db\\user\\ArticleCommentListWapper.java",
+          "src\\com\\yfzx\\service\\db\\user\\CreditRuleLogService.java",
+          "src\\com\\yfzx\\service\\db\\user\\CreditRuleService.java",
+          "src\\com\\yfzx\\service\\db\\user\\Email_Auth.java",
+          "src\\com\\yfzx\\service\\db\\user\\MembersService.java",
+          "src\\com\\yfzx\\service\\db\\user\\ResetMemberModel.java",
+          "src\\com\\yfzx\\service\\db\\user\\ResetMemberService.java",
+          "src\\com\\yfzx\\service\\db\\user\\RoleactionService.java",
+          "src\\com\\yfzx\\service\\db\\user\\RolemoduleService.java",
+          "src\\com\\yfzx\\service\\db\\user\\RoleService.java",
+          "src\\com\\yfzx\\service\\db\\user\\StockSeqService.java",
+          "src\\com\\yfzx\\service\\db\\user\\ThirdUserService.java",
+          "src\\com\\yfzx\\service\\db\\user\\UserService.java",
+          "src\\com\\yfzx\\service\\db\\user\\UserStockService.java"
+        ],
+        "": [
+          "src\\com\\yfzx\\service\\db\\user\\SimpleArticleListWapper.java"
+        ],
+        "com.yfzx.service.msg.event": [
+          "src\\com\\yfzx\\service\\msg\\event\\EventQueueWapper.java",
+          "src\\com\\yfzx\\service\\msg\\event\\IMessageListWapper.java",
+          "src\\com\\yfzx\\service\\msg\\event\\MyTalkMessageListWapper.java",
+          "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDataWapper.java",
+          "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDateTest.java",
+          "src\\com\\yfzx\\service\\msg\\event\\TopicListWapper.java"
+        ],
+        "com.yfzx.service.msg.impl": [
+          "src\\com\\yfzx\\service\\msg\\impl\\MessageSenderServiceImpl.java"
+        ],
+        "com.yfzx.service.msg.handler.c": [
+          "src\\com\\yfzx\\service\\msg\\handler\\c\\DelegateOrderClientHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\c\\MobileClientHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\c\\RemindClientHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\c\\UserNotifyClientHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\c\\USubjectNotifyClientHandler.java"
+        ],
+        "com.yfzx.service.msg.handler.m": [
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\RealtimeComputeDataUpdateMsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\StatictisMsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\StockPriceUpdateMsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType0Handler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType1Handler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType0MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType12MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType13MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType14MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType15MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType16MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType2MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType3MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType4MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType5MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType6MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType7MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType8MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType9MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType0MsgHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType1MsgHandler.java"
+        ],
+        "com.yfzx.service.msg.handler.mp": [
+          "src\\com\\yfzx\\service\\msg\\handler\\mp\\MobilePushHandler.java"
+        ],
+        "com.yfzx.service.msg.handler.s": [
+          "src\\com\\yfzx\\service\\msg\\handler\\s\\MobileServerHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\s\\RemindClientServerHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\s\\StockPriceUpdateServerHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\s\\TradeNotifyServerHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\s\\UserNotifyServerHandler.java",
+          "src\\com\\yfzx\\service\\msg\\handler\\s\\UsubjectNotifyServerHandler.java"
+        ],
+        "com.yfzx.service.msgpush.asyntask": [
+          "src\\com\\yfzx\\service\\msgpush\\asyntask\\AsyncTaskService.java"
+        ],
+        "com.yfzx.service.share.task": [
+          "src\\com\\yfzx\\service\\share\\task\\HotAnalysisTask.java"
+        ],
+        "com.yz.stock.portal.service.company.spider": [
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\DownloadPage.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\FunctionUtils.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\HrefOfPage.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\JacksonMapper.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\QQWBSpider.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SinaWBSpider.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SpiderFacade.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\Test.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlDataHanding.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlQueue.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\VisitedUrlQueue.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\WBSpiderFacade.java",
+          "src\\com\\yz\\stock\\portal\\service\\company\\spider\\XueQiuWBSpider.java"
+        ],
+        "org.ansj.app.keyword": [
+          "src\\org\\ansj\\app\\keyword\\Keyword.java",
+          "src\\org\\ansj\\app\\keyword\\KeyWordComputer.java"
+        ]
+      }
+    },
+    "class_hierarchy": {
+      "total_classes": 282,
+      "classes": [
+        {
+          "name": "",
+          "package": "topic",
+          "file": "src\\topic\\TopicConst.java",
+          "type": "class",
+          "methods_count": 0
+        },
+        {
+          "name": "",
+          "package": "com.aliyun.openservices.oss.samples",
+          "file": "src\\com\\aliyun\\openservices\\oss\\samples\\OSSMultipartSample.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.aliyun.openservices.oss.samples",
+          "file": "src\\com\\aliyun\\openservices\\oss\\samples\\OSSObjectSample.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.aliyun.openservices.ots.samples",
+          "file": "src\\com\\aliyun\\openservices\\ots\\samples\\OTSMultiDataSample.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.aliyun.openservices.ots.samples",
+          "file": "src\\com\\aliyun\\openservices\\ots\\samples\\OTSSingleDataSample.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service",
+          "file": "src\\com\\yfzx\\service\\StockCenter.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service",
+          "file": "src\\com\\yfzx\\service\\StockDto.java",
+          "type": "class",
+          "methods_count": 26
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.agent",
+          "file": "src\\com\\yfzx\\service\\agent\\CompileDefaultDataFetcherImpl.java",
+          "type": "class",
+          "methods_count": 50
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.agent",
+          "file": "src\\com\\yfzx\\service\\agent\\IndexValueAgent.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.ansj",
+          "file": "src\\com\\yfzx\\service\\ansj\\KeywordsExtratorService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\CacheUtilService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\DataLoadTimeMng.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\ExtCacheService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\IndexCacheLoadService.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\IndexCacheService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\IndustryCacheLoadService.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\IndustryExtCacheService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.cache",
+          "file": "src\\com\\yfzx\\service\\cache\\PageCacheLoadService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.chance",
+          "file": "src\\com\\yfzx\\service\\chance\\ChanceCategoryService.java",
+          "type": "class",
+          "methods_count": 35
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\DcssCompanyExtIndexServiceClient.java",
+          "type": "class",
+          "methods_count": 15
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\DcssDefaultServiceClient.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\DcssIndustryExtIndexServiceClient.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\DcssTradeIndexServiceClient.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\MessageSenderServiceClient.java",
+          "type": "class",
+          "methods_count": 21
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\PushClient.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "IRemindService",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\RemindServiceClient.java",
+          "type": "class",
+          "methods_count": 106
+        },
+        {
+          "name": "ITopicService",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\TopicServiceClient.java",
+          "type": "class",
+          "methods_count": 20
+        },
+        {
+          "name": "IUserService",
+          "package": "com.yfzx.service.client",
+          "file": "src\\com\\yfzx\\service\\client\\UserServiceClient.java",
+          "type": "class",
+          "methods_count": 58
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.comet",
+          "file": "src\\com\\yfzx\\service\\comet\\CometService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.count",
+          "file": "src\\com\\yfzx\\service\\count\\StatisticsService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\AssertService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\BaseIndexService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\CashFlowService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\CfScoreRuleService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\CIndexService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\CompanyService.java",
+          "type": "class",
+          "methods_count": 91
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\ComposeIndexService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\ConditionDefineService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\CRuleService.java",
+          "type": "class",
+          "methods_count": 35
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\DcheckService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\DelegateOrderService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\DictService.java",
+          "type": "class",
+          "methods_count": 31
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\Fund0002Service.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IIndexService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IIService.java",
+          "type": "interface",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IndexCacheService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IndexCategoryService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IndexGroupService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IndexService.java",
+          "type": "class",
+          "methods_count": 98
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IndexUtilService.java",
+          "type": "class",
+          "methods_count": 0
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\IndustryService.java",
+          "type": "class",
+          "methods_count": 67
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\MAnalysisService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\MarketService.java",
+          "type": "class",
+          "methods_count": 27
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\MatchinfoService.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\MenberExtService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\MessageCenterSerivce.java",
+          "type": "class",
+          "methods_count": 13
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\MsgconstService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\ProfileService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\RankingService.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\RankResultService.java",
+          "type": "class",
+          "methods_count": 16
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\RealTimeService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\ReferenceService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\RelativeIndexsService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\SelectStockService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\StatisticsService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\Stock0001Service.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\Stock0004Service.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\Stock0007Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\Stock0008Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\Stock0009Service.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\StockPoolService.java",
+          "type": "class",
+          "methods_count": 16
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\StockServiceFactory.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\SystemPropertiesService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TableSystemService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TagruleService.java",
+          "type": "class",
+          "methods_count": 23
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TagService.java",
+          "type": "class",
+          "methods_count": 31
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TemplateService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TopicApplicantService.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TopicBackupService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TopicHostService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TopicService.java",
+          "type": "class",
+          "methods_count": 47
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TopicUserService.java",
+          "type": "class",
+          "methods_count": 15
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\TUextService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "IIService",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\UIndexService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\UserNoteService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\USubjectService.java",
+          "type": "class",
+          "methods_count": 39
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db",
+          "file": "src\\com\\yfzx\\service\\db\\ValuationService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.factory",
+          "file": "src\\com\\yfzx\\service\\factory\\SMsgFactory.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HAbbcService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HAppearService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HAvgService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HBollService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HCcService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HCountService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HCXGXDService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HDateService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HDayAvgService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HDayService.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HDaySumService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HExpCountService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HExpService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HFqlhzService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HGetMaxMinService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HGetsfbsService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HGetTimesService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HGService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HIndexValueBelowBVDayCountService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HIndexValueCountService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HKdjService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HLxndService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HMacdService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HMonthAvgService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HMonthService.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HNdlhzService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HpdlongService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HPoweiService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HPzService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HRsiService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HRsvService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HSlhtService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "IFService",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HSplService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HUtilService.java",
+          "type": "class",
+          "methods_count": 18
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HWeekAvgService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\HWeekService.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\IFInvoker.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.hfunction",
+          "file": "src\\com\\yfzx\\service\\hfunction\\IFService.java",
+          "type": "interface",
+          "methods_count": 0
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.mobile",
+          "file": "src\\com\\yfzx\\service\\mobile\\MobileAgentService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.mobile",
+          "file": "src\\com\\yfzx\\service\\mobile\\MobileMessageService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.mobile",
+          "file": "src\\com\\yfzx\\service\\mobile\\SmsService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg",
+          "file": "src\\com\\yfzx\\service\\msg\\TalkMessageService.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg",
+          "file": "src\\com\\yfzx\\service\\msg\\UserEventService.java",
+          "type": "class",
+          "methods_count": 22
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg",
+          "file": "src\\com\\yfzx\\service\\msg\\UsubjectEventService.java",
+          "type": "class",
+          "methods_count": 16
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msgpush",
+          "file": "src\\com\\yfzx\\service\\msgpush\\IOSFailureMsgService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msgpush",
+          "file": "src\\com\\yfzx\\service\\msgpush\\MobileMsgPushService.java",
+          "type": "class",
+          "methods_count": 30
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msgpush",
+          "file": "src\\com\\yfzx\\service\\msgpush\\MobileTokenCacheService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.nosql",
+          "file": "src\\com\\yfzx\\service\\nosql\\NosqlService.java",
+          "type": "class",
+          "methods_count": 20
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.product",
+          "file": "src\\com\\yfzx\\service\\product\\AlipayInfoService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.product",
+          "file": "src\\com\\yfzx\\service\\product\\OrderService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.product",
+          "file": "src\\com\\yfzx\\service\\product\\ProductService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.product",
+          "file": "src\\com\\yfzx\\service\\product\\ResourceService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "BaseMsg",
+          "package": "com.yfzx.service.realtime",
+          "file": "src\\com\\yfzx\\service\\realtime\\RealtimeDataItem.java",
+          "type": "class",
+          "methods_count": 73
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.realtime",
+          "file": "src\\com\\yfzx\\service\\realtime\\RealTradeService.java",
+          "type": "class",
+          "methods_count": 20
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.realtime",
+          "file": "src\\com\\yfzx\\service\\realtime\\SinaStockService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.realtime",
+          "file": "src\\com\\yfzx\\service\\realtime\\WStockMessageListWapper.java",
+          "type": "class",
+          "methods_count": 13
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.realtime",
+          "file": "src\\com\\yfzx\\service\\realtime\\WStockService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\MicorBlogService.java",
+          "type": "class",
+          "methods_count": 149
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\MsgTimeLineService.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\NoticeService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\ReportService.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\SquareStockChanceService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\TimeLineService.java",
+          "type": "class",
+          "methods_count": 20
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share",
+          "file": "src\\com\\yfzx\\service\\share\\ViewpointService.java",
+          "type": "class",
+          "methods_count": 19
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\CninfoNoticeTaskProcessor.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "Comparator<TagBean>",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\ComparatorTagBean.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\EastmoneyCompanyTaskProcessor.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "HttpRequestProxy",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\HttpRequestProxy.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\ITaskProcessor.java",
+          "type": "interface",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\P5wCWQZTaskProcessor.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\P5wNoticeTaskProcessor.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\QQCompanyNoticeTaskProcessor.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\QQCompanyTaskProcessor.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\QQZxgTaskProcessor.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\SpiderConfigBean.java",
+          "type": "class",
+          "methods_count": 22
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\SpiderConfigMain.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\SpiderScheduler.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\SpiderStorage.java",
+          "type": "class",
+          "methods_count": 19
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\SpiderStorageBean.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\StockSpider.java",
+          "type": "class",
+          "methods_count": 20
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\TagBean.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\TalkMockService.java",
+          "type": "class",
+          "methods_count": 31
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\UidCompany.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\WeiboUserTaskProcessor.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\XueqiuTalkTaskProcessor.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\XueqiuTodayTaskProcessor.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.spider",
+          "file": "src\\com\\yfzx\\service\\spider\\XueqiuUserTaskProcessor.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockChargeBillService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockDelegationService.java",
+          "type": "class",
+          "methods_count": 18
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockEquityService.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockGameCacheService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockGameFollowService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockRevenueService.java",
+          "type": "class",
+          "methods_count": 23
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockSnapshootService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.stockgame",
+          "file": "src\\com\\yfzx\\service\\stockgame\\StockTransactionService.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.trade",
+          "file": "src\\com\\yfzx\\service\\trade\\ShareTimerTradeService.java",
+          "type": "class",
+          "methods_count": 15
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.trade",
+          "file": "src\\com\\yfzx\\service\\trade\\StockTradeService.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.trade",
+          "file": "src\\com\\yfzx\\service\\trade\\Trade0001Service.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.trade",
+          "file": "src\\com\\yfzx\\service\\trade\\TradeBitMapService.java",
+          "type": "class",
+          "methods_count": 23
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.trade",
+          "file": "src\\com\\yfzx\\service\\trade\\TradeCenter.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.trade",
+          "file": "src\\com\\yfzx\\service\\trade\\TradeService.java",
+          "type": "class",
+          "methods_count": 38
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.util",
+          "file": "src\\com\\yfzx\\service\\util\\SCacheUtil.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.util",
+          "file": "src\\com\\yfzx\\service\\util\\ServiceUtil.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.util",
+          "file": "src\\com\\yfzx\\service\\util\\StockChanceUtil.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client.es",
+          "file": "src\\com\\yfzx\\service\\client\\es\\ESClient.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client.es",
+          "file": "src\\com\\yfzx\\service\\client\\es\\ESIndexData.java",
+          "type": "class",
+          "methods_count": 22
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client.es",
+          "file": "src\\com\\yfzx\\service\\client\\es\\ESIndexMapping.java",
+          "type": "class",
+          "methods_count": 13
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client.es",
+          "file": "src\\com\\yfzx\\service\\client\\es\\StockWordExtrator.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.client.es",
+          "file": "src\\com\\yfzx\\service\\client\\es\\TextSplitService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0010Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0012Service.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0013Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0018Service.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0019Service.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0021Service.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Company0022Service.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\CompanyExtService.java",
+          "type": "class",
+          "methods_count": 7
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\CompanyPageBuildService.java",
+          "type": "class",
+          "methods_count": 15
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Stock0010Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Stock0011Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.company",
+          "file": "src\\com\\yfzx\\service\\db\\company\\Stock0013Service.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.mapdb",
+          "file": "src\\com\\yfzx\\service\\db\\mapdb\\StockMapdb.java",
+          "type": "class",
+          "methods_count": 15
+        },
+        {
+          "name": "RuleTreeService",
+          "package": "com.yfzx.service.db.tree",
+          "file": "src\\com\\yfzx\\service\\db\\tree\\RuleTreeService.java",
+          "type": "class",
+          "methods_count": 16
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\ArticleCommentListWapper.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\CreditRuleLogService.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\CreditRuleService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\Email_Auth.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\MembersService.java",
+          "type": "class",
+          "methods_count": 38
+        },
+        {
+          "name": "BaseVO",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\ResetMemberModel.java",
+          "type": "class",
+          "methods_count": 17
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\ResetMemberService.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\RoleactionService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\RolemoduleService.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\RoleService.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\StockSeqService.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\ThirdUserService.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\UserService.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.db.user",
+          "file": "src\\com\\yfzx\\service\\db\\user\\UserStockService.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.event",
+          "file": "src\\com\\yfzx\\service\\msg\\event\\EventQueueWapper.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.event",
+          "file": "src\\com\\yfzx\\service\\msg\\event\\IMessageListWapper.java",
+          "type": "class",
+          "methods_count": 22
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.event",
+          "file": "src\\com\\yfzx\\service\\msg\\event\\MyTalkMessageListWapper.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.event",
+          "file": "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDataWapper.java",
+          "type": "class",
+          "methods_count": 16
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.event",
+          "file": "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDateTest.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.event",
+          "file": "src\\com\\yfzx\\service\\msg\\event\\TopicListWapper.java",
+          "type": "class",
+          "methods_count": 25
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.impl",
+          "file": "src\\com\\yfzx\\service\\msg\\impl\\MessageSenderServiceImpl.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.c",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\DelegateOrderClientHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.c",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\MobileClientHandler.java",
+          "type": "class",
+          "methods_count": 11
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.c",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\RemindClientHandler.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.c",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\UserNotifyClientHandler.java",
+          "type": "class",
+          "methods_count": 12
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.c",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\USubjectNotifyClientHandler.java",
+          "type": "class",
+          "methods_count": 8
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\RealtimeComputeDataUpdateMsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\StatictisMsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\StockPriceUpdateMsgHandler.java",
+          "type": "class",
+          "methods_count": 4
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType0Handler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType1Handler.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType0MsgHandler.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType12MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType13MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType14MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType15MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType16MsgHandler.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType2MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType3MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType4MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType5MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType6MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType7MsgHandler.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType8MsgHandler.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType9MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType0MsgHandler.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.m",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType1MsgHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.mp",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\mp\\MobilePushHandler.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.s",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\MobileServerHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.s",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\RemindClientServerHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.s",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\StockPriceUpdateServerHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.s",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\TradeNotifyServerHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.s",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\UserNotifyServerHandler.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msg.handler.s",
+          "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\UsubjectNotifyServerHandler.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.msgpush.asyntask",
+          "file": "src\\com\\yfzx\\service\\msgpush\\asyntask\\AsyncTaskService.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yfzx.service.share.task",
+          "file": "src\\com\\yfzx\\service\\share\\task\\HotAnalysisTask.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\DownloadPage.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\FunctionUtils.java",
+          "type": "class",
+          "methods_count": 6
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\HrefOfPage.java",
+          "type": "class",
+          "methods_count": 1
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\JacksonMapper.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\QQWBSpider.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SinaWBSpider.java",
+          "type": "class",
+          "methods_count": 10
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SpiderFacade.java",
+          "type": "class",
+          "methods_count": 9
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\Test.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlDataHanding.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlQueue.java",
+          "type": "class",
+          "methods_count": 5
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\VisitedUrlQueue.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\WBSpiderFacade.java",
+          "type": "class",
+          "methods_count": 3
+        },
+        {
+          "name": "WBSpiderFacade",
+          "package": "com.yz.stock.portal.service.company.spider",
+          "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\XueQiuWBSpider.java",
+          "type": "class",
+          "methods_count": 2
+        },
+        {
+          "name": "",
+          "package": "org.ansj.app.keyword",
+          "file": "src\\org\\ansj\\app\\keyword\\Keyword.java",
+          "type": "class",
+          "methods_count": 14
+        },
+        {
+          "name": "",
+          "package": "org.ansj.app.keyword",
+          "file": "src\\org\\ansj\\app\\keyword\\KeyWordComputer.java",
+          "type": "class",
+          "methods_count": 8
+        }
+      ]
+    },
+    "dependencies": {
+      "total_imports": 632,
+      "external_dependencies": [
+        "org.htmlparser.NodeFilter",
+        "com.yfzx.service.trade.ShareTimerTradeService",
+        "com.aliyun.openservices.oss.model.MultipartUpload",
+        "com.stock.common.model.share.UserExt",
+        "org.elasticsearch.common.collect.Maps",
+        "com.stock.common.constants.AAAConstants",
+        "com.yfzx.service.nosql.NosqlService",
+        "net.sf.ehcache.config.CacheConfiguration",
+        "com.yz.mycore.lcs.service.BaseLoadService",
+        "com.yz.mycore.daf.enter.PLayerEnter",
+        "org.apache.commons.httpclient.HttpException",
+        "org.nlpcn.commons.lang.util.StringUtil",
+        "com.yfzx.service.factory.SMsgFactory",
+        "com.stock.common.service.ITopicService",
+        "com.stock.common.model.share.TalkMessage",
+        "org.htmlparser.tags.TableColumn",
+        "com.yz.mycore.daf.agent.DBAgent",
+        "com.yfzx.service.db.company.Company0019Service",
+        "com.yfzx.service.msg.event.IMessageListWapper",
+        "com.yfzx.service.hfunction.HPoweiService",
+        "com.stock.common.constants.StockConstants",
+        "com.stock.common.service.IUserService",
+        "org.apache.commons.httpclient.methods.PostMethod",
+        "org.apache.xmlrpc.client.XmlRpcClient",
+        "com.stock.common.model.user.Roleaction",
+        "com.yfzx.service.util.StockChanceUtil",
+        "com.stock.common.model.MenberExt",
+        "com.stock.common.model.Stock0004",
+        "com.yfzx.service.share.MsgTimeLineService",
+        "com.yfzx.service.hfunction.HGetMaxMinService",
+        "com.yfzx.service.db.user.UserStockService",
+        "com.yfzx.service.db.DictService",
+        "com.yfzx.service.msg.TalkMessageService",
+        "com.aliyun.openservices.oss.model.PartETag",
+        "com.stock.common.constants.ShareConst",
+        "com.yz.mycore.core.util.BaseUtil",
+        "net.sf.ehcache.search.expression.LessThan",
+        "com.yfzx.service.db.user.RoleService.ROLE_TYPE",
+        "com.yfzx.service.db.user.StockSeqService",
+        "net.sf.ehcache.Element",
+        "com.stock.common.model.stockgame.StockRevenue",
+        "com.stock.common.util.SqlWithTrasitionUtil.ISqlCallback",
+        "org.elasticsearch.common.collect.Lists",
+        "com.yfzx.service.db.user.ResetMemberService",
+        "org.apache.struts2.json.JSONUtil",
+        "com.stock.common.model.share.ArticleUtil",
+        "org.eclipse.paho.client.mqttv3.MqttMessage",
+        "com.yfzx.service.client.TopicServiceClient",
+        "com.stock.common.model.msgpush.MobileToken",
+        "com.yfzx.service.client.es.ESClient",
+        "com.stock.common.model.company.Company0012",
+        "com.yfzx.service.db.ReferenceService",
+        "org.htmlparser.filters.TagNameFilter",
+        "com.yfzx.service.cache.IndexCacheService",
+        "com.stock.common.service.IDcssIndustryExtIndexService",
+        "org.eclipse.paho.client.mqttv3.MqttCallback",
+        "com.stock.common.msg.RealtimeComputeDataUpdateMsg",
+        "com.yz.configcenter.callback.IConfigRefresh",
+        "com.yfzx.service.db.user.ArticleCommentListWapper",
+        "com.yfzx.service.msg.handler.m.UsubjectType0MsgHandler",
+        "com.stock.common.model.base.Cash0292",
+        "org.apache.velocity.app.Velocity",
+        "com.stock.common.model.snn.Statistics",
+        "com.stock.common.msg.Message",
+        "com.aliyun.openservices.ots.model.RangeRowQueryCriteria",
+        "com.stock.common.constants.SExt",
+        "com.stock.common.msg.StatictisMsg",
+        "com.stock.common.service.YService",
+        "com.yfzx.yas.router.RouterCenter",
+        "com.yfzx.service.client.UserServiceClient",
+        "com.yfzx.service.comet.CometService",
+        "com.stock.common.util.Spider",
+        "com.yfzx.service.client.DcssIndustryExtIndexServiceClient",
+        "org.elasticsearch.action.search.SearchType",
+        "com.yz.mycore.lcs.enter.LCEnter",
+        "com.yfzx.service.hfunction.HCountService",
+        "com.yz.mycore.msg.ServerEventCenter",
+        "com.yfzx.dc.template.VmUtil",
+        "org.apache.commons.httpclient.HttpMethod",
+        "com.stock.common.model.company.Company0018",
+        "com.stock.common.model.Stock0007",
+        "com.yfzx.service.share.MicorBlogService",
+        "com.stock.common.model.product.Resource",
+        "com.yz.mycore.core.config.BaseConfiguration",
+        "com.aliyun.openservices.ots.model.ColumnValue",
+        "com.stock.common.model.Topic",
+        "com.yfzx.service.db.mapdb.StockMapdb",
+        "com.yfzx.dc.function.GetIndustryValue",
+        "com.aliyun.openservices.oss.OSSClient",
+        "com.stock.common.service.IMessageSenderService",
+        "com.stock.common.model.share.Viewpoint",
+        "com.stock.common.yasmsg.DcssReqMsg",
+        "com.stock.common.util.FConst",
+        "com.stock.common.service.IRemindService",
+        "com.stock.common.model.Ranking",
+        "com.stock.common.msg.MsgConst",
+        "com.yfzx.service.trade.TradeService",
+        "com.stock.common.msg.UserMsg",
+        "com.yz.stock.portal.service.company.spider.JacksonMapper",
+        "com.stock.common.util.NosqlBeanUtil",
+        "org.htmlparser.tags.BulletList",
+        "com.yfzx.service.msg.event.ShareTimerTradeDataWapper",
+        "com.stock.common.constants.StockSqlKey",
+        "com.stock.common.model.chance.ChanceCategory",
+        "net.sf.ehcache.search.Query",
+        "com.aliyun.openservices.oss.model.MultipartUploadListing",
+        "com.stock.common.model.Tagrule",
+        "com.stock.common.model.Fund0002",
+        "com.stock.common.msg.common.SimpleSeries",
+        "org.apache.axis.client.Service",
+        "com.yfzx.service.msg.UsubjectEventService",
+        "com.aliyun.openservices.ots.model.Row",
+        "com.stock.common.model.share.SUser",
+        "com.stock.common.model.user.CreditRuleLog",
+        "com.stock.common.util.DateUtil",
+        "com.stock.common.model.Indexgroup",
+        "com.yfzx.service.spider.HttpRequestProxy",
+        "com.yfzx.service.hfunction.HKdjService",
+        "org.apache.commons.httpclient.cookie.CookiePolicy",
+        "com.yz.mycore.core.manager.BaseFactory",
+        "topic.TopicConst",
+        "com.yfzx.service.db.TagruleService",
+        "com.yz.mycore.lcs.config.CacheConfig",
+        "org.elasticsearch.index.query.QueryBuilder",
+        "com.aliyun.openservices.ServiceException",
+        "com.stock.common.util.TreeNode",
+        "com.stock.common.event.NotifyEvent",
+        "com.aliyun.openservices.oss.model.Bucket",
+        "org.ansj.domain.Term",
+        "org.jsoup.nodes.Document",
+        "org.apache.xerces.impl.dv.util.Base64",
+        "com.aliyun.openservices.ots.model.SingleRowQueryCriteria",
+        "org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsResponse",
+        "org.ansj.splitWord.analysis.ToAnalysis",
+        "org.htmlparser.beans.StringBean",
+        "com.yfzx.service.msg.handler.c.UserNotifyClientHandler",
+        "com.google.common.collect.Sets",
+        "com.stock.common.util.MultiStringReplacer",
+        "com.stock.common.constants.Msgconst",
+        "org.apache.http.client.ClientProtocolException",
+        "com.aliyun.openservices.ots.OTSException",
+        "org.apache.commons.httpclient.Header",
+        "org.elasticsearch.client.IndicesAdminClient",
+        "com.yz.common.vo.BaseVO",
+        "net.sf.json.JSONObject",
+        "com.notnoop.apns.ApnsService",
+        "com.yfzx.yas.YASFactory",
+        "com.stock.common.model.company.Stock0001",
+        "com.yfzx.service.trade.TradeBitMapService",
+        "com.yfzx.service.db.CRuleService",
+        "com.yz.mycore.lcs.cache.EhcacheImpl",
+        "com.aliyun.openservices.ots.OTSErrorCode",
+        "com.yfzx.service.hfunction.HExpCountService",
+        "com.stock.common.model.share.Favorite",
+        "com.yz.mycore.msg.handler.HandleUtil",
+        "com.notnoop.apns.APNS",
+        "ch.qos.logback.classic.Logger",
+        "com.stock.common.model.base.ICompanyAttr",
+        "com.notnoop.apns.ApnsNotification",
+        "org.quartz.impl.StdSchedulerFactory",
+        "com.yfzx.service.comet.CometPushMsgType",
+        "org.eclipse.paho.client.mqttv3.persist.MqttDefaultFilePersistence",
+        "com.stock.common.model.share.Report",
+        "com.yfzx.service.cache.IndustryExtCacheService",
+        "org.htmlparser.tags.Bullet",
+        "com.yfzx.service.db.user.MembersService",
+        "org.quartz.JobDetail",
+        "com.stock.common.model.user.StockSeq",
+        "com.stock.common.util.HttpUtil",
+        "com.stock.common.util.SqlWithTrasitionUtil",
+        "com.yfzx.service.hfunction.HFqlhzService",
+        "com.stock.common.msg.common.SimpleDataItem",
+        "com.stock.common.model.company.Stock",
+        "com.stock.common.bloomfilter.QueryParam",
+        "org.elasticsearch.action.get.GetResponse",
+        "com.yfzx.service.stockgame.StockGameFollowService",
+        "com.stock.common.model.trade.StockTrade",
+        "com.stock.common.remind.RemindFacade",
+        "com.stock.common.model.share.ShortUser",
+        "org.apache.http.params.CoreConnectionPNames",
+        "com.stock.common.msg.BaseMsg",
+        "com.stock.common.msg.common.DataItem",
+        "com.stock.common.model.share.TimeLine",
+        "org.apache.velocity.Template",
+        "com.yfzx.service.db.IndexService",
+        "com.stock.common.util.CassandraHectorGateWay",
+        "com.stock.common.util.ZLibUtil",
+        "com.stock.common.model.Company",
+        "com.yz.mycore.lcs.cache.CacheUtil",
+        "com.aliyun.common.utils.IOUtils",
+        "com.yfzx.service.cache.IndexCacheLoadService",
+        "org.jsoup.safety.Whitelist",
+        "com.stock.common.model.weixin.WeiXinAuthModel",
+        "com.yfzx.service.share.NoticeService",
+        "org.apache.commons.lang.StringEscapeUtils",
+        "com.aliyun.openservices.ClientConfiguration",
+        "com.yfzx.service.hfunction.HWeekService",
+        "com.stock.common.model.Extindex",
+        "com.aliyun.openservices.oss.model.UploadPartResult",
+        "com.stock.common.util.UtilDate",
+        "org.ansj.app.keyword.Keyword",
+        "net.sf.ehcache.store.chm.ConcurrentHashMap",
+        "com.aliyun.openservices.oss.model.InitiateMultipartUploadRequest",
+        "com.aliyun.openservices.oss.model.OSSObjectSummary",
+        "org.apache.commons.httpclient.methods.GetMethod",
+        "com.yfzx.service.hfunction.HDayService",
+        "com.stock.common.model.share.ComparatorTimeLine",
+        "org.codehaus.jackson.map.ObjectMapper",
+        "net.sf.ehcache.search.Direction",
+        "org.htmlparser.util.ParserException",
+        "com.yfzx.service.hfunction.HSlhtService",
+        "com.aliyun.openservices.ots.OTSClient",
+        "com.yz.mycore.core.util.BaseCodes",
+        "com.yfzx.service.share.TimeLineService.SAVE_TABLE",
+        "org.elasticsearch.action.admin.indices.create.CreateIndexResponse",
+        "com.stock.common.model.company.Stock0011",
+        "com.stock.common.bloomfilter.BFUtil",
+        "com.stock.common.model.TopicHost",
+        "net.sf.ehcache.search.expression.EqualTo",
+        "com.stock.common.model.Stockpool",
+        "com.yfzx.service.hfunction.IFService",
+        "com.stock.common.util.ComputeUtil",
+        "com.yfzx.service.hfunction.HGService",
+        "com.yz.mycore.daf.manager.DAFFactory",
+        "org.apache.ibatis.session.SqlSession",
+        "com.stock.common.model.stockgame.StockTransaction",
+        "org.apache.axis.encoding.XMLType",
+        "org.apache.commons.beanutils.BeanUtils",
+        "com.stock.common.model.SmallIndustry",
+        "com.yfzx.service.hfunction.HGetsfbsService",
+        "org.htmlparser.nodes.TextNode",
+        "com.yz.mycore.core.log.LogManager",
+        "org.elasticsearch.search.SearchHits",
+        "org.springframework.jdbc.datasource.UserCredentialsDataSourceAdapter",
+        "com.yz.configcenter.ConfigCenterFactory",
+        "com.yfzx.service.client.DcssTradeIndexServiceClient",
+        "com.yfzx.service.client.es.TextSplitService",
+        "com.stock.common.model.user.Composeindex",
+        "com.stock.common.util.CipherUtil",
+        "com.yfzx.service.count.StatisticsService",
+        "com.stock.common.model.user.ThirdUser",
+        "org.quartz.Scheduler",
+        "com.stock.common.model.Trade0001",
+        "com.yfzx.service.hfunction.HDateService",
+        "com.yfzx.service.trade.Trade0001Service",
+        "com.stock.common.util.StockCacheUtil",
+        "org.apache.http.client.methods.HttpGet",
+        "com.stock.common.model.share.TimeLineWithUid",
+        "com.stock.common.model.chance.StockChanceEntity",
+        "com.yfzx.service.msg.event.EventQueueWapper",
+        "net.sf.ehcache.config.SearchAttribute",
+        "com.stock.common.model.share.Article",
+        "com.aliyun.openservices.oss.model.InitiateMultipartUploadResult",
+        "org.apache.commons.httpclient.NameValuePair",
+        "com.yfzx.service.hfunction.HAbbcService",
+        "org.ansj.domain.Nature",
+        "org.elasticsearch.index.query.QueryBuilders",
+        "com.stock.common.model.msgpush.IOSFailureMsg",
+        "org.apache.commons.lang.StringUtils",
+        "com.stock.common.msg.TradeAlarmMsg",
+        "com.stock.common.model.share.ComparatorShortUser",
+        "com.yfzx.service.hfunction.HMonthService",
+        "org.htmlparser.tags.TableRow",
+        "com.yfzx.service.db.DelegateOrderService",
+        "com.stock.common.model.company.Index0001",
+        "org.eclipse.paho.client.mqttv3.MqttConnectOptions",
+        "com.yfzx.service.hfunction.HCcService",
+        "org.eclipse.paho.client.mqttv3.MqttException",
+        "com.aliyun.openservices.oss.model.CompleteMultipartUploadRequest",
+        "com.stock.common.model.snn.EConst",
+        "com.yfzx.service.db.company.CompanyExtService",
+        "org.apache.axis.client.Call",
+        "org.elasticsearch.common.unit.TimeValue",
+        "com.stock.common.model.Index4ScreenResult",
+        "com.stock.common.model.company.Company0022",
+        "com.stock.common.model.stockgame.StockSnapshoot",
+        "org.elasticsearch.common.xcontent.XContentFactory",
+        "com.stock.common.model.product.Product",
+        "com.yfzx.service.hfunction.HPzService",
+        "com.yfzx.service.hfunction.HRsvService",
+        "net.sf.ehcache.search.Result",
+        "org.elasticsearch.action.bulk.BulkRequestBuilder",
+        "com.yz.mycore.msg.event.IEvent",
+        "com.stock.common.model.Cfscorerule",
+        "com.yz.mycore.msg.message.IMessage",
+        "com.stock.common.constants.StockException",
+        "com.yfzx.service.agent.IndexValueAgent",
+        "com.yfzx.service.hfunction.HGetTimesService",
+        "com.stock.common.util.StockUtil",
+        "com.aliyun.openservices.ots.model.PrimaryKeyValue",
+        "com.yfzx.service.util.ServiceUtil",
+        "org.htmlparser.tags.ImageTag",
+        "org.htmlparser.Parser",
+        "com.yz.mycore.core.config.ConfigFactory",
+        "com.stock.common.bloomfilter.BloomFilter",
+        "org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse",
+        "org.apache.ibatis.session.SqlSessionFactory",
+        "com.yfzx.service.db.USubjectService",
+        "org.htmlparser.PrototypicalNodeFactory",
+        "com.yfzx.service.hfunction.HAvgService",
+        "com.stock.common.constants.MobileConst",
+        "com.stock.common.util.StringUtil",
+        "com.yfzx.service.db.SelectStockService",
+        "com.stock.common.util.SMathUtil",
+        "com.stock.common.model.stockgame.StockChargeBill",
+        "com.yfzx.service.chance.ChanceCategoryService",
+        "com.stock.common.util.WStockUtil",
+        "com.yfzx.service.trade.TradeCenter",
+        "com.yfzx.service.hfunction.HNdlhzService",
+        "com.stock.common.model.Stock0008",
+        "com.stock.common.model.company.Company0010",
+        "com.stock.common.util.Pair",
+        "com.stock.common.constants.TopicConstants",
+        "com.yz.mycore.msg.ClientEventCenter",
+        "com.yfzx.service.cache.PageCacheLoadService",
+        "com.stock.common.util.ComparetorUtil",
+        "org.htmlparser.tags.CompositeTag",
+        "com.stock.common.model.Matchinfo",
+        "com.jayway.jsonpath.JsonPath",
+        "org.terracotta.agent.repkg.de.schlichtherle.io.FileInputStream",
+        "com.yfzx.dc.compile.ICompile",
+        "org.quartz.CronExpression",
+        "com.yfzx.service.hfunction.HpdlongService",
+        "com.stock.common.msg.common.SimpleDataItemV2",
+        "com.stock.common.model.TopicApplicant",
+        "com.stock.common.msg.DelegateOrderMsg",
+        "com.yz.mycore.msg.MessageCenter",
+        "com.aliyun.openservices.oss.model.ListMultipartUploadsRequest",
+        "com.yfzx.service.db.company.Company0018Service",
+        "com.stock.common.model.nosql.UserNote",
+        "org.quartz.SchedulerException",
+        "com.stock.common.constants.StockRegex",
+        "org.ansj.dic.LearnTool",
+        "org.slf4j.Logger",
+        "com.stock.common.util.JSEscape",
+        "org.ansj.splitWord.analysis.IndexAnalysis",
+        "com.yfzx.service.hfunction.HMacdService",
+        "com.yfzx.service.hfunction.HCXGXDService",
+        "com.stock.common.model.share.ArticleMd5Content",
+        "com.stock.common.msg.common.CIndexSeries",
+        "com.yfzx.dc.compile.FunctionCompile",
+        "com.stock.common.model.IndexMessage",
+        "com.stock.common.model.company.Stock0010",
+        "org.elasticsearch.common.settings.ImmutableSettings",
+        "com.yfzx.yas.router.ISelectRouter",
+        "com.stock.common.util.CKeyUtil",
+        "com.yfzx.service.hfunction.HDayAvgService",
+        "com.aliyun.openservices.ots.model.TableMeta",
+        "org.htmlparser.util.NodeList",
+        "com.yfzx.service.client.MessageSenderServiceClient",
+        "com.stock.common.model.share.RelativeArticle",
+        "org.eclipse.paho.client.mqttv3.persist.MemoryPersistence",
+        "net.sf.ehcache.search.Attribute",
+        "com.aliyun.openservices.oss.model.UploadPartRequest",
+        "com.stock.common.model.company.StockSell",
+        "org.ansj.splitWord.analysis.NlpAnalysis",
+        "com.stock.common.model.base.Asset0290",
+        "com.stock.common.model.stockgame.StockEquity",
+        "com.aliyun.openservices.oss.model.GetObjectRequest",
+        "org.apache.http.impl.client.DefaultHttpClient",
+        "com.yfzx.service.msg.UserEventService",
+        "com.yfzx.service.hfunction.HMonthAvgService",
+        "com.stock.common.model.company.Company0021",
+        "com.yz.mycore.daf.bean.ResponseMessage",
+        "org.jfree.util.Log",
+        "com.notnoop.exceptions.NetworkIOException",
+        "org.htmlparser.tags.LinkTag",
+        "com.aliyun.openservices.ClientException",
+        "com.stock.common.model.product.Order",
+        "com.stock.common.model.Stock0009",
+        "com.stock.common.constants.StockCodes",
+        "com.yfzx.dc.compile.TimeCompile",
+        "org.apache.http.client.HttpClient",
+        "org.apache.commons.httpclient.params.HttpConnectionParams",
+        "org.elasticsearch.action.search.SearchResponse",
+        "com.stock.common.model.Template",
+        "org.apache.http.HttpResponse",
+        "com.stock.common.model.user.Members",
+        "com.stock.common.util.DictUtil",
+        "com.stock.common.model.product.AliPayInfo",
+        "com.yfzx.service.msgpush.MobileMsgPushService",
+        "com.aliyun.openservices.oss.model.ObjectMetadata",
+        "com.yfzx.service.share.ViewpointService",
+        "com.aliyun.openservices.oss.model.CannedAccessControlList",
+        "com.stock.common.model.Dictionary",
+        "com.stock.common.constants.SCache",
+        "com.yfzx.service.msg.event.MyTalkMessageListWapper",
+        "com.yfzx.service.msg.handler.s.UserNotifyServerHandler",
+        "com.stock.common.model.tree.RuleTreeNode",
+        "com.yfzx.service.db.IndustryService",
+        "org.elasticsearch.common.xcontent.XContentBuilder",
+        "com.yfzx.service.hfunction.HSplService",
+        "org.eclipse.paho.client.mqttv3.MqttAsyncClient",
+        "com.yz.mycore.daf.bean.RequestMessage",
+        "com.yfzx.service.StockCenter",
+        "com.yfzx.service.client.DcssCompanyExtIndexServiceClient",
+        "com.stock.common.util.VmUtil",
+        "com.yz.mycore.daf.dao.db.DBDefaultDaoImpl",
+        "com.stock.common.datacenter.DefaultDataFetcher",
+        "com.stock.common.model.share.Comment",
+        "org.apache.http.Header",
+        "com.yfzx.service.spider.TalkMockService",
+        "com.yfzx.service.spider.StockSpider",
+        "com.stock.common.model.Dcheck",
+        "com.stock.common.model.tree.SimpleRuleTreeNode",
+        "com.stock.common.model.Cfirule",
+        "net.minidev.json.JSONArray",
+        "com.stock.common.model.base.Profile0291",
+        "com.yfzx.yas.router.SetSelectRouter",
+        "com.yfzx.service.db.TopicUserService",
+        "com.yfzx.service.stockgame.StockDelegationService",
+        "com.yfzx.service.client.RemindServiceClient",
+        "org.apache.http.util.EntityUtils",
+        "org.elasticsearch.ElasticsearchException",
+        "org.elasticsearch.action.bulk.BulkResponse",
+        "org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean",
+        "com.stock.common.model.router.Dbrouter",
+        "org.apache.velocity.VelocityContext",
+        "com.yfzx.service.db.CompanyService",
+        "com.stock.common.util.RSAUtil",
+        "com.stock.common.model.ConditionDefine",
+        "org.apache.commons.beanutils.PropertyUtils",
+        "org.apache.commons.httpclient.HeaderElement",
+        "com.aliyun.openservices.oss.model.ObjectListing",
+        "com.yfzx.service.client.PushClient",
+        "com.yfzx.service.db.SystemPropertiesService",
+        "com.yfzx.service.db.TUextService",
+        "org.apache.commons.configuration.Configuration",
+        "org.jsoup.Jsoup",
+        "com.stock.common.model.UpdateIndexReq",
+        "com.aliyun.openservices.ots.model.PrimaryKeyType",
+        "org.ansj.app.keyword.KeyWordComputer",
+        "org.jsoup.nodes.Element",
+        "com.stock.common.model.company.Company0019",
+        "com.stock.common.model.Fund002CountInfo",
+        "org.apache.commons.lang3.StringEscapeUtils",
+        "com.yfzx.service.db.ConditionDefineService",
+        "org.apache.xmlrpc.client.XmlRpcClientConfigImpl",
+        "org.quartz.CronTrigger",
+        "com.stock.common.model.user.UserStock",
+        "com.stock.common.remind.BaseRemindFunction",
+        "com.yfzx.dc.compile.ComplexCompile",
+        "com.yfzx.service.hfunction.HExpService",
+        "com.stock.common.service.IDcssCompanyExtIndexService",
+        "com.stock.common.model.user.CreditRule",
+        "com.yz.common.vo.Pair",
+        "com.stock.common.util.DbConnectionBroker",
+        "com.stock.common.util.CookieUtil",
+        "com.stock.common.model.share.Invite",
+        "com.stock.common.model.Rankresult",
+        "com.stock.common.model.TopicBackup",
+        "net.sf.ehcache.config.Searchable",
+        "com.yfzx.service.db.MessageCenterSerivce",
+        "com.stock.common.util.SLogFactory",
+        "org.htmlparser.tags.DefinitionList",
+        "org.htmlparser.Node",
+        "com.yfzx.service.db.user.ResetMemberModel",
+        "com.stock.common.constants.CompileMode",
+        "com.stock.common.model.user.UserStockKey",
+        "org.jsoup.select.Elements",
+        "com.yz.mycore.msg.handler.IHandler",
+        "com.aliyun.openservices.ots.model.PartitionKeyValue",
+        "org.apache.commons.httpclient.HttpClient",
+        "com.yfzx.service.hfunction.HBollService",
+        "com.yfzx.service.trade.StockTradeService",
+        "com.yfzx.service.cache.DataLoadTimeMng",
+        "com.aliyun.openservices.oss.model.AbortMultipartUploadRequest",
+        "com.yfzx.service.hfunction.HAppearService",
+        "com.yfzx.service.db.Stock0001Service",
+        "com.stock.common.model.user.Rolemodule",
+        "com.stock.common.model.company.CompanyExt",
+        "com.stock.common.model.stockgame.StockDelegation",
+        "com.yfzx.service.share.TimeLineService",
+        "com.yfzx.service.db.RealTimeService",
+        "org.apache.http.HttpEntity",
+        "com.stock.common.model.company.Stock0013",
+        "net.sf.ehcache.Cache",
+        "org.ansj.library.UserDefineLibrary",
+        "org.mapdb.DB",
+        "net.sf.ehcache.search.Results",
+        "com.yfzx.service.hfunction.HRsiService",
+        "com.yfzx.service.hfunction.HLxndService",
+        "com.stock.common.model.chance.ChanceMsgWapper",
+        "com.stock.common.model.SSeries",
+        "com.stock.common.model.share.ComparatorArticleByCounts",
+        "com.stock.common.constants.AsyncTaskConstants",
+        "com.yfzx.service.cache.ExtCacheService",
+        "com.stock.common.msg.StockPriceBatchMsg",
+        "org.eclipse.paho.client.mqttv3.IMqttDeliveryToken",
+        "com.stock.common.expression.IExpresion",
+        "com.stock.common.model.user.RoleWithBLOBs",
+        "org.apache.commons.httpclient.HttpStatus",
+        "com.stock.common.model.Industry",
+        "com.stock.common.model.tree.RuleElement",
+        "com.stock.common.model.Indexreference",
+        "com.yfzx.service.db.TopicService",
+        "com.yfzx.service.db.MarketService",
+        "com.stock.common.model.share.SimpleArticle",
+        "com.aliyun.openservices.oss.OSSException",
+        "com.aliyun.openservices.ots.model.RowChange",
+        "org.elasticsearch.client.transport.TransportClient",
+        "org.apache.struts2.json.JSONException",
+        "com.stock.common.model.TUextData",
+        "org.elasticsearch.common.transport.InetSocketTransportAddress",
+        "com.stock.common.util.UnitUtil",
+        "com.stock.common.model.Indexcategory",
+        "com.stock.common.util.CommonUtil",
+        "com.stock.common.model.trade.TradeBitMap",
+        "org.mapdb.DBMaker",
+        "com.stock.common.bloomfilter.BFConst",
+        "org.elasticsearch.client.Client",
+        "org.slf4j.LoggerFactory",
+        "com.stock.common.model.TopicUser",
+        "com.stock.common.model.USubject",
+        "com.google.common.collect.Lists",
+        "com.stock.common.service.IDcssTradeIndexService",
+        "com.stock.common.model.RankResultItem",
+        "org.apache.commons.httpclient.SimpleHttpConnectionManager",
+        "com.stock.common.model.company.Company0013",
+        "com.aliyun.openservices.ots.model.RowPutChange",
+        "com.yfzx.service.hfunction.HWeekAvgService",
+        "com.stock.common.model.TableSystem",
+        "com.stock.common.service.IDcssDefaultService",
+        "org.apache.commons.lang3.StringUtils",
+        "org.htmlparser.tags.Div",
+        "com.yfzx.service.msg.handler.c.RemindClientHandler",
+        "org.elasticsearch.common.collect.Sets",
+        "com.stock.common.util.LogSvr",
+        "net.minidev.json.JSONObject"
+      ],
+      "java_standard_library": [
+        "java.util.Locale",
+        "java.util.Arrays",
+        "javax.mail.Message",
+        "java.util.LinkedHashMap",
+        "javax.script.ScriptEngineManager",
+        "java.util.Random",
+        "java.util.LinkedHashSet",
+        "java.util.HashMap",
+        "java.util.concurrent.locks.Lock",
+        "javax.mail.Multipart",
+        "java.io.ObjectInputStream",
+        "java.sql.DriverManager",
+        "java.util.concurrent.TimeUnit",
+        "java.security.KeyPair",
+        "java.io.File",
+        "java.util.ArrayList",
+        "java.io.FileOutputStream",
+        "java.util.zip.GZIPOutputStream",
+        "java.util.Comparator",
+        "java.util.concurrent.Executors",
+        "java.io.ObjectOutputStream",
+        "java.util.concurrent.Callable",
+        "java.io.InputStream",
+        "java.util.TimerTask",
+        "java.util.concurrent.atomic.AtomicInteger",
+        "java.io.UnsupportedEncodingException",
+        "javax.mail.internet.InternetAddress",
+        "java.util.HashSet",
+        "javax.xml.namespace.QName",
+        "javax.mail.internet.MimeMultipart",
+        "java.math.BigDecimal",
+        "java.io.ByteArrayInputStream",
+        "java.io.BufferedWriter",
+        "java.io.BufferedReader",
+        "javax.script.ScriptEngine",
+        "java.util.Calendar",
+        "java.sql.Statement",
+        "javax.mail.Transport",
+        "java.lang.reflect.InvocationTargetException",
+        "java.io.FileInputStream",
+        "java.math.BigInteger",
+        "java.security.interfaces.RSAPublicKey",
+        "java.util.regex.Pattern",
+        "java.net.URLDecoder",
+        "java.util.Set",
+        "javax.script.ScriptException",
+        "java.io.BufferedInputStream",
+        "java.util.zip.GZIPInputStream",
+        "java.sql.Connection",
+        "java.text.ParseException",
+        "java.util.TreeSet",
+        "javax.servlet.http.HttpServletRequest",
+        "java.util.Map.Entry",
+        "java.net.URLEncoder",
+        "java.util.concurrent.ConcurrentHashMap",
+        "java.util.concurrent.ExecutorService",
+        "java.net.URI",
+        "java.io.FileWriter",
+        "java.io.OutputStream",
+        "java.util.Properties",
+        "java.util.TimeZone",
+        "java.util.SortedSet",
+        "java.io.FileNotFoundException",
+        "java.io.OutputStreamWriter",
+        "java.text.DateFormat",
+        "java.io.Serializable",
+        "java.io.IOException",
+        "javax.mail.BodyPart",
+        "javax.mail.internet.MimeBodyPart",
+        "java.util.concurrent.ArrayBlockingQueue",
+        "java.util.Timer",
+        "java.util.Collection",
+        "java.util.UUID",
+        "java.util.Iterator",
+        "java.sql.ResultSet",
+        "java.lang.reflect.Method",
+        "java.io.*",
+        "java.util.Collections",
+        "java.text.SimpleDateFormat",
+        "javax.activation.DataHandler",
+        "java.util.Map",
+        "java.util.concurrent.ConcurrentSkipListMap",
+        "java.util.regex.Matcher",
+        "java.util.LinkedList",
+        "java.io.StringWriter",
+        "javax.mail.Address",
+        "java.security.interfaces.RSAPrivateKey",
+        "javax.mail.Session",
+        "java.net.*",
+        "javax.xml.rpc.ParameterMode",
+        "java.lang.reflect.Field",
+        "java.util.List",
+        "java.util.concurrent.Future",
+        "java.util.concurrent.locks.ReentrantLock",
+        "java.text.DecimalFormat",
+        "java.net.URL",
+        "java.util.Date",
+        "javax.mail.PasswordAuthentication",
+        "java.util.Queue",
+        "java.io.InputStreamReader",
+        "javax.mail.internet.MimeMessage",
+        "javax.mail.Authenticator",
+        "java.io.CharArrayWriter"
+      ]
+    }
+  },
+  "code_quality_metrics": {
+    "total_lines": 68824,
+    "average_lines_per_file": 242.33802816901408,
+    "file_size_distribution": {
+      "min_size": 70,
+      "max_size": 190727,
+      "average_size": 7975.855633802817
+    }
+  },
+  "key_components": [
+    {
+      "type": "Service",
+      "file": "src\\com\\aliyun\\openservices\\oss\\samples\\OSSMultipartSample.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\aliyun\\openservices\\oss\\samples\\OSSObjectSample.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\aliyun\\openservices\\ots\\samples\\OTSMultiDataSample.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\aliyun\\openservices\\ots\\samples\\OTSSingleDataSample.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\StockCenter.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\StockDto.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\agent\\CompileDefaultDataFetcherImpl.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\agent\\IndexValueAgent.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\ansj\\KeywordsExtratorService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\CacheUtilService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\DataLoadTimeMng.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\ExtCacheService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\IndexCacheLoadService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\IndexCacheService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\IndustryCacheLoadService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\IndustryExtCacheService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\cache\\PageCacheLoadService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\chance\\ChanceCategoryService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\DcssCompanyExtIndexServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\DcssDefaultServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\DcssIndustryExtIndexServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\DcssTradeIndexServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\MessageSenderServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\PushClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\RemindServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\TopicServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\UserServiceClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\comet\\CometPushMsgType.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\comet\\CometService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\count\\StatisticsService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\AssertService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\BaseIndexService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\CashFlowService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\CfScoreRuleService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\CIndexService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\CompanyService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\ComposeIndexService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\ConditionDefineService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\CRuleService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\DcheckService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\DelegateOrderService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\DictService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\Fund0002Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IIndexService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IIService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IndexCacheService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IndexCategoryService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IndexGroupService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IndexService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IndexUtilService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\IndustryService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\MAnalysisService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\MarketService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\MatchinfoService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\MenberExtService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\MessageCenterSerivce.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\MsgconstService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\ProfileService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\RankingService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\RankResultService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\RealTimeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\ReferenceService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\RelativeIndexsService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\SelectStockService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\StatisticsService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\Stock0001Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\Stock0004Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\Stock0007Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\Stock0008Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\Stock0009Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\StockPoolService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\StockServiceFactory.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\SystemPropertiesService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TableSystemService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TagruleService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TagService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TemplateService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TopicApplicantService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TopicBackupService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TopicHostService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TopicService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TopicUserService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\TUextService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\UIndexService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\UserNoteService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\USubjectService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\ValuationService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\factory\\SMsgFactory.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HAbbcService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HAppearService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HAvgService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HBollService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HCcService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HCountService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HCXGXDService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HDateService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HDayAvgService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HDayService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HDaySumService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HExpCountService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HExpService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HFqlhzService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HGetMaxMinService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HGetsfbsService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HGetTimesService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HGService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HIndexValueBelowBVDayCountService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HIndexValueCountService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HKdjService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HLxndService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HMacdService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HMonthAvgService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HMonthService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HNdlhzService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HpdlongService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HPoweiService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HPzService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HRsiService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HRsvService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HSlhtService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HSplService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HUtilService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HWeekAvgService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\HWeekService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\IFInvoker.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\hfunction\\IFService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\mobile\\MobileAgentService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\mobile\\MobileMessageService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\mobile\\SmsService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\TalkMessageService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\UserEventService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\UsubjectEventService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msgpush\\IOSFailureMsgService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msgpush\\MobileMsgPushService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msgpush\\MobileTokenCacheService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\nosql\\NosqlService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\product\\AlipayInfoService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\product\\OrderService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\product\\ProductService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\product\\ResourceService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\realtime\\RealtimeDataItem.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\realtime\\RealTradeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\realtime\\SinaStockService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\realtime\\WStockMessageListWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\realtime\\WStockService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\MicorBlogService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\MsgTimeLineService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\NoticeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\ReportService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\SquareStockChanceService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\TimeLineService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\ViewpointService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\CninfoNoticeTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\ComparatorTagBean.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\EastmoneyCompanyTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\HttpRequestProxy.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\ITaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\P5wCWQZTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\P5wNoticeTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\QQCompanyNoticeTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\QQCompanyTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\QQZxgTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\SpiderConfigBean.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\SpiderConfigMain.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\SpiderScheduler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\SpiderStorage.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\SpiderStorageBean.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\StockSpider.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\TagBean.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\TalkMockService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\UidCompany.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\WeiboUserTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\XueqiuTalkTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\XueqiuTodayTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\spider\\XueqiuUserTaskProcessor.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockChargeBillService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockDelegationService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockEquityService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockGameCacheService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockGameFollowService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockRevenueService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockSnapshootService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\stockgame\\StockTransactionService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\trade\\ShareTimerTradeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\trade\\StockTradeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\trade\\Trade0001Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\trade\\TradeBitMapService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\trade\\TradeCenter.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\trade\\TradeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\util\\SCacheUtil.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\util\\ServiceUtil.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\util\\StockChanceUtil.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\es\\ESClient.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\es\\ESIndexData.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\es\\ESIndexMapping.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\es\\StockWordExtrator.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\client\\es\\TextSplitService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0010Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0012Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0013Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0018Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0019Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0021Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Company0022Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\CompanyExtService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\CompanyPageBuildService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Stock0010Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Stock0011Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\company\\Stock0013Service.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\mapdb\\StockMapdb.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\tree\\RuleTreeService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\ArticleCommentListWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\CreditRuleLogService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\CreditRuleService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\Email_Auth.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\MembersService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\ResetMemberModel.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\ResetMemberService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\RoleactionService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\RolemoduleService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\RoleService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\SimpleArticleListWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\StockSeqService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\ThirdUserService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\UserService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\db\\user\\UserStockService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\event\\EventQueueWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\event\\IMessageListWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\event\\MyTalkMessageListWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDataWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\event\\ShareTimerTradeDateTest.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\event\\TopicListWapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\impl\\MessageSenderServiceImpl.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\DelegateOrderClientHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\MobileClientHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\RemindClientHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\UserNotifyClientHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\c\\USubjectNotifyClientHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\RealtimeComputeDataUpdateMsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\StatictisMsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\StockPriceUpdateMsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType0Handler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\TradeMsgType1Handler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType0MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType12MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType13MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType14MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType15MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType16MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType2MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType3MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType4MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType5MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType6MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType7MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType8MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UserType9MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType0MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\m\\UsubjectType1MsgHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\mp\\MobilePushHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\MobileServerHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\RemindClientServerHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\StockPriceUpdateServerHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\TradeNotifyServerHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\UserNotifyServerHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msg\\handler\\s\\UsubjectNotifyServerHandler.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\msgpush\\asyntask\\AsyncTaskService.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yfzx\\service\\share\\task\\HotAnalysisTask.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\DownloadPage.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\FunctionUtils.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\HrefOfPage.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\JacksonMapper.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\QQWBSpider.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SinaWBSpider.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\SpiderFacade.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\Test.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlDataHanding.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\UrlQueue.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\VisitedUrlQueue.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\WBSpiderFacade.java",
+      "description": "业务服务层组件"
+    },
+    {
+      "type": "Service",
+      "file": "src\\com\\yz\\stock\\portal\\service\\company\\spider\\XueQiuWBSpider.java",
+      "description": "业务服务层组件"
+    }
+  ]
+}

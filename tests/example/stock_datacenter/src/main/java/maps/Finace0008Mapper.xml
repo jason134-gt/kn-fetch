@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.base.Finace0008" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.base.Finace0008" >
+    <id column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <id column="f002v" property="f002v" jdbcType="VARCHAR" />
+    <id column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="objectid" property="objectid" jdbcType="BIGINT" />
+    <result column="orgid" property="orgid" jdbcType="VARCHAR" />
+    <result column="orgname" property="orgname" jdbcType="VARCHAR" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="secname" property="secname" jdbcType="VARCHAR" />
+    <result column="declaredate" property="declaredate" jdbcType="TIMESTAMP" />
+    <result column="enddate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="f003v" property="f003v" jdbcType="VARCHAR" />
+    <result column="f004v" property="f004v" jdbcType="VARCHAR" />
+    <result column="f005v" property="f005v" jdbcType="VARCHAR" />
+    <result column="f006n" property="f006n" jdbcType="DOUBLE" />
+    <result column="f007n" property="f007n" jdbcType="DOUBLE" />
+    <result column="f008n" property="f008n" jdbcType="DOUBLE" />
+    <result column="f009n" property="f009n" jdbcType="DOUBLE" />
+    <result column="f010n" property="f010n" jdbcType="DOUBLE" />
+    <result column="f011n" property="f011n" jdbcType="DOUBLE" />
+    <result column="f012n" property="f012n" jdbcType="DOUBLE" />
+    <result column="f016n" property="f016n" jdbcType="DOUBLE" />
+    <result column="f017n" property="f017n" jdbcType="DOUBLE" />
+    <result column="f018n" property="f018n" jdbcType="DOUBLE" />
+    <result column="f019n" property="f019n" jdbcType="DOUBLE" />
+    <result column="f020n" property="f020n" jdbcType="DOUBLE" />
+    <result column="f021n" property="f021n" jdbcType="DOUBLE" />
+    <result column="f022n" property="f022n" jdbcType="DOUBLE" />
+    <result column="f023n" property="f023n" jdbcType="DOUBLE" />
+    <result column="f024n" property="f024n" jdbcType="DOUBLE" />
+    <result column="f025n" property="f025n" jdbcType="DOUBLE" />
+    <result column="f026n" property="f026n" jdbcType="DOUBLE" />
+    <result column="f027n" property="f027n" jdbcType="DOUBLE" />
+    <result column="f028n" property="f028n" jdbcType="DOUBLE" />
+    <result column="f029n" property="f029n" jdbcType="DOUBLE" />
+    <result column="f030n" property="f030n" jdbcType="DOUBLE" />
+    <result column="f031n" property="f031n" jdbcType="DOUBLE" />
+    <result column="f032n" property="f032n" jdbcType="DOUBLE" />
+    <result column="f033n" property="f033n" jdbcType="DOUBLE" />
+    <result column="f034n" property="f034n" jdbcType="DOUBLE" />
+    <result column="f035n" property="f035n" jdbcType="DOUBLE" />
+    <result column="f036n" property="f036n" jdbcType="DOUBLE" />
+    <result column="f037n" property="f037n" jdbcType="DOUBLE" />
+    <result column="f038n" property="f038n" jdbcType="DOUBLE" />
+    <result column="f039n" property="f039n" jdbcType="DOUBLE" />
+    <result column="f040n" property="f040n" jdbcType="DOUBLE" />
+    <result column="f042n" property="f042n" jdbcType="DOUBLE" />
+    <result column="f043n" property="f043n" jdbcType="DOUBLE" />
+    <result column="f044n" property="f044n" jdbcType="DOUBLE" />
+    <result column="f045n" property="f045n" jdbcType="DOUBLE" />
+    <result column="f046n" property="f046n" jdbcType="DOUBLE" />
+    <result column="f047n" property="f047n" jdbcType="DOUBLE" />
+    <result column="f048n" property="f048n" jdbcType="DOUBLE" />
+    <result column="f049n" property="f049n" jdbcType="DOUBLE" />
+    <result column="f050n" property="f050n" jdbcType="DOUBLE" />
+    <result column="f051n" property="f051n" jdbcType="DOUBLE" />
+    <result column="f052n" property="f052n" jdbcType="DOUBLE" />
+    <result column="f053n" property="f053n" jdbcType="DOUBLE" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="rectime" property="rectime" jdbcType="TIMESTAMP" />
+    <result column="modtime" property="modtime" jdbcType="TIMESTAMP" />
+    <result column="isvalid" property="isvalid" jdbcType="CHAR" />
+    <result column="seqid" property="seqid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    company_code, f002v, time, f003v, f004v, f005v, f006n, f007n, f008n, f009n, f010n, f011n, f012n, f016n, 
+    f017n, f018n, f019n, f020n, f021n, f022n, f023n, f024n, f025n, f026n, f027n, f028n, 
+    f029n, f030n, f031n, f032n, f033n, f034n, f035n, f036n, f037n, f038n, f039n, f040n, 
+    f042n, f043n, f044n, f045n, f046n, f047n, f048n, f049n, f050n, f051n, f052n, f053n
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="companyCode != null" >
+          and company_code = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="f002v != null" >
+          and f002v = #{f002v,jdbcType=VARCHAR}
+      </if>
+      <if test="time != null" >
+          and time = #{time,jdbcType=TIMESTAMP}
+      </if>
+      <if test="objectid != null" >
+          and objectid = #{objectid,jdbcType=BIGINT}
+      </if>
+      <if test="orgid != null" >
+          and orgid = #{orgid,jdbcType=VARCHAR}
+      </if>
+      <if test="orgname != null" >
+          and orgname = #{orgname,jdbcType=VARCHAR}
+      </if>
+      <if test="stockCode != null" >
+          and stock_code = #{stockCode,jdbcType=VARCHAR}
+      </if>
+      <if test="secname != null" >
+          and secname = #{secname,jdbcType=VARCHAR}
+      </if>
+      <if test="declaredate != null" >
+          and declaredate = #{declaredate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="enddate != null" >
+          and enddate = #{enddate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="f003v != null" >
+          and f003v = #{f003v,jdbcType=VARCHAR}
+      </if>
+      <if test="f004v != null" >
+          and f004v = #{f004v,jdbcType=VARCHAR}
+      </if>
+      <if test="f005v != null" >
+          and f005v = #{f005v,jdbcType=VARCHAR}
+      </if>
+      <if test="f006n != null" >
+          and f006n = #{f006n,jdbcType=DOUBLE}
+      </if>
+      <if test="f007n != null" >
+          and f007n = #{f007n,jdbcType=DOUBLE}
+      </if>
+      <if test="f008n != null" >
+          and f008n = #{f008n,jdbcType=DOUBLE}
+      </if>
+      <if test="f009n != null" >
+          and f009n = #{f009n,jdbcType=DOUBLE}
+      </if>
+      <if test="f010n != null" >
+          and f010n = #{f010n,jdbcType=DOUBLE}
+      </if>
+      <if test="f011n != null" >
+          and f011n = #{f011n,jdbcType=DOUBLE}
+      </if>
+      <if test="f012n != null" >
+          and f012n = #{f012n,jdbcType=DOUBLE}
+      </if>
+      <if test="f016n != null" >
+          and f016n = #{f016n,jdbcType=DOUBLE}
+      </if>
+      <if test="f017n != null" >
+          and f017n = #{f017n,jdbcType=DOUBLE}
+      </if>
+      <if test="f018n != null" >
+          and f018n = #{f018n,jdbcType=DOUBLE}
+      </if>
+      <if test="f019n != null" >
+          and f019n = #{f019n,jdbcType=DOUBLE}
+      </if>
+      <if test="f020n != null" >
+          and f020n = #{f020n,jdbcType=DOUBLE}
+      </if>
+      <if test="f021n != null" >
+          and f021n = #{f021n,jdbcType=DOUBLE}
+      </if>
+      <if test="f022n != null" >
+          and f022n = #{f022n,jdbcType=DOUBLE}
+      </if>
+      <if test="f023n != null" >
+          and f023n = #{f023n,jdbcType=DOUBLE}
+      </if>
+      <if test="f024n != null" >
+          and f024n = #{f024n,jdbcType=DOUBLE}
+      </if>
+      <if test="f025n != null" >
+          and f025n = #{f025n,jdbcType=DOUBLE}
+      </if>
+      <if test="f026n != null" >
+          and f026n = #{f026n,jdbcType=DOUBLE}
+      </if>
+      <if test="f027n != null" >
+          and f027n = #{f027n,jdbcType=DOUBLE}
+      </if>
+      <if test="f028n != null" >
+          and f028n = #{f028n,jdbcType=DOUBLE}
+      </if>
+      <if test="f029n != null" >
+          and f029n = #{f029n,jdbcType=DOUBLE}
+      </if>
+      <if test="f030n != null" >
+          and f030n = #{f030n,jdbcType=DOUBLE}
+      </if>
+      <if test="f031n != null" >
+          and f031n = #{f031n,jdbcType=DOUBLE}
+      </if>
+      <if test="f032n != null" >
+          and f032n = #{f032n,jdbcType=DOUBLE}
+      </if>
+      <if test="f033n != null" >
+          and f033n = #{f033n,jdbcType=DOUBLE}
+      </if>
+      <if test="f034n != null" >
+          and f034n = #{f034n,jdbcType=DOUBLE}
+      </if>
+      <if test="f035n != null" >
+          and f035n = #{f035n,jdbcType=DOUBLE}
+      </if>
+      <if test="f036n != null" >
+          and f036n = #{f036n,jdbcType=DOUBLE}
+      </if>
+      <if test="f037n != null" >
+          and f037n = #{f037n,jdbcType=DOUBLE}
+      </if>
+      <if test="f038n != null" >
+          and f038n = #{f038n,jdbcType=DOUBLE}
+      </if>
+      <if test="f039n != null" >
+          and f039n = #{f039n,jdbcType=DOUBLE}
+      </if>
+      <if test="f040n != null" >
+          and f040n = #{f040n,jdbcType=DOUBLE}
+      </if>
+      <if test="f042n != null" >
+          and f042n = #{f042n,jdbcType=DOUBLE}
+      </if>
+      <if test="f043n != null" >
+          and f043n = #{f043n,jdbcType=DOUBLE}
+      </if>
+      <if test="f044n != null" >
+          and f044n = #{f044n,jdbcType=DOUBLE}
+      </if>
+      <if test="f045n != null" >
+          and f045n = #{f045n,jdbcType=DOUBLE}
+      </if>
+      <if test="f046n != null" >
+          and f046n = #{f046n,jdbcType=DOUBLE}
+      </if>
+      <if test="f047n != null" >
+          and f047n = #{f047n,jdbcType=DOUBLE}
+      </if>
+      <if test="f048n != null" >
+          and f048n = #{f048n,jdbcType=DOUBLE}
+      </if>
+      <if test="f049n != null" >
+          and f049n = #{f049n,jdbcType=DOUBLE}
+      </if>
+      <if test="f050n != null" >
+          and f050n = #{f050n,jdbcType=DOUBLE}
+      </if>
+      <if test="f051n != null" >
+          and f051n = #{f051n,jdbcType=DOUBLE}
+      </if>
+      <if test="f052n != null" >
+          and f052n = #{f052n,jdbcType=DOUBLE}
+      </if>
+      <if test="f053n != null" >
+          and f053n = #{f053n,jdbcType=DOUBLE}
+      </if>
+      <if test="memo != null" >
+          and memo = #{memo,jdbcType=VARCHAR}
+      </if>
+      <if test="rectime != null" >
+          and rectime = #{rectime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modtime != null" >
+          and modtime = #{modtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="isvalid != null" >
+          and isvalid = #{isvalid,jdbcType=CHAR}
+      </if>
+      <if test="seqid != null" >
+          and seqid = #{seqid,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="objectid != null" >
+        objectid = #{objectid,jdbcType=BIGINT},
+      </if>
+      <if test="orgid != null" >
+        orgid = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        orgname = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="secname != null" >
+        secname = #{secname,jdbcType=VARCHAR},
+      </if>
+      <if test="declaredate != null" >
+        declaredate = #{declaredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="f003v != null" >
+        f003v = #{f003v,jdbcType=VARCHAR},
+      </if>
+      <if test="f004v != null" >
+        f004v = #{f004v,jdbcType=VARCHAR},
+      </if>
+      <if test="f005v != null" >
+        f005v = #{f005v,jdbcType=VARCHAR},
+      </if>
+      <if test="f006n != null" >
+        f006n = #{f006n,jdbcType=DOUBLE},
+      </if>
+      <if test="f007n != null" >
+        f007n = #{f007n,jdbcType=DOUBLE},
+      </if>
+      <if test="f008n != null" >
+        f008n = #{f008n,jdbcType=DOUBLE},
+      </if>
+      <if test="f009n != null" >
+        f009n = #{f009n,jdbcType=DOUBLE},
+      </if>
+      <if test="f010n != null" >
+        f010n = #{f010n,jdbcType=DOUBLE},
+      </if>
+      <if test="f011n != null" >
+        f011n = #{f011n,jdbcType=DOUBLE},
+      </if>
+      <if test="f012n != null" >
+        f012n = #{f012n,jdbcType=DOUBLE},
+      </if>
+      <if test="f016n != null" >
+        f016n = #{f016n,jdbcType=DOUBLE},
+      </if>
+      <if test="f017n != null" >
+        f017n = #{f017n,jdbcType=DOUBLE},
+      </if>
+      <if test="f018n != null" >
+        f018n = #{f018n,jdbcType=DOUBLE},
+      </if>
+      <if test="f019n != null" >
+        f019n = #{f019n,jdbcType=DOUBLE},
+      </if>
+      <if test="f020n != null" >
+        f020n = #{f020n,jdbcType=DOUBLE},
+      </if>
+      <if test="f021n != null" >
+        f021n = #{f021n,jdbcType=DOUBLE},
+      </if>
+      <if test="f022n != null" >
+        f022n = #{f022n,jdbcType=DOUBLE},
+      </if>
+      <if test="f023n != null" >
+        f023n = #{f023n,jdbcType=DOUBLE},
+      </if>
+      <if test="f024n != null" >
+        f024n = #{f024n,jdbcType=DOUBLE},
+      </if>
+      <if test="f025n != null" >
+        f025n = #{f025n,jdbcType=DOUBLE},
+      </if>
+      <if test="f026n != null" >
+        f026n = #{f026n,jdbcType=DOUBLE},
+      </if>
+      <if test="f027n != null" >
+        f027n = #{f027n,jdbcType=DOUBLE},
+      </if>
+      <if test="f028n != null" >
+        f028n = #{f028n,jdbcType=DOUBLE},
+      </if>
+      <if test="f029n != null" >
+        f029n = #{f029n,jdbcType=DOUBLE},
+      </if>
+      <if test="f030n != null" >
+        f030n = #{f030n,jdbcType=DOUBLE},
+      </if>
+      <if test="f031n != null" >
+        f031n = #{f031n,jdbcType=DOUBLE},
+      </if>
+      <if test="f032n != null" >
+        f032n = #{f032n,jdbcType=DOUBLE},
+      </if>
+      <if test="f033n != null" >
+        f033n = #{f033n,jdbcType=DOUBLE},
+      </if>
+      <if test="f034n != null" >
+        f034n = #{f034n,jdbcType=DOUBLE},
+      </if>
+      <if test="f035n != null" >
+        f035n = #{f035n,jdbcType=DOUBLE},
+      </if>
+      <if test="f036n != null" >
+        f036n = #{f036n,jdbcType=DOUBLE},
+      </if>
+      <if test="f037n != null" >
+        f037n = #{f037n,jdbcType=DOUBLE},
+      </if>
+      <if test="f038n != null" >
+        f038n = #{f038n,jdbcType=DOUBLE},
+      </if>
+      <if test="f039n != null" >
+        f039n = #{f039n,jdbcType=DOUBLE},
+      </if>
+      <if test="f040n != null" >
+        f040n = #{f040n,jdbcType=DOUBLE},
+      </if>
+      <if test="f042n != null" >
+        f042n = #{f042n,jdbcType=DOUBLE},
+      </if>
+      <if test="f043n != null" >
+        f043n = #{f043n,jdbcType=DOUBLE},
+      </if>
+      <if test="f044n != null" >
+        f044n = #{f044n,jdbcType=DOUBLE},
+      </if>
+      <if test="f045n != null" >
+        f045n = #{f045n,jdbcType=DOUBLE},
+      </if>
+      <if test="f046n != null" >
+        f046n = #{f046n,jdbcType=DOUBLE},
+      </if>
+      <if test="f047n != null" >
+        f047n = #{f047n,jdbcType=DOUBLE},
+      </if>
+      <if test="f048n != null" >
+        f048n = #{f048n,jdbcType=DOUBLE},
+      </if>
+      <if test="f049n != null" >
+        f049n = #{f049n,jdbcType=DOUBLE},
+      </if>
+      <if test="f050n != null" >
+        f050n = #{f050n,jdbcType=DOUBLE},
+      </if>
+      <if test="f051n != null" >
+        f051n = #{f051n,jdbcType=DOUBLE},
+      </if>
+      <if test="f052n != null" >
+        f052n = #{f052n,jdbcType=DOUBLE},
+      </if>
+      <if test="f053n != null" >
+        f053n = #{f053n,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="rectime != null" >
+        rectime = #{rectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modtime != null" >
+        modtime = #{modtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null" >
+        isvalid = #{isvalid,jdbcType=CHAR},
+      </if>
+      <if test="seqid != null" >
+        seqid = #{seqid,jdbcType=BIGINT},
+      </if>
+    </set>
+  </sql>
+  
+   <select id="getfinace0008AllCount" resultType="java.lang.Integer" >
+    select count(*)
+    from t_finace0008
+  </select>
+  
+  <select id="getfinace0008PageData2Cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0008
+  </select>
+  
+  <select id="getfinace0008UpdateCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.base.Asset0290" >
+    select count(*)
+    from t_finace0008 
+    where rectime>= #{uptime,jdbcType=TIMESTAMP}  
+    or modtime>= #{uptime,jdbcType=TIMESTAMP}  
+  </select>
+  
+   <select id="getfinace0008PageData2Cache_refresh" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0008  
+    where rectime>= #{uptime,jdbcType=TIMESTAMP}  
+    or modtime>= #{uptime,jdbcType=TIMESTAMP}  
+    limit ${start},${limit} 
+  </select>
+</mapper>

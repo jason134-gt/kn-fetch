@@ -1,0 +1,58 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: code
+entity_id: 11e94fe83d40d423
+signature: ab88087682f19ab164c32e328e4e83b9
+created: '2026-03-11T10:11:02.964608'
+file_path: D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\docs\TDX_DATA_INTEGRATION.md
+start_line: 40
+end_line: 48
+lines_of_code: 9
+tags:
+- entity
+- code
+- 代码块 (yaml)
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 代码块 (yaml)
+
+> **类型**: `EntityType.CODE` | **文件**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\docs\TDX_DATA_INTEGRATION.md` | **行数**: 40-48 (9行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+# 通达信数据配置
+tdx:
+  data_path: "C:/zd_zsone"  # 通达信安装目录
+  enabled: true             # 是否启用通达信数据源
+  default_market: "SH"      # 默认市场，SH:上海，SZ:深圳，BJ:北京
+  cache_enabled: true       # 是否启用缓存
+  cache_ttl: 300            # 缓存时间（秒）
+```
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\docs\TDX_DATA_INTEGRATION.md`
+- **起始行号**: 40
+- **搜索关键词**: `代码块 (yaml)`
+
+### 签名追踪
+- **签名**: `ab88087682f19ab1...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

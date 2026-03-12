@@ -1,0 +1,31 @@
+project:
+  name: "股票舆情分析系统"
+  description: "基于AI的股票舆情分析系统，采集实时财经资讯，多维度专家评估生成短线交易建议"
+  root_dir: "."
+  
+analysis:
+  include:
+    - "src/**/*.py"
+    - "config/**/*.yaml"
+    - "prompts/**/*.md"
+    - "*.md"
+    - "requirements.txt"
+  exclude:
+    - "data/**/*"
+    - "logs/**/*"
+    - "__pycache__/**/*"
+    - "*.pyc"
+    - ".git/**/*"
+    
+output:
+  format: "markdown"
+  path: "./docs/PROJECT_KNOWLEDGE_BASE.md"
+  sections:
+    - "project_overview"
+    - "architecture"
+    - "core_modules"
+    - "api_reference"
+    - "configuration"
+    - "usage_guide"
+    - "tech_stack"
+    - "development_standards"

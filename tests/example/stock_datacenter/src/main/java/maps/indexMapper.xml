@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.stock.portal.action.common" >	
+	<!--基本指示-->
+	<select id="select_base_index" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		order by time asc
+	]]>
+	</select> 
+
+	<select id="select_base_index_list" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) <= DATE(#{endTime,jdbcType=TIMESTAMP})
+		order by time asc
+	]]>
+	</select> 
+	<select id="select_base_index_object" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select ${columnName},TIME from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		order by time asc
+	]]>
+	</select> 
+	<select id="select_base_index_object_list" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select ${columnName} ,TIME from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{endTime,jdbcType=TIMESTAMP}) 
+		order by time asc
+	]]>
+	</select> 
+	<update id="update_base_index" parameterType="com.stock.common.model.UpdateIndexReq">
+		<![CDATA[ 
+		    update ${tableName}
+		    set ${columnName} = #{value,jdbcType=DOUBLE},
+		    company_code = #{uidentify,jdbcType=VARCHAR}
+		    ,time=DATE(#{time,jdbcType=TIMESTAMP})
+		    where  DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+			and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		    and company_code = #{uidentify,jdbcType=VARCHAR}
+    ]]>
+	</update>
+  
+	<insert id="insert_base_index" parameterType="com.stock.common.model.UpdateIndexReq">
+    insert into ${tableName} (${columnName},TIME,uidentify) 
+    values ( #{value,jdbcType=DOUBLE},DATE(#{time,jdbcType=TIMESTAMP}),#{uidentify,jdbcType=VARCHAR}) 
+	</insert>
+	
+	<!--扩展指示-->
+	<select id="select_c_ext_index" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	
+	<select id="select_u_ext_index" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where uidentify = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	<select id="select_c_ext_index_list" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE(TIME) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{endTime,jdbcType=TIMESTAMP})
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	<select id="select_u_ext_index_list" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where uidentify = #{uidentify,jdbcType=VARCHAR}
+		and DATE(TIME) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{endTime,jdbcType=TIMESTAMP})
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	<select id="select_c_ext_index_object" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select ${columnName},TIME from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	<select id="select_c_ext_index_object_list" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select ${columnName},TIME from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{endTime,jdbcType=TIMESTAMP})
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	<insert id="insert_c_ext_index" parameterType="com.stock.common.model.UpdateIndexReq">
+		<![CDATA[ 
+    insert into ${tableName} (uidentify,index_code,value,time) 
+    values ( #{uidentify,jdbcType=VARCHAR},#{indexCode,jdbcType=VARCHAR},#{value,jdbcType=DOUBLE},DATE(#{time,jdbcType=TIMESTAMP})) 
+    ]]>
+	</insert>
+	<update id="update_c_ext_index" parameterType="com.stock.common.model.UpdateIndexReq">
+		<![CDATA[ 
+    update ${tableName}
+    set value = #{value,jdbcType=DOUBLE}
+    where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		]]>
+	</update>
+	
+	<select id="select_companydata_maxtime" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.Date"  >  
+	<![CDATA[ 
+		select max(time) from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+	]]>
+	</select> 
+	
+	<select id="select_companydata_mintime" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.Date"  >  
+	<![CDATA[ 
+		select min(time) from ${tableName}
+		where company_code = #{uidentify,jdbcType=VARCHAR}
+	]]>
+	</select> 
+	<!-- 此处只查资产表 -->
+	<select id="select_companydata_mintime_uptime" parameterType="map"  resultType="java.util.Date"  >  
+	<![CDATA[ 
+		select min(time) from ${tableName}
+		where uidentify = #{uidentify,jdbcType=VARCHAR} and modtime >= DATE(#{modtime,jdbcType=TIMESTAMP}) 
+	]]>
+	</select> 
+	
+	<select id="get_Table_DataCount" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Integer"  >  
+	<![CDATA[ 
+		select count(*) from ${tableName}
+	]]>
+	</select> 
+	
+	<select id="getExtIndexValueNumOfCompany" parameterType="com.stock.common.model.IndexMessage"  resultType="java.lang.Integer"  >  
+	<![CDATA[ 
+		select count(value) from ${tableName} 
+		where uidentify = #{uidentify,jdbcType=VARCHAR}
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+	]]>
+	</select> 
+	
+	<select id="p_importData2NormalDb" statementType="CALLABLE" parameterType="map" >  
+    <![CDATA[  
+        {call p_importData2NormalDb(#{uptime,mode=IN,jdbcType=VARCHAR})}  
+    ]]>  
+    </select>  
+    
+	<select id="p_importData2NormalDb_timer" statementType="CALLABLE" parameterType="map" >  
+    <![CDATA[  
+        {call p_importData2NormalDb_timer(#{uptime,mode=IN,jdbcType=VARCHAR})}  
+    ]]>  
+    </select>  
+    
+    <select id="p_importChildCapData2MidDb" statementType="CALLABLE" parameterType="map" resultType="map">  
+    <![CDATA[  
+        {call p_IndexDataExe(#{uptime,mode=IN,jdbcType=VARCHAR},'2125','2130')} 
+    ]]>  
+    </select>  
+	<select id="select_index_all_data" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select ${columnName},uidentify,time from ${tableName}
+		order by time asc
+	]]>
+	</select> 
+	
+	<select id="getIndexvalueListDesc" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select ${columnName},uidentify,time from ${tableName}  
+		where uidentify in (${uidentifys})
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		order by ${columnName} desc
+	]]>
+	</select> 
+	
+  <select id="hasAssetData" resultType="java.lang.Integer" parameterType="com.stock.common.model.IndexMessage" >
+    select count(*) from ${tableName}
+     <![CDATA[ 
+    where company_code = #{uidentify,jdbcType=VARCHAR}
+		and DATE(TIME) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{endTime,jdbcType=TIMESTAMP}) 
+		order by time asc
+		]]>
+  </select>
+  
+	<select id="getAllCompanyOneIndexOfOneTag2cache" parameterType="map"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select t.company_code as uidentify,${columnName} from ${tableName} t,t_company0001 tc
+		where  t.company_code = tc.company_code
+		and DATE_ADD(DATE(t.TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(t.TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP})  
+		and tc.tags like CONCAT('%',#{tag,jdbcType=TIMESTAMP},'%')
+	]]>
+	</select> 
+	
+	<select id="getAllCompanyOneExtIndexOneSecOfOneTag2cache" parameterType="map"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select t.uidentify as uidentify,${columnName},time from ${tableName} t,t_company0001 tc
+		where  t.uidentify = tc.uidentify
+		and DATE_ADD(DATE(t.TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(t.TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP})  
+		and tc.tags like CONCAT('%',#{tag,jdbcType=TIMESTAMP},'%')
+	]]>
+	</select> 
+	
+	<select id="getAllCompanyOneExtIndexOneSec2cache" parameterType="map"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select t.uidentify as uidentify,${columnName} ,time from ${tableName} t
+		where DATE_ADD(DATE(t.TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(t.TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP})  
+	]]>
+	</select> 
+</mapper>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	
+<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%p][%d{ISO8601}][%c][%m]%n" />
+		</layout>
+	</appender>
+	<!--class定义日志记录器-->
+	<appender name="DEBUG"
+		class="org.apache.log4j.RollingFileAppender">
+		<!--相对于应用服务器的输出路径,应用服务器的路径指定在common包中指定-->
+		<param name="File" value="stock/log/debug/app-debug.log" />
+		<!--是否追加写入文件 true-是 false-否,此部分不建议改动-->
+		<param name="Append" value="true" />
+		<!--当日志文件超过定义数值则自动备分一个新文件-->
+		<!--可以定义为1MB,1KB,1GB这样的类型,也可以定义为1000则表示1000字节-->
+		<param name="MaxFileSize" value="5MB" />
+		<!--备分文件最多的数量-->
+		<param name="MaxBackupIndex" value="100" />
+		<!--输出的日志文件格式,根据操作系统编码指定-->
+		<param name="Encoding" value="UTF8" />
+		<!--log4j的打印日志布局,可参考相关log4j文档设置-->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%p][%d{ISO8601}][%c][%m]%n" />
+		</layout>
+		<!--日志级别过滤器-->
+		<!--DHMMinLevel表示最小的级别,DHMMaxLevel表示最大的级别,建议不做改动-->
+		<filter
+			class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="DEBUG" />
+			<param name="levelMax" value="DEBUG" />
+		</filter>
+	</appender>
+
+	<appender name="INFO"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="stock/log/info/app-info.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="5MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<param name="Encoding" value="UTF8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%p][%d{ISO8601}][%c][%m]%n" />
+		</layout>
+		<filter
+			class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="INFO" />
+			<param name="levelMax" value="INFO" />
+		</filter>
+	</appender>
+
+	<appender name="WARN"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="stock/log/warn/app-warn.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="5MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<param name="Encoding" value="UTF8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%p][%d{ISO8601}][%c][%m]%n" />
+		</layout>
+		<filter
+			class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="WARN" />
+			<param name="levelMax" value="WARN" />
+		</filter>
+	</appender>
+
+
+	<appender name="ERROR"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="stock/log/error/app-error.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="5MB" />
+		<param name="MaxBackupIndex" value="100" />
+		<param name="Encoding" value="UTF8" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="[%p][%d{ISO8601}][%c][%m]%n" />
+		</layout>
+		<filter
+			class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="ERROR" />
+			<param name="levelMax" value="ERROR" />
+		</filter>
+	</appender>
+
+
+	<root>
+		<!--定义日志的最低输出级别-->
+		<priority value="INFO" />
+		<!--引用的日志记录器-->
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="DEBUG" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="WARN" />
+		<appender-ref ref="ERROR" />
+	</root>
+</log4j:configuration>  

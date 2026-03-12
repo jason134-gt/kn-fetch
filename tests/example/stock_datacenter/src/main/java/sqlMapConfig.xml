@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration  
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<mappers>
+		<mapper resource="maps/indexMapper.xml" />
+		<mapper resource="maps/DictionaryMapper.xml" />
+		<mapper resource="maps/CfiruleMapper.xml" />
+		<mapper resource="maps/CompanyMapper.xml" />
+	
+		<mapper resource="maps/BaseIndexMapper.xml" />
+		<mapper resource="maps/ExtindexMapper.xml" />
+		<mapper resource="maps/MatchinfoMapper.xml" />
+		<mapper resource="maps/TableSystemMapper.xml" />
+		<mapper resource="maps/DataSourceMapper.xml" />
+		<mapper resource="maps/IndustryMapper.xml" />
+		<mapper resource="maps/CompanyStockInfoMapper.xml" />
+		
+		<mapper resource="maps/Companyasset0290Mapper.xml" />
+		<mapper resource="maps/Companycash0292Mapper.xml" />
+		<mapper resource="maps/Companyprofile0291Mapper.xml" />
+		
+		
+		<mapper resource="maps/Asset0290Mapper.xml" />
+		<mapper resource="maps/Cash0292Mapper.xml" />
+		<mapper resource="maps/Profile0291Mapper.xml" />
+		
+		<mapper resource="maps/RankingMapper.xml" />
+		<mapper resource="maps/RankresultMapper.xml" />
+		<mapper resource="maps/IndexgroupMapper.xml" />
+		
+		
+		<mapper resource="maps/industryIndexMapper.xml" />
+		
+		<mapper resource="maps/Stock0001Mapper.xml" />
+		<mapper resource="maps/MatchinfoMapper.xml" />
+		
+		<mapper resource="maps/BxassetMapper.xml" />
+		<mapper resource="maps/BxcashMapper.xml" />
+		<mapper resource="maps/BxprofileMapper.xml" />
+		
+		<mapper resource="maps/YhassetMapper.xml" />
+		<mapper resource="maps/YhcashMapper.xml" />
+		<mapper resource="maps/YhprofileMapper.xml" />
+		
+		<mapper resource="maps/ZjassetMapper.xml" />
+		<mapper resource="maps/ZjcashMapper.xml" />
+		<mapper resource="maps/ZjprofileMapper.xml" />
+		
+		<mapper resource="maps/MarketMapper.xml" />
+		
+		<mapper resource="maps/Finace0004Mapper.xml" />
+		<mapper resource="maps/Finace0005Mapper.xml" />
+		<mapper resource="maps/Finace0006Mapper.xml" />
+		<mapper resource="maps/Finace0007Mapper.xml" />
+		<mapper resource="maps/Finace0008Mapper.xml" />
+		<mapper resource="maps/Finace0009Mapper.xml" />
+		<mapper resource="maps/Finace0010Mapper.xml" />
+		<mapper resource="maps/Finace0011Mapper.xml" />
+		<mapper resource="maps/Finace0012Mapper.xml" />
+		
+		<mapper resource="maps/TagruleMapper.xml" />
+		
+		<mapper resource="maps/StockpoolMapper.xml" />
+		
+		<mapper resource="maps/DcheckMapper.xml" />
+		
+		<mapper resource="maps/Fund0002Mapper.xml" />
+		
+		<mapper resource="maps/company/Company0022Mapper.xml" />
+		
+		<mapper resource="maps/systemPropertiesMapper.xml" />
+		
+		<mapper resource="maps/Trade0001Mapper.xml" />
+		
+		<mapper resource="maps/UsubjectMapper.xml" />
+		<mapper resource="maps/StatisticsMapper.xml" />
+		
+		<mapper resource="maps/IndexcategoryMapper.xml" />
+		<mapper resource="maps/chance/ChanceCategoryMapper.xml" />
+		
+		<mapper resource="maps/user/MembersMapper.xml" />
+		
+	</mappers>
+</configuration> 

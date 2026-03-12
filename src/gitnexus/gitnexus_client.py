@@ -16,10 +16,11 @@ from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 import tempfile
 import shutil
+import threading  # 添加线程锁支持
 
 from .models import CodeEntity, KnowledgeGraph, AnalysisResult, ExportFormat
 from .exceptions import GitNexusError, AnalysisError, ConfigurationError, ExportError
-from .parser import CodeParser
+from .parser_v2 import EnhancedCodeParser as CodeParser
 from .incremental import IncrementalAnalyzer
 from .exporter import KnowledgeExporter
 
@@ -39,6 +40,9 @@ class GitNexusClient:
     支持百万行代码级别的工程分析，具备增量分析、并行处理、
     结构化知识存储、多格式导出能力
     """
+    
+    # 类级别的数据库锁，用于多线程同步
+    _db_lock = threading.Lock()
     
     def __init__(self, config_path: str = "config/config.yaml"):
         self.config = self._load_config(config_path)
@@ -70,7 +74,13 @@ class GitNexusClient:
     def _init_database(self) -> Any:
         """初始化数据库连接"""
         db_path = self.config.get("storage", {}).get("db_path", ".gitnexus_cache.db")
-        engine = create_engine(f"sqlite:///{db_path}")
+        # 添加SQLite多线程支持和连接池配置
+        engine = create_engine(
+            f"sqlite:///{db_path}",
+            connect_args={"check_same_thread": False},
+            pool_pre_ping=True,
+            pool_recycle=3600
+        )
         Base.metadata.create_all(engine)
         return engine
     
@@ -124,43 +134,46 @@ class GitNexusClient:
                 relative_path = file_path
             file_hash = self._get_file_hash(file_path)
             
-            # 检查缓存
+            # 检查缓存 - 使用锁保护数据库访问
             if not force:
-                with self.Session() as session:
-                    cache = session.query(AnalysisCache).filter(
-                        AnalysisCache.file_path == str(relative_path),
-                        AnalysisCache.file_hash == file_hash
-                    ).first()
-                    if cache:
-                        return AnalysisResult(**cache.analysis_result)
+                with GitNexusClient._db_lock:
+                    with self.Session() as session:
+                        cache = session.query(AnalysisCache).filter(
+                            AnalysisCache.file_path == str(relative_path),
+                            AnalysisCache.file_hash == file_hash
+                        ).first()
+                        if cache:
+                            return AnalysisResult(**cache.analysis_result)
             
-            # 解析文件
+            # 解析文件（无需锁，纯计算）
             with open(file_path, "r", encoding="utf-8") as f:
                 content = f.read()
             
-            entities = self.parser.parse(content, str(relative_path))
+            entities, relationships = self.parser.parse(content, str(relative_path))
             
             result = AnalysisResult(
                 file_path=str(relative_path),
                 file_hash=file_hash,
-                language=self.parser.detect_language(content),
+                language=self.parser.detect_language(content, str(relative_path)),
                 entities=entities,
+                relationships=relationships,
                 lines_of_code=len(content.splitlines()),
                 analyzed_at=datetime.now().isoformat()
             )
             
-            # 更新缓存
-            with self.Session() as session:
-                version = self.repo.head.commit.hexsha if self.repo else "unknown"
-                cache = AnalysisCache(
-                    file_path=str(relative_path),
-                    file_hash=file_hash,
-                    analysis_result=result.model_dump(),
-                    analyzed_at=datetime.now(),
-                    version=version
-                )
-                session.merge(cache)
-                session.commit()
+            # 更新缓存 - 使用锁保护数据库写入
+            with GitNexusClient._db_lock:
+                with self.Session() as session:
+                    version = self.repo.head.commit.hexsha if self.repo else "unknown"
+                    cache = AnalysisCache(
+                        file_path=str(relative_path),
+                        file_hash=file_hash,
+                        analysis_result=result.model_dump(),
+                        analyzed_at=datetime.now(),
+                        version=version
+                    )
+                    session.merge(cache)
+                    session.commit()
             
             return result
             

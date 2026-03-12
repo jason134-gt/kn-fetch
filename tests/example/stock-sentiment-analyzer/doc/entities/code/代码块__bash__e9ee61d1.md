@@ -1,0 +1,66 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: code
+entity_id: e9ee61d126f003eb
+signature: 9b10da27ec096b82a740f104af304883
+created: '2026-03-11T10:11:02.893971'
+file_path: D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\docs\PROJECT_KNOWLEDGE_BASE.md
+start_line: 167
+end_line: 183
+lines_of_code: 17
+tags:
+- entity
+- code
+- 代码块 (bash)
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 代码块 (bash)
+
+> **类型**: `EntityType.CODE` | **文件**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\docs\PROJECT_KNOWLEDGE_BASE.md` | **行数**: 167-183 (17行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+   pip install -r requirements.txt
+   ```
+2. 编辑`config/config.yaml`配置数据源、AI接口、股票池等参数
+3. 运行系统：
+   ```bash
+   # 单次运行
+   python src/main.py --mode once
+   
+   # 定时运行
+   python src/main.py --mode scheduled
+   
+   # 交互模式
+   python src/main.py --mode interactive
+   ```
+### 输出示例
+```
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\docs\PROJECT_KNOWLEDGE_BASE.md`
+- **起始行号**: 167
+- **搜索关键词**: `代码块 (bash)`
+
+### 签名追踪
+- **签名**: `9b10da27ec096b82...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

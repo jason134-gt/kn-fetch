@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stock.common.model.Dictionary">
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Dictionary">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
+    <result column="INDEX_CODE" jdbcType="VARCHAR" property="indexCode" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="COLUMN_CHI_NAME" jdbcType="VARCHAR" property="columnChiName" />
+    <result column="time_interval" jdbcType="INTEGER" property="interval" />
+    <result column="tctype" jdbcType="INTEGER" property="tctype" />
+    <result column="time_unit" jdbcType="VARCHAR" property="timeUnit" />
+     <result column="SYSTEM_CHILD_TABLE_CODE" jdbcType="VARCHAR" property="tableCode" />
+     <result column="UNIT" jdbcType="INTEGER" property="unit" />
+     <result column="TAGS" jdbcType="VARCHAR" property="tags" />
+      <result column="BIT_SET" jdbcType="VARCHAR" property="bitSet" />
+     <result column="SHOW_NAME" jdbcType="VARCHAR" property="showName" />
+     <result column="weight_condition" jdbcType="VARCHAR" property="weightExp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TABLE_NAME, COLUMN_NAME, INDEX_CODE, type,time_interval,tctype,time_unit,COLUMN_CHI_NAME,SYSTEM_CHILD_TABLE_CODE,UNIT,TAGS,BIT_SET,SHOW_NAME,REMARK,weight_condition
+  </sql>
+  <sql id="Base_Where">
+    <trim prefix=" where " prefixOverrides="AND|OR">
+      <if test="id != null">
+          and ID = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="tableName != null">
+          and TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+      </if>
+      <if test="columnName != null">
+          and COLUMN_NAME = #{columnName,jdbcType=VARCHAR}
+      </if>
+      <if test="indexCode != null">
+          and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+          and type = #{type,jdbcType=INTEGER}
+      </if>
+       <if test="columnChiName != null">
+          and COLUMN_CHI_NAME = #{columnChiName,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set">
+    <set>
+      <if test="tableName != null">
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="columnName != null">
+        COLUMN_NAME = #{columnName,jdbcType=VARCHAR},
+      </if>
+      <if test="indexCode != null">
+        INDEX_CODE = #{indexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="columnChiName != null">
+          and COLUMN_CHI_NAME = #{columnChiName,jdbcType=VARCHAR}
+      </if>
+       <if test="time_interval != null">
+        and time_interval = #{interval,jdbcType=INTEGER},
+      </if>
+      <if test="timeUnit != null">
+          and time_unit = #{timeUnit,jdbcType=VARCHAR}
+      </if>
+       <if test="tableCode != null">
+          and SYSTEM_CHILD_TABLE_CODE = #{tableCode,jdbcType=VARCHAR}
+      </if>
+      <if test="UNIT != null">
+          and UNIT = #{unit,jdbcType=VARCHAR}
+      </if>
+      <if test="tags != null">
+          and TAGS = #{tags,jdbcType=VARCHAR}
+      </if>
+      <if test="weightExp != null">
+          and weight_condition = #{weightExp,jdbcType=VARCHAR}
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Dictionary">
+    insert into t_data_diictionary (ID, TABLE_NAME, COLUMN_NAME, 
+      INDEX_CODE, type,tctype,COLUMN_CHI_NAME,SYSTEM_CHILD_TABLE_CODE,UNIT,TAGS,SHOW_NAME,time_interval,time_unit)
+    values (#{id,jdbcType=BIGINT}, #{tableName,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, 
+      #{indexCode,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},#{tctype,jdbcType=INTEGER},#{columnChiName,jdbcType=VARCHAR},#{tableCode,jdbcType=VARCHAR}
+      ,#{unit,jdbcType=INTEGER},#{tags,jdbcType=VARCHAR},#{columnChiName,jdbcType=VARCHAR},#{interval,jdbcType=INTEGER},#{timeUnit,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_data_diictionary
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="select" parameterType="com.stock.common.model.Dictionary" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null">
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" parameterType="com.stock.common.model.Dictionary" resultType="java.lang.Integer">
+    select count(*)
+    from t_data_diictionary
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.Dictionary">
+    update t_data_diictionary
+    <include refid="Base_Update_Set" />
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.Dictionary">
+    update t_data_diictionary
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+    <!-- 加载数据到缓存-->
+   <select id="loaddictionary2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary order by  INDEX_CODE asc
+  </select>
+  
+  <select id="getDictListByTableSystemCode" resultMap="BaseResultMap" parameterType="com.stock.common.model.Dictionary" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary
+    where SYSTEM_CHILD_TABLE_CODE = #{tableCode,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="getDictListByType" resultMap="BaseResultMap" parameterType="com.stock.common.model.Dictionary" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary t where t.type = #{type,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getMaxIndexcodeValue" parameterType="com.stock.common.model.Dictionary"  resultType="java.util.HashMap" >
+    select max(index_code) from t_data_diictionary
+  </select>
+   <update id="updateByIndexCode" parameterType="com.stock.common.model.Dictionary">
+    update t_data_diictionary
+    <include refid="Base_Update_Set" />
+    where index_code = #{indexCode,jdbcType=VARCHAR}
+  </update>
+     <update id="updatetags" parameterType="map">
+    update t_data_diictionary
+    set TAGS = #{tags,jdbcType=VARCHAR}
+    where index_code = #{indexCode,jdbcType=VARCHAR}
+  </update>
+  
+      <update id="modifyUnitByIndexcode" parameterType="map">
+    update t_data_diictionary
+    set UNIT = #{unit,jdbcType=VARCHAR}
+    where index_code = #{indexCode,jdbcType=VARCHAR}
+  </update>
+     
+    <select id="getDictionaryListByTag" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_diictionary
+    where TAGS like CONCAT('%',#{indexcategorycode,jdbcType=VARCHAR},'%') 
+  </select>
+  
+   <update id="updateWeightCondition" parameterType="map">
+    update t_data_diictionary
+    set weight_condition = #{wcexp,jdbcType=VARCHAR}
+    where index_code = #{indexCode,jdbcType=VARCHAR}
+  </update>
+    
+    <update id="updateBitSet" parameterType="map">
+    update t_data_diictionary
+    set BIT_SET = #{nbit,jdbcType=VARCHAR}
+    where index_code = #{indexCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

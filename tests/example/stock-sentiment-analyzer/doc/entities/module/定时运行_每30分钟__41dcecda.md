@@ -1,0 +1,52 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: module
+entity_id: 41dcecda94829547
+signature: f2913088b2dd023e9415226b3de69faa
+created: '2026-03-11T10:11:01.756742'
+file_path: D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\DEPLOYMENT.md
+start_line: 52
+end_line: 52
+lines_of_code: 1
+tags:
+- entity
+- module
+- 定时运行（每30分钟）
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 定时运行（每30分钟）
+
+> **类型**: `EntityType.MODULE` | **文件**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\DEPLOYMENT.md` | **行数**: 52-52 (1行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+定时运行（每30分钟）
+```
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\kn-fetch\output\example\stock-sentiment-analyzer\DEPLOYMENT.md`
+- **起始行号**: 52
+- **搜索关键词**: `定时运行（每30分钟）`
+
+### 签名追踪
+- **签名**: `f2913088b2dd023e...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

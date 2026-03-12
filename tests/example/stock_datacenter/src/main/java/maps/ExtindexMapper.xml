@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stock.common.model.Extindex">
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Extindex">
+    <result column="uidentify" jdbcType="VARCHAR" property="companyCode" />
+    <result column="INDEX_CODE" jdbcType="VARCHAR" property="indexCode" />
+    <result column="VALUE" jdbcType="DOUBLE" property="value" />
+    <result column="TIME" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+     uidentify, INDEX_CODE, VALUE, TIME
+  </sql>
+  <sql id="Base_Where">
+    <trim prefix=" where " prefixOverrides="AND|OR">
+      <if test="companyCode != null">
+          and uidentify = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="indexCode != null">
+          and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+      </if>
+      <if test="value != null">
+          and VALUE = #{value,jdbcType=DOUBLE}
+      </if>
+      <if test="time != null">
+          and TIME = #{time,jdbcType=TIMESTAMP}
+      </if>
+ 
+      
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set">
+    <set>
+      <if test="companyCode != null">
+        uidentify = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="indexCode != null">
+        INDEX_CODE = #{indexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        VALUE = #{value,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        TIME = #{time,jdbcType=TIMESTAMP},
+      </if>
+
+      
+    </set>
+  </sql>
+ 
+
+ 
+   <select id="portal_getExtIndexList" parameterType="com.stock.common.model.IndexMessage" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ${tableName}
+      <![CDATA[ 
+    where uidentify = #{companyCode,jdbcType=VARCHAR}
+		and DATE(TIME) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{endTime,jdbcType=TIMESTAMP}) 
+		order by time asc
+		]]>
+  </select>
+  
+    <select id="getextindexAllCount" resultType="java.lang.Integer" parameterType="map" >
+    select count(*)
+    from ${tableName}
+  </select>
+  
+  <select id="getextindexAllCountByTime" resultType="java.lang.Integer" parameterType="map" >
+         <![CDATA[ 
+		    select count(*)
+		    from ${tableName}
+		    where  DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		    and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP}) 
+	    ]]>
+	  </select>
+    <select id="getextindexPageData2Cache" parameterType="map" resultMap="BaseResultMap">
+    select 
+    uidentify, INDEX_CODE, TIME,VALUE
+    from ${tableName} limit ${start},${limit}    
+  </select>
+  
+     <select id="getextindexPageData2CacheBytime" parameterType="map" resultMap="BaseResultMap">
+        <![CDATA[ 
+		    select 
+		    uidentify, INDEX_CODE, TIME,VALUE
+		    from ${tableName}
+		    where  DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		    and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP}) 
+		    limit ${start},${limit}    
+	    ]]>
+	  </select>
+  
+      <select id="getCapindexPageData2CacheBytime" parameterType="map" resultMap="BaseResultMap">
+        <![CDATA[ 
+		    select 
+		    uidentify, INDEX_CODE, TIME,VALUE
+		    from ${tableName}
+		    where  DATE(TIME) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		    and DATE(TIME) <= DATE(#{etime,jdbcType=TIMESTAMP})  
+		    and index_code in ('2125','2126','2127','2128','2129','2130','2131')
+	    ]]>
+	  </select>
+	  
+  <select id="getloadOneCompanyExtData" parameterType="map" resultMap="BaseResultMap">
+    select 
+    uidentify, INDEX_CODE, TIME,VALUE
+    from ${tableName} where uidentify = #{companyCode,jdbcType=VARCHAR} 
+  </select>
+  
+   <select id="getloadOneIndexExtData" parameterType="map" resultMap="BaseResultMap">
+    select 
+    uidentify, INDEX_CODE, TIME,VALUE
+    from ${tableName} where INDEX_CODE = #{indexcode,jdbcType=VARCHAR} 
+  </select>
+  
+   
+    <select id="getloadIndexsExtData" parameterType="map" resultMap="BaseResultMap">
+    select 
+    uidentify, INDEX_CODE, TIME,VALUE
+    from ${tableName} where INDEX_CODE in ${indexcodes} 
+  </select>
+</mapper>

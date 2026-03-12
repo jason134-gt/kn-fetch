@@ -43,7 +43,8 @@ def main():
     analyze_parser.add_argument("--large-scale", action="store_true", help="启用大规模处理模式（适合百万行级项目）")
     analyze_parser.add_argument("--incremental", action="store_true", help="启用增量分析")
     analyze_parser.add_argument("--resume", action="store_true", help="断点续传模式")
-    analyze_parser.add_argument("--deep", "-d", action="store_true", help="启用LLM深度分析，生成详细设计文档（需要配置API Key）")
+    analyze_parser.add_argument("--deep", "-d", action="store_true", default=True, help="启用LLM深度分析，生成详细设计文档（默认启用，需要配置API Key）")
+    analyze_parser.add_argument("--no-deep", action="store_true", help="禁用LLM深度分析")
     analyze_parser.add_argument("--refactoring", "-r", action="store_true", help="启用重构分析，包括风险分级、技术债务扫描、架构诊断")
     
     # 导出命令
@@ -166,6 +167,9 @@ def handle_analyze(args):
     """处理分析命令"""
     print(f"开始分析目录: {args.directory}")
     
+    # 处理 --no-deep 标志
+    deep_analysis = args.deep and not getattr(args, 'no_deep', False)
+    
     if args.large_scale:
         processor = LargeScaleProcessor(args.config)
         graph = processor.process_large_project(
@@ -182,7 +186,7 @@ def handle_analyze(args):
             include_code=not args.no_code,
             include_docs=not args.no_docs,
             force=args.force,
-            deep_analysis=args.deep if hasattr(args, 'deep') else False,
+            deep_analysis=deep_analysis,
             refactoring_analysis=args.refactoring if hasattr(args, 'refactoring') else False
         )
     

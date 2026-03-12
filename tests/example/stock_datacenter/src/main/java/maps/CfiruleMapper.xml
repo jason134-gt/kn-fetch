@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Cfirule" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Cfirule" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="RULE" property="rule" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="INTEGER" />
+    <result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+    <result column="C_INDEX_CODE" property="cIndexCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="ACROSS_TYPE" property="acrossType" jdbcType="INTEGER" />
+    <result column="Q1_RULE" jdbcType="VARCHAR" property="q1Rule" />
+    <result column="Q1_RULE_COMMENTS" jdbcType="VARCHAR" property="q1RuleComments" />
+    <result column="Q2_RULE" jdbcType="VARCHAR" property="q2Rule" />
+    <result column="Q2_RULE_COMMENTS" jdbcType="VARCHAR" property="q2RuleComments" />
+    <result column="Q3_RULE" jdbcType="VARCHAR" property="q3Rule" />
+    <result column="Q3_RULE_COMMENTS" jdbcType="VARCHAR" property="q3RuleComments" />
+    <result column="Q4_RULE" jdbcType="VARCHAR" property="q4Rule" />
+    <result column="Q4_RULE_COMMENTS" jdbcType="VARCHAR" property="q4RuleComments" />
+    <result column="TABLE_SYSTEM_CODE" property="tableSystemCode" jdbcType="VARCHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, RULE, TYPE, COMMENTS, C_INDEX_CODE, COMPANY_CODE, UPDATE_TIME, ACROSS_TYPE, 
+    Q1_RULE, Q1_RULE_COMMENTS, Q2_RULE, Q2_RULE_COMMENTS, Q3_RULE, Q3_RULE_COMMENTS, 
+    Q4_RULE, Q4_RULE_COMMENTS, TABLE_SYSTEM_CODE
+  </sql>
+  <sql id="Base_Where">
+    <trim prefix=" where " prefixOverrides="AND|OR">
+      <if test="id != null">
+          and ID = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="name != null">
+          and NAME = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="rule != null">
+          and RULE = #{rule,jdbcType=VARCHAR}
+      </if>
+
+      <if test="comments != null">
+          and COMMENTS = #{comments,jdbcType=VARCHAR}
+      </if>
+      <if test="cIndexCode != null">
+          and C_INDEX_CODE = #{cIndexCode,jdbcType=VARCHAR}
+      </if>
+      <if test="companyCode != null">
+          and COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="updateTime != null">
+          and UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    
+      <if test="q1Rule != null">
+          and Q1_RULE = #{q1Rule,jdbcType=VARCHAR}
+      </if>
+      <if test="q1RuleComments != null">
+          and Q1_RULE_COMMENTS = #{q1RuleComments,jdbcType=VARCHAR}
+      </if>
+      <if test="q2Rule != null">
+          and Q2_RULE = #{q2Rule,jdbcType=VARCHAR}
+      </if>
+      <if test="q2RuleComments != null">
+          and Q2_RULE_COMMENTS = #{q2RuleComments,jdbcType=VARCHAR}
+      </if>
+      <if test="q3Rule != null">
+          and Q3_RULE = #{q3Rule,jdbcType=VARCHAR}
+      </if>
+      <if test="q3RuleComments != null">
+          and Q3_RULE_COMMENTS = #{q3RuleComments,jdbcType=VARCHAR}
+      </if>
+      <if test="q4Rule != null">
+          and Q4_RULE = #{q4Rule,jdbcType=VARCHAR}
+      </if>
+      <if test="q4RuleComments != null">
+          and Q4_RULE_COMMENTS = #{q4RuleComments,jdbcType=VARCHAR}
+      </if>
+      <if test="tableSystemCode != null">
+          and TABLE_SYSTEM_CODE = #{tableSystemCode,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set">
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="rule != null">
+        RULE = #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="comments != null">
+        COMMENTS = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="cIndexCode != null">
+        C_INDEX_CODE = #{cIndexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+        UPDATE_TIME = now(),
+      <if test="acrossType != null">
+        ACROSS_TYPE = #{acrossType,jdbcType=INTEGER},
+      </if>
+      <if test="q1Rule != null">
+        Q1_RULE = #{q1Rule,jdbcType=VARCHAR},
+      </if>
+      <if test="q1RuleComments != null">
+        Q1_RULE_COMMENTS = #{q1RuleComments,jdbcType=VARCHAR},
+      </if>
+      <if test="q2Rule != null">
+        Q2_RULE = #{q2Rule,jdbcType=VARCHAR},
+      </if>
+      <if test="q2RuleComments != null">
+        Q2_RULE_COMMENTS = #{q2RuleComments,jdbcType=VARCHAR},
+      </if>
+      <if test="q3Rule != null">
+        Q3_RULE = #{q3Rule,jdbcType=VARCHAR},
+      </if>
+      <if test="q3RuleComments != null">
+        Q3_RULE_COMMENTS = #{q3RuleComments,jdbcType=VARCHAR},
+      </if>
+      <if test="q4Rule != null">
+        Q4_RULE = #{q4Rule,jdbcType=VARCHAR},
+      </if>
+      <if test="q4RuleComments != null">
+        Q4_RULE_COMMENTS = #{q4RuleComments,jdbcType=VARCHAR},
+      </if>
+      <if test="tableSystemCode != null">
+        TABLE_SYSTEM_CODE = #{tableSystemCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Cfirule">
+    insert into t_c_financial_index_rule (ID, NAME, RULE, 
+      TYPE, COMMENTS, C_INDEX_CODE, 
+      COMPANY_CODE, UPDATE_TIME, ACROSS_TYPE, 
+      Q1_RULE, Q1_RULE_COMMENTS, Q2_RULE, 
+      Q2_RULE_COMMENTS, Q3_RULE, Q3_RULE_COMMENTS, 
+      Q4_RULE, Q4_RULE_COMMENTS, TABLE_SYSTEM_CODE
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{rule,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{comments,jdbcType=VARCHAR}, #{cIndexCode,jdbcType=VARCHAR}, 
+      #{companyCode,jdbcType=VARCHAR}, now(), #{acrossType,jdbcType=INTEGER}, 
+      #{q1Rule,jdbcType=VARCHAR}, #{q1RuleComments,jdbcType=VARCHAR}, #{q2Rule,jdbcType=VARCHAR}, 
+      #{q2RuleComments,jdbcType=VARCHAR}, #{q3Rule,jdbcType=VARCHAR}, #{q3RuleComments,jdbcType=VARCHAR}, 
+      #{q4Rule,jdbcType=VARCHAR}, #{q4RuleComments,jdbcType=VARCHAR}, #{tableSystemCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_c_financial_index_rule
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Cfirule" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Cfirule" >
+    select count(*)
+    from t_c_financial_index_rule
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.Cfirule" >
+    update t_c_financial_index_rule
+    <include refid="Base_Update_Set" />
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+   <update id="updateRuleByIndexCode" parameterType="com.stock.common.model.Cfirule" >
+    update t_c_financial_index_rule
+    <include refid="Base_Update_Set" />
+    where C_INDEX_CODE = #{cIndexCode,jdbcType=BIGINT}
+  </update>
+  
+  <update id="update" parameterType="com.stock.common.model.Cfirule" >
+    update t_c_financial_index_rule
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  <!-- 加载数据到缓存-->
+   <select id="loadcfirule2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+  </select>
+  
+    <select id="getTemplateByTableSystemCode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+    where  TABLE_SYSTEM_CODE = #{tableSystemCode,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 加载最新入库的指标-->
+   <select id="getLatestIndexRuleList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule where 
+    <![CDATA[ 
+    	DATE(UPDATE_TIME) >= DATE(#{updateTime,jdbcType=TIMESTAMP}) 
+		order by C_INDEX_CODE asc
+		]]>
+  </select>
+  
+   <!-- 取规则表中模板中index_code的最大值-->
+   <select id="getTemplateCodeMax" resultType="java.util.HashMap" parameterType="com.stock.common.model.Cfirule" >
+    select max(c_index_code) from t_c_financial_index_rule where type='2'
+  </select>
+  
+    <select id="getRuleByCondition" resultMap="BaseResultMap" parameterType="com.stock.common.model.Cfirule" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+ 	<include refid="Base_Select_Where" />
+  </select>
+  
+    <sql id="Base_Select_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="name != null" >
+           <if test="name != ''" >
+          and NAME like #{name,jdbcType=VARCHAR}
+      	</if>
+      </if>
+      <if test="companyCode != null" >
+          <if test="companyCode != ''" >
+          and COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+      	  </if>
+      </if>
+      <if test="startTime != null" >
+           <if test="startTime != ''" >
+          <![CDATA[ and DATE(UPDATE_TIME) >= DATE(#{startTime,jdbcType=VARCHAR}) ]]>
+      		</if>
+      </if>
+      <if test="endTime != null" >
+           <if test="startTime != ''" >
+          <![CDATA[ and DATE(UPDATE_TIME) >= DATE(#{startTime,jdbcType=VARCHAR}) ]]>
+      	   </if>
+      </if>
+      <if test="acrossType != null" >
+             and ACROSS_TYPE = #{acrossType,jdbcType=INTEGER} 
+      </if>
+      <if test="tableSystemCode != null" >
+             and TABLE_SYSTEM_CODE = #{tableSystemCode,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+   <select id="getCIndexRuleByCode" resultMap="BaseResultMap" parameterType="com.stock.common.model.Cfirule" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_c_financial_index_rule
+    where  C_INDEX_CODE = #{cIndexCode,jdbcType=VARCHAR}
+  </select>
+  
+   
+  <update id="updateIndexRuleOfCompute" >
+   update t_c_financial_index_rule tc set tc.UPDATE_TIME = Date_add(now(), interval 1 day) where  tc.RULE  not like '%getidv%';
+  </update>
+  
+</mapper>

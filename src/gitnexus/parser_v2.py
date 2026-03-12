@@ -10,7 +10,7 @@ from pathlib import Path
 from collections import defaultdict
 
 try:
-    from tree_sitter import Language, Parser
+    from tree_sitter import Language, Parser, QueryCursor
     TREE_SITTER_VERSION = "new"
 except ImportError:
     from tree_sitter import Language, Parser
@@ -540,17 +540,46 @@ class EnhancedCodeParser:
         
         try:
             query = self.languages[language].query(query_patterns[language])
-            captures = query.captures(root_node)
             
-            for node, capture_name in captures:
-                entity = self._process_tree_sitter_capture(
-                    node, capture_name, content, lines, file_path
-                )
-                if entity:
-                    entities.append(entity)
+            # 使用QueryCursor执行查询 (新版API)
+            cursor = QueryCursor(query)
+            
+            # 处理捕获结果
+            if hasattr(cursor, 'captures'):
+                # captures方法返回字典格式
+                captures_dict = cursor.captures(root_node)
+                for capture_name, nodes in captures_dict.items():
+                    for node in nodes:
+                        entity = self._process_tree_sitter_capture(
+                            node, capture_name, content, lines, file_path
+                        )
+                        if entity:
+                            entities.append(entity)
+            elif hasattr(cursor, 'matches'):
+                # matches方法返回列表格式
+                matches = cursor.matches(root_node)
+                for match in matches:
+                    for capture in match[1]:  # match[1]包含捕获列表
+                        node = capture[0]
+                        capture_name = capture[1]
+                        entity = self._process_tree_sitter_capture(
+                            node, capture_name, content, lines, file_path
+                        )
+                        if entity:
+                            entities.append(entity)
+            else:
+                print(f"Tree-sitter查询失败: QueryCursor没有可用的查询方法")
+                return [], []
         
         except Exception as e:
             print(f"Tree-sitter查询失败: {e}")
+        
+        # 提取调用关系（Java等语言）
+        if language in ["java", "javascript", "typescript"]:
+            call_rels = self._extract_tree_sitter_call_relationships(
+                root_node, content, file_path, entities
+            )
+            relationships.extend(call_rels)
         
         return entities, relationships
     
@@ -573,28 +602,205 @@ class EnhancedCodeParser:
             "field": EntityType.ATTRIBUTE
         }
         
-        # 提取名称
+        # 提取名称 - 改进版
         name = ""
-        for child in node.children:
-            if child.type in ["identifier", "type_identifier", "property_identifier"]:
-                name = content[child.start_byte:child.end_byte]
-                break
         
+        # 方法1: 从Query捕获的节点中提取名称
+        # capture_name可能是 "class_name", "method_name" 等
+        if capture_name.endswith("_name"):
+            # 查找对应名称的子节点
+            for child in node.children:
+                if child.type in ["identifier", "type_identifier", "property_identifier", "field_identifier"]:
+                    name = content[child.start_byte:child.end_byte].strip()
+                    break
+        
+        # 方法2: 如果没有找到，尝试从节点类型推断
         if not name:
-            name = capture_name
+            # 对于method_declaration，方法名通常在identifier类型的子节点中
+            if node.type == "method_declaration":
+                # Java方法声明结构: [modifiers] [type] identifier (parameters) [throws] {body}
+                for child in node.children:
+                    # 查找方法标识符
+                    if child.type == "identifier":
+                        potential_name = content[child.start_byte:child.end_byte].strip()
+                        # 过滤掉看起来像类型名的标识符（如void, String等）
+                        if potential_name and not potential_name[0].isupper() and potential_name not in ['void', 'int', 'long', 'boolean', 'double', 'float', 'char', 'byte', 'short']:
+                            name = potential_name
+                            break
+                    # 也检查field_identifier
+                    elif child.type == "field_identifier":
+                        name = content[child.start_byte:child.end_byte].strip()
+                        break
+            
+            # 对于class_declaration
+            elif node.type == "class_declaration":
+                for child in node.children:
+                    if child.type == "identifier":
+                        name = content[child.start_byte:child.end_byte].strip()
+                        break
+            
+            # 对于interface_declaration
+            elif node.type == "interface_declaration":
+                for child in node.children:
+                    if child.type == "identifier":
+                        name = content[child.start_byte:child.end_byte].strip()
+                        break
+            
+            # 对于field_declaration（属性）
+            elif node.type == "field_declaration":
+                # 查找variable_declarator
+                for child in node.children:
+                    if child.type == "variable_declarator":
+                        for subchild in child.children:
+                            if subchild.type == "identifier":
+                                name = content[subchild.start_byte:subchild.end_byte].strip()
+                                break
+                        if name:
+                            break
+        
+        # 方法3: 如果仍然没有找到，使用通用方法
+        if not name:
+            for child in node.children:
+                if child.type in ["identifier", "type_identifier", "property_identifier", "field_identifier"]:
+                    potential_name = content[child.start_byte:child.end_byte].strip()
+                    if potential_name and len(potential_name) > 0:
+                        name = potential_name
+                        break
+        
+        # 过滤不合法的名称
+        if not name or len(name) < 1 or '\n' in name or '{' in name or '}' in name:
+            # 尝试从节点内容中提取第一行作为标识
+            node_content = content[node.start_byte:node.end_byte]
+            first_line = node_content.split('\n')[0].strip()
+            # 提取可能的名称
+            import re
+            
+            # 对于方法：public/private/protected ... name(
+            match = re.search(r'(?:public|private|protected|static)?\s*(?:\w+\s+)?(\w+)\s*\(', first_line)
+            if match:
+                name = match.group(1)
+            # 对于字段声明：public static final Type NAME =
+            elif 'field' in capture_name or node.type == 'field_declaration':
+                # 提取常量名或变量名
+                match = re.search(r'(\w+)\s*[;=]', first_line)
+                if match:
+                    name = match.group(1)
+            # 对于import声明
+            elif 'import' in capture_name or node.type == 'import_declaration':
+                # 提取导入的类名或包名
+                match = re.search(r'import\s+(?:static\s+)?([^;]+)', first_line)
+                if match:
+                    import_path = match.group(1).strip()
+                    # 取最后一部分作为名称
+                    name = import_path.split('.')[-1] if '.' in import_path else import_path
+            else:
+                # 尝试提取任何标识符
+                match = re.search(r'\b([a-zA-Z_][a-zA-Z0-9_]*)\b', first_line)
+                if match:
+                    name = match.group(1)
+                else:
+                    name = f"unknown_{capture_name}"
+        
+        # 确定实体类型
+        entity_type_key = capture_name.replace("_name", "").replace("_", "")
+        if capture_name == "method":
+            entity_type_key = "method"
+        elif capture_name == "class":
+            entity_type_key = "class"
+        
+        entity_type = entity_type_map.get(entity_type_key, EntityType.UNKNOWN)
+        
+        # 获取节点内容
+        node_content = "\n".join(lines[start_line - 1:end_line]) if start_line <= len(lines) else ""
         
         entity = CodeEntity(
             id=self._generate_entity_id(file_path, name, start_line),
-            entity_type=entity_type_map.get(capture_name.replace("_name", ""), EntityType.UNKNOWN),
+            entity_type=entity_type,
             name=name,
             file_path=file_path,
             start_line=start_line,
             end_line=end_line,
-            content="\n".join(lines[start_line - 1:end_line]),
+            content=node_content,
             lines_of_code=end_line - start_line + 1
         )
         
         return entity
+    
+    def _extract_tree_sitter_call_relationships(self, root_node, content: str, 
+                                                  file_path: str, entities: List[CodeEntity]) -> List[Relationship]:
+        """从tree-sitter AST中提取调用关系"""
+        relationships = []
+        
+        # 构建实体映射（用于快速查找）
+        entity_map = {}
+        method_entities = []
+        for entity in entities:
+            if entity.entity_type in [EntityType.METHOD, EntityType.FUNCTION]:
+                method_entities.append(entity)
+                entity_map[(entity.start_line, entity.end_line)] = entity
+        
+        # 遍历AST查找方法调用
+        def find_method_calls(node, current_method=None):
+            """递归查找方法调用"""
+            # 检查是否进入方法声明
+            if node.type == "method_declaration":
+                # 找到方法名
+                method_name = None
+                for child in node.children:
+                    if child.type == "identifier":
+                        method_name = content[child.start_byte:child.end_byte]
+                        break
+                
+                if method_name:
+                    # 查找对应的实体
+                    start_line = node.start_point[0] + 1
+                    end_line = node.end_point[0] + 1
+                    for entity in method_entities:
+                        if entity.start_line == start_line and entity.name == method_name:
+                            current_method = entity
+                            break
+                
+                # 继续遍历子节点
+                for child in node.children:
+                    find_method_calls(child, current_method)
+                
+                return
+            
+            # 检查是否是方法调用
+            if node.type == "method_invocation":
+                if current_method:
+                    # 提取被调用方法名
+                    call_name = None
+                    for child in node.children:
+                        if child.type == "identifier":
+                            call_name = content[child.start_byte:child.end_byte]
+                            break
+                    
+                    if call_name:
+                        # 创建调用关系
+                        call_line = node.start_point[0] + 1
+                        callee_id = self._generate_entity_id(file_path, call_name, call_line)
+                        
+                        rel = Relationship(
+                            source_id=current_method.id,
+                            target_id=callee_id,
+                            relationship_type=RelationshipType.CALLS,
+                            call_site=f"{file_path}:{call_line}",
+                            metadata={
+                                "caller_name": current_method.name,
+                                "callee_name": call_name
+                            }
+                        )
+                        relationships.append(rel)
+            
+            # 递归遍历子节点
+            for child in node.children:
+                find_method_calls(child, current_method)
+        
+        # 从根节点开始遍历
+        find_method_calls(root_node)
+        
+        return relationships
     
     def _generate_entity_id(self, file_path: str, name: str, line: int) -> str:
         """生成实体唯一ID"""

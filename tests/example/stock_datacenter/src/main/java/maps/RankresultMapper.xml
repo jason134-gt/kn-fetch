@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Rankresult" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Rankresult" >
+    <id column="rank_code" property="rankCode" jdbcType="INTEGER" />
+    <result column="table_system_code" property="tableSystemCode" jdbcType="VARCHAR" />
+    <result column="rank_period" property="rankPeriod" jdbcType="TIMESTAMP" />
+    <result column="uptime" property="uptime" jdbcType="TIMESTAMP" />
+    <result column="rank_companys" property="rankCompanys" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rank_code, table_system_code, rank_period, uptime,rank_companys
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="rankCode != null" >
+          and rank_code = #{rankCode,jdbcType=INTEGER}
+      </if>
+      <if test="tableSystemCode != null" >
+          and table_system_code = #{tableSystemCode,jdbcType=VARCHAR}
+      </if>
+      <if test="rankPeriod != null" >
+          and rank_period = #{rankPeriod,jdbcType=TIMESTAMP}
+      </if>
+      <if test="uptime != null" >
+          and uptime = #{uptime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="rankCompanys != null" >
+          and rank_companys = #{rankCompanys,jdbcType=LONGVARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="uptime != null" >
+        uptime = now(),
+      </if>
+      <if test="rankCompanys != null" >
+        rank_companys = #{rankCompanys,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Rankresult" >
+    insert into t_ranking_result (rank_code, table_system_code, rank_period, 
+      uptime, rank_companys)
+    values (#{rankCode,jdbcType=INTEGER}, #{tableSystemCode,jdbcType=VARCHAR}, #{rankPeriod,jdbcType=TIMESTAMP}, 
+      now(), #{rankCompanys,jdbcType=LONGVARCHAR})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ranking_result
+    where rank_code = #{rankCode,jdbcType=INTEGER}
+  </delete>
+  
+  
+  
+    <select id="queryAllRankresult" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking_result  
+  </select>
+
+    <select id="queryRankresultByCode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking_result  
+    where rank_code = #{rankCode,jdbcType=INTEGER}
+    <![CDATA[ 
+    and DATE_ADD(DATE(rank_period),INTERVAL 2 DAY) >= DATE(#{period,jdbcType=TIMESTAMP}) 
+	and DATE_ADD(DATE(rank_period),INTERVAL -2 DAY) <= DATE(#{period,jdbcType=TIMESTAMP}) 
+		]]>
+  </select>
+  
+     <select id="queryRankresultByName" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking_result  
+    where rank_name like CONCAT('%',#{rankName,jdbcType=VARCHAR},'%')
+    	<![CDATA[ 
+    and DATE_ADD(DATE(rank_period),INTERVAL 2 DAY) >= DATE(#{period,jdbcType=TIMESTAMP}) 
+	and DATE_ADD(DATE(rank_period),INTERVAL -2 DAY) <= DATE(#{period,jdbcType=TIMESTAMP}) 
+		]]>
+  </select>
+    
+    <update id="modifyRankResultByCode" parameterType="com.stock.common.model.Rankresult" >
+    update t_ranking_result
+    <include refid="Base_Update_Set" />
+    where rank_code = #{rankCode,jdbcType=INTEGER}
+  </update>
+    
+    <update id="updateCompanysByCode" parameterType="com.stock.common.model.Rankresult" >
+    update t_ranking_result
+    <include refid="Base_Update_Set" />
+    where rank_code = #{rankCode,jdbcType=INTEGER}
+  </update>
+    
+
+  
+</mapper>

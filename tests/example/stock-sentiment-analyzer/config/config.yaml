@@ -1,0 +1,143 @@
+# 股票舆情分析系统配置
+
+# 数据源配置
+data_sources:
+  official:
+    - name: "上交所公告"
+      url: "http://www.sse.com.cn"
+      enabled: true
+    - name: "深交所公告"
+      url: "http://www.szse.cn"
+      enabled: true
+    - name: "证监会"
+      url: "http://www.csrc.gov.cn"
+      enabled: true
+
+  media:
+    - name: "财新网"
+      url: "https://www.caixin.com"
+      enabled: true
+    - name: "第一财经"
+      url: "https://www.yicai.com"
+      enabled: true
+    - name: "华尔街见闻"
+      url: "https://wallstreetcn.com"
+      enabled: true
+    - name: "证券时报"
+      url: "https://www.stcn.com"
+      enabled: true
+
+  platforms:
+    - name: "东方财富网"
+      url: "https://www.eastmoney.com"
+      enabled: true
+    - name: "同花顺财经"
+      url: "https://news.10jqka.com.cn"
+      enabled: true
+
+# 专家权重配置
+expert_weights:
+  macro_economy: 0.25      # 宏观经济专家
+  industry_research: 0.25  # 行业研究员
+  technical_analysis: 0.20 # 技术面分析专家
+  capital_flow: 0.20       # 资金面分析专家
+  risk_control: 0.10       # 风险管控专家
+
+# 采集配置
+collector:
+  interval_minutes: 30     # 采集间隔（分钟）
+  batch_size: 10           # 每批处理资讯数量
+  max_items_per_source: 20 # 每个源最多采集条数
+  timeout_seconds: 30      # 请求超时时间
+
+# 分析配置
+analyzer:
+  min_confidence: 0.6      # 最低置信度阈值
+  min_impact_score: 0.3    # 最低影响分数阈值
+  short_term_days: 5       # 短线分析天数
+
+# 短线决策配置
+trader:
+  min_volume: 100000000    # 最小成交额（1亿）
+  max_volume: 10000000000  # 最大成交额（100亿）
+  min_turnover: 2.0        # 最小换手率（%）
+  max_pe_ratio: 100        # 最大市盈率
+  min_market_cap: 5000000000 # 最小市值（50亿）
+
+# 报告配置
+reporter:
+  output_dir: "./data/reports"
+  output_format: "markdown"
+  include_charts: true
+  send_notification: false
+
+# 调度配置
+scheduler:
+  enabled: true
+  cron_expression: "0 */30 * * * *"  # 每30分钟执行一次
+  timezone: "Asia/Shanghai"
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "./logs/analyzer.log"
+  max_size_mb: 100
+  backup_count: 10
+
+# 存储配置
+storage:
+  type: "json"  # json | sqlite | mongodb
+  path: "./data/storage.json"
+
+# 通达信数据配置
+tdx:
+  data_path: "C:/zd_zsone"  # 通达信安装目录
+  enabled: true
+  default_market: "SH"      # 默认市场，SH:上海，SZ:深圳，BJ:北京
+  cache_enabled: true
+  cache_ttl: 300            # 缓存时间（秒）
+
+# AI配置
+ai:
+  provider: "openai"  # openai | claude
+  openai:
+    api_key: ""  # 填入你的OpenAI API Key
+    base_url: "https://api.openai.com/v1"
+    model: "gpt-4"
+    temperature: 0.7
+  claude:
+    api_key: ""  # 填入你的Claude API Key
+    base_url: "https://api.anthropic.com/v1"
+    model: "claude-3-sonnet-20240229"
+    temperature: 0.7
+
+# 关注板块（可自定义）
+watched_sectors:
+  - "人工智能"
+  - "半导体"
+  - "新能源"
+  - "白酒"
+  - "医药"
+  - "军工"
+  - "基建"
+  - "银行"
+  - "券商"
+  - "数字经济"
+
+# 核心股票池（可自定义）
+stock_pool:
+  - code: "600036"
+    name: "招商银行"
+    sector: "银行"
+  - code: "000858"
+    name: "五粮液"
+    sector: "白酒"
+  - code: "600519"
+    name: "贵州茅台"
+    sector: "白酒"
+  - code: "000001"
+    name: "平安银行"
+    sector: "银行"
+  - code: "600030"
+    name: "中信证券"
+    sector: "券商"

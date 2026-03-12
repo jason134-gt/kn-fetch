@@ -1,0 +1,62 @@
+---
+type: skill
+version: '1.0'
+category: entities
+entity_type: code
+entity_id: 7effdd152223cd29
+signature: 585758f09406a69c957f3e80bb656875
+created: '2026-03-10T20:58:25.622807'
+file_path: D:\mywork\workspace\stock-sentiment-analyzer\README_GITNEXUS.md
+start_line: 56
+end_line: 68
+lines_of_code: 13
+tags:
+- entity
+- code
+- 代码块 (bash)
+related_entities: []
+dependencies:
+  out: []
+  in: []
+metrics:
+  complexity: null
+  param_count: 0
+---
+
+# 代码块 (bash)
+
+> **类型**: `EntityType.CODE` | **文件**: `D:\mywork\workspace\stock-sentiment-analyzer\README_GITNEXUS.md` | **行数**: 56-68 (13行)
+
+## 📋 概述
+
+*该实体缺少文档说明*
+
+## 💻 代码实现
+
+```text
+# 导出为Markdown格式（默认）
+python gitnexus.py export
+
+# 导出为HTML格式
+python gitnexus.py export --format html
+
+# 导出为JSON格式
+python gitnexus.py export --format json
+
+# 导出到指定路径
+python gitnexus.py export --output ./output/my_project_docs.md
+```
+
+---
+## 🤖 AI智能体指南
+
+### 快速定位
+- **文件路径**: `D:\mywork\workspace\stock-sentiment-analyzer\README_GITNEXUS.md`
+- **起始行号**: 56
+- **搜索关键词**: `代码块 (bash)`
+
+### 签名追踪
+- **签名**: `585758f09406a69c...`
+
+---
+*由知识提取智能体自动生成 | Skill格式 v1.0*

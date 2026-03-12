@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Ranking" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Ranking" >
+    <result column="ranking_code" property="rankingCode" jdbcType="INTEGER" />
+    <result column="ranking_name" property="rankingName" jdbcType="VARCHAR" />
+    <result column="table_system_code" property="tableSystemCode" jdbcType="VARCHAR" />
+    <result column="ranking_rule" property="rankingRule" jdbcType="VARCHAR" />
+    <result column="ranking_comments" property="rankingComments" jdbcType="VARCHAR" />
+    <result column="uptime" property="uptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ranking_code, ranking_name, ranking_rule, ranking_comments, uptime,table_system_code
+  </sql>
+ 
+  <sql id="Base_Update_Set" >
+    <set > 
+      <if test="rankingName != null" >
+        ranking_name = #{rankingName,jdbcType=VARCHAR},
+      </if>
+      <if test="rankingRule != null" >
+        ranking_rule = #{rankingRule,jdbcType=VARCHAR},
+      </if>
+      <if test="rankingComments != null" >
+        ranking_comments = #{rankingComments,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null" >
+        uptime = now(),
+      </if>
+      <if test="tableSystemCode != null" >
+        table_system_code = #{tableSystemCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Ranking" >
+    insert into t_ranking (ranking_code, ranking_name, ranking_rule, 
+      ranking_comments, uptime, table_system_code
+      )
+    values (#{rankingCode,jdbcType=INTEGER}, #{rankingName,jdbcType=VARCHAR}, #{rankingRule,jdbcType=VARCHAR}, 
+      #{rankingComments,jdbcType=VARCHAR}, now(), #{tableSystemCode,jdbcType=VARCHAR}
+      )
+  </insert>
+ 
+   <select id="queryAllRanking" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking  
+  </select>
+
+    <select id="queryRankingByCode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking  
+    where ranking_code = #{rankingCode,jdbcType=INTEGER}
+  </select>
+  
+     <select id="queryRankByName" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking  
+    where ranking_name like CONCAT('%',#{rankingName,jdbcType=VARCHAR},'%')
+  </select>
+    
+    <update id="modifyRankByCode" parameterType="com.stock.common.model.Ranking" >
+    update t_ranking
+    <include refid="Base_Update_Set" />
+    where ranking_code = #{rankingCode,jdbcType=INTEGER}
+  </update>
+    
+     <select id="getMaxRankcode" resultMap="BaseResultMap" parameterType="map" >
+    select max(ranking_code) from t_ranking  
+  </select>
+    
+  <delete id="delRankingBycode" parameterType="map" >
+    delete from t_ranking  where ranking_code = #{rankingCode,jdbcType=INTEGER}
+  </delete>
+  
+  
+    <select id="queryRankingByTableSystemCode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ranking  
+    where  table_system_code = #{tableSystemCode,jdbcType=VARCHAR}
+  </select>
+  
+    <select id="queryRankingNameList" resultMap="BaseResultMap" parameterType="map" >
+    select tr.ranking_code,tr.ranking_name
+    from `t_ranking` tr ,`t_ranking_result` trr
+ 	where trr.rank_period = #{time,jdbcType=VARCHAR} and trr.rank_code = tr.ranking_code
+  </select>
+</mapper>

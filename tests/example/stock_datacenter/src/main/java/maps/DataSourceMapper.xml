@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.DataSource" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.DataSource" >
+    <id column="data_source_code" property="dataSourceCode" jdbcType="VARCHAR" />
+    <result column="data_source_name" property="dataSourceName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    data_source_code, data_source_name
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="dataSourceCode != null" >
+          and data_source_code = #{dataSourceCode,jdbcType=VARCHAR}
+      </if>
+      <if test="dataSourceName != null" >
+          and data_source_name = #{dataSourceName,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="dataSourceName != null" >
+        data_source_name = #{dataSourceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.DataSource" >
+    insert into t_data_source (data_source_code, data_source_name)
+    values (#{dataSourceCode,jdbcType=VARCHAR}, #{dataSourceName,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_data_source
+    where data_source_code = #{dataSourceCode,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_source
+    where data_source_code = #{dataSourceCode,jdbcType=VARCHAR}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.DataSource" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_source
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_source
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.DataSource" >
+    select count(*)
+    from t_data_source
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.DataSource" >
+    update t_data_source
+    <include refid="Base_Update_Set" />
+    where data_source_code = #{dataSourceCode,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.DataSource" >
+    update t_data_source
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+   <!-- 加载数据到缓存-->
+   <select id="loaddataSource2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_source
+  </select>
+</mapper>

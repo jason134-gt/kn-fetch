@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.base.Asset0290" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.base.Asset0290" >
+    <result column="ob_object_id" property="obObjectId" jdbcType="BIGINT" />
+    <result column="company_code" property="companycode" jdbcType="VARCHAR" />
+    <result column="ob_orgname_0290" property="obOrgname0290" jdbcType="VARCHAR" />
+    <result column="ob_declaredate_0290" property="obDeclaredate0290" jdbcType="TIMESTAMP" />
+    <result column="ob_enddate_0290" property="obEnddate0290" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="f002v_0290" property="f002v0290" jdbcType="VARCHAR" />
+    <result column="f003v_0290" property="f003v0290" jdbcType="VARCHAR" />
+    <result column="f004v_0290" property="f004v0290" jdbcType="VARCHAR" />
+    <result column="f005v_0290" property="f005v0290" jdbcType="VARCHAR" />
+    <result column="f006n_0290" property="f006n0290" jdbcType="DOUBLE" />
+    <result column="f007n_0290" property="f007n0290" jdbcType="DOUBLE" />
+    <result column="f008n_0290" property="f008n0290" jdbcType="DOUBLE" />
+    <result column="f009n_0290" property="f009n0290" jdbcType="DOUBLE" />
+    <result column="f010n_0290" property="f010n0290" jdbcType="DOUBLE" />
+    <result column="f011n_0290" property="f011n0290" jdbcType="DOUBLE" />
+    <result column="f012n_0290" property="f012n0290" jdbcType="DOUBLE" />
+    <result column="f013n_0290" property="f013n0290" jdbcType="DOUBLE" />
+    <result column="f014n_0290" property="f014n0290" jdbcType="DOUBLE" />
+    <result column="f015n_0290" property="f015n0290" jdbcType="DOUBLE" />
+    <result column="f016n_0290" property="f016n0290" jdbcType="DOUBLE" />
+    <result column="f017n_0290" property="f017n0290" jdbcType="DOUBLE" />
+    <result column="f018n_0290" property="f018n0290" jdbcType="DOUBLE" />
+    <result column="f019n_0290" property="f019n0290" jdbcType="DOUBLE" />
+    <result column="f020n_0290" property="f020n0290" jdbcType="DOUBLE" />
+    <result column="f021n_0290" property="f021n0290" jdbcType="DOUBLE" />
+    <result column="f022n_0290" property="f022n0290" jdbcType="DOUBLE" />
+    <result column="f023n_0290" property="f023n0290" jdbcType="DOUBLE" />
+    <result column="f024n_0290" property="f024n0290" jdbcType="DOUBLE" />
+    <result column="f025n_0290" property="f025n0290" jdbcType="DOUBLE" />
+    <result column="f026n_0290" property="f026n0290" jdbcType="DOUBLE" />
+    <result column="f027n_0290" property="f027n0290" jdbcType="DOUBLE" />
+    <result column="f028n_0290" property="f028n0290" jdbcType="DOUBLE" />
+    <result column="f029n_0290" property="f029n0290" jdbcType="DOUBLE" />
+    <result column="f030n_0290" property="f030n0290" jdbcType="DOUBLE" />
+    <result column="f031n_0290" property="f031n0290" jdbcType="DOUBLE" />
+    <result column="f032n_0290" property="f032n0290" jdbcType="DOUBLE" />
+    <result column="f033n_0290" property="f033n0290" jdbcType="DOUBLE" />
+    <result column="f034n_0290" property="f034n0290" jdbcType="DOUBLE" />
+    <result column="f035n_0290" property="f035n0290" jdbcType="DOUBLE" />
+    <result column="f036n_0290" property="f036n0290" jdbcType="DOUBLE" />
+    <result column="f037n_0290" property="f037n0290" jdbcType="DOUBLE" />
+    <result column="f038n_0290" property="f038n0290" jdbcType="DOUBLE" />
+    <result column="f039n_0290" property="f039n0290" jdbcType="DOUBLE" />
+    <result column="f040n_0290" property="f040n0290" jdbcType="DOUBLE" />
+    <result column="f041n_0290" property="f041n0290" jdbcType="DOUBLE" />
+    <result column="f042n_0290" property="f042n0290" jdbcType="DOUBLE" />
+    <result column="f043n_0290" property="f043n0290" jdbcType="DOUBLE" />
+    <result column="f044n_0290" property="f044n0290" jdbcType="DOUBLE" />
+    <result column="f045n_0290" property="f045n0290" jdbcType="DOUBLE" />
+    <result column="f046n_0290" property="f046n0290" jdbcType="DOUBLE" />
+    <result column="f047n_0290" property="f047n0290" jdbcType="DOUBLE" />
+    <result column="f048n_0290" property="f048n0290" jdbcType="DOUBLE" />
+    <result column="f049n_0290" property="f049n0290" jdbcType="DOUBLE" />
+    <result column="f050n_0290" property="f050n0290" jdbcType="DOUBLE" />
+    <result column="f051n_0290" property="f051n0290" jdbcType="DOUBLE" />
+    <result column="f052n_0290" property="f052n0290" jdbcType="DOUBLE" />
+    <result column="f053n_0290" property="f053n0290" jdbcType="DOUBLE" />
+    <result column="f054n_0290" property="f054n0290" jdbcType="DOUBLE" />
+    <result column="f055n_0290" property="f055n0290" jdbcType="DOUBLE" />
+    <result column="f056n_0290" property="f056n0290" jdbcType="DOUBLE" />
+    <result column="f057n_0290" property="f057n0290" jdbcType="DOUBLE" />
+    <result column="f058n_0290" property="f058n0290" jdbcType="DOUBLE" />
+    <result column="f059n_0290" property="f059n0290" jdbcType="DOUBLE" />
+    <result column="f060n_0290" property="f060n0290" jdbcType="DOUBLE" />
+    <result column="f061n_0290" property="f061n0290" jdbcType="DOUBLE" />
+    <result column="f062n_0290" property="f062n0290" jdbcType="DOUBLE" />
+    <result column="f063n_0290" property="f063n0290" jdbcType="DOUBLE" />
+    <result column="f064n_0290" property="f064n0290" jdbcType="DOUBLE" />
+    <result column="f066n_0290" property="f066n0290" jdbcType="DOUBLE" />
+    <result column="f065n_0290" property="f065n0290" jdbcType="DOUBLE" />
+    <result column="f067n_0290" property="f067n0290" jdbcType="DOUBLE" />
+    <result column="f068n_0290" property="f068n0290" jdbcType="DOUBLE" />
+    <result column="f069n_0290" property="f069n0290" jdbcType="DOUBLE" />
+    <result column="f070n_0290" property="f070n0290" jdbcType="DOUBLE" />
+    <result column="f071n_0290" property="f071n0290" jdbcType="DOUBLE" />
+    <result column="f073n" property="f073n" jdbcType="DOUBLE" />
+    <result column="f072n" property="f072n" jdbcType="DOUBLE" />
+    <result column="f076n" property="f076n" jdbcType="DOUBLE" />
+    <result column="ob_memo_0290" property="obMemo0290" jdbcType="VARCHAR" />
+    <result column="ob_rectime_0290" property="obRectime0290" jdbcType="TIMESTAMP" />
+    <result column="modtime" property="obModtime0290" jdbcType="TIMESTAMP" />
+    <result column="ob_isvalid_0290" property="obIsvalid0290" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    company_code, 
+    time, f006n_0290, f007n_0290, 
+    f008n_0290, f009n_0290, f010n_0290, f011n_0290, f012n_0290, f013n_0290, f014n_0290, 
+    f015n_0290, f016n_0290, f017n_0290, f018n_0290, f019n_0290, f020n_0290, f021n_0290, 
+    f022n_0290, f023n_0290, f024n_0290, f025n_0290, f026n_0290, f027n_0290, f028n_0290, 
+    f029n_0290, f030n_0290, f031n_0290, f032n_0290, f033n_0290, f034n_0290, f035n_0290, 
+    f036n_0290, f037n_0290, f038n_0290, f039n_0290, f040n_0290, f041n_0290, f042n_0290, 
+    f043n_0290, f044n_0290, f045n_0290, f046n_0290, f047n_0290, f048n_0290, f049n_0290, 
+    f050n_0290, f051n_0290, f052n_0290, f053n_0290, f054n_0290, f055n_0290, f056n_0290, 
+    f057n_0290, f058n_0290, f059n_0290, f060n_0290, f061n_0290, f062n_0290, f063n_0290, 
+    f064n_0290, f066n_0290, f065n_0290, f067n_0290, f068n_0290, f069n_0290, f070n_0290, 
+    f071n_0290,f072n,f073n,f076n
+  </sql>
+
+  <select id="queryAsset0290ListByCompanyCode" resultMap="BaseResultMap" parameterType="com.stock.common.model.base.Asset0290" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0001
+    where  company_code = #{companycode,jdbcType=VARCHAR}
+    order by time asc
+  </select>
+  
+   <select id="getassetAllCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.base.Asset0290" >
+    select count(*)
+    from t_finace0001
+  </select>
+  
+   <select id="getassetPageData2Cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0001 limit ${start},${limit} 
+  </select>
+  
+    <select id="getassetUpdateCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.base.Asset0290" >
+    select count(*)
+    from t_finace0001 
+    where ob_rectime_0290>= #{uptime,jdbcType=TIMESTAMP}  
+    or modtime>= #{uptime,jdbcType=TIMESTAMP} 
+  </select>
+  
+   <select id="getassetPageData2Cache_refresh" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0001 
+    where ob_rectime_0290>= #{uptime,jdbcType=TIMESTAMP}  
+    or modtime>= #{uptime,jdbcType=TIMESTAMP} 
+    limit ${start},${limit} 
+  </select>
+</mapper>

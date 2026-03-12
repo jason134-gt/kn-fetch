@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Industry" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Industry" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <id column="INDUSTRY_CODE" property="industryCode" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="DMFLMap" type="com.stock.common.model.Industry" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <id column="INDUSTRY_CODE" property="industryCode" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENT_CODE" property="parentCode" jdbcType="VARCHAR" /> 
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, INDUSTRY_CODE, NAME, PARENT_CODE
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="id != null" >
+          and ID = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="industryCode != null" >
+          and INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+          and NAME = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="parentCode != null" >
+          and PARENT_CODE = #{parentCode,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null" >
+        PARENT_CODE = #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Industry" >
+    insert into t_industry (ID, INDUSTRY_CODE, NAME, 
+      PARENT_CODE)
+    values (#{id,jdbcType=BIGINT}, #{industryCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{parentCode,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Industry" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Industry" >
+    select count(*)
+    from t_industry
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.Industry" >
+    update t_industry
+    <include refid="Base_Update_Set" />
+    where ID = #{id,jdbcType=BIGINT}
+      and INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.Industry" >
+    update t_industry
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+  <!-- 查所有行业-->
+   <select id="getAllIndustry" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry
+  </select>
+  
+  <!-- 查所有行业 证劵会-->
+   <select id="getAllIndustryCSRC" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry_csrc
+  </select>
+  
+    <!-- 查所有行业  盈富在线-->
+   <select id="getAllIndustryYFZX" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry_yfzx
+  </select>
+  
+    <!-- 查所有申万行业-->
+  <select id="getAllIndustrySW" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry_sw
+  </select>
+  
+  <select id="selectCSRC" resultMap="BaseResultMap" parameterType="com.stock.common.model.Industry" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_industry_csrc
+    where  NAME = #{name,jdbcType=VARCHAR}
+  </select>  
+  
+  <select id="getAllIndustryDMFL" resultMap="DMFLMap" parameterType="com.stock.common.model.Industry" >
+    select 
+    <include refid="Base_Column_List" />
+    ,REMARK
+    from t_industry_dmfl
+    <include refid="Base_Where" />
+  </select>
+  
+   <insert id="repalceIndustryDMFL" parameterType="com.stock.common.model.Industry" >
+    replace into t_industry_dmfl (ID, INDUSTRY_CODE, NAME, 
+      PARENT_CODE,REMARK)
+    values (#{id,jdbcType=BIGINT}, #{industryCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{parentCode,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+  </insert> 
+  
+  <insert id="repalceIndustrySW" parameterType="com.stock.common.model.Industry" >
+    replace into t_industry_sw (ID, INDUSTRY_CODE, NAME,PARENT_CODE)
+    values (#{id,jdbcType=BIGINT}, #{industryCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{parentCode,jdbcType=VARCHAR})
+  </insert> 
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stock.common.model.Indexcategory">
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Indexcategory">
+    <id column="index_category_code" jdbcType="INTEGER" property="indexCategoryCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_code" jdbcType="VARCHAR" property="parentCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    index_category_code, name, parent_code
+  </sql>
+  <sql id="Base_Where">
+    <trim prefix=" where " prefixOverrides="AND|OR">
+      <if test="indexCategoryCode != null">
+          and index_category_code = #{indexCategoryCode,jdbcType=INTEGER}
+      </if>
+      <if test="name != null">
+          and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="parentCode != null">
+          and parent_code = #{parentCode,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set">
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCode != null">
+        parent_code = #{parentCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  
+  
+    <!-- 加载数据到缓存-->
+   <select id="loadindexcategory2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_index_category
+  </select>
+  
+     <select id="getIndexCategoryByCode" parameterType="com.stock.common.model.Indexcategory" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_index_category
+    where index_category_code = #{indexCategoryCode,jdbcType=INTEGER}
+  </select>
+
+</mapper>

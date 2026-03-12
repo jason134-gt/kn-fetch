@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.stock.portal.model.CompanyStockInfo" >
+  <resultMap id="BaseResultMap" type="com.yz.stock.portal.model.CompanyStockInfo" >
+    <result column="ob_secid_0007" property="obSecid0007" jdbcType="VARCHAR" />
+    <result column="ob_seccode_0007" property="obSeccode0007" jdbcType="VARCHAR" />
+    <result column="ob_secname_0007" property="obSecname0007" jdbcType="VARCHAR" />
+    <result column="f001v_0007" property="f001v0007" jdbcType="VARCHAR" />
+    <result column="f016v_0007" property="f016v0007" jdbcType="VARCHAR" />
+    <result column="f002v_0007" property="f002v0007" jdbcType="VARCHAR" />
+    <result column="f003v_0007" property="f003v0007" jdbcType="VARCHAR" />
+    <result column="f005v_0007" property="f005v0007" jdbcType="VARCHAR" />
+    <result column="f006v_0007" property="f006v0007" jdbcType="VARCHAR" />
+    <result column="f007d_0007" property="f007d0007" jdbcType="TIMESTAMP" />
+    <result column="f008d_0007" property="f008d0007" jdbcType="TIMESTAMP" />
+    <result column="f009n_0007" property="f009n0007" jdbcType="DOUBLE" />
+    <result column="f012v_0007" property="f012v0007" jdbcType="VARCHAR" />
+    <result column="f013v_0007" property="f013v0007" jdbcType="VARCHAR" />
+    <result column="f014v_0007" property="f014v0007" jdbcType="VARCHAR" />
+    <result column="f015v_0007" property="f015v0007" jdbcType="VARCHAR" />
+    <result column="f017v_0007" property="f017v0007" jdbcType="VARCHAR" />
+    <result column="f018v_0007" property="f018v0007" jdbcType="VARCHAR" />
+    <result column="ob_memo_0007" property="obMemo0007" jdbcType="VARCHAR" />
+    <result column="ob_modtime_0007" property="obModtime0007" jdbcType="TIMESTAMP" />
+    <result column="ob_rectime_0007" property="obRectime0007" jdbcType="TIMESTAMP" />
+    <result column="ob_isvalid_0007" property="obIsvalid0007" jdbcType="CHAR" />
+    <result column="ob_object_id" property="obObjectId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ob_secid_0007, ob_seccode_0007, ob_secname_0007, f001v_0007, f016v_0007, f002v_0007, 
+    f003v_0007, f005v_0007, f006v_0007, f007d_0007, f008d_0007, f009n_0007, f012v_0007, 
+    f013v_0007, f014v_0007, f015v_0007, f017v_0007, f018v_0007, ob_memo_0007, ob_modtime_0007, 
+    ob_rectime_0007, ob_isvalid_0007, ob_object_id
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="obSecid0007 != null" >
+          and ob_secid_0007 = #{obSecid0007,jdbcType=VARCHAR}
+      </if>
+      <if test="obSeccode0007 != null" >
+          and ob_seccode_0007 = #{obSeccode0007,jdbcType=VARCHAR}
+      </if>
+      <if test="obSecname0007 != null" >
+          and ob_secname_0007 = #{obSecname0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f001v0007 != null" >
+          and f001v_0007 = #{f001v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f016v0007 != null" >
+          and f016v_0007 = #{f016v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f002v0007 != null" >
+          and f002v_0007 = #{f002v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f003v0007 != null" >
+          and f003v_0007 = #{f003v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f005v0007 != null" >
+          and f005v_0007 = #{f005v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f006v0007 != null" >
+          and f006v_0007 = #{f006v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f007d0007 != null" >
+          and f007d_0007 = #{f007d0007,jdbcType=TIMESTAMP}
+      </if>
+      <if test="f008d0007 != null" >
+          and f008d_0007 = #{f008d0007,jdbcType=TIMESTAMP}
+      </if>
+      <if test="f009n0007 != null" >
+          and f009n_0007 = #{f009n0007,jdbcType=DOUBLE}
+      </if>
+      <if test="f012v0007 != null" >
+          and f012v_0007 = #{f012v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f013v0007 != null" >
+          and f013v_0007 = #{f013v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f014v0007 != null" >
+          and f014v_0007 = #{f014v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f015v0007 != null" >
+          and f015v_0007 = #{f015v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f017v0007 != null" >
+          and f017v_0007 = #{f017v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="f018v0007 != null" >
+          and f018v_0007 = #{f018v0007,jdbcType=VARCHAR}
+      </if>
+      <if test="obMemo0007 != null" >
+          and ob_memo_0007 = #{obMemo0007,jdbcType=VARCHAR}
+      </if>
+      <if test="obModtime0007 != null" >
+          and ob_modtime_0007 = #{obModtime0007,jdbcType=TIMESTAMP}
+      </if>
+      <if test="obRectime0007 != null" >
+          and ob_rectime_0007 = #{obRectime0007,jdbcType=TIMESTAMP}
+      </if>
+      <if test="obIsvalid0007 != null" >
+          and ob_isvalid_0007 = #{obIsvalid0007,jdbcType=CHAR}
+      </if>
+      <if test="obObjectId != null" >
+          and ob_object_id = #{obObjectId,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="obSecid0007 != null" >
+        ob_secid_0007 = #{obSecid0007,jdbcType=VARCHAR},
+      </if>
+      <if test="obSeccode0007 != null" >
+        ob_seccode_0007 = #{obSeccode0007,jdbcType=VARCHAR},
+      </if>
+      <if test="obSecname0007 != null" >
+        ob_secname_0007 = #{obSecname0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f001v0007 != null" >
+        f001v_0007 = #{f001v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f016v0007 != null" >
+        f016v_0007 = #{f016v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f002v0007 != null" >
+        f002v_0007 = #{f002v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f003v0007 != null" >
+        f003v_0007 = #{f003v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f005v0007 != null" >
+        f005v_0007 = #{f005v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f006v0007 != null" >
+        f006v_0007 = #{f006v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f007d0007 != null" >
+        f007d_0007 = #{f007d0007,jdbcType=TIMESTAMP},
+      </if>
+      <if test="f008d0007 != null" >
+        f008d_0007 = #{f008d0007,jdbcType=TIMESTAMP},
+      </if>
+      <if test="f009n0007 != null" >
+        f009n_0007 = #{f009n0007,jdbcType=DOUBLE},
+      </if>
+      <if test="f012v0007 != null" >
+        f012v_0007 = #{f012v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f013v0007 != null" >
+        f013v_0007 = #{f013v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f014v0007 != null" >
+        f014v_0007 = #{f014v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f015v0007 != null" >
+        f015v_0007 = #{f015v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f017v0007 != null" >
+        f017v_0007 = #{f017v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="f018v0007 != null" >
+        f018v_0007 = #{f018v0007,jdbcType=VARCHAR},
+      </if>
+      <if test="obMemo0007 != null" >
+        ob_memo_0007 = #{obMemo0007,jdbcType=VARCHAR},
+      </if>
+      <if test="obModtime0007 != null" >
+        ob_modtime_0007 = #{obModtime0007,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obRectime0007 != null" >
+        ob_rectime_0007 = #{obRectime0007,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obIsvalid0007 != null" >
+        ob_isvalid_0007 = #{obIsvalid0007,jdbcType=CHAR},
+      </if>
+      <if test="obObjectId != null" >
+        ob_object_id = #{obObjectId,jdbcType=BIGINT},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    insert into tb_public_0007 (ob_secid_0007, ob_seccode_0007, ob_secname_0007, 
+      f001v_0007, f016v_0007, f002v_0007, 
+      f003v_0007, f005v_0007, f006v_0007, 
+      f007d_0007, f008d_0007, f009n_0007, 
+      f012v_0007, f013v_0007, f014v_0007, 
+      f015v_0007, f017v_0007, f018v_0007, 
+      ob_memo_0007, ob_modtime_0007, ob_rectime_0007, 
+      ob_isvalid_0007, ob_object_id)
+    values (#{obSecid0007,jdbcType=VARCHAR}, #{obSeccode0007,jdbcType=VARCHAR}, #{obSecname0007,jdbcType=VARCHAR}, 
+      #{f001v0007,jdbcType=VARCHAR}, #{f016v0007,jdbcType=VARCHAR}, #{f002v0007,jdbcType=VARCHAR}, 
+      #{f003v0007,jdbcType=VARCHAR}, #{f005v0007,jdbcType=VARCHAR}, #{f006v0007,jdbcType=VARCHAR}, 
+      #{f007d0007,jdbcType=TIMESTAMP}, #{f008d0007,jdbcType=TIMESTAMP}, #{f009n0007,jdbcType=DOUBLE}, 
+      #{f012v0007,jdbcType=VARCHAR}, #{f013v0007,jdbcType=VARCHAR}, #{f014v0007,jdbcType=VARCHAR}, 
+      #{f015v0007,jdbcType=VARCHAR}, #{f017v0007,jdbcType=VARCHAR}, #{f018v0007,jdbcType=VARCHAR}, 
+      #{obMemo0007,jdbcType=VARCHAR}, #{obModtime0007,jdbcType=TIMESTAMP}, #{obRectime0007,jdbcType=TIMESTAMP}, 
+      #{obIsvalid0007,jdbcType=CHAR}, #{obObjectId,jdbcType=BIGINT})
+  </insert>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+    <include refid="Base_Where" />
+  </select>
+  
+  <select id="getObSecid0007" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+    where  ob_secid_0007 = #{obSecid0007,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getObSeccode0007" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+   	where  ob_seccode_0007 = #{obSeccode0007,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getObSeccode0007A2H" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+   	where  ob_seccode_0007 = #{obSeccode0007,jdbcType=VARCHAR}
+   	and (f002v_0007 ='001001' or f002v_0007 ='001002')
+  </select>
+  
+   <select id="getobSecid0007ByStockType" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+   	where  ob_secid_0007 = #{obSecid0007,jdbcType=VARCHAR}
+   	and f002v_0007 =#{f002v0007,jdbcType=VARCHAR} 
+  </select>
+  
+    <select id="getobSecid0007A2H" resultMap="BaseResultMap" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+   	where  ob_secid_0007 = #{obSecid0007,jdbcType=VARCHAR}
+   	and (f002v_0007 ='001001' or f002v_0007 ='001002')
+  </select>
+  
+   
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_public_0007
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    select count(*)
+    from tb_public_0007
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    update tb_public_0007
+    <include refid="Base_Update_Set" />
+  </update>
+  <update id="update" parameterType="com.yz.stock.portal.model.CompanyStockInfo" >
+    update tb_public_0007
+    <include refid="Base_Update_Set" />
+    where ob_secid_0007 = #{obSecid0007,jdbcType=VARCHAR}
+  </update>
+</mapper>
