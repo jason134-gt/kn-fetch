@@ -3,322 +3,233 @@
 ## 1. API 概览
 
 ### 1.1 总体介绍
-KN-Fetch 是一款先进的代码分析工具，通过深度语义分析和人工智能技术，提供智能化的代码理解、架构分析和文档生成功能。API 采用 RESTful 设计风格，支持同步和异步调用模式。
+KN-Fetch 是一个先进的代码分析工具，通过人工智能技术对代码库进行深度知识提取和分析。系统采用模块化架构，提供智能代码理解、语义提取、工作流引擎等核心功能。
 
 ### 1.2 使用场景
-- 代码质量评估与优化建议
-- 软件架构分析与可视化
-- 自动化文档生成
-- 代码安全漏洞检测
-- 技术债务分析
+- **代码质量分析**：自动识别代码中的设计模式和架构问题
+- **知识图谱构建**：从代码中提取语义信息构建知识网络
+- **文档自动生成**：基于代码分析自动生成技术文档
+- **业务逻辑分析**：深度理解代码中的业务规则和流程
 
 ## 2. 认证机制
 
 ### 2.1 认证方式
-KN-Fetch 使用 JWT (JSON Web Token) 进行 API 认证。
-
 ```python
-# 认证示例
+# API 密钥认证示例
 from kn_fetch import KNFetchClient
 
-# 初始化客户端
 client = KNFetchClient(
-    api_key="your_api_key",
+    api_key="your_api_key_here",
     base_url="https://api.kn-fetch.com/v1"
 )
-
-# 自动处理认证令牌
 ```
 
 ### 2.2 令牌管理
-- 令牌有效期：24小时
-- 自动刷新机制
-- 支持多环境配置
+```python
+# 令牌刷新机制
+try:
+    analysis_result = client.analyze_code(repository_path)
+except AuthenticationError:
+    client.refresh_token()
+    analysis_result = client.analyze_code(repository_path)
+```
 
 ## 3. 主要接口说明
 
-### 3.1 代码分析接口
+### 3.1 kn-fetch.py 主接口
 
-#### POST /v1/analysis/code
-深度代码语义分析
-
-**参数说明：**
+#### analyze_repository()
+**功能**：分析整个代码仓库
 ```python
-{
-    "code_content": "string",          # 必需，源代码内容
-    "language": "string",              # 必需，编程语言
-    "analysis_level": "string",        # 可选，分析深度级别
-    "include_metrics": "boolean"       # 可选，是否包含代码度量
-}
+def analyze_repository(repo_path: str, 
+                      analysis_depth: str = "deep",
+                      output_format: str = "json") -> AnalysisResult
 ```
 
-### 3.2 架构分析接口
+**参数说明**：
+- `repo_path`：代码仓库路径（必需）
+- `analysis_depth`：分析深度（"quick" | "standard" | "deep"）
+- `output_format`：输出格式（"json" | "xml" | "yaml"）
 
-#### POST /v1/analysis/architecture
-软件架构分析
+### 3.2 LLM Client 接口
 
-**参数说明：**
+#### generate_insights()
+**功能**：基于LLM生成代码洞察
 ```python
-{
-    "project_structure": "object",     # 必需，项目结构
-    "dependencies": "array",          # 可选，依赖关系
-    "config_files": "array"           # 可选，配置文件
-}
+def generate_insights(code_snippets: List[str], 
+                     context: Dict[str, Any],
+                     model: str = "gpt-4") -> InsightResult
 ```
 
-### 3.3 文档生成接口
+### 3.3 Deep Knowledge Analyzer
 
-#### POST /v1/generate/documentation
-自动化文档生成
-
-**参数说明：**
+#### extract_knowledge_graph()
+**功能**：从代码中提取知识图谱
 ```python
-{
-    "analysis_id": "string",          # 必需，分析任务ID
-    "template_type": "string",        # 可选，文档模板类型
-    "output_format": "string"         # 可选，输出格式
-}
+def extract_knowledge_graph(source_files: List[FileObject],
+                           relationship_types: List[str] = None) -> KnowledgeGraph
 ```
 
 ## 4. 请求/响应示例
 
-### 4.1 代码分析示例
-
-**请求示例：**
+### 4.1 基本代码分析请求
 ```python
-import asyncio
+# 请求示例
 from kn_fetch import KNFetchClient
 
-async def analyze_code():
-    client = KNFetchClient(api_key="your_api_key")
-    
-    response = await client.analyze_code(
-        code_content="""
-        def calculate_fibonacci(n):
-            if n <= 1:
-                return n
-            return calculate_fibonacci(n-1) + calculate_fibonacci(n-2)
-        """,
-        language="python",
-        analysis_level="deep",
-        include_metrics=True
-    )
-    
-    return response
+client = KNFetchClient(api_key="your_key")
+result = client.analyze_repository(
+    repo_path="/path/to/your/code",
+    analysis_depth="deep",
+    output_format="json"
+)
 
-# 执行分析
-result = asyncio.run(analyze_code())
-```
-
-**成功响应：**
-```json
+# 响应示例
 {
     "status": "success",
-    "analysis_id": "ana_123456789",
-    "results": {
-        "complexity": 15,
-        "maintainability": 85,
-        "security_issues": [],
-        "performance_suggestions": ["建议使用记忆化优化递归"]
+    "analysis_id": "ana_123456",
+    "summary": {
+        "total_files": 156,
+        "analysis_time": "2m34s",
+        "issues_found": 23
     },
-    "timestamp": "2024-01-15T10:30:00Z"
+    "detailed_results": {
+        "architectural_issues": [...],
+        "code_smells": [...],
+        "business_logic": [...]
+    }
 }
 ```
 
-**错误处理：**
+### 4.2 错误处理示例
 ```python
 try:
-    response = await client.analyze_code(invalid_code)
-except KNFetchAPIError as e:
-    print(f"API错误: {e.status_code} - {e.message}")
-except KNFetchTimeoutError as e:
-    print(f"请求超时: {e}")
-```
-
-### 4.2 异步任务示例
-
-```python
-# 提交异步分析任务
-task = await client.submit_async_analysis(
-    repository_url="https://github.com/example/repo",
-    analysis_type="full_scan"
-)
-
-# 轮询任务状态
-while task.status in ["pending", "running"]:
-    await asyncio.sleep(5)
-    task = await client.get_task_status(task.id)
-
-if task.status == "completed":
-    results = await client.get_analysis_results(task.id)
+    result = client.analyze_repository("/invalid/path")
+except RepositoryNotFoundError as e:
+    print(f"仓库未找到: {e}")
+except AnalysisTimeoutError as e:
+    print(f"分析超时: {e}")
+except APIQuotaExceededError as e:
+    print(f"API配额不足: {e}")
 ```
 
 ## 5. 错误码说明
 
-### 5.1 错误码分类
+### 5.1 客户端错误 (4xx)
+| 错误码 | 含义 | 解决方案 |
+|--------|------|----------|
+| 400 | 请求参数错误 | 检查参数格式和必填字段 |
+| 401 | 认证失败 | 验证API密钥有效性 |
+| 403 | 权限不足 | 检查账户权限设置 |
+| 404 | 资源未找到 | 确认仓库路径正确 |
+| 429 | 请求频率超限 | 降低请求频率或升级套餐 |
 
-| 错误码 | 类型 | 描述 |
-|--------|------|------|
-| 400xx | 请求错误 | 客户端请求参数错误 |
-| 401xx | 认证错误 | 身份验证失败 |
-| 403xx | 权限错误 | 访问权限不足 |
-| 404xx | 资源未找到 | 请求的资源不存在 |
-| 429xx | 限流错误 | 请求频率超限 |
-| 500xx | 服务器错误 | 服务端内部错误 |
-
-### 5.2 常见错误码详情
-
-**40001 - 无效的代码内容**
-```json
-{
-    "error_code": "40001",
-    "message": "提供的代码内容格式无效",
-    "details": "请检查代码语法是否正确"
-}
-```
-
-**42901 - 请求频率超限**
-```json
-{
-    "error_code": "42901",
-    "message": "API调用频率超限",
-    "retry_after": 60
-}
-```
+### 5.2 服务端错误 (5xx)
+| 错误码 | 含义 | 解决方案 |
+|--------|------|----------|
+| 500 | 内部服务器错误 | 联系技术支持 |
+| 502 | 网关错误 | 稍后重试 |
+| 503 | 服务不可用 | 检查服务状态页 |
+| 504 | 网关超时 | 优化分析配置 |
 
 ## 6. 使用限制
 
 ### 6.1 调用限制
-
-| 限制类型 | 免费版 | 专业版 | 企业版 |
-|----------|--------|--------|--------|
-| 每分钟请求数 | 60 | 300 | 1000 |
-| 每月总请求数 | 10,000 | 100,000 | 无限制 |
-| 最大代码大小 | 1MB | 10MB | 50MB |
-| 并发任务数 | 1 | 5 | 20 |
+- **免费版**：100次调用/天，最大文件数：1000个
+- **专业版**：1000次调用/天，最大文件数：10000个
+- **企业版**：自定义限制，支持大代码库分析
 
 ### 6.2 配额管理
-
 ```python
-# 查询配额使用情况
-quota_info = await client.get_quota_info()
-print(f"已使用: {quota_info.used}/{quota_info.total}")
-
-# 设置速率限制
-client.set_rate_limit(requests_per_minute=300)
+# 检查配额使用情况
+quota_info = client.get_quota_info()
+print(f"今日已用: {quota_info.used_today}")
+print(f"剩余配额: {quota_info.remaining}")
 ```
 
 ## 7. 最佳实践
 
-### 7.1 使用建议
+### 7.1 性能优化建议
 
-**批量处理优化：**
+#### 代码预处理
 ```python
-async def batch_analyze_files(file_paths):
-    # 使用异步并发处理
-    tasks = []
-    for file_path in file_paths:
-        with open(file_path, 'r') as f:
-            code_content = f.read()
-        
-        task = client.analyze_code(
-            code_content=code_content,
-            language="python"
-        )
-        tasks.append(task)
+# 优化分析性能
+optimized_config = {
+    "exclude_patterns": [".git", "node_modules", "*.min.js"],
+    "include_extensions": [".py", ".js", ".java", ".cpp"],
+    "max_file_size": "10MB"
+}
+
+result = client.analyze_repository(
+    repo_path,
+    analysis_config=optimized_config
+)
+```
+
+#### 增量分析
+```python
+# 只分析变化的文件
+changed_files = get_git_changes_since_last_analysis()
+result = client.analyze_files(changed_files)
+```
+
+### 7.2 使用建议
+
+#### 批量处理
+```python
+# 批量分析多个仓库
+repositories = ["/repo1", "/repo2", "/repo3"]
+results = []
+
+for repo in repositories:
+    try:
+        result = client.analyze_repository(repo)
+        results.append(result)
+    except Exception as e:
+        print(f"分析 {repo} 失败: {e}")
+        continue
+```
+
+#### 结果缓存
+```python
+# 实现结果缓存机制
+def cached_analysis(repo_path, cache_duration=3600):
+    cache_key = f"analysis_{hash(repo_path)}"
+    cached_result = cache.get(cache_key)
     
-    # 并发执行所有分析任务
-    results = await asyncio.gather(*tasks, return_exceptions=True)
-    return results
-```
-
-**缓存策略：**
-```python
-from functools import lru_cache
-
-class CachedAnalyzer:
-    def __init__(self, client):
-        self.client = client
-        self.cache = {}
+    if cached_result:
+        return cached_result
     
-    @lru_cache(maxsize=1000)
-    async def analyze_with_cache(self, code_hash, code_content):
-        # 检查缓存
-        if code_hash in self.cache:
-            return self.cache[code_hash]
-        
-        # 执行分析并缓存结果
-        result = await self.client.analyze_code(code_content)
-        self.cache[code_hash] = result
-        return result
-```
-
-### 7.2 性能优化
-
-**连接池配置：**
-```python
-import aiohttp
-
-# 优化HTTP连接池
-session = aiohttp.ClientSession(
-    connector=aiohttp.TCPConnector(limit=100, limit_per_host=30),
-    timeout=aiohttp.ClientTimeout(total=30)
-)
-
-client = KNFetchClient(
-    api_key="your_api_key",
-    session=session
-)
-```
-
-**错误重试机制：**
-```python
-from tenacity import retry, stop_after_attempt, wait_exponential
-
-@retry(
-    stop=stop_after_attempt(3),
-    wait=wait_exponential(multiplier=1, min=4, max=10)
-)
-async def robust_analysis(code_content):
-    return await client.analyze_code(code_content)
+    result = client.analyze_repository(repo_path)
+    cache.set(cache_key, result, cache_duration)
+    return result
 ```
 
 ### 7.3 监控和日志
-
 ```python
+# 添加监控和日志
 import logging
 
-# 配置详细日志
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('kn-fetch')
+logger = logging.getLogger("kn_fetch")
 
-# 添加监控指标
-class MonitoredClient:
-    def __init__(self, client):
-        self.client = client
-        self.metrics = {
-            'requests_total': 0,
-            'errors_total': 0,
-            'total_response_time': 0
-        }
+def monitored_analysis(repo_path):
+    start_time = time.time()
+    logger.info(f"开始分析仓库: {repo_path}")
     
-    async def monitored_analyze(self, code_content):
-        start_time = time.time()
-        try:
-            result = await self.client.analyze_code(code_content)
-            self.metrics['requests_total'] += 1
-            return result
-        except Exception as e:
-            self.metrics['errors_total'] += 1
-            logger.error(f"分析失败: {e}")
-            raise
-        finally:
-            response_time = time.time() - start_time
-            self.metrics['total_response_time'] += response_time
+    try:
+        result = client.analyze_repository(repo_path)
+        duration = time.time() - start_time
+        logger.info(f"分析完成，耗时: {duration:.2f}s")
+        return result
+    except Exception as e:
+        logger.error(f"分析失败: {e}")
+        raise
 ```
 
 ---
 
-**文档版本：** v1.2.0  
-**最后更新：** 2024年1月15日  
-**技术支持：** support@kn-fetch.com
+**文档版本**: v1.0  
+**最后更新**: 2024年1月  
+**技术支持**: support@kn-fetch.com  
+**API文档**: https://docs.kn-fetch.com/api
