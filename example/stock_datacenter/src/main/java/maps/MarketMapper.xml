@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.market" >
+
+	
+	<select id="getFirstFinancing" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select f027n from `t_stock0002` 
+ 		where  company_code = #{companycode,jdbcType=VARCHAR}
+	]]>
+	</select>
+	<select id="getFinancingType" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select sum(f007n) from `t_stock0003` 
+ 		where company_code = #{companycode,jdbcType=VARCHAR}
+ 		and f025v like  concat('%',#{type,jdbcType=VARCHAR},'%') 
+	]]>
+	</select>  
+	<select id="getLastFinancing" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select sum(f007n) from `t_stock0003` 
+ 		where company_code = #{companycode,jdbcType=VARCHAR}
+	]]>
+	</select> 
+	<select id="getDividend" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select sum(f017n) from `t_stock0004` t where t.company_code = #{companycode,jdbcType=VARCHAR}
+		and DATE(f001d) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(f001d),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP})
+	]]>
+	</select> 
+	
+	<select id="getStockSellByTime" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select f004n from t_company0011  where company_code = #{companycode,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(f001d),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP})
+		order by f001d desc limit 1
+	]]>
+	</select> 
+	
+	<select id="getStockSellList" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select f004n,f001d,company_code from t_company0011 order by f001d desc
+	]]>
+	</select> 
+	
+	<select id="getLastRating" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select concat(f001n,'-',f002n) ym , f004n,f005n,f006n,f007n from t_stock0005 t
+		where company_code = #{companycode,jdbcType=VARCHAR}
+		order by t.f001n desc ,t.f002n desc 
+		limit 0,3
+	]]>
+	</select>
+	
+	<select id="loadOneTimeAllCompanyStockPrice" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select company_code,f002n as price from v_trade0001
+		where time = #{time,jdbcType=VARCHAR}
+	]]>
+	</select>
+	
+</mapper>

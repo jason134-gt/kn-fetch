@@ -1,0 +1,65 @@
+/* CSS Document */
+
+/* 网站标志 容器*/
+.logo_container {
+	position: absolute;
+	top: 20px;
+	left: 25px;
+	width: 200px;
+	height: 40px;
+}
+
+.menu_container{
+	top:60px;
+	left:25px;
+	width: 184px;
+	position: relative;
+	color: #4A4A4A;
+}
+
+.menu_container .normalLi{
+	position: relative;
+	background: url(http://screener.finance.sina.com.cn/screener/images/menu_li_back.gif) bottom repeat-x;
+	line-height: 26px;
+	text-align: center;
+	cursor: pointer;
+	margin: 0 3px;
+}
+
+/* 搜索 容器 */
+.select_container {
+	position: absolute;
+	top: 20px;
+	left: 300px;
+	width: 650px;
+	height: 40px;
+}
+
+/* 股票筛选器 容器 */
+.screen_container {
+	position: absolute;
+	left: 300px;
+	top: 60px;
+	width: 650px;
+}
+
+.sliderimage_default{
+	position: absolute;
+	background-image:url(../images/slider_default.gif);
+    cursor: ew-resize;
+    display: inline;
+    height: 25px;
+    width: 9px;
+}
+
+/* 筛选结果区
+.screenResult_container {
+	background-color:#330;
+	position: absolute;
+	left: 300px;
+	top:  350px;
+}
+.screenResult_container .result {
+	background-color:#9C6;
+}
+ */

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Dcheck" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Dcheck" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="rule" property="rule" jdbcType="VARCHAR" />
+    <result column="rule_comments" property="ruleComments" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rule, rule_comments
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="rule != null" >
+          and rule = #{rule,jdbcType=VARCHAR}
+      </if>
+      <if test="ruleComments != null" >
+          and rule_comments = #{ruleComments,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="rule != null" >
+        rule = #{rule,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleComments != null" >
+        rule_comments = #{ruleComments,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insertDcheck" parameterType="com.stock.common.model.Dcheck" >
+    insert into t_data_check ( rule, rule_comments
+      )
+    values ( #{rule,jdbcType=VARCHAR}, #{ruleComments,jdbcType=VARCHAR}
+      )
+  </insert>
+  <delete id="delDcheckById" parameterType="java.lang.Integer" >
+    delete from t_data_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="getDcheckById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Dcheck" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_check
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_check
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Dcheck" >
+    select count(*)
+    from t_data_check
+    <include refid="Base_Where" />
+  </select>
+  <update id="modifyDcheckByid" parameterType="com.stock.common.model.Dcheck" >
+    update t_data_check
+    <include refid="Base_Update_Set" />
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.Dcheck" >
+    update t_data_check
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+   <select id="queryDcheckListByDesc" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_check
+    where  rule_comments like concat('%',#{desc,jdbcType=VARCHAR},'%') 
+    
+  </select>
+  
+    <select id="queryDcheckListAll" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_data_check
+  </select>
+  
+  
+</mapper>

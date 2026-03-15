@@ -9,11 +9,17 @@ import asyncio
 
 from starlette.requests import Request
 
+# 导入前端 API 路由
+from .frontend_api import router as frontend_router
+
 # 获取项目根目录
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 CONFIG_PATH = PROJECT_ROOT / "config" / "config.yaml"
 
 app = FastAPI(title="知识提取智能体管理界面")
+
+# 注册前端 API 路由
+app.include_router(frontend_router)
 
 # 模板和静态文件配置
 templates = Jinja2Templates(directory=Path(__file__).parent / "templates")

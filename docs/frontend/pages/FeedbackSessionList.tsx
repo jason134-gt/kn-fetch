@@ -12,8 +12,8 @@ import {
   CheckCircleOutlined, ClockCircleOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { mockApi } from '../services/mockData';
-import type { FeedbackSession } from '../services/mockData';
+import { feedbackApi } from '../services/api';
+import type { FeedbackSession } from '../api-types';
 import type { ColumnsType } from 'antd/es/table';
 
 const { Search } = Input;
@@ -36,7 +36,7 @@ const FeedbackSessionList: React.FC = () => {
   const loadSessions = async () => {
     setLoading(true);
     try {
-      const result = await mockApi.getFeedbackSessions({
+      const result = await feedbackApi.getSessions({
         status: filters.status === 'all' ? undefined : filters.status,
         page: pagination.current,
         pageSize: pagination.pageSize,

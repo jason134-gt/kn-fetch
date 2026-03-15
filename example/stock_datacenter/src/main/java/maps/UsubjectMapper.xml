@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.USubject" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.USubject" >
+    <id column="uidentify" property="uidentify" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="BIGINT" />
+    <result column="isPassed" property="isPassed" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="passTime" property="passTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   id, uidentify, name, type,tscs,uid,isPassed,createTime,passTime,pinyin,shortPinyin
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="uidentify != null" >
+          and uidentify = #{uidentify,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+          and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null" >
+          and type = #{type,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Where_2" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="uidentify != '' and uidentify !=null" >
+          and uidentify = #{uidentify,jdbcType=VARCHAR}
+      </if>
+      <if test="name != '' and name !=null" >
+          and name = #{name,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Where_3" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="type !=null" >
+          and type = #{type,type=INTEGER}
+      </if>
+      <if test="isPassed != null" >
+          and isPassed = #{isPassed,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </sql>
+   <sql id="Base_Where_4" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="uidentify != '' and uidentify !=null" >
+          and uidentify = #{uidentify,jdbcType=VARCHAR}
+      </if>
+      <if test="name != '' and name !=null" >
+          and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="isPassed !=null" >
+          and isPassed = #{isPassed,jdbcType=INTEGER}
+      </if>
+      <if test="id !=null and id !=0" >
+          and id = #{id,jdbcType=INTEGER}
+      </if>
+    	
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>      
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>      
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.USubject" >
+    insert into t_usubject (uidentify, name, type,createTime)
+    values (#{uidentify,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_usubject
+    where uidentify = #{uidentify,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+    where uidentify = #{uidentify,jdbcType=VARCHAR}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.USubject" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+    <include refid="Base_Where" />
+  </select>
+  <select id="select2" resultMap="BaseResultMap" parameterType="com.stock.common.model.USubject" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+    <include refid="Base_Where_4" />
+  </select>
+  <select id="selectByUidentify" resultMap="BaseResultMap" parameterType="com.stock.common.model.USubject" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+   <include refid="Base_Where_2" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+    <include refid="Base_Where" />
+  <!--   <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit}  -->
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.USubject" >
+    select count(*)
+    from t_usubject
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectListToIndex" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+	    <if test="isPassed >= 0" >
+	    	and isPassed = #{isPassed} 
+	    </if>
+	    <if test="type != null" >
+	    	and type = #{type} 
+	    </if>	    
+	</trim>
+    limit ${offset},${limit} 
+  </select>  
+  <select id="selectCountByType" resultType="java.lang.Integer" parameterType="com.stock.common.model.USubject" >
+    select count(*)
+    from t_usubject
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+    	<if test="isPassed >= 0" >
+	    	and isPassed = #{isPassed, jdbcType=INTEGER} 
+	    </if>
+	    <if test="type != null" >
+	    	and type = #{type,jdbcType=INTEGER}
+	    </if>
+    </trim>
+  </select>  
+  
+  <sql id="Base_Index_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="uidentify != null" >
+          and uidentify = #{uidentify,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+          and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null" >
+          and type = #{type,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </sql>  
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.USubject" >
+    update t_usubject
+    <include refid="Base_Update_Set" />
+    where uidentify = #{uidentify,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.USubject" >
+    update t_usubject
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+   <update id="updateStatus" parameterType="com.stock.common.model.USubject" >
+    update t_usubject
+   	set isPassed = #{isPassed,jdbcType=INTEGER},passTime = #{passTime}
+   	where name=  #{name,jdbcType=VARCHAR}
+  </update>
+   <update id="updateUid" parameterType="com.stock.common.model.USubject" >
+    update t_usubject
+   	set uid = #{uid,jdbcType=BIGINT}
+   	where uidentify = #{uidentify,jdbcType=VARCHAR}
+  </update>
+      <!-- 加载数据到缓存-->
+   <select id="loadusubject2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject
+  </select>
+  
+    <select id="queryUextIndexList" parameterType="com.stock.common.model.IndexMessage"  resultType="java.util.HashMap"  >  
+	<![CDATA[ 
+		select ${columnName},TIME from ${tableName}
+		where uidentify = #{uidentify,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{startTime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{endTime,jdbcType=TIMESTAMP})
+		and INDEX_CODE = #{indexCode,jdbcType=VARCHAR}
+		order by time asc
+	]]>
+	</select> 
+	
+	<select id="selectCount2" resultType="java.lang.Integer" parameterType="com.stock.common.model.USubject" >
+	 	select count(*) from t_usubject where name= #{name,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectAllByType" resultMap="BaseResultMap" parameterType="com.stock.common.model.USubject" >
+	 	select 
+	 	<include refid="Base_Column_List"/>
+	 	from t_usubject
+		<include refid="Base_Where_3"/>
+	<!-- <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit}  -->
+	</select>
+	
+   <select id="getusubjectAllCount" resultType="java.lang.Integer"  parameterType="com.stock.common.model.USubject">
+    select count(*)
+    from t_usubject
+  </select>
+   <select id="getusubjectPageData2Cache" resultMap="BaseResultMap"  parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject 
+  </select>
+  
+    <select id="getusubjectUpdateCount" resultType="java.lang.Integer" parameterType="map">
+    select count(*)
+    from t_usubject 
+    where
+    passTime >= #{uptime,jdbcType=VARCHAR}  
+    and isPassed =1
+  </select>
+   <select id="getusubjectPageData2Cache_refresh" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_usubject 
+    where passTime>= #{uptime,jdbcType=VARCHAR}  
+    and isPassed =1
+    limit ${start},${limit} 
+  </select>
+  
+   <select id="selectIsPassed" resultType="java.lang.Integer" parameterType="com.stock.common.model.USubject" >
+    select 
+    count(*)
+    from t_usubject 
+  	where
+    uidentify = #{uidentify,jdbcType=VARCHAR}   
+    AND
+    isPassed = 1
+  </select>
+  
+</mapper>

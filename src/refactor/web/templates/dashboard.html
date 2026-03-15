@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重构分析报告 - Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        /* 头部 */
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; margin-bottom: 20px; }
+        .header h1 { font-size: 24px; margin-bottom: 10px; }
+        .header .meta { font-size: 14px; opacity: 0.9; }
+        
+        /* 统计卡片 */
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .stat-card .value { font-size: 32px; font-weight: bold; color: #333; }
+        .stat-card .label { font-size: 14px; color: #666; margin-top: 5px; }
+        .stat-card.danger .value { color: #e74c3c; }
+        .stat-card.warning .value { color: #f39c12; }
+        .stat-card.success .value { color: #27ae60; }
+        
+        /* 变更记录 */
+        .changes { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .changes h2 { font-size: 18px; margin-bottom: 15px; color: #333; }
+        .change-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .change-item:last-child { border-bottom: none; }
+        .change-item .label { color: #666; }
+        .change-item .value { font-weight: bold; }
+        .change-item .value.positive { color: #27ae60; }
+        .change-item .value.negative { color: #e74c3c; }
+        
+        /* 操作按钮 */
+        .actions { display: flex; gap: 10px; margin-bottom: 20px; }
+        .btn { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5a6fd6; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-success:hover { background: #229954; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-outline { background: white; border: 1px solid #ddd; color: #333; }
+        .btn-outline:hover { background: #f5f5f5; }
+        
+        /* 问题列表 */
+        .problems { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .problems-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .problems-header h2 { font-size: 18px; }
+        .problem-item { padding: 15px 20px; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.2s; }
+        .problem-item:hover { background: #f9f9f9; }
+        .problem-item:last-child { border-bottom: none; }
+        .problem-item .row { display: flex; align-items: center; gap: 10px; }
+        .problem-item .id { font-weight: bold; color: #667eea; min-width: 60px; }
+        .problem-item .severity { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+        .severity-high { background: #fde8e8; color: #e74c3c; }
+        .severity-medium { background: #fef3cd; color: #856404; }
+        .severity-low { background: #d4edda; color: #155724; }
+        .problem-item .type { color: #666; min-width: 80px; }
+        .problem-item .entity { color: #333; flex: 1; }
+        .problem-item .status { font-size: 12px; color: #666; }
+        .problem-item .feedback { font-size: 12px; color: #667eea; margin-top: 5px; padding-left: 70px; }
+        
+        /* 选中状态 */
+        .problem-item.selected { background: #f0f4ff; border-left: 3px solid #667eea; }
+        .problem-item input[type="checkbox"] { margin-right: 10px; }
+        
+        /* 底部操作栏 */
+        .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .bottom-bar .selected-info { color: #666; }
+        .bottom-bar .actions { margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>📊 重构分析报告 - V{{ version }}</h1>
+            <div class="meta">
+                项目: {{ project_name }} | 版本: {{ version }} | 状态: {{ status }}
+            </div>
+        </div>
+        
+        <!-- 统计卡片 -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="value">{{ total_problems }}</div>
+                <div class="label">问题总数</div>
+            </div>
+            <div class="stat-card danger">
+                <div class="value">{{ high_severity }}</div>
+                <div class="label">高优先级</div>
+            </div>
+            <div class="stat-card warning">
+                <div class="value">{{ medium_severity }}</div>
+                <div class="label">中优先级</div>
+            </div>
+            <div class="stat-card success">
+                <div class="value">{{ estimated_hours }}h</div>
+                <div class="label">预计工时</div>
+            </div>
+        </div>
+        
+        <!-- 变更记录 -->
+        {% if change_log %}
+        <div class="changes">
+            <h2>📈 本次变更（相比V{{ version - 1 }}）</h2>
+            <div class="change-item">
+                <span class="label">移除问题</span>
+                <span class="value negative">-{{ change_log.removed_problems }}个</span>
+            </div>
+            <div class="change-item">
+                <span class="label">新增问题</span>
+                <span class="value positive">+{{ change_log.added_problems }}个</span>
+            </div>
+            <div class="change-item">
+                <span class="label">修改问题</span>
+                <span class="value">{{ change_log.modified_problems }}个</span>
+            </div>
+            <div class="change-item">
+                <span class="label">确认问题</span>
+                <span class="value positive">{{ change_log.confirmed_problems }}个</span>
+            </div>
+            <div class="change-item">
+                <span class="label">忽略问题</span>
+                <span class="value negative">{{ change_log.ignored_problems }}个</span>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- 操作按钮 -->
+        <div class="actions">
+            <button class="btn btn-success" onclick="approveReport()">✓ 批准报告</button>
+            <button class="btn btn-danger" onclick="rejectReport()">✗ 拒绝</button>
+            <button class="btn btn-primary" onclick="submitFeedback()">📝 继续反馈</button>
+            <button class="btn btn-outline" onclick="viewDetails()">📋 查看详情</button>
+        </div>
+        
+        <!-- 问题列表 -->
+        <div class="problems">
+            <div class="problems-header">
+                <h2>问题列表 ({{ total_problems }})</h2>
+                <div>
+                    <button class="btn btn-outline" onclick="selectAll()">全选</button>
+                    <button class="btn btn-outline" onclick="filterBy('high')">高优先级</button>
+                    <button class="btn btn-outline" onclick="filterBy('all')">全部</button>
+                </div>
+            </div>
+            
+            {% for problem in problems %}
+            <div class="problem-item" id="problem-{{ problem.id }}" onclick="toggleSelect('{{ problem.id }}')">
+                <div class="row">
+                    <input type="checkbox" id="check-{{ problem.id }}">
+                    <span class="id">{{ problem.id }}</span>
+                    <span class="severity severity-{{ problem.severity }}">{{ problem.severity }}</span>
+                    <span class="type">{{ problem.type }}</span>
+                    <span class="entity">{{ problem.entity_name }}</span>
+                    <span class="status">{{ problem.status }}</span>
+                </div>
+                {% if problem.user_comment %}
+                <div class="feedback">💬 {{ problem.user_comment }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- 底部操作栏 -->
+    <div class="bottom-bar">
+        <div class="selected-info">
+            已选择 <span id="selected-count">0</span> 个问题
+        </div>
+        <div class="actions">
+            <button class="btn btn-primary" onclick="submitBatchFeedback()">提交反馈</button>
+        </div>
+    </div>
+    
+    <script>
+        let selectedProblems = new Set();
+        
+        function toggleSelect(id) {
+            const item = document.getElementById('problem-' + id);
+            const checkbox = document.getElementById('check-' + id);
+            
+            if (selectedProblems.has(id)) {
+                selectedProblems.delete(id);
+                item.classList.remove('selected');
+                checkbox.checked = false;
+            } else {
+                selectedProblems.add(id);
+                item.classList.add('selected');
+                checkbox.checked = true;
+            }
+            
+            document.getElementById('selected-count').textContent = selectedProblems.size;
+        }
+        
+        function selectAll() {
+            const items = document.querySelectorAll('.problem-item');
+            items.forEach(item => {
+                const id = item.id.replace('problem-', '');
+                if (!selectedProblems.has(id)) {
+                    toggleSelect(id);
+                }
+            });
+        }
+        
+        function approveReport() {
+            if (confirm('确认批准当前报告？')) {
+                alert('报告已批准！');
+            }
+        }
+        
+        function rejectReport() {
+            const reason = prompt('请输入拒绝原因：');
+            if (reason) {
+                alert('报告已拒绝：' + reason);
+            }
+        }
+        
+        function submitFeedback() {
+            window.location.href = '/feedback?session={{ session_id }}';
+        }
+        
+        function submitBatchFeedback() {
+            if (selectedProblems.size === 0) {
+                alert('请先选择问题');
+                return;
+            }
+            alert('将为 ' + selectedProblems.size + ' 个问题提交反馈');
+        }
+        
+        function viewDetails() {
+            window.location.href = '/problems?session={{ session_id }}';
+        }
+        
+        function filterBy(type) {
+            // 筛选逻辑
+            console.log('Filter by:', type);
+        }
+    </script>
+</body>
+</html>

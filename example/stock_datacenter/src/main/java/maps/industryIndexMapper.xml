@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.stock.portal.action.common" >	
+
+	<select id="select_index_one_time" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select ${columnName},company_code from ${tableName}
+		where DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		order by time asc
+	]]>
+	</select> 
+
+	<insert id="update_industry_index" parameterType="map" >  
+	<![CDATA[ 
+		replace into ${tableName} (uidentify,index_code,value,time) 
+        values ( #{industryMark,jdbcType=VARCHAR},#{iIndexCode,jdbcType=VARCHAR},#{value,jdbcType=DOUBLE},DATE(#{time,jdbcType=TIMESTAMP})) 
+	]]>
+	</insert> 
+	
+	
+	<select id="select_index_one_companyOftime" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select ${columnName} from ${tableName}
+		where company_code = #{companycode,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+		order by time asc
+	]]>
+	</select> 
+	
+	<select id="getIndexListMapFromIndustryExt" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select value,index_code,time from ${tableName}
+		where index_code = #{iIndexCode,jdbcType=VARCHAR}
+		and uidentify = #{mark,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{sTime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{eTime,jdbcType=TIMESTAMP}) 
+		order by time asc
+	]]>
+	</select> 
+	
+	<select id="getOneIndexMMAM" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select value,index_code from ${tableName}
+		where index_code like CONCAT('%',#{indexcode,jdbcType=VARCHAR},'%')
+		and uidentify = #{mark,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+	]]>
+	</select> 
+	
+	<select id="getOneIndexAllMarkDataOneTimeByType" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select value,index_code,time,uidentify from ${tableName}
+		where index_code = #{iIndexCode,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+	
+	]]>
+	</select> 
+
+	<select id="getAllMarkDataOneTimeByType" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select value,index_code,time,uidentify from ${tableName}
+		where index_code like CONCAT('%',#{prefix,jdbcType=VARCHAR},'%')
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+
+	]]>
+	</select> 
+	
+	<select id="getIndustryPeerOneIndexOneTimeData2Cache" parameterType="map"  resultType="map"  >  
+	<![CDATA[ 
+		select value,index_code,time,uidentify from ${tableName}
+		where index_code like CONCAT('%',#{prefix,jdbcType=VARCHAR},'%')
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+	
+	]]>
+	</select> 
+	<select id="getIndustryIndexValueFromExt" parameterType="map"  resultType="java.lang.Double"  >  
+	<![CDATA[ 
+		select value from ${tableName}
+		where index_code = #{iIndexCode,jdbcType=VARCHAR}
+		and uidentify = #{mark,jdbcType=VARCHAR}
+		and DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{time,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{time,jdbcType=TIMESTAMP}) 
+	
+	]]>
+	</select> 
+	
+	
+	 <select id="getIndExtindexAllCountByTime" resultType="java.lang.Integer" parameterType="map" >
+         <![CDATA[ 
+		    select count(*)
+		    from ${tableName}
+		    where  DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		    and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP}) 
+	    ]]>
+	 </select>
+	 
+	  <select id="getIndExtindexAllCountByTime_uptime" resultType="java.lang.Integer" parameterType="map" >
+         <![CDATA[ 
+		    select count(*)
+		    from ${tableName}
+		    where  DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		    and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP}) 
+		    and DATE(uptime) >= DATE(#{uptime,jdbcType=TIMESTAMP}) 
+	    ]]>
+ 	  </select>
+ 	  
+	 <select id="getIndExtindexPageData2CacheBytime" parameterType="map" resultType="map">
+        <![CDATA[ 
+        select value,index_code,time,uidentify from ${tableName}
+		where  DATE_ADD(DATE(TIME),INTERVAL 2 DAY) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		and DATE_ADD(DATE(TIME),INTERVAL -2 DAY) <= DATE(#{etime,jdbcType=TIMESTAMP}) 
+		limit ${start},${limit}    
+	    ]]>
+	  </select>
+	  
+	 <select id="loadDataFromDBByPageWithTag" parameterType="map" resultType="map">
+        <![CDATA[ 
+        select value,index_code,time,uidentify from ${tableName}
+		where  DATE(TIME) >= DATE(#{stime,jdbcType=TIMESTAMP}) 
+		and DATE(TIME) <= DATE(#{etime,jdbcType=TIMESTAMP}) 
+		and uidentify = #{tag,jdbcType=VARCHAR}
+		limit ${start},${limit}    
+	    ]]>
+	  </select>
+</mapper>

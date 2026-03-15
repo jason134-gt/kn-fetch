@@ -1,0 +1,1589 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="js/jquery-autocomplete/jquery.autocomplete.css" />
+<script type="text/javascript" src="js/jquery/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type='text/javascript' src='js/jquery-autocomplete/jquery.autocomplete.js'></script>
+ <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+<script type="text/javascript" src="js/jquery.ichoose/plug.choose.js"></script>
+<script src="js/highcharts/js/highcharts.src.js" type="text/javascript"></script>
+ <script src="js/highcharts/js/highcharts-more.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.ichoose/mod.udatas.js"></script>
+ <script type="text/javascript" src="js/myanalysis-common.js"></script>
+<script language="javascript" type="text/javascript">
+
+$(function() {
+	
+	initCompanysOfTag('testcompany','所有行业');
+	
+	$("#show_index").click(function(){
+		$("#show_index").val("");
+	});
+	$("#variableIndexText").click(function(){
+		$("#variableIndexText").val("");
+	});
+	$("#tr_indtag").click(function(){
+		$("#tr_indtag").val("");
+	});
+	$("#tags_div").mouseover(function(){
+		$('ul',$("#tags_div")).css("visibility","");
+	});
+	$("#testcompany").click(function(){
+		$("#testcompany").val("");
+		$("#testResult").empty();
+		$("#testAllTag").empty();
+		$("#queryAllCompanysMZCondition").empty();
+		$("#queryAllCompanysMZCondition_history").empty();
+		$("#mult-k").empty();
+		//$("#setTime").val("");
+		
+	});
+	initIndustry("root",-1);
+	
+	
+	$("#tr_create").click(function(){
+		saveTagrule(0);
+	});
+	$("#tr_modify").click(function(){
+		saveTagrule(1);
+	});
+	initIndexRule("show_index","variableIndexText");
+	$("#tableSystem").change(function(){
+		initIndexRule("show_index","variableIndexText");
+	});
+	
+	
+	$("#fetchRealtimeData").click(function(){
+		
+	
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/realtime/realfetch?", function(result){
+			alert("操作结束!");
+	  });
+	});
+	$("#computeRealtime").click(function(){
+		
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/realtime/realcompute?", function(result){
+			alert("操作结束!");
+	  });
+	});
+	
+	$("#loadTestTradeData").click(function(){
+			
+		var tstime = $("#tstime").val();
+		var tstart = $("#tstart").val();
+		var tend = $("#tend").val();
+		var data = {
+			stime:tstime,
+			start:tstart,
+			end:tend
+		};
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/tagrule/loadTestTradeData?"+$.param(data), function(result){
+			alert("操作结束!");
+	  });
+	});
+	
+	$("#computeIndexs").click(function(){
+		var indexcodes = $("#indexcodes").val();
+		var tstime = $("#tstime").val();
+		var data = {
+			indexcodes:indexcodes,
+			stime:tstime
+		};
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/tagrule/computeIndexOfNeedRealtime?"+$.param(data), function(result){
+			alert("操作结束!");
+	  	});
+	});
+	$("#loadSetIndexs").click(function(){
+		var companycode = $("#companycode").val();
+		var indexcodes = $("#indexcodes").val();
+		var tstart = $("#tstart").val();
+		var tend = $("#tend").val();
+		var data = {
+			indexcodes:indexcodes,
+			start:tstart,
+			end:tend,
+			companycode:companycode
+		};
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/tagrule/loadSetIndexData?"+$.param(data), function(result){
+			alert("操作结束!");
+	  	});
+	});
+	
+
+	$("#loadTestCompanyTradeData").click(function(){
+		var tstime = $("#tstime").val();
+		var companycode = $("#companycode").val();
+		var indexcodes = $("#indexcodes").val();
+		var loadCfData = $("#loadCfData").val();
+		var data = {
+			stime:tstime,
+			companycode:companycode,
+			indexcodes:indexcodes,
+			loadCfData:loadCfData
+		};
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/tagrule/loadTestCompanyTradeData?"+$.param(data), function(result){
+			alert("操作结束!");
+	  });
+	});
+	
+
+});//end ready;
+function initIndexRule(id1,id2)
+{
+		var tscode = $("#tableSystem").val();
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/stock/cfirule/getCfiruleListByTidWithOutCache_V2?msg.tableSystemCode="+tscode, function(result){
+		  	if(retObj==null)
+				{
+					return;
+				}
+				var data = retObj.split(";");
+				if(data!=null)
+				{
+					var c_data = data;
+					$("#"+id1).flushCache();
+					$("#"+id1).autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					$("#"+id2).flushCache();
+					$("#"+id2).autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					
+				}
+
+	  });
+}
+function testTheCompany()
+{
+	var companys = $("#testcompany").val();
+	if(companys=="")
+	{
+		alert("公司不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var companycode = companys.split(":")[1];
+	testCompany(companycode);
+}
+function initCompanysOfTag(id,tag)
+{
+	var data={
+		tag:tag
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/stock/company/getCompanyByTagWihtShort?"+$.param(data), function(result){
+		    var data = new Array(); 
+			var dataArr = retObj.split(";");
+				for(var i=0;i<dataArr.length;i++){
+					var item = dataArr[i].split(":");
+					data.push({"mid":item[1],"realname":item[0]});
+			}			
+			if(data!=null)
+			{
+				var c_data = data;
+				var option = {
+					max: 12, 
+					minChars: 0, 
+					width: 150,
+					scrollHeight: 300, 
+					matchContains: true, 
+					autoFill: false,
+					formatItem: function(item) {
+						return item.realname + ":" + item.mid;
+					},
+					formatMatch: function(item, i, max) { 
+						var newName = item.realname.replace(/[ ]/g,"");
+						return item.realname + " " + item.mid + " " +newName+" " +" " +ZhToPinyinMaster(newName) + " " + ZhToPinyin(newName);
+					}, 
+					formatResult: function(item) {
+						return item.realname + ":" + item.mid;
+					}
+				};
+				var obj = $("#"+id+"");
+				$("#"+id).flushCache();
+				obj.autocomplete(c_data, option).result(function(event, item) {
+					testCompany(item.mid);
+				});
+			}
+	  });	
+}
+function testCompany(companycode)
+{
+	var rule = $("#tr_ruledefine").val();
+	if(rule=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var timeInterval = $("#timeInterval").val();
+	var ruleType = $("#ruleType").val();
+	var timeUnit = $("#timeUnit").val();
+	var time = $("#test_time").val();
+	var setTime = $("#setTime").val();
+	if(setTime!="")
+		time = setTime;
+	var data = {
+		rule:rule,
+		companycode:companycode,
+		time:time,
+		timeInterval:timeInterval,
+		ruleType:ruleType,
+		timeUnit:timeUnit
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/testTagrule",data, function(result){
+		  if(result.success)
+			{
+				var data = result.data;
+				var accord = data.accord;
+				var compileResult = data.compileResult;
+				if(accord>0)	
+					$("#testResult").text("符合条件！"+compileResult);
+				else
+					$("#testResult").text("不符合条件！"+compileResult);
+			}
+			else
+			{
+				alert("操作失败！");
+			}
+	  });	
+	  
+	
+}
+function initIndustry(uid,prefix)
+{
+
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/stock/industry/getYfzxAllIndustryJsonData", function(result){
+		  var si = yfzxjd;
+		  if(si==null||si=="")
+			  return ;
+		  indData = si;
+		  doInitIndustry("root",indData,0);	  
+	  });	
+}
+function doInitIndustry(uid,si,type)
+{
+	var name =  si.n;
+	var pid = name.split(":")[1];
+	var pindustryName = name.split(":")[0];
+	var liid = pid+"_li_"+type;
+	var ctag = "";
+	if(pid=="-1") 
+	{
+		liid = "root_li_"+type;
+		ctag = "所有行业";
+	}
+	$("#"+uid+"").append("<li id='"+liid+"' onclick=\"appendTags(event,'"+pindustryName+"');return false;\"><span style=\"width:100%\" >"+pindustryName+"</span></li>");
+	var child = si.c;
+	if(child!=null&&child.length>0)
+	{
+		var subid = pid+"_sub_"+type;
+		if(pid=="-1") 
+		 subid = "root_sub_"+type;
+		$("#"+liid+"").append("<ul class='sub_menu' id='"+subid+"' style='margin-left:-15'></ul>");
+		
+		for(var i=0;i<child.length;i++)
+		{
+			var csi = child[i];
+			doInitIndustry(subid,csi,type)	
+		}	
+	}
+}
+function stopBubble(e) {  
+    var e = e ? e : window.Event;  
+    if (window.Event) { // IE  
+        e.cancelBubble = true;   
+    } else { // FF  
+        //e.preventBubble();   
+        e.stopPropagation();   
+    }   
+} 
+function appendTags(event,industryName)
+{
+	stopBubble(event);
+	$("#tr_indtag").val(industryName);
+	$('ul',$("#root")).css("visibility","hidden");
+	var tag = $("#tr_indtag").val();
+	initCompanysOfTag('testcompany',tag);
+}
+function showVariablePanel(e,id,source)
+{
+	stopBubble(e);
+	if($("#"+id).is(":visible"))
+	{
+		$("#"+id).slideUp();
+		$("#show_xy").val(0);
+	}
+	else
+	{
+		showIndexPanel(id,source);
+	}
+}
+function showIndexPanel(id,source)
+{
+		//获取$("#deText")的位置
+		var ntop =  realOffset(source).y;
+		var nleft =  realOffset(source).x+678;
+		var id = "#"+id+"";
+		$(id).css({'position':'absolute','top':ntop,'left':nleft,'z-index':2});
+		$(id).slideDown();
+		$(id).focus();
+
+}
+//取对象的绝对位置
+function realOffset(o)
+{
+  var x = y = 0; 
+  do{
+  x += o.offsetLeft || 0; 
+  y += o.offsetTop || 0;
+  o = o.offsetParent;
+  }while(o);
+  return {"x" : x, "y" : y};
+}
+function hidenVarPanel()
+{
+	$("#variableBuildDiv").slideUp();
+	$("#showVarPanel").slideUp();
+}
+function stopBubble(e) {  
+    var e = e ? e : window.Event;  
+    if (window.Event) { // IE  
+        e.cancelBubble = true;   
+    } else { // FF  
+        //e.preventBubble();   
+        e.stopPropagation();   
+    }   
+}
+function clearObjectData(id)
+{
+	$("#"+id+"").val("");
+}
+//定义规则
+var exp = "";//规则表达式
+function appendS(o,vid)
+{
+	var dst ;
+	//区分事件发生在哪个面板
+
+	var id = vid;
+	dst = $("#"+id+"");
+	//光标的起始位置
+	var cx =0;
+	var variable = o;
+	if(exp=="")
+	{
+		exp+=variable;
+	}
+	else
+	{
+		//当输入区与缓存不相等时，则认为用户做了删除操作，则以输入区内容为准
+		if(dst.val()!=exp)
+		{
+			exp = dst.val();
+		}
+
+		//计算字符串的插入位置,并把新串插入到老串中
+	    cx = dst[0].selectionStart;
+		if(exp.length>cx+1)
+		{
+			exp = exp.substring(0,cx)+variable+exp.substring(cx,exp.length);
+		}
+		else
+		{
+			exp+=variable;
+		}
+		
+	}	
+	dst.val(exp);
+	//重置光标位置
+	dst[0].selectionStart = cx+variable.length;
+}
+function createIndexVariable()
+{
+	var index=$("#variableIndexText").val();
+	var interval=$("#v_interval_index").val();
+	if(index==null||index=="")
+	{
+		alert("指标不可以为空！");
+		$("#variableIndexText").focus();
+		return ;
+	}
+	var v=createVariable(index,interval);
+	appendS(v,'tr_ruledefine');
+	
+}
+//拼装变量
+function createVariable(x,t)
+{
+	if(t=="0")
+	{
+		return "\${"+x+"}";
+	}
+	return "\${"+x+","+t+"}";
+}
+function createShowPara()
+{
+	var showxy=$("#show_xy").val();
+	var type=$("#show_type").val();
+	var showindex=$("#show_index").val();
+	if(showindex==null||showindex=="")
+	{
+		alert("指标不可以为空！");
+		$("#show_index").focus();
+		return ;
+	}
+	var indexcode = showindex.split(":")[1];
+	var t = showxy+"^"+type+"^"+indexcode+"~";
+	appendS(t,'tr_showDefine');
+}
+function initAllTag(id)
+{
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/stock/industry/getAllTags", function(result){
+		  if(retobj==null||retobj=="")
+			{
+			  return;
+			}
+			var data = retobj.tags;
+			if(data!=null)
+			{
+				var c_data = data;
+				var option = {
+					max: 12, 
+					minChars: 0, 
+					width: 150,
+					scrollHeight: 300, 
+					matchContains: true, 
+					autoFill: false
+				};
+				var obj = $("#"+id+"");
+				obj.autocomplete(c_data, option).result(function(event, item) {
+					reloadPage(item[0]);
+					return false;
+				 });;
+			}
+	  });	
+}
+//0：新增，1：修改
+function queryGailv()
+{
+	var id ="";
+	  
+	var tsc = $("#tableSystem").val();
+	var tag = $("#tr_indtag").val();
+	var tagDesc = $("#tr_title").val();
+	var ruleDefine = $("#tr_ruledefine").val();
+	var showDefine = $("#tr_showDefine").val();
+	var type = $("#tr_type").val();
+	var comments = $("#tr_comments").val();
+	var ruleType = $("#ruleType").val();
+	var timeInterval = $("#timeInterval").val();
+	var timeUnit = $("#timeUnit").val();
+	var mstime = $("#setTime").val();
+	if(tag==""||tagDesc==""||ruleDefine=="")
+	{
+		alert("参数不全！");
+		return;
+	}
+	var data = {
+		id:id,
+		tsc:tsc,
+		tag:tag,
+		tagDesc:tagDesc,
+		rule:ruleDefine,
+		chartDesc:showDefine,
+		type:type,
+		ruleType:ruleType,
+		timeInterval:timeInterval,
+		timeUnit:timeUnit,
+		comments:comments,
+		mstime:mstime
+	};
+	$("#queryAllCompanysMZCondition_history").prepend($("#queryAllCompanysMZCondition").html());
+	$("#queryAllCompanysMZCondition").empty();
+	
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/mapreduce/m", data,function(result){
+		if(result!=null&&result!="")
+		{
+			var mapreduce_r = result;
+			  if(mapreduce_r!=null)
+			  {
+				$("#queryAllCompanysMZCondition").empty();
+				var mrt = "<table class='mr_table' style='width: 700px'>";
+				mrt+=mrToString(mapreduce_r.k1d);
+				mrt+=mrToString(mapreduce_r.k3d);
+				mrt+=mrToString(mapreduce_r.k5d);
+				mrt+=mrToString(mapreduce_r.k10d);
+				mrt+=mrToString(mapreduce_r.k1m);
+				mrt+=mrToString(mapreduce_r.k3m);
+				mrt+=mrToString(mapreduce_r.k1y);
+				$("#queryAllCompanysMZCondition").append(mrt+"</table><br/>--------------------------------");
+			  }
+		}
+		  
+		  return;
+	  });
+	
+}
+function mrToString(v)
+{
+	var ratio = v.uptimes/(v.uptimes+v.downtimes)*100;
+	var color = "green";
+	if(parseFloat(v.zf)>0)
+		color = "red";
+	return "<tr><td>k="+v.k+"</td><td>zf=<span style='color:"+color+"'>"+v.zf+"%</span></td><td>uptimes="+v.uptimes+"</td><td>downtimes="+v.downtimes+"</td><td>tratio="+ratio.toFixed(2)+"%</td></tr>";
+}
+
+//0：新增，1：修改
+function saveTagrule(type)
+{
+	var id ="";
+	if(type==1)
+	  id = $("#tr_id").val();
+	  
+	var tsc = $("#tableSystem").val();
+	var tag = $("#tr_indtag").val();
+	var tagDesc = $("#tr_title").val();
+	var ruleDefine = $("#tr_ruledefine").val();
+	var showDefine = $("#tr_showDefine").val();
+	var type = $("#tr_type").val();
+	var comments = $("#tr_comments").val();
+	var ruleType = $("#ruleType").val();
+	var timeInterval = $("#timeInterval").val();
+	var timeUnit = $("#timeUnit").val();
+	
+	if(tag==""||tagDesc==""||ruleDefine=="")
+	{
+		alert("参数不全！");
+		return;
+	}
+	var data = {
+		id:id,
+		tsc:tsc,
+		tag:tag,
+		tagDesc:tagDesc,
+		rule:ruleDefine,
+		chartDesc:showDefine,
+		type:type,
+		ruleType:ruleType,
+		timeInterval:timeInterval,
+		timeUnit:timeUnit,
+		comments:comments
+	};
+	doCreateTagrule(data);
+	
+}
+function doCreateTagrule(data)
+{
+	
+	
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/createTagRule",data, function(result){
+		  if(result.success)
+		  {
+			alert("操作成功！");
+			queryTagrule();
+		  }
+		  else
+		  {
+			alert("操作失败！");
+		  }
+		  return;
+	  });
+}
+function queryTagrule()
+{
+	
+	var id = $("#q_tr_id").val();
+	var tagDesc = $("#q_tr_title").val();
+	if(id==""&&tagDesc=="")
+	{
+		alert("查询参数为空！");
+		return;
+	}
+	var data = {
+		id:id,
+		tagDesc:tagDesc
+	};
+	
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/getTagruleByTagdescOrId",data, function(result){
+		  $("#q_tbody").empty();
+		  if(!result.success)
+		  {
+			alert("操作失败！");
+			return;
+		  }
+		  var dl = result.data;
+		  if(dl!=null)
+		  {
+				
+				for(var i=0;i<dl.length;i++)
+				{
+					var tr = dl[i];
+					var id = tr.id;
+					var tagDesc = tr.tagDesc;
+					var tsc = tr.tsc;
+					var industryTag = tr.industryTag;
+					var rule = tr.ruleOriginal;
+					var charDesc = tr.chartDesc;
+					var type=tr.type;
+					var comments = tr.comments==null?"":tr.comments;
+					var html = "<tr timeUnit='"+tr.timeUnit+"' timeInterval='"+tr.timeInterval+"' ruleType='"+tr.ruleType+"'>";
+					html+="<td id='q_td_0"+i+"' style='border:1px solid #ccc'>"+id+"</td>";
+					html+="<td id='q_td_1"+i+"' style='border:1px solid #ccc'>"+tagDesc+"</td>";
+					html+="<td id='q_td_7"+i+"' style='border:1px solid #ccc'>"+comments+"</td>";
+					html+="<td id='q_td_2"+i+"' style='border:1px solid #ccc'>"+rule+"</td>";
+					html+="<td id='q_td_3"+i+"' style='border:1px solid #ccc'>"+charDesc+"</td>";
+					html+="<td id='q_td_4"+i+"' style='border:1px solid #ccc'>"+industryTag+"</td>";
+					html+="<td id='q_td_5"+i+"' style='border:1px solid #ccc'>"+tsc+"</td>";
+					html+="<td id='q_td_6"+i+"' style='border:1px solid #ccc'>"+type+"</td>";
+					html+="<td style='border:1px solid #ccc'><span style='cursor:pointer;color:red' onclick='modifyTagrule("+i+")'>修改</span>|<span style='cursor:pointer;color:red' onclick='delTagrule("+id+")'>删除</span></td>";
+					html+="</tr>";
+					$("#q_tbody").append(html);
+				}
+		  }
+		  return;
+	  });
+}
+function modifyTagrule(i)
+{
+	var id = $("#q_td_0"+i).text();
+	var tsc = $("#q_td_5"+i).text();
+	var tag = $("#q_td_4"+i).text();
+	var type = $("#q_td_6"+i).text();
+	var tagDesc = $("#q_td_1"+i).text();
+	var ruleDefine = $("#q_td_2"+i).text();
+	var showDefine = $("#q_td_3"+i).text();
+	var comments = $("#q_td_7"+i).text();
+	var timeUnit = $("#q_td_7"+i).parent().attr("timeUnit");
+	var timeInterval = $("#q_td_7"+i).parent().attr("timeInterval");
+	var ruleType = $("#q_td_7"+i).parent().attr("ruleType");
+	
+	 $("#tr_id").val(id);
+	 $("#tableSystem").val(tsc);
+	 $("#tr_indtag").val(tag);
+	 $("#tr_title").val(tagDesc);
+	 $("#tr_ruledefine").val(ruleDefine);
+	 $("#tr_showDefine").val(showDefine);
+	 $("#tr_type").val(type);
+	 $("#tr_comments").val(comments);
+	 $("#timeUnit").val(timeUnit);
+	 $("#timeInterval").val(timeInterval);
+	 $("#ruleType").val(ruleType);
+	 window.scrollTo(0,0);
+}
+function delTagrule(id)
+{
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/delTagrule",{id:id}, function(result){
+		  if(result.success)
+		  {
+			alert("操作成功！");
+			queryTagrule();
+		  }
+		  else
+		  {
+			alert("操作失败！");
+		  }
+		  return;
+	  });
+}
+function showChart()
+{
+		var id = "chartdiv";
+		var cs = $("#tr_showDefine").val();
+		if(cs=="") 
+		{
+			alert("展示方案内容为空！");
+			return;
+		}
+		cs=cs.trim();
+		var companys = $("#testcompany").val();
+		if(companys=="") 
+		{
+			alert("测试公司为空！");
+			$("#testcompany").focus();
+			return;
+		}
+		var xindexs="";
+		var yindexs="";
+		var csa = cs.split("~");
+		for(var i=0;i<csa.length;i++)
+		{
+			var si = csa[i].split("^");
+			if(si=="") continue;
+			var zi = si[0];
+			if(zi==0)
+				{
+					xindexs+=si[2];
+					xindexs+="^";
+				}
+			if(zi==1)
+				{
+					yindexs+=si[2];
+					yindexs+="^";
+				}
+		}
+		if(xindexs==""&&yindexs=="")
+		{
+			alert("展示方案解析出错！");
+			$("#tr_showDefine").focus();
+			return;
+		}
+		createTrendsAnalysis_tr("chartdiv_0",companys,cs,"2009-06-30","");
+		$("#chartdiv_1").empty();
+		$("#chartdiv_1").append("<span style='color:red;cursor:pointer' onclick='closeChartDiv()'>关闭</span>");
+		$("#chartdiv").show();
+		
+}
+function closeChartDiv()
+{
+	$("#chartdiv").hide();
+}
+function queryOneCompanyAllCfTag()
+{
+	var companys = $("#testcompany").val();
+	if(companys=="")
+	{
+		alert("公司不可以为空！");
+		$("#testcompany").focus();
+		return;
+	}
+	var companycode = companys.split(":")[1];
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/realComputeOneCompanyAllCFTag",{companycode:companycode}, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllTag = result.data;
+		  if(testAllTag!="")
+		  {
+			 $("#testAllTag").text(testAllTag);
+		  }
+		  else
+		  {
+				$("#testAllTag").text("没有相关的财务标签！");
+		  }
+	  });
+	
+}
+function reset()
+{
+	$("#tr_id").val("");
+	 $("#tableSystem").val("");
+	 $("#tr_indtag").val("");
+	 $("#tr_title").val("");
+	 $("#tr_ruledefine").val("");
+	 $("#tr_showDefine").val("");
+	 $("#queryAllCompanysMZCondition").empty();
+	 $("#mult-k").empty();
+}
+function convert2result()
+{
+	var companycodes = $("#tr_ruledefine").val();
+	var time = $("#setTime").val();
+	if(companycodes=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var data = {
+		companycodes:companycodes,
+		time:time
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/convert2result",data, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllCompanyTagrule = result.data;
+		 
+		  if(testAllCompanyTagrule!="")
+		  {
+			  $("#mult-k").empty();
+			  $("#queryAllCompanysMZCondition").empty();
+			  var ca = testAllCompanyTagrule.split(";");
+			  var size = ca.length;
+			  if(ca[ca.length-1]=="")
+				size=size-1;
+			  $("#queryAllCompanysMZCondition").append("共计:"+size+"家;");
+			  for(var i=0;i<ca.length;i++)
+			  {
+					var cs = ca[i];
+					var cname = cs.split(":")[0];
+					var ccode = cs.split(":")[1];
+					var color="";
+					if(cname=="date")
+						color="red";
+					$("#queryAllCompanysMZCondition").append("<a class='a-clazz' style='color:"+color+"' href='#' cname='"+cname+"' ccode='"+ccode+"' onclick='return false;'>"+cs+"</a>;");
+			  }
+			 
+			  $("#queryAllCompanysMZCondition").find(".a-clazz").bind("click",function(){
+					 var cname = $(this).attr("cname");
+					 var ccode = $(this).attr("ccode");
+					 var clazz = "a-clazz-"+new Date().getTime();
+					 if(cname!="date")
+						addMkItem(clazz,cname,ccode);
+					var finded = false;
+					var fdate ;
+					$("#queryAllCompanysMZCondition").find(".a-clazz").each(function(){
+						var fcname = $(this).attr("cname");
+						var fccode = $(this).attr("ccode");
+						if(fccode == ccode)
+							finded = true;
+						if(finded==true&&fcname=="date")
+						{
+							fdate = fccode.substring(0,4)+"-"+fccode.substring(4,6)+"-"+fccode.substring(6,8);
+							return false;
+						}
+					});
+					
+					if(fdate!=null)
+						testThis(cname,ccode,fdate);
+			  });
+		  }
+		  else
+		  {
+				$("#queryAllCompanysMZCondition").text("没有相关的公司！");
+		  }
+	  });
+}
+function queryAllCompanysMZCondition()
+{
+	var rule = $("#tr_ruledefine").val();
+	if(rule=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var time = $("#test_time").val();
+	var timeInterval = $("#timeInterval").val();
+	var ruleType = $("#ruleType").val();
+	var timeUnit = $("#timeUnit").val();
+	var checkCount = $("#checkCount").val();
+	var setTime = $("#setTime").val();
+	if(setTime!="")
+		time = setTime;
+	var data = {
+		rule:rule,
+		time:time,
+		checkCount:checkCount,
+		timeInterval:timeInterval,
+		ruleType:ruleType,
+		timeUnit:timeUnit
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/testAllCompanyTagrule",data, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllCompanyTagrule = result.data;
+		 
+		  if(testAllCompanyTagrule!="")
+		  {
+			  $("#mult-k").empty();
+			  $("#queryAllCompanysMZCondition").empty();
+			  var ca = testAllCompanyTagrule.split(";");
+			  var size = ca.length;
+			  if(ca[ca.length-1]=="")
+				size=size-1;
+			  $("#queryAllCompanysMZCondition").append("共计:"+size+"家;");
+			  for(var i=0;i<ca.length;i++)
+			  {
+					var cs = ca[i];
+					var cname = cs.split(":")[0];
+					var ccode = cs.split(":")[1];
+					var color="";
+					if(cname=="date")
+						color="red";
+					$("#queryAllCompanysMZCondition").append("<a class='a-clazz' style='color:"+color+"' href='#' cname='"+cname+"' ccode='"+ccode+"' onclick='return false;'>"+cs+"</a>;");
+			  }
+			 
+			  $("#queryAllCompanysMZCondition").find(".a-clazz").bind("click",function(){
+					 var cname = $(this).attr("cname");
+					 var ccode = $(this).attr("ccode");
+					 var clazz = "a-clazz-"+new Date().getTime();
+					 if(cname!="date")
+						addMkItem(clazz,cname,ccode);
+					var finded = false;
+					var fdate ;
+					$("#queryAllCompanysMZCondition").find(".a-clazz").each(function(){
+						var fcname = $(this).attr("cname");
+						var fccode = $(this).attr("ccode");
+						if(fccode == ccode)
+							finded = true;
+						if(finded==true&&fcname=="date")
+						{
+							fdate = fccode.substring(0,4)+"-"+fccode.substring(4,6)+"-"+fccode.substring(6,8);
+							return false;
+						}
+					});
+					
+					if(fdate!=null)
+						testThis(cname,ccode,fdate);
+			  });
+		  }
+		  else
+		  {
+				$("#queryAllCompanysMZCondition").text("没有相关的公司！");
+		  }
+	  });
+}
+function dcheckAllCompanysMZCondition()
+{
+	var rule = $("#tr_ruledefine").val();
+	if(rule=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var time = $("#test_time").val();
+	var timeInterval = $("#timeInterval").val();
+	var ruleType = $("#ruleType").val();
+	var timeUnit = $("#timeUnit").val();
+	var checkCount = $("#checkCount").val();
+	var setTime = $("#setTime").val();
+	if(setTime!="")
+		time = setTime;
+	var data = {
+		rule:rule,
+		time:time,
+		checkCount:checkCount,
+		timeInterval:timeInterval,
+		ruleType:ruleType,
+		timeUnit:timeUnit
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/dcheckAllCompanyTagrule",data, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllCompanyTagrule = result.data;
+		 
+		  if(testAllCompanyTagrule!="")
+		  {
+			  $("#mult-k").empty();
+			  $("#queryAllCompanysMZCondition").empty();
+			  var ca = testAllCompanyTagrule.split(";");
+			  var size = ca.length;
+			  if(ca[ca.length-1]=="")
+				size=size-1;
+			  $("#queryAllCompanysMZCondition").append("共计:"+size+"家;");
+			  for(var i=0;i<ca.length;i++)
+			  {
+					var cs = ca[i];
+					var cname = cs.split(":")[0];
+					var ccode = cs.split(":")[1];
+					var color="";
+					if(cname=="date")
+						color="red";
+					$("#queryAllCompanysMZCondition").append("<a class='a-clazz' style='color:"+color+"' href='#' cname='"+cname+"' ccode='"+ccode+"' onclick='return false;'>"+cs+"</a>;");
+			  }
+			 
+			  $("#queryAllCompanysMZCondition").find(".a-clazz").bind("click",function(){
+					 var cname = $(this).attr("cname");
+					 var ccode = $(this).attr("ccode");
+					 var clazz = "a-clazz-"+new Date().getTime();
+					 if(cname!="date")
+						addMkItem(clazz,cname,ccode);
+					var finded = false;
+					var fdate ;
+					$("#queryAllCompanysMZCondition").find(".a-clazz").each(function(){
+						var fcname = $(this).attr("cname");
+						var fccode = $(this).attr("ccode");
+						if(fccode == ccode)
+							finded = true;
+						if(finded==true&&fcname=="date")
+						{
+							fdate = fccode.substring(0,4)+"-"+fccode.substring(4,6)+"-"+fccode.substring(6,8);
+							return false;
+						}
+					});
+					
+					if(fdate!=null)
+						testThis(cname,ccode,fdate);
+			  });
+		  }
+		  else
+		  {
+				$("#queryAllCompanysMZCondition").text("没有相关的公司！");
+		  }
+	  });
+}
+var trendschart_tr = function(id,yaxis) {
+		var cwidth = $("#"+id).width()-5;
+		return new Highcharts.Chart({
+			chart : {
+				renderTo : id,
+				width : cwidth,
+			},
+			title: {
+	         text: "财务指标趋势图"
+			},
+			yAxis :yaxis,
+			xAxis : {
+				type : "datetime",//时间轴要加上这个type，默认是linear
+				//自定义x刻度上显示的时间格式，根据间隔大小，以下面预设的小时/分钟/日的格式来显示
+				dateTimeLabelFormats:
+					{
+					 month : '%Q'
+					},
+				title: {
+					text: null
+				}
+			},
+			tooltip: {
+				formatter: function() {
+					var name = Highcharts.dateFormat('%Q',this.x).replace(/-/g,"")+"<br/>"+this.series.name+'<b>,'+ this.y +'</b>';
+					return name;
+				}
+			},
+			plotOptions : {
+				series : {
+					pointWidth : 11,
+					borderWidth : 0,
+					shadow : false
+				}
+			},
+			legend : {
+				align : 'center',
+				maxHeight:40,
+				verticalAlign : 'bottom',
+				backgroundColor : '#FFFFFF',
+				itemStyle: {
+                 fontSize: '10px'
+				}
+			},
+			credits : {
+				enabled : false
+			},
+			series : []
+		});
+}
+function testThis(cname,ccode,fdate)
+{
+	$("#testcompany").val(cname+":"+ccode);
+	$("#setTime").val(fdate);
+	testTheCompany();
+}
+function createTrendsAnalysis_tr(id,company,chartshow,stime,etime,chart)
+{
+	try{
+	var cchart = chart;
+	var companyname = company.split(":")[0];
+	var companycode = company.split(":")[1];
+	var data={
+		companycode:companycode,
+		chartshow:chartshow,
+		stime:stime,
+		etime:etime
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/stock/trends/getTagruleShow?"+$.param(data), function(result){
+		  var rm = taret;
+		  if(rm==null||rm.vl==null||rm.vl=="")
+			{
+			  return;
+			}
+		var dl = rm.vl.split("~");
+		
+		var cname =rm.cname;
+		var yaxis = [{
+					title:
+					{
+						text:null
+					},
+					lineWidth: 1,
+					opposite : 0//0=左侧，1=右侧
+					},{
+					title:
+					{
+						text:null
+					},
+					lineWidth: 1,
+					opposite : 1//0=左侧，1=右侧
+					}];	
+		/*
+		if(chart!=null)
+			cchart=chart;
+		*/
+		if(cchart==null)
+			cchart = new trendschart_tr(id,yaxis);
+		
+		if(cchart.yAxis.length<2)
+		{
+			cchart.addAxis({
+					title:
+					{
+						text:null
+					},
+					lineWidth: 1,
+					opposite: 1
+			});
+		}
+		for(var i=0;i<dl.length;i++)
+		{
+				if(dl[i]=="") continue;
+				//分隔指标编码与名字
+				var cd = dl[i].split("&");
+				if(cd=="") continue;
+				if(cd=="") continue;
+				var ctname = cd[0];//公司或行业名
+				if(ctname.indexOf("_")>=0)
+					ctname = ctname.split("_")[2]+"行业";
+				var indexname = cd[1].split(":")[0];
+				var indexcode = cd[1].split(":")[1];
+				var udesc = getUnitDesc(cd[1].split(":")[2]);
+				   if(udesc!="")
+						indexname = indexname+"("+udesc+")";
+				var yindex = parseInt(cd[2]);
+				var stype = cd[3];
+				if(cd.length<5) continue;
+				var vl = cd[4].split("|");
+				var pointdata = new Array();
+				for(var k=0;k<vl.length;k++)
+				{
+					if(vl[k]=="") continue;
+					var y=parseFloat(vl[k].split("^")[0]).toFixed(2);
+					var time=vl[k].split("^")[1];
+					pointdata.push({
+					x: parseInt(time),
+					y: parseFloat(y)
+					});	
+				}
+				var oldtitle = cchart.yAxis[yindex].options.title.text;
+									if(oldtitle!=null&&oldtitle!=""&&oldtitle!="Values")
+									{
+										if(oldtitle.indexOf(indexname)<0)
+											cchart.yAxis[yindex].setTitle({text:oldtitle+"|"+indexname});
+									}
+									else
+									{
+										cchart.yAxis[yindex].setTitle({text:indexname});
+									}
+				var sra = $("#tr_showDefine").val().split("~");
+				for(var m=0;m<sra.length;m++)
+				{
+					var sr = sra[m];
+					if(sr=="") continue;
+					if(sr.indexOf(indexcode)>=0)
+						{
+							var nst = sr.split("^")[1];
+							if(nst!=null&&nst!="")
+								stype = nst;
+						}
+				}
+				cchart.addSeries({
+						type: stype,
+						name:ctname+":"+indexname,
+						yAxis : yindex,
+						data: pointdata
+							});
+		}
+
+	
+	  });	
+
+	 }catch(e)
+	 {
+		console.log(e);
+	 }
+}
+function addMkItem(clazz,companyname,companycode)
+ {
+	var scompanycode = companycode.split(".")[1]+companycode.split(".")[0];
+	var turl = "http://stockhtm.finance.qq.com/sstock/ggcx/"+companycode.split(".")[0]+".shtml";
+	var surl = "http://finance.sina.com.cn/realstock/company/"+scompanycode+"/nc.shtml?_="+new Date().getTime();
+	var imgurl = "http://image.sinajs.cn/newchart/daily/n/"+scompanycode+".gif?v="+new Date().getTime();
+	if(companycode.indexOf("hk")>0)
+	{
+		imgurl = "http://image.sinajs.cn/newchart/hk_stock/daily/"+companycode.split(".")[0]+".gif?_="+new Date().getTime();
+		surl = "http://stock.finance.sina.com.cn/hkstock/quotes/"+companycode.split(".")[0]+".html"
+		turl = "http://stock.qq.com/"+scompanycode;
+	}
+	var strVar="<div class='"+clazz+"' av='"+companycode+"' ttime='"+new Date().getTime()+"' style='float:left;margin-top: 10px;margin-left: 17px;' >";
+		strVar += "	<div class='mk-c-item' style=\"float: left; border: 1px solid rgb(204, 204, 204); border-bottom:0px\">";
+		strVar += "		<div style=\"float:left\">";
+		strVar += "		<div>";
+		strVar += "			<div class=\"main-analysis-top\" style=\"height: 28px; background: none repeat scroll 0% 0% rgb(246, 246, 246); border: 1px solid rgb(237, 237, 239);\">  ";
+		strVar += "			<div    style=\"float: left; margin: 3px 2px 0px; padding: 1px 6px 3px; cursor: pointer; font-size: 12px; width: auto; box-shadow: 0px 1px 3px rgb(237, 237, 239); height: 17px; \"> <span style=\"width: 100%; display: inline-block; color: #fff;\"><\/span><\/div>";
+		strVar += "			<div style=\"float: left; padding-bottom: 0px; margin: 3px 5px 0px 2px;\"><\/div>";
+		strVar += "			<div class='dtype' style='width: 300px; margin-top: 2px; float: left; padding-top: 3px;'><strong>"+companyname+"</strong><\/div>";
+		strVar += "			<div style=\"float: left; margin: 4px 0px;\">";
+		strVar += "				<div style=\"float:left\" class=\"mk-nav-c-info\">";
+		strVar += "					<strong><a target=\"_blank\" href=\"company_main.html?companycode="+companycode+"\"><\/a><\/strong>";
+		//strVar += "					(<span class='ind-rank' style=\"color:#339999;font-size:13px\"><\/span>)";
+		strVar += "				<\/div>";
+		strVar += "                                <div style=\"float:left; margin-left: 2px; margin-top: 1px;\">";
+		//strVar += "				<span class=\"mk-nav-more-b\" style=\"margin-left:2px;color:#0000FF;cursor:pointer\" av='"+clazz+"'>更多&gt;&gt;<\/span>";
+		//strVar += "				<span style=\"margin-left: 0px;\">|<\/span>";
+		//strVar += "				<a style=\"color:#E73010;cursor:pointer\" href='creport.html?companycode="+companycode+"' target='_blank' >简报<\/a>";
+		strVar += "				<span style=\"margin-left: 0px;\">|<\/span>";
+		strVar += "				<span style=\"color:#0000FF;cursor:pointer\"><a target=\"_blank\"  href=\""+turl+"\" style=\"color:#0000FF;\">腾讯行情</a><\/span>";
+		strVar += "                                <\/div>";
+		strVar += "			<\/div>";
+		strVar += "			<div style=\"float: right; cursor: pointer; margin-left: 7px;\" class=\"mk-nav-close\"><\/div>			";
+		strVar += "      	<\/div>";
+		strVar += "		";
+		strVar += "<div style=\"height: 31px; border-bottom: 1px solid rgb(204, 204, 204);\">			";
+		strVar += "		<ul class=\"mk-indexcompose-nav\" >";
+
+		strVar += "			<li class=\"main-ma-nav-li\" value2=\"min\" title='时分线'>时分线<\/li> 				";
+		strVar += "			<li class=\"main-ma-nav-li-sp\">|<\/li>   ";
+		strVar += "			<li class=\"main-ma-nav-li\" value2=\"daily\" title='日K线'>日K线<\/li> 				";
+		strVar += "			<li class=\"main-ma-nav-li-sp\">|<\/li>   ";
+		strVar += "			<li class=\"main-ma-nav-li\" value2=\"weekly\" title='周K线'>周K线<\/li> 				";
+		strVar += "			<li class=\"main-ma-nav-li-sp\">|<\/li>   ";
+		strVar += "			<li class=\"main-ma-nav-li\" value2=\"monthly\" title='月K线'>月K线<\/li> 				";
+		strVar += "			<li class=\"main-ma-nav-li-sp\">|<\/li>   ";
+	
+		strVar += "		<\/ul>		";
+		strVar += "		<\/div>";
+		strVar += "<\/div>";
+		strVar += "<div style='height:307px;width:545px;border-bottom:1px solid #ccc'>";
+		strVar += "    <div style=\"float:left\">";
+		strVar += "		";
+		strVar += "		<div class=\"mk-content\" style='height:300px;width:545px;'>";
+		strVar += "		<a href=\""+surl+"\" target=\"_blank\">";
+		strVar += "			<img class='klineImg' style=\"width: 545px;height:300px;float:left\" alt=\"公司日K线\" src=\""+imgurl+"\">";
+		strVar += "		<\/a>";
+		strVar += "		<\/div>";
+		strVar += "<\/div>";
+		strVar += "<div class='mk-left' style=\"width: 557px; border: 0px solid rgb(204, 204, 204); float: left; height: 267px;display:none\">";
+		strVar += "<\/div>";
+		strVar += "<\/div>";	
+		strVar += "<\/div>";
+		strVar += "";
+		strVar += "	<\/div>";
+		strVar += "	<\/div>";
+		
+		$("#mult-k").append(strVar);
+		$("."+clazz).find("ul.mk-indexcompose-nav >.main-ma-nav-li").click(function(){
+			//$(this).parent().parent().find("li").css("color","");
+			$(this).parent().find("li").css("color","");
+			var selVal = $(this).attr("value2");//.val();
+			if(selVal==-1) return;
+			var companycode = $("."+clazz).attr("av");
+			var scompanycode = companycode.split(".")[1]+companycode.split(".")[0];
+			var surl = "http://finance.sina.com.cn/realstock/company/"+scompanycode+"/nc.shtml?_="+new Date().getTime();
+			var imgurl = "http://image.sinajs.cn/newchart/"+selVal+"/n/"+scompanycode+".gif?v="+new Date().getTime();
+			if(companycode.indexOf("hk")>0)
+			{
+				imgurl = "http://image.sinajs.cn/newchart/hk_stock/"+selVal+"/"+companycode.split(".")[0]+".gif?_="+new Date().getTime();
+				surl = "http://stock.finance.sina.com.cn/hkstock/quotes/"+companycode.split(".")[0]+".html"
+			}
+			var html = "<a  href='"+surl+"' target='_blank' ><img class='klineImg' style=\"width: 545px;height:300px;float:left\" alt=\"公司日K线\" src=\""+imgurl+"\" /></a>";
+			$("."+clazz).find(".mk-content").empty();
+			$("."+clazz).find(".mk-content").append(html);
+		});
+						
+		$($("."+clazz)).prependTo($("#mult-k").first());
+		//$("#mult-k").prepend("<div class='load-class' id='load_"+index+"' style=\"margin:0 auto\"><img src='images/loading2.gif'/></div>");	
+						
+ }
+</script>
+<style>
+.main-ma-nav-li-sp{
+	list-type-select:none;
+	height:40px;line-height:40px;
+	float:left;
+	/*padding:2px 0px;*/
+	font-size:14px;
+	color:#dadada;
+}
+.main-ma-nav-li{
+	list-type-select:none;
+	height:40px;line-height:40px;
+	float:left;
+	padding:0px 13px;/*ljb  2014.4.23*/
+	font-size:12px;
+	cursor:pointer;
+	color: #686868;
+}
+.mr_table td{
+	width:60px;
+}
+</style>
+</head>
+<body>
+<div id="header">
+</div>
+<div  style="float:left;margin-left:10" onclick="hidenVarPanel()">
+	<div style="border:1px solid #CCCCCC;width:761px;margin:5">
+		<table style="width:761px;font-size:14px;word-break:break-all">
+			<tr>
+					<td style="width:80px">规则编码：</td>
+					<td>
+					<input id="tr_id" type="text"/>
+					</td>
+			</tr>
+			<tr>
+				<td style="width:80px">报表体系：</td>
+				<td>
+				<select id="tableSystem" name="tableSystemCode">
+						<option selected="" value="ts_00003">A股通用报表</option>
+						<option value="ts_00004">A股银行报表</option>
+						<option value="ts_00005">A股保险报表</option>
+						<option value="ts_00006">A股证券报表</option>	
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">规则属性：</td>
+				<td>
+					规则类型:  <select id="ruleType" name="rule.ruleType">
+								<option value='1' selected>财务规则</option>
+								<option value='2'>行情规则</option>
+							</select><br/>
+							
+							间隔:<select id="timeInterval" name="rule.timeInterval" >
+								<option value='3' selected>3</option>
+								<option value='1' >1</option>
+								<option value='5' >5</option>
+								<option value='7' >7</option>
+								<option value='10' >10</option>
+								<option value='20' >20</option>
+								<option value='30' >30</option>
+								<option value='60' >60</option>
+								<option value='120' >120</option>
+								<option value='250' >250</option>
+							</select>
+							间隔单位:<select id="timeUnit" name="rule.timeUnit" >
+								<option value='m' selected>月</option>
+								<option value='w' >周</option>
+								<option value='d' >日</option>
+								<option value='h' >小时</option>
+								<option value='f' >分钟</option>
+							</select>
+				</td>
+			
+			</tr>
+			
+			<tr>
+				<td style="width:80px">所属行业：</td>
+				<td>
+					<div id="tags_div" style="color:red">
+						<ul id="root" class="dropdown" style="z-index:1010">
+						</ul>
+				   </div>
+					<input id="tr_indtag" type="text" value="所有行业"/>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">规则标题：</td>
+				<td>
+					<textarea id="tr_title" style="width:100%;height:30px"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">规则类型：</td>
+				<td>
+				<select id="tr_type" >
+						<option value="0" selected >投资亮点</option>
+						<option value="1">投资提示</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">规则备注：</td>
+				<td>
+					<textarea  id="tr_comments" style="width:100%;height:100px"></textarea><br/>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">规则定义：</td>
+				<td>
+					<textarea onclick="showVariablePanel(event,'variableBuildDiv',this)" id="tr_ruledefine" style="width:100%;height:300px"></textarea><br/>
+					<input type="button" onclick="clearObjectData('tr_ruledefine')" value="清"/>
+					<input type="text" id="testcompany" placeholder="请输入公司"/>
+					<!-- 
+						<select name="test_time" id="test_time" onchange="testTheCompany()" >
+							<option value='' selected>最新一期数据</option>
+							<option value='2013-12-30' >2013-Q4</option>
+							<option value='2013-09-30' >2013-Q3</option>
+							<option value='2013-06-30' >2013-Q2</option>
+							<option value='2013-03-30' >2013-Q1</option>
+							<option value='2012-12-30'>2012-Q4</option>
+							<option value='2012-09-30'>2012-Q3</option>
+							<option value='2012-06-30'>2012-Q2</option>
+							<option value='2012-03-30'>2012-Q1</option>
+							<option value='2011-12-30'>2011-Q4</option>
+							<option value='2011-09-30'>2011-Q3</option>
+							<option value='2011-06-30'>2011-Q2</option>	
+						</select>
+					 -->
+					<input type="button" onclick="testTheCompany()" value="测试"/>
+					<span id="testResult"></span>
+					<input type="button" onclick="queryOneCompanyAllCfTag()" value="查询已有标签"/>
+					<span id="testAllTag"></span>
+					<input type="button" onclick="queryAllCompanysMZCondition()" value="查询所有满足条件的公司"/>
+					<input type="button" onclick="dcheckAllCompanysMZCondition()" value="数据校验"/>
+					<input type="button" onclick="queryGailv()" value="概率"/>
+					<input type="text" id="checkCount" placeholder="请输入限定的公司数" value="5"/>
+					<input type="text" id="setTime"  value="" placeholder="指定测试时间"/>
+					<input type="button" onclick="convert2result()" value="公司列表转换"/>
+					<div id="queryAllCompanysMZCondition"></div>
+					<div id="queryAllCompanysMZCondition_history"></div>
+					<div id="mult-k"></div>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">展示方案：</td>
+				<td>
+					<textarea onclick="showVariablePanel(event,'showVarPanel',this)" id="tr_showDefine" style="width:100%;height:100px"></textarea><br/>
+					<input type="button" onclick="clearObjectData('tr_showDefine')" value="清"/>
+					<input type="button" onclick="showChart()" value="图"/>
+				</td>
+			</tr>
+			<tr style="border:1px solid #ccc">
+				<td style="width:80px">操作：</td>
+				<td>
+					<input id="tr_create" type="button" style="color:red" value="新增"/>
+					<input id="tr_modify" type="button" style="color:red" value="修改"/>
+					<input  type="button" style="color:red" value="重置" onclick="reset()"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="border:1px solid #CCCCCC;width:761px;margin:5;font-size:14px;">	
+		<div>
+			<table style="font-size:14px;width:761px;">
+				<tr>
+					<td>规则id:<input id="q_tr_id" type="text" placeholder="请输入规则id"/></td>
+					<td>规则标题:<input style="width:300px" id="q_tr_title" type="text" placeholder="请输入规则标题"/></td>
+					<td><input id="tr_query" type="button" value="查询" onclick="queryTagrule()"/></td>
+				</tr>
+			</table>
+		</div>
+		<div></div>
+		<table style="width:761px;font-size:14px;border:1px solid #ccc;border-collapse: collapse;">
+			<thead>
+				<tr><th>规则编码</th><th>规则标题</th><th>规则备注</th><th>规则定义</th><th>展示方案</th><th>所属行业</th><th>报表体系</th><th>类型(0:亮点|1:风险)</th><th>操作</th></tr>
+			</thead>
+			<tbody id="q_tbody">
+			
+			</tbody>
+		</table>
+	</div>
+	<div>
+		起始时间:<input id='tstime' value=""/>分页:<input id='tstart' value="0"/><input id='tend' value="100"/><input id="loadTestTradeData" type="button" value="加载测试数据"/><br/>
+		指标列表:<textarea id='indexcodes' style="width:60%">4787,4799,4856,4857,4858,4862,4863,4864,4865,4866,4867,4868,4869,4870,4871,4872</textarea>
+		<input id="computeIndexs" type="button" value="计算指定指标"/>
+		<input id="loadSetIndexs" type="button" value="加载指定指标"/><br/>
+		公司编码:<input id='companycode' value="" placeholder="公司编码"/><input id='loadCfData' value="0" placeholder="是否加载财务指标数据"/><input id="loadTestCompanyTradeData" type="button" value="加载指定公司并计算"/><br/>
+		
+		<input id="fetchRealtimeData" type="button" value="拉取实时数据"/><input id="computeRealtime" type="button" value="计算实时指标"/><br/>
+	</div>
+</div>
+<div id="variableBuildDiv" style="border-style:solid; border-width:1px;width:319px;display:none;background:gray">
+	指标:<input type="text" name="variableIndexText" id="variableIndexText"  placeholder="请输入指标"/>
+	间隔:<select name="v_interval_index" id="v_interval_index" >
+			<option value='-24'>-24</option>
+			<option value='-21'>-21</option>			
+			<option value='-18'>-18</option>		
+			<option value='-15'>-15</option>			
+			<option value='-12'>-12</option>				
+			<option value='-9'>-9</option>				
+			<option value='-6'>-6</option>
+			<option value='-3'>-3</option>
+			<option value='-1'>-1</option>
+			<option value='0' selected>0</option>
+			<option value='1'>1</option>
+			<option value='3'>3</option>
+			<option value='6'>6</option>
+			<option value='9'>9</option>
+			<option value='12'>12</option>
+			<option value='15'>15</option>
+			<option value='18'>18</option>
+			<option value='21'>21</option>
+			<option value='24'>24</option>	
+	</select>
+	<input type="button" id="createIndexVariable" onclick="createIndexVariable()" value="生成"/><br/>
+	<input type="button"  value="(" onclick="appendS('(','tr_ruledefine')">
+	<input type="button"  value=")" onclick="appendS(')','tr_ruledefine')">
+	<input type="button"  value="+" onclick="appendS('+','tr_ruledefine')">
+	<input type="button"  value="-" onclick="appendS('-','tr_ruledefine')">
+	<input type="button"  value="*" onclick="appendS('*','tr_ruledefine')">
+	<input type="button"  value="/" onclick="appendS('/','tr_ruledefine')">
+	<input type="button"  value="&gt" onclick="appendS('&gt','tr_ruledefine')">
+	<input type="button"  value="&lt" onclick="appendS('&lt','tr_ruledefine')">
+	<input type="button"  value="=" onclick="appendS('=','tr_ruledefine')">
+	<input type="button"  value="or" onclick="appendS('||','tr_ruledefine')">
+	<input type="button"  value="and" onclick="appendS('&&','tr_ruledefine')"><br/>
+	
+</div>
+<div id="showVarPanel" style="width:370px;heigth:auto;display:none;background:gray;border:1px solid #ccc">
+	<div>
+		<table style="font-size:14px;text-align:center">
+			<tr>
+				<td>
+					轴:<select id="show_xy">
+						<option value="0">y0</option>
+						<option value="1">y1</option>
+					</select>
+				</td>
+				<td>
+					展示类型:<select id="show_type">
+						<option value="line">折线</option>
+						<option value="spline" selected>曲线</option>
+						<option value="column">列型</option>
+						<option value="area">阴影</option>
+					</select>
+				</td>
+				<td>
+					<input type='text' id="show_index" placeholder="请输入指标"/>
+				</td>
+				<td>
+					<input type='button' id="show_append" value="生成" onclick="createShowPara()"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</div>
+<div id="chartdiv" style="position: fixed;top:10px;left:150px; margin:50 80; z-index: 2222;width:600px;height:430px;display:none;background:#ccc">
+	<div id="chartdiv_1" style="float:right;background:#fff;margin:2 20;cursor:pointer"></div>
+	<div id="chartdiv_0" style="float:left;width:580px;height:400px;margin-left:10"></div>
+</div>
+</body>
+
+</html>

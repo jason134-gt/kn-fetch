@@ -1,10 +1,9 @@
 /**
  * Dashboard 数据概览页面
- * 简化版本，使用 mock 数据
  */
 
-import React from 'react';
-import { Row, Col, Card, Statistic, Table, Tag, Progress } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Row, Col, Card, Statistic, Table, Tag, Progress, Spin, message } from 'antd';
 import {
   ProjectOutlined,
   DatabaseOutlined,
@@ -16,163 +15,211 @@ import {
 import { useNavigate } from 'react-router-dom';
 import ReactECharts from 'echarts-for-react';
 import styles from './index.module.less';
+import { dashboardApi } from '../services/api';
 
-// Mock 数据
-const mockStats = {
-  projectCount: 12,
-  entityCount: 15420,
-  problemCount: 89,
-  pendingReviewCount: 5,
-  projectTrend: { type: 'up' as const, value: 15 },
-  entityTrend: { type: 'up' as const, value: 23 },
-  problemTrend: { type: 'down' as const, value: 8 },
-};
+// 类型定义
+interface DashboardStats {
+  projectCount: number;
+  entityCount: number;
+  problemCount: number;
+  pendingReviewCount: number;
+  projectTrend: { type: string; value: number };
+  entityTrend: { type: string; value: number };
+  problemTrend: { type: string; value: number };
+}
 
-const mockKnowledgeStats = {
-  totalEntities: 15420,
-  totalRelations: 8650,
-  entityTypes: [
-    { type: 'Class', count: 5200, percentage: 33.7 },
-    { type: 'Method', count: 6800, percentage: 44.1 },
-    { type: 'Field', count: 2100, percentage: 13.6 },
-    { type: 'Interface', count: 1320, percentage: 8.6 },
-  ],
-};
+interface KnowledgeStats {
+  totalEntities: number;
+  totalRelations: number;
+  entityTypes: Array<{ type: string; count: number; percentage: number }>;
+}
 
-const mockRefactorStats = {
-  totalProblems: 89,
-  bySeverity: [
-    { severity: 'high' as const, count: 12, percentage: 13.5 },
-    { severity: 'medium' as const, count: 35, percentage: 39.3 },
-    { severity: 'low' as const, count: 42, percentage: 47.2 },
-  ],
-  estimatedHours: 156,
-};
+interface RefactorStats {
+  totalProblems: number;
+  bySeverity: Array<{ severity: string; count: number; percentage: number }>;
+  estimatedHours: number;
+}
 
-const mockRecentTasks = {
-  extractTasks: [
-    { taskId: '1', projectName: 'stock-service', status: 'completed' as const, progress: 100, entityCount: 5200, createdAt: '2026-03-14 10:30:00' },
-    { taskId: '2', projectName: 'user-center', status: 'running' as const, progress: 65, entityCount: 3200, createdAt: '2026-03-15 09:00:00' },
-  ],
-  refactorTasks: [
-    { taskId: '3', projectName: 'stock-service', status: 'completed' as const, problemCount: 45, highPriorityCount: 8, estimatedHours: 80, createdAt: '2026-03-14 14:00:00' },
-  ],
-};
+interface RecentTasks {
+  extractTasks: Array<{
+    taskId: string;
+    projectName: string;
+    status: string;
+    progress: number;
+    entityCount: number;
+    createdAt: string;
+  }>;
+  refactorTasks: Array<{
+    taskId: string;
+    projectName: string;
+    status: string;
+    problemCount: number;
+    highPriorityCount: number;
+    estimatedHours: number;
+    createdAt: string;
+  }>;
+}
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
+  
+  // 状态
+  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [knowledgeStats, setKnowledgeStats] = useState<KnowledgeStats | null>(null);
+  const [refactorStats, setRefactorStats] = useState<RefactorStats | null>(null);
+  const [recentTasks, setRecentTasks] = useState<RecentTasks | null>(null);
+
+  // 加载数据
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  const loadData = async () => {
+    setLoading(true);
+    try {
+      const [statsData, knowledgeData, refactorData, tasksData] = await Promise.all([
+        dashboardApi.getStats(),
+        dashboardApi.getKnowledgeStats(),
+        dashboardApi.getRefactorStats(),
+        dashboardApi.getRecentTasks(),
+      ]);
+      
+      setStats(statsData);
+      setKnowledgeStats(knowledgeData);
+      setRefactorStats(refactorData);
+      setRecentTasks(tasksData);
+    } catch (error) {
+      message.error('加载数据失败');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // 统计卡片配置
-  const statCards = [
-    {
-      title: '项目总数',
-      value: mockStats.projectCount,
-      icon: <ProjectOutlined style={{ fontSize: 32, color: '#1677ff' }} />,
-      trend: mockStats.projectTrend,
-      color: '#1677ff',
-      route: '/extract-tasks', // 跳转到提取任务列表
-    },
-    {
-      title: '知识实体',
-      value: mockStats.entityCount,
-      icon: <DatabaseOutlined style={{ fontSize: 32, color: '#52c41a' }} />,
-      trend: mockStats.entityTrend,
-      color: '#52c41a',
-      route: '/extract-tasks', // 跳转到提取任务列表
-    },
-    {
-      title: '重构问题',
-      value: mockStats.problemCount,
-      icon: <BugOutlined style={{ fontSize: 32, color: '#faad14' }} />,
-      trend: mockStats.problemTrend,
-      color: '#faad14',
-      route: '/refactor-tasks', // 跳转到重构任务列表
-    },
-    {
-      title: '待审核数',
-      value: mockStats.pendingReviewCount,
-      icon: <ClockCircleOutlined style={{ fontSize: 32, color: '#ff4d4f' }} />,
-      trend: null,
-      color: '#ff4d4f',
-      route: '/review-workflow', // 跳转到审核工作流
-    },
-  ];
+  const getStatCards = () => {
+    if (!stats) return [];
+    
+    return [
+      {
+        title: '项目总数',
+        value: stats.projectCount,
+        icon: <ProjectOutlined style={{ fontSize: 32, color: '#1677ff' }} />,
+        trend: stats.projectTrend,
+        color: '#1677ff',
+        route: '/extract-tasks',
+      },
+      {
+        title: '知识实体',
+        value: stats.entityCount,
+        icon: <DatabaseOutlined style={{ fontSize: 32, color: '#52c41a' }} />,
+        trend: stats.entityTrend,
+        color: '#52c41a',
+        route: '/extract-tasks',
+      },
+      {
+        title: '重构问题',
+        value: stats.problemCount,
+        icon: <BugOutlined style={{ fontSize: 32, color: '#faad14' }} />,
+        trend: stats.problemTrend,
+        color: '#faad14',
+        route: '/refactor-tasks',
+      },
+      {
+        title: '待审核数',
+        value: stats.pendingReviewCount,
+        icon: <ClockCircleOutlined style={{ fontSize: 32, color: '#ff4d4f' }} />,
+        trend: null,
+        color: '#ff4d4f',
+        route: '/review-workflow',
+      },
+    ];
+  };
 
   // 知识图谱饼图配置
-  const knowledgePieOption = {
-    title: {
-      text: '知识图谱统计',
-      left: 'center',
-    },
-    tooltip: {
-      trigger: 'item',
-      formatter: '{b}: {c} ({d}%)',
-    },
-    legend: {
-      orient: 'vertical',
-      left: 'left',
-    },
-    series: [
-      {
-        name: '实体类型',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderColor: '#fff',
-          borderWidth: 2,
-        },
-        label: {
-          show: false,
-          position: 'center',
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 20,
-            fontWeight: 'bold',
-          },
-        },
-        labelLine: {
-          show: false,
-        },
-        data: mockKnowledgeStats.entityTypes.map(item => ({
-          value: item.count,
-          name: item.type,
-        })),
+  const getKnowledgePieOption = () => {
+    if (!knowledgeStats) return {};
+    
+    return {
+      title: {
+        text: '知识图谱统计',
+        left: 'center',
       },
-    ],
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c} ({d}%)',
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+      },
+      series: [
+        {
+          name: '实体类型',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2,
+          },
+          label: {
+            show: false,
+            position: 'center',
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 20,
+              fontWeight: 'bold',
+            },
+          },
+          labelLine: {
+            show: false,
+          },
+          data: knowledgeStats.entityTypes.map(item => ({
+            value: item.count,
+            name: item.type,
+          })),
+        },
+      ],
+    };
   };
 
   // 问题分布柱状图
-  const problemBarOption = {
-    title: {
-      text: '重构问题分布',
-      left: 'center',
-    },
-    tooltip: {
-      trigger: 'axis',
-    },
-    xAxis: {
-      type: 'category',
-      data: ['高优先级', '中优先级', '低优先级'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: mockRefactorStats.bySeverity.map((item, index) => ({
-          value: item.count,
-          itemStyle: {
-            color: index === 0 ? '#ff4d4f' : index === 1 ? '#faad14' : '#52c41a',
-          },
-        })),
-        type: 'bar',
-        barWidth: '40%',
+  const getProblemBarOption = () => {
+    if (!refactorStats) return {};
+    
+    return {
+      title: {
+        text: '重构问题分布',
+        left: 'center',
       },
-    ],
+      tooltip: {
+        trigger: 'axis',
+      },
+      xAxis: {
+        type: 'category',
+        data: ['高优先级', '中优先级', '低优先级'],
+      },
+      yAxis: {
+        type: 'value',
+      },
+      series: [
+        {
+          data: refactorStats.bySeverity.map((item, index) => ({
+            value: item.count,
+            itemStyle: {
+              color: index === 0 ? '#ff4d4f' : index === 1 ? '#faad14' : '#52c41a',
+            },
+          })),
+          type: 'bar',
+          barWidth: '40%',
+        },
+      ],
+    };
   };
 
   // 任务表格列配置
@@ -216,6 +263,16 @@ const Dashboard: React.FC = () => {
       key: 'createdAt',
     },
   ];
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '400px' }}>
+        <Spin size="large" tip="加载数据中..." />
+      </div>
+    );
+  }
+
+  const statCards = getStatCards();
 
   return (
     <div className={styles.dashboard}>
@@ -261,7 +318,7 @@ const Dashboard: React.FC = () => {
         <Col span={12}>
           <Card style={{ cursor: 'pointer' }}>
             <ReactECharts 
-              option={knowledgePieOption} 
+              option={getKnowledgePieOption()} 
               style={{ height: 300 }}
               onEvents={{
                 click: () => navigate('/extract-tasks'),
@@ -272,7 +329,7 @@ const Dashboard: React.FC = () => {
         <Col span={12}>
           <Card style={{ cursor: 'pointer' }}>
             <ReactECharts 
-              option={problemBarOption} 
+              option={getProblemBarOption()} 
               style={{ height: 300 }}
               onEvents={{
                 click: () => navigate('/refactor-tasks'),
@@ -287,7 +344,7 @@ const Dashboard: React.FC = () => {
         <Col span={12}>
           <Card title="最近提取任务" className={styles.taskCard}>
             <Table
-              dataSource={mockRecentTasks.extractTasks}
+              dataSource={recentTasks?.extractTasks || []}
               columns={extractTaskColumns}
               rowKey="taskId"
               pagination={false}
@@ -302,7 +359,7 @@ const Dashboard: React.FC = () => {
         <Col span={12}>
           <Card title="最近重构任务" className={styles.taskCard}>
             <Table
-              dataSource={mockRecentTasks.refactorTasks}
+              dataSource={recentTasks?.refactorTasks || []}
               columns={[
                 {
                   title: '项目名称',

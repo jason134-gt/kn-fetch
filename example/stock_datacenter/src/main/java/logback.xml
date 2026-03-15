@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+	<jmxConfigurator />  
+
+	<!-- 打印到控制台-->
+	<appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date %level [%thread] %10logger [%file:%line] %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<appender name="sysLog" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>stock/log/sysLog/sysLog.log</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily --> 
+			<fileNamePattern>sql-%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> <!-- or whenever the file size reaches 100MB --> 
+				<maxFileSize>100MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy> 
+		<encoder charset="UTF-8"> 
+			<pattern>%date %level [%thread] %10logger [%file:%line] %msg%n</pattern> 
+		</encoder> 
+	</appender>
+  
+	<appender name="mybusiness" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>stock/log/slf4j/mybusiness.log</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily --> 
+			<fileNamePattern>sql-%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> <!-- or whenever the file size reaches 100MB --> 
+				<maxFileSize>100MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy> 
+		<encoder charset="UTF-8"> 
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+		</encoder> 
+	</appender>
+	
+	<appender name="compile" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>stock/log/slf4j/compile.log</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily --> 
+			<fileNamePattern>sql-%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> <!-- or whenever the file size reaches 100MB --> 
+				<maxFileSize>100MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy> 
+		<encoder charset="UTF-8"> 
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+		</encoder> 
+	</appender>
+	
+	
+	<appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>stock/log/slf4j/sql.log</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily --> 
+			<fileNamePattern>sql-%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> <!-- or whenever the file size reaches 100MB --> 
+				<maxFileSize>100MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy> 
+		<encoder charset="UTF-8"> 
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+		</encoder> 
+	</appender>
+	
+	
+	<appender name="Mybatis" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>stock/log/slf4j/mybatis.log</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> <!-- rollover daily --> 
+			<fileNamePattern>sql-%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> <!-- or whenever the file size reaches 100MB --> 
+				<maxFileSize>30MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy> 
+		<encoder charset="UTF-8"> 
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+		</encoder> 
+	</appender>
+	
+	<appender name="yasLog" class="ch.qos.logback.core.rolling.RollingFileAppender"> 
+		<file>stock/log/slf4j/yas.log</file> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>yas-%d{yyyy-MM-dd}.%i.log</fileNamePattern> 
+			<maxHistory>30</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"> 
+				<maxFileSize>100MB</maxFileSize> 
+			</timeBasedFileNamingAndTriggeringPolicy> 
+		</rollingPolicy> 
+		<encoder charset="UTF-8"> 
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern> 
+		</encoder> 
+	</appender>
+
+	<!-- name与包名匹配  additivity=false 是否使用 rootLogger配置的appender进行输出 -->
+	<logger name="com.yfzx.yas" level="info" additivity="false" >
+		<appender-ref ref="yasLog"/>
+	</logger>
+
+	<!--与包名匹配 -->
+	<logger name="org.apache.ibatis"  additivity="true">
+		<level value="info" />  
+		<appender-ref ref="Mybatis"/>
+	</logger> 	
+
+	<logger name="com.yz.stock.portal.compile" level="info" additivity="true">
+		<appender-ref ref="compile"/>
+	</logger> 
+	
+	<logger name="com.yz.stock" level="info" additivity="true">
+		<appender-ref ref="mybusiness"/>
+	</logger> 
+	<!--  
+	<logger name="com.yz" level="info" additivity="true">
+		<appender-ref ref="mybusiness"/>
+	</logger> 
+	-->
+	<logger name="java.sql" level="info" additivity="true">
+		<appender-ref ref="SQL"/>
+	</logger> 
+	<!--    根节点处  设置跟级别  设置appender的引用-->
+	<root level="info">
+		<appender-ref ref="sysLog"/>
+	</root>
+</configuration>

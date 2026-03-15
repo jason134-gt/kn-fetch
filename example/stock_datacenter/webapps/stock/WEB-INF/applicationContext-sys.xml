@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	default-lazy-init="true">
+
+	<bean id="EhcacheImpl" class="com.yz.mycore.lcs.cache.EhcacheImpl"></bean>
+	<bean id="BaseLoadService" class="com.yz.mycore.lcs.service.BaseLoadService"></bean>
+	<bean id="DCDefaultDaoImpl" class="com.yz.mycore.daf.dao.dc.DCDefaultDaoImpl"></bean>
+	<bean id="DBDefaultDaoImpl" class="com.yz.mycore.daf.dao.db.DBDefaultDaoImpl"></bean>
+	<bean id="LCDefaultDaoImpl" class="com.yz.mycore.daf.dao.lc.LCDefaultDaoImpl"></bean>
+	<bean id="DataRegionPolicy" class="com.yz.mycore.core.policy.DataRegionPolicy"></bean>
+	<bean id="DCAgent" class="com.yz.mycore.daf.agent.DCAgent"></bean>
+	<bean id="LCAgent" class="com.yz.mycore.daf.agent.LCAgent"></bean>
+	<bean id="DBAgent" class="com.yz.mycore.daf.agent.DBAgent"></bean>
+	<bean id="CacheRefreshTimer" class="com.yz.mycore.daf.manager.CacheRefreshTimer"></bean>
+	<bean id="DataCenterTimer" class="com.yz.stock.portal.task.DataCenterTimer"></bean>
+	
+</beans>

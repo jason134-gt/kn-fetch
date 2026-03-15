@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Indexgroup" >
+<resultMap id="BaseResultMap" type="com.stock.common.model.Indexgroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="index_group_keys" property="indexGroupKeys" jdbcType="VARCHAR" />
+    <result column="index_group_desc" property="indexGroupDesc" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, index_group_keys, index_group_desc, type
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="indexGroupKeys != null" >
+          and index_group_keys = #{indexGroupKeys,jdbcType=VARCHAR}
+      </if>
+      <if test="indexGroupDesc != null" >
+          and index_group_desc = #{indexGroupDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null" >
+          and type = #{type,jdbcType=INTEGER}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="indexGroupKeys != null" >
+        index_group_keys = #{indexGroupKeys,jdbcType=VARCHAR},
+      </if>
+      <if test="indexGroupDesc != null" >
+        index_group_desc = #{indexGroupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Indexgroup" >
+    insert into t_index_group (id, index_group_keys, index_group_desc, 
+      type)
+    values (#{id,jdbcType=INTEGER}, #{indexGroupKeys,jdbcType=VARCHAR}, #{indexGroupDesc,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER})
+  </insert>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Indexgroup" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_index_group
+    <include refid="Base_Where" />
+  </select>
+  
+  <select id="getIndexGroupByKey" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_index_group
+    where type = #{type,jdbcType=INTEGER} and index_group_keys like CONCAT('%',#{indexCode,jdbcType=VARCHAR},'%')
+  </select>
+  <update id="update" parameterType="com.stock.common.model.Indexgroup" >
+    update t_index_group
+    <include refid="Base_Update_Set" />
+    where type = #{type,jdbcType=INTEGER} and index_group_keys = #{keys,jdbcType=VARCHAR}
+  </update>
+
+    <!-- 加载数据到缓存-->
+   <select id="loadindexgroup2cache" resultMap="BaseResultMap" parameterType="map" >
+    select * from t_index_group
+  </select>
+</mapper>

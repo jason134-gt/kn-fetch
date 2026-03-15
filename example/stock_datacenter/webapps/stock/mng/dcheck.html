@@ -1,0 +1,812 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="js/jquery-autocomplete/jquery.autocomplete.css" />
+<script type="text/javascript" src="js/jquery/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type='text/javascript' src='js/jquery-autocomplete/jquery.autocomplete.js'></script>
+ <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+<script type="text/javascript" src="js/jquery.ichoose/plug.choose.js"></script>
+<script src="js/highcharts/js/highcharts.js" type="text/javascript"></script>
+ <script src="js/highcharts/js/highcharts-more.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.ichoose/mod.udatas.js"></script>
+ <script type="text/javascript" src="js/myanalysis-common.js"></script>
+<script language="javascript" type="text/javascript">
+
+$(function() {
+	
+	initCompanysOfTag('testcompany','所有行业');
+	
+	$("#show_index").click(function(){
+		$("#show_index").val("");
+	});
+	$("#variableIndexText").click(function(){
+		$("#variableIndexText").val("");
+	});
+	$("#tr_indtag").click(function(){
+		$("#tr_indtag").val("");
+	});
+	$("#tags_div").mouseover(function(){
+		$('ul',$("#tags_div")).css("visibility","");
+	});
+	$("#testcompany").click(function(){
+		$("#testcompany").val("");
+		$("#testResult").empty();
+		$("#testAllTag").empty();
+		$("#queryAllCompanysMZCondition").empty();
+	});
+	initIndustry("root",-1);
+	
+	
+	$("#tr_create").click(function(){
+		saveDcheck(0);
+	});
+	$("#tr_modify").click(function(){
+		saveDcheck(1);
+	});
+	initIndexRule("show_index","variableIndexText");
+	$("#tableSystem").change(function(){
+		initIndexRule("show_index","variableIndexText");
+	});
+});//end ready;
+function initIndexRule(id1,id2)
+{
+		var tscode = $("#tableSystem").val();
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/cfirule/getCfiruleListByTidWithOutCache_V2?msg.tableSystemCode="+tscode, function(result){
+		  	if(retObj==null)
+				{
+					return;
+				}
+				var data = retObj.split(";");
+				if(data!=null)
+				{
+					var c_data = data;
+					$("#"+id1).flushCache();
+					$("#"+id1).autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					$("#"+id2).flushCache();
+					$("#"+id2).autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					
+				}
+
+	  });
+}
+function testTheCompany()
+{
+	var companys = $("#testcompany").val();
+	if(companys=="")
+	{
+		alert("公司不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var companycode = companys.split(":")[1];
+	testCompany(companycode);
+}
+function initCompanysOfTag(id,tag)
+{
+	var data={
+		tag:tag
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/company/getCompanyByTagWihtShort?"+$.param(data), function(result){
+		    var data = new Array(); 
+			var dataArr = retObj.split(";");
+				for(var i=0;i<dataArr.length;i++){
+					var item = dataArr[i].split(":");
+					data.push({"mid":item[1],"realname":item[0]});
+			}			
+			if(data!=null)
+			{
+				var c_data = data;
+				var option = {
+					max: 12, 
+					minChars: 0, 
+					width: 150,
+					scrollHeight: 300, 
+					matchContains: true, 
+					autoFill: false,
+					formatItem: function(item) {
+						return item.realname + ":" + item.mid;
+					},
+					formatMatch: function(item, i, max) { 
+						var newName = item.realname.replace(/[ ]/g,"");
+						return item.realname + " " + item.mid + " " +newName+" " +" " +ZhToPinyinMaster(newName) + " " + ZhToPinyin(newName);
+					}, 
+					formatResult: function(item) {
+						return item.realname + ":" + item.mid;
+					}
+				};
+				var obj = $("#"+id+"");
+				$("#"+id).flushCache();
+				obj.autocomplete(c_data, option).result(function(event, item) {
+					testCompany(item.mid);
+				});
+			}
+	  });	
+}
+function testCompany(companycode)
+{
+	var rule = $("#tr_ruledefine").val();
+	var itype = $("#ruleType").val();
+	if(rule=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var data = {
+		rule:rule,
+		companycode:companycode,
+		ruleType:itype
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/dcheck/testDcheck",data, function(result){
+		  if(result.success)
+			{
+				var data = result.data;
+				var accord = data.accord;
+				var compileResult = data.compileResult;
+				if(accord>0)	
+					$("#testResult").text("符合条件！"+compileResult);
+				else
+					$("#testResult").text("不符合条件！"+compileResult);
+			}
+			else
+			{
+				alert("操作失败！");
+			}
+	  });	
+	  
+	
+}
+function initIndustry(uid,prefix)
+{
+
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/industry/getYfzxAllIndustryJsonData", function(result){
+		  var si = yfzxjd;
+		  if(si==null||si=="")
+			  return ;
+		  indData = si;
+		  doInitIndustry("root",indData,0);	  
+	  });	
+}
+function doInitIndustry(uid,si,type)
+{
+	var name =  si.n;
+	var pid = name.split(":")[1];
+	var pindustryName = name.split(":")[0];
+	var liid = pid+"_li_"+type;
+	var ctag = "";
+	if(pid=="-1") 
+	{
+		liid = "root_li_"+type;
+		ctag = "所有行业";
+	}
+	$("#"+uid+"").append("<li id='"+liid+"' onclick=\"appendTags(event,'"+pindustryName+"');return false;\"><span style=\"width:100%\" >"+pindustryName+"</span></li>");
+	var child = si.c;
+	if(child!=null&&child.length>0)
+	{
+		var subid = pid+"_sub_"+type;
+		if(pid=="-1") 
+		 subid = "root_sub_"+type;
+		$("#"+liid+"").append("<ul class='sub_menu' id='"+subid+"' style='margin-left:-15'></ul>");
+		
+		for(var i=0;i<child.length;i++)
+		{
+			var csi = child[i];
+			doInitIndustry(subid,csi,type)	
+		}	
+	}
+}
+function stopBubble(e) {  
+    var e = e ? e : window.Event;  
+    if (window.Event) { // IE  
+        e.cancelBubble = true;   
+    } else { // FF  
+        //e.preventBubble();   
+        e.stopPropagation();   
+    }   
+} 
+function appendTags(event,industryName)
+{
+	stopBubble(event);
+	$("#tr_indtag").val(industryName);
+	$('ul',$("#root")).css("visibility","hidden");
+	var tag = $("#tr_indtag").val();
+	initCompanysOfTag('testcompany',tag);
+}
+function showVariablePanel(e,id,source)
+{
+	stopBubble(e);
+	if($("#"+id).is(":visible"))
+	{
+		$("#"+id).slideUp();
+		$("#show_xy").val(0);
+	}
+	else
+	{
+		showIndexPanel(id,source);
+	}
+}
+function showIndexPanel(id,source)
+{
+		//获取$("#deText")的位置
+		var ntop =  realOffset(source).y;
+		var nleft =  realOffset(source).x+678;
+		var id = "#"+id+"";
+		$(id).css({'position':'absolute','top':ntop,'left':nleft,'z-index':2});
+		$(id).slideDown();
+		$(id).focus();
+
+}
+//取对象的绝对位置
+function realOffset(o)
+{
+  var x = y = 0; 
+  do{
+  x += o.offsetLeft || 0; 
+  y += o.offsetTop || 0;
+  o = o.offsetParent;
+  }while(o);
+  return {"x" : x, "y" : y};
+}
+function hidenVarPanel()
+{
+	$("#variableBuildDiv").slideUp();
+	$("#showVarPanel").slideUp();
+}
+function stopBubble(e) {  
+    var e = e ? e : window.Event;  
+    if (window.Event) { // IE  
+        e.cancelBubble = true;   
+    } else { // FF  
+        //e.preventBubble();   
+        e.stopPropagation();   
+    }   
+}
+function clearObjectData(id)
+{
+	$("#"+id+"").val("");
+}
+//定义规则
+var exp = "";//规则表达式
+function appendS(o,vid)
+{
+	var dst ;
+	//区分事件发生在哪个面板
+
+	var id = vid;
+	dst = $("#"+id+"");
+	//光标的起始位置
+	var cx =0;
+	var variable = o;
+	if(exp=="")
+	{
+		exp+=variable;
+	}
+	else
+	{
+		//当输入区与缓存不相等时，则认为用户做了删除操作，则以输入区内容为准
+		if(dst.val()!=exp)
+		{
+			exp = dst.val();
+		}
+
+		//计算字符串的插入位置,并把新串插入到老串中
+	    cx = dst[0].selectionStart;
+		if(exp.length>cx+1)
+		{
+			exp = exp.substring(0,cx)+variable+exp.substring(cx,exp.length);
+		}
+		else
+		{
+			exp+=variable;
+		}
+		
+	}	
+	dst.val(exp);
+	//重置光标位置
+	dst[0].selectionStart = cx+variable.length;
+}
+function createIndexVariable()
+{
+	var index=$("#variableIndexText").val();
+	var interval=$("#v_interval_index").val();
+	if(index==null||index=="")
+	{
+		alert("指标不可以为空！");
+		$("#variableIndexText").focus();
+		return ;
+	}
+	var v=createVariable(index,interval);
+	appendS(v,'tr_ruledefine');
+	
+}
+//拼装变量
+function createVariable(x,t)
+{
+	if(t=="0")
+	{
+		return "\${"+x+"}";
+	}
+	return "\${"+x+","+t+"}";
+}
+function createShowPara()
+{
+	var showxy=$("#show_xy").val();
+	var type=$("#show_type").val();
+	var showindex=$("#show_index").val();
+	if(showindex==null||showindex=="")
+	{
+		alert("指标不可以为空！");
+		$("#show_index").focus();
+		return ;
+	}
+	var indexcode = showindex.split(":")[1];
+	var t = showxy+"^"+type+"^"+indexcode+"~";
+	appendS(t,'tr_showDefine');
+}
+function initAllTag(id)
+{
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/industry/getAllTags", function(result){
+		  if(retobj==null||retobj=="")
+			{
+			  return;
+			}
+			var data = retobj.tags;
+			if(data!=null)
+			{
+				var c_data = data;
+				var option = {
+					max: 12, 
+					minChars: 0, 
+					width: 150,
+					scrollHeight: 300, 
+					matchContains: true, 
+					autoFill: false
+				};
+				var obj = $("#"+id+"");
+				obj.autocomplete(c_data, option).result(function(event, item) {
+					reloadPage(item[0]);
+					return false;
+				 });;
+			}
+	  });	
+}
+//0：新增，1：修改
+function saveDcheck(type)
+{
+	var id ="";
+	if(type==1)
+	  id = $("#tr_id").val();
+	var rcComments = $("#tr_ruledefine").val();
+	
+	if(rcComments=="")
+	{
+		alert("参数不全！");
+		return;
+	}
+	var data = {
+		id:id,
+		rcComments:rcComments,
+	};
+	doCreateDcheck(data);
+	
+}
+function doCreateDcheck(data)
+{
+	
+	
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/dcheck/createdCheck",data, function(result){
+		  if(result.success)
+		  {
+			alert("操作成功！");
+			queryDcheck();
+		  }
+		  else
+		  {
+			alert("操作失败！");
+		  }
+		  return;
+	  });
+}
+function queryDcheck()
+{
+	$("#q_tbody").empty();
+	var id = $("#q_tr_id").val();
+	var desc = $("#q_tr_title").val();
+	if(id==""&&desc=="")
+	{
+		alert("查询参数为空！");
+		return;
+	}
+	var data = {
+		id:id,
+		desc:desc
+	};
+	
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/dcheck/getDcheckByDescOrId",data, function(result){
+		  if(!result.success)
+		  {
+			alert("操作失败！");
+			return;
+		  }
+		  var dl = result.data;
+		  if(dl!=null)
+		  {
+				
+				for(var i=0;i<dl.length;i++)
+				{
+					var tr = dl[i];
+					var id = tr.id;
+					var ruleComments = tr.ruleComments;
+					
+					var html = "<tr>";
+					html+="<td id='q_td_0"+i+"' style='border:1px solid #ccc'>"+id+"</td>";
+					html+="<td id='q_td_1"+i+"' style='border:1px solid #ccc'>"+ruleComments+"</td>";
+					html+="<td style='border:1px solid #ccc'><span style='cursor:pointer;color:red' onclick='modifyDcheck("+i+")'>修改</span>|<span style='cursor:pointer;color:red' onclick='delDcheck("+id+")'>删除</span></td>";
+					html+="</tr>";
+					$("#q_tbody").append(html);
+				}
+		  }
+		  return;
+	  });
+}
+function modifyDcheck(i)
+{
+	var id = $("#q_td_0"+i).text();
+	var rule = $("#q_td_1"+i).text();
+
+	 $("#tr_id").val(id);
+	 $("#tr_ruledefine").val(rule);
+
+	 window.scrollTo(0,0);
+}
+function delDcheck(id)
+{
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/dcheck/delDcheck",{id:id}, function(result){
+		  if(result.success)
+		  {
+			alert("操作成功！");
+			queryDcheck();
+		  }
+		  else
+		  {
+			alert("操作失败！");
+		  }
+		  return;
+	  });
+}
+function showChart()
+{
+		var id = "chartdiv";
+		var cs = $("#tr_showDefine").val();
+		if(cs=="") 
+		{
+			alert("展示方案内容为空！");
+			return;
+		}
+		var companys = $("#testcompany").val();
+		if(companys=="") 
+		{
+			alert("测试公司为空！");
+			$("#testcompany").focus();
+			return;
+		}
+		var xindexs="";
+		var yindexs="";
+		var csa = cs.split("~");
+		for(var i=0;i<csa.length;i++)
+		{
+			var si = csa[i].split("^");
+			if(si=="") continue;
+			var zi = si[0];
+			if(zi==0)
+				{
+					xindexs+=si[2];
+					xindexs+="^";
+				}
+			if(zi==1)
+				{
+					yindexs+=si[2];
+					yindexs+="^";
+				}
+		}
+		if(xindexs==""&&yindexs=="")
+		{
+			alert("展示方案解析出错！");
+			$("#tr_showDefine").focus();
+			return;
+		}
+		createTrendsAnalysis("chartdiv_0",companys,xindexs,yindexs,"2009-06-30","");
+		$("#chartdiv_1").empty();
+		$("#chartdiv_1").append("<span style='color:red;cursor:pointer' onclick='closeChartDiv()'>关闭</span>");
+		$("#chartdiv").show();
+		
+}
+function closeChartDiv()
+{
+	$("#chartdiv").hide();
+}
+function queryOneCompanyAllCfTag()
+{
+	var companys = $("#testcompany").val();
+	if(companys=="")
+	{
+		alert("公司不可以为空！");
+		$("#testcompany").focus();
+		return;
+	}
+	var companycode = companys.split(":")[1];
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/Dcheck/realComputeOneCompanyAllCFTag",{companycode:companycode}, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllTag = result.data;
+		  if(testAllTag!="")
+		  {
+			 $("#testAllTag").text(testAllTag);
+		  }
+		  else
+		  {
+				$("#testAllTag").text("没有相关的财务标签！");
+		  }
+	  });
+	
+}
+function reset()
+{
+	$("#tr_id").val("");
+	 $("#tableSystem").val("");
+	 $("#tr_indtag").val("");
+	 $("#tr_title").val("");
+	 $("#tr_ruledefine").val("");
+	 $("#tr_showDefine").val("");
+	 $("#queryAllCompanysMZCondition").empty();
+}
+function queryAllCompanysMZCondition()
+{
+	var rule = $("#tr_ruledefine").val();
+	if(rule=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var time = $("#test_time").val();
+	var timeInterval = $("#timeInterval").val();
+	var ruleType = $("#ruleType").val();
+	var timeUnit = $("#timeUnit").val();
+	var checkCount = $("#checkCount").val();
+	var setTime = $("#setTime").val();
+	if(setTime!="")
+		time = setTime;
+	var data = {
+		rule:rule,
+		time:time,
+		checkCount:checkCount,
+		timeInterval:timeInterval,
+		ruleType:ruleType,
+		timeUnit:timeUnit
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/stock/tagrule/testAllCompanyTagrule",data, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllCompanyTagrule = result.data;
+		 
+		  if(testAllCompanyTagrule!="")
+		  {
+			  $("#mult-k").empty();
+			  $("#queryAllCompanysMZCondition").empty();
+			  var ca = testAllCompanyTagrule.split(";");
+			  var size = ca.length;
+			  if(ca[ca.length-1]=="")
+				size=size-1;
+			  $("#queryAllCompanysMZCondition").append("共计:"+size+"家;");
+			  for(var i=0;i<ca.length;i++)
+			  {
+					var cs = ca[i];
+					var cname = cs.split(":")[0];
+					var ccode = cs.split(":")[1];
+					var color="";
+					if(cname=="date")
+						color="red";
+					$("#queryAllCompanysMZCondition").append("<a class='a-clazz' style='color:"+color+"' href='#' cname='"+cname+"' ccode='"+ccode+"' onclick='return false;'>"+cs+"</a>");
+			  }
+			 
+			  $("#queryAllCompanysMZCondition").find(".a-clazz").bind("click",function(){
+					 var cname = $(this).attr("cname");
+					 var ccode = $(this).attr("ccode");
+					 var clazz = "a-clazz-"+new Date().getTime();
+					 if(cname!="date")
+						addMkItem(clazz,cname,ccode);
+					var finded = false;
+					var fdate ;
+					$("#queryAllCompanysMZCondition").find(".a-clazz").each(function(){
+						var fcname = $(this).attr("cname");
+						var fccode = $(this).attr("ccode");
+						if(fccode == ccode)
+							finded = true;
+						if(finded==true&&fcname=="date")
+						{
+							fdate = fccode.substring(0,4)+"-"+fccode.substring(4,6)+"-"+fccode.substring(6,8);
+							return false;
+						}
+					});
+					
+					if(fdate!=null)
+						testThis(cname,ccode,fdate);
+			  });
+		  }
+		  else
+		  {
+				$("#queryAllCompanysMZCondition").text("没有相关的公司！");
+		  }
+	  });
+}
+</script>
+</head>
+<body>
+<div id="header">
+</div>
+<div  style="float:left;margin-left:10" onclick="hidenVarPanel()">
+	<div style="border:1px solid #CCCCCC;width:761px;margin:5">
+		<table style="width:100%;font-size:14px">
+			<tr>
+					<td style="width:80px">编码：</td>
+					<td>
+					<input id="tr_id" type="text"/>
+					</td>
+			</tr>
+			<tr>
+				<td style="width:80px">报表体系：</td>
+				<td>
+				<select id="tableSystem" name="tableSystemCode">
+						<option selected="" value="ts_00003">A股通用报表</option>
+						<option value="ts_00004">A股银行报表</option>
+						<option value="ts_00005">A股保险报表</option>
+						<option value="ts_00006">A股证券报表</option>	
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:80px">规则属性：</td>
+				<td>
+					规则类型:  <select id="ruleType" name="rule.ruleType">
+								<option value='1' selected>财务规则</option>
+								<option value='2'>行情规则</option>
+							</select><br/>
+					间隔:<select id="timeInterval" name="rule.timeInterval" >
+								<option value='3' selected>3</option>
+								<option value='1' >1</option>
+								<option value='5' >5</option>
+								<option value='7' >7</option>
+								<option value='10' >10</option>
+								<option value='20' >20</option>
+								<option value='30' >30</option>
+								<option value='60' >60</option>
+								<option value='120' >120</option>
+								<option value='250' >250</option>
+							</select>
+							间隔单位:<select id="timeUnit" name="rule.timeUnit" >
+								<option value='m' selected>月</option>
+								<option value='w' >周</option>
+								<option value='d' >日</option>
+								<option value='h' >小时</option>
+								<option value='f' >分钟</option>
+							</select>
+				</td>
+			
+			</tr>
+			<tr>
+				<td style="width:80px">规则定义：</td>
+				<td>
+					<textarea onclick="showVariablePanel(event,'variableBuildDiv',this)" id="tr_ruledefine" style="width:100%;height:300px"></textarea><br/>
+					<input type="button" onclick="clearObjectData('tr_ruledefine')" value="清"/>
+					<input type="text" id="testcompany" placeholder="请输入公司"/>
+					<input type="button" onclick="testTheCompany()" value="测试"/>
+					<span id="testResult"></span>
+					<input type="button" onclick="queryAllCompanysMZCondition()" value="查询所有满足条件的公司"/>
+					<input type="text" id="checkCount" placeholder="请输入限定的公司数" value="5"/>
+					<span id="queryAllCompanysMZCondition"></span>
+				</td>
+			</tr>
+			<tr style="border:1px solid #ccc">
+				<td style="width:80px">操作：</td>
+				<td>
+					<input id="tr_create" type="button" style="color:red" value="新增"/>
+					<input id="tr_modify" type="button" style="color:red" value="修改"/>
+					<input  type="button" style="color:red" value="重置" onclick="reset()"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="border:1px solid #CCCCCC;width:761px;margin:5;font-size:14px;">	
+		<div>
+			<table style="font-size:14px;width:100%;">
+				<tr>
+					<td>规则id:<input id="q_tr_id" type="text" placeholder="请输入规则id"/></td>
+					<td>规则标题:<input style="width:300px" id="q_tr_title" type="text" placeholder="请输入规则标题"/></td>
+					<td><input id="tr_query" type="button" value="查询" onclick="queryDcheck()"/></td>
+				</tr>
+			</table>
+		</div>
+		<div></div>
+		<table style="width:100%;font-size:14px;border:1px solid #ccc;border-collapse: collapse;">
+			<thead>
+				<tr><th>编码</th><th>规则定义</th><th>操作</th></tr>
+			</thead>
+			<tbody id="q_tbody">
+			
+			</tbody>
+		</table>
+	</div>
+</div>
+<div id="variableBuildDiv" style="border-style:solid; border-width:1px;width:319px;display:none;background:gray">
+	指标:<input type="text" name="variableIndexText" id="variableIndexText"  placeholder="请输入指标"/>
+	间隔:<select name="v_interval_index" id="v_interval_index" >
+			<option value='-24'>-24</option>
+			<option value='-21'>-21</option>			
+			<option value='-18'>-18</option>		
+			<option value='-15'>-15</option>			
+			<option value='-12'>-12</option>				
+			<option value='-9'>-9</option>				
+			<option value='-6'>-6</option>
+			<option value='-3'>-3</option>
+			<option value='0' selected>0</option>
+			<option value='3'>3</option>
+			<option value='6'>6</option>
+			<option value='9'>9</option>
+			<option value='12'>12</option>
+			<option value='15'>15</option>
+			<option value='18'>18</option>
+			<option value='21'>21</option>
+			<option value='24'>24</option>	
+	</select>
+	<input type="button" id="createIndexVariable" onclick="createIndexVariable()" value="生成"/><br/>
+	<input type="button"  value="(" onclick="appendS('(','tr_ruledefine')">
+	<input type="button"  value=")" onclick="appendS(')','tr_ruledefine')">
+	<input type="button"  value="+" onclick="appendS('+','tr_ruledefine')">
+	<input type="button"  value="-" onclick="appendS('-','tr_ruledefine')">
+	<input type="button"  value="*" onclick="appendS('*','tr_ruledefine')">
+	<input type="button"  value="/" onclick="appendS('/','tr_ruledefine')">
+	<input type="button"  value="&gt" onclick="appendS('&gt','tr_ruledefine')">
+	<input type="button"  value="&lt" onclick="appendS('&lt','tr_ruledefine')">
+	<input type="button"  value="=" onclick="appendS('=','tr_ruledefine')">
+	<input type="button"  value="or" onclick="appendS('||','tr_ruledefine')">
+	<input type="button"  value="and" onclick="appendS('&&','tr_ruledefine')"><br/>
+	
+</div>
+
+</body>
+
+</html>

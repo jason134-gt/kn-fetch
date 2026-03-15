@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	default-lazy-init="true">
+
+	<!-- ============================================================ -->
+	<!--                          DAF定时器                                -->
+	<!-- ============================================================ -->
+	<!-- 
+		*定时器CronTrigger配置说明
+		CronTrigger配置格式:
+		
+		格式: [秒] [分] [小时] [日] [月] [周] [年]
+		
+		序号 说明  是否必填  允许填写的值  			允许的通配符 
+		1	  秒	   	 是		0-59 	   			, - * /
+		2	  分	 	 是	 	0-59    	 		, - * /
+		3	 小时	 是	 	0-23	 	 		, - * /
+		4	  日		 是	 	1-31			  	, - * ? / L W
+		5	  月		 是	 	1-12 or JAN-DEC	  	, - * /
+		6	  周	 	 是	 	1-7 or SUN-SAT	  	, - * ? / L #
+		7	  年	 	 否	 	empty 或 1970-2099	, - * /
+		通配符说明:
+		* 表示所有值. 例如:在分的字段上设置 "*",表示每一分钟都会触发。
+		? 表示不指定值。使用的场景为不需要关心当前设置这个字段的值。例如:要在每月的10号触发一个操作，但不关心是周几，所以需要周位置的那个字段设置为"?" 具体设置为 0 0 0 10 * ?
+		- 表示区间。例如 在小时上设置 "10-12",表示 10,11,12点都会触发。
+		, 表示指定多个值，例如在周字段上设置 "MON,WED,FRI" 表示周一，周三和周五触发
+		/ 用于递增触发。如在秒上面设置"5/15" 表示从5秒开始，每增15秒触发(5,20,35,50)。 在月字段上设置'1/3'所示每月1号开始，每隔三天触发一次。
+		L 表示最后的意思。在日字段设置上，表示当月的最后一天(依据当前月份，如果是二月还会依据是否是润年[leap]), 在周字段上表示星期六，相当于"7"或"SAT"。如果在"L"前加上数字，则表示该数据的最后一个。例如在周字段上设置"6L"这样的格式,则表示“本月最后一个星期五" 
+		W 表示离指定日期的最近那个工作日(周一至周五). 例如在日字段上设置"15W"，表示离每月15号最近的那个工作日触发。如果15号正好是周六，则找最近的周五(14号)触发, 如果15号是周未，则找最近的下周一(16号)触发.如果15号正好在工作日(周一至周五)，则就在该天触发。如果指定格式为 "1W",它则表示每月1号往后最近的工作日触发。如果1号正是周六，则将在3号下周一触发。(注，"W"前只能设置具体的数字,不允许区间"-").
+		小提示
+		'L'和 'W'可以一组合使用。如果在日字段上设置"LW",则表示在本月的最后一个工作日触发(一般指发工资 ) 
+		
+		# 序号(表示每月的第几个周几)，例如在周字段上设置"6#3"表示在每月的第三个周六.注意如果指定"#5",正好第五周没有周六，则不会触发该配置(用在母亲节和父亲节再合适不过了)
+		小提示
+		周字段的设置，若使用英文字母是不区分大小写的 MON 与mon相同.
+		
+		
+		
+		常用示例:
+		
+		0 0 12 * * ?		 每天12点触发
+		0 15 10 ? * *		 每天10点15分触发
+		0 15 10 * * ?		 每天10点15分触发
+		0 15 10 * * ? *	 	 每天10点15分触发
+		0 15 10 * * ? 2005	 2005年每天10点15分触发
+		0 * 14 * * ?	 	 每天下午的 2点到2点59分每分触发
+		0 0/5 14 * * ?	 	 每天下午的 2点到2点59分(整点开始，每隔5分触发)
+		0 0/5 14,18 * * ?	 每天下午的 2点到2点59分(整点开始，每隔5分触发)每天下午的 18点到18点59分(整点开始，每隔5分触发)
+		0 0-5 14 * * ?	 	 每天下午的 2点到2点05分每分触发
+		0 10,44 14 ? 3 WED	 3月分每周三下午的 2点10分和2点44分触发
+		0 15 10 ? * MON-FRI	 从周一到周五每天上午的10点15分触发
+		0 15 10 15 * ?		 每月15号上午10点15分触发
+		0 15 10 L * ?		 每月最后一天的10点15分触发
+		0 15 10 ? * 6L		 每月最后一周的星期五的10点15分触发
+		0 15 10 ? * 6L 2002-2005	 从2002年到2005年每月最后一周的星期五的10点15分触发
+		0 15 10 ? * 6#3		 每月的第三周的星期五开始触发
+		0 0 12 1/5 * ?	   	 每月的第一个中午开始每隔5天触发一次
+		0 11 11 11 11 ?		 每年的11月11号 11点11分触发(光棍节)
+		
+		
+	-->
+
+	<!-- ============================================================ -->
+	<!--                          refreshLC任务                          -->
+	<!-- ============================================================ -->
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="jobtask_DAFTimer_refreshLC"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="CacheRefreshTimer" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>refreshLC</value>
+		</property>
+	</bean>
+	
+	<bean id="jobtask_DAFTimer_refreshLC_cron"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="CacheRefreshTimer" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>refreshLC_cron</value>
+		</property>
+	</bean>
+	
+	<bean id="jobtask_DataCenterTimer_datacompute_cron_cf"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="DataCenterTimer" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>datacompute_cron_cf</value>
+		</property>
+	</bean>
+	
+	<bean id="jobtask_DataCenterTimer_datacompute_cron_trade"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="DataCenterTimer" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>datacompute_cron_trade</value>
+		</property>
+	</bean>
+	
+	<bean id="jobtask_DataCenterTimer_importFoundCgrs"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="DataCenterTimer" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>importFoundCgrsSetTime</value>
+		</property>
+	</bean>
+	
+	<!-- 配置调度任务,简单模式   -->
+	<bean id="simpleReportTrigger_DAFTimer_refreshLC"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_DAFTimer_refreshLC" />
+		</property>
+		<property name="repeatInterval">
+			<value>3600000</value>
+		</property>
+	</bean>
+
+	<bean id="simpleReportTrigger_DataCenterTimer_refreshLC"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_DataCenterTimer_datacompute_cron_cf" />
+		</property>
+		<property name="repeatInterval">
+			<value>3600000</value>
+		</property>
+	</bean>
+
+	<!-- 配置调度任务,复杂定制模式,月份中的日期和星期不能同时设置   -->
+	<!-- 刷新定时任务 -->
+	<bean id="cronReportTrigger_DAFTimer_refreshLC"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_DAFTimer_refreshLC_cron" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 05 * * ?</value>
+			<!-- 每天凌晨三点执行 -->
+		</property>
+	</bean>	
+
+<!-- 计算财务指标的定时任务 -->
+	<bean id="cronReportTrigger_DataCenterTimer_cron_cf"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_DataCenterTimer_datacompute_cron_cf" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 02 * * ?</value>
+			<!-- 每天凌晨三点执行 -->
+		</property>
+	</bean>
+<!-- 计算行情指标的定时任务 -->
+	<bean id="cronReportTrigger_DataCenterTimer_cron_trade"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_DataCenterTimer_datacompute_cron_trade" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 02 * * ?</value>
+			<!-- 每天凌晨三点执行 -->
+		</property>
+	</bean>
+	
+
+
+<!-- 计算指标的定时任务 -->
+	<bean id="cronReportTrigger_computeDataUpdateCompanyTask_bean"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="computeDataUpdateCompanyTask_bean" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 01 * * ?</value>
+			<!-- 每天凌晨三点执行 -->
+		</property>
+	</bean>
+	
+
+	<bean id="cronReportTrigger_importFoundCgrs"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="jobtask_DataCenterTimer_importFoundCgrs" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 10 * * ?</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 检查开市或收市状态 任务调度管理 -->
+	<bean id="TradeCenter" class="com.yfzx.service.trade.TradeCenter"></bean>
+	<bean id="TradeCenter_Job"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="TradeCenter" />
+		</property>
+		<!-- 检查开市或收市状态 -->
+		<property name="targetMethod">
+			<value>judgmentATradeClosed</value>
+		</property>
+	</bean>
+	<!-- 初始执行一次任务  -->
+	<!-- 初始执行一次任务  -->
+	<bean id="TradeCenter_Cron_Init"
+		class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			<ref bean="TradeCenter_Job" />
+		</property>
+		<property name="startDelay">  
+            <value>30000</value>  
+        </property> 
+        <!-- 必须设置0 才能实现启动后执行一次效果  它跟repeatInterval设置有限制 repeatCount != 0 && repeatInterval < 1 时报错  --> 
+        <property name="repeatCount">
+        	<value>2</value>
+        </property>
+        <property name="repeatInterval">  
+		  <value>10000</value>  
+		 </property> 
+		 
+	</bean>
+	<!--A股开市时间 9:30-11:30|13:00-15:00 港股开市时间9:30-12:00|13:00-16:00  -->
+	<bean id="TradeCenter_Cron_Am"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="TradeCenter_Job" />
+		</property>		
+		<property name="cronExpression">
+			<value>0/10 0,1,28,29,30,31,32,58,59 09,12,13 ? * *</value>
+		</property>
+	</bean>
+	<!-- 休市判断晚一些，可以获取更多数据  -->
+	<bean id="TradeCenter_Cron_Pm"
+		class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="TradeCenter_Job" />
+		</property>		
+		<property name="cronExpression">
+			<value>0/30 6,7 12,15,16 ? * *</value>
+		</property>
+	</bean>
+	
+	<!-- ============================================================ -->
+	<!--                     当前选用的配置方式                              -->
+	<!-- ============================================================ -->
+	<!-- 启动调度 -->
+	<bean id="startTrigger"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- snn服务器使用 -->
+				<ref bean="cronReportTrigger_DAFTimer_refreshLC" />
+				
+				<!-- 财务运算中心使用的配置 -->
+				<ref bean="cronReportTrigger_importFoundCgrs" />
+				<ref bean="cronReportTrigger_DataCenterTimer_cron_cf" />
+				
+				<!-- 行情运算中心使用的配置 
+				<ref bean="cronReportTrigger_DataCenterTimer_cron_trade" />
+				-->
+				<!-- 实时运算中心使用的配置 
+				<ref bean="cronReportTrigger_DAFTimer_refreshLC" />
+				<ref bean="TradeCenter_Cron_Init"/>
+				<ref bean="TradeCenter_Cron_Am" />
+				<ref bean="TradeCenter_Cron_Pm" />
+				-->
+				
+				
+			</list>
+		</property>
+	</bean>
+
+</beans>

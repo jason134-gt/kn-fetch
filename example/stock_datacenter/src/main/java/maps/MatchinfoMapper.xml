@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Matchinfo" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Matchinfo" >
+    <id column="system_child_table_code" property="systemChildTableCode" jdbcType="VARCHAR" />
+    <result column="data_source_code" property="dataSourceCode" jdbcType="VARCHAR" />
+    <result column="data_source_name" property="dataSourceName" jdbcType="VARCHAR" />
+    <result column="industry_code" property="industryCode" jdbcType="VARCHAR" />
+    <result column="table_system_code" property="tableSystemCode" jdbcType="VARCHAR" />
+    <result column="system_child_table_type" property="systemChildTableType" jdbcType="VARCHAR" />
+    <result column="system_child_table_name" property="systemChildTableName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    system_child_table_code, data_source_code, data_source_name, industry_code, table_system_code, 
+    system_child_table_type, system_child_table_name
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="systemChildTableCode != null" >
+          and system_child_table_code = #{systemChildTableCode,jdbcType=VARCHAR}
+      </if>
+      <if test="dataSourceCode != null" >
+          and data_source_code = #{dataSourceCode,jdbcType=VARCHAR}
+      </if>
+      <if test="dataSourceName != null" >
+          and data_source_name = #{dataSourceName,jdbcType=VARCHAR}
+      </if>
+      <if test="industryCode != null" >
+          and industry_code = #{industryCode,jdbcType=VARCHAR}
+      </if>
+      <if test="tableSystemCode != null" >
+          and table_system_code = #{tableSystemCode,jdbcType=VARCHAR}
+      </if>
+      <if test="systemChildTableType != null" >
+          and system_child_table_type = #{systemChildTableType,jdbcType=VARCHAR}
+      </if>
+      <if test="systemChildTableName != null" >
+          and system_child_table_name = #{systemChildTableName,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="dataSourceCode != null" >
+        data_source_code = #{dataSourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataSourceName != null" >
+        data_source_name = #{dataSourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        industry_code = #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tableSystemCode != null" >
+        table_system_code = #{tableSystemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="systemChildTableType != null" >
+        system_child_table_type = #{systemChildTableType,jdbcType=VARCHAR},
+      </if>
+      <if test="systemChildTableName != null" >
+        system_child_table_name = #{systemChildTableName,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Matchinfo" >
+    insert into t_match_info (system_child_table_code, data_source_code, 
+      data_source_name, industry_code, table_system_code, 
+      system_child_table_type, system_child_table_name
+      )
+    values (#{systemChildTableCode,jdbcType=VARCHAR}, #{dataSourceCode,jdbcType=VARCHAR}, 
+      #{dataSourceName,jdbcType=VARCHAR}, #{industryCode,jdbcType=VARCHAR}, #{tableSystemCode,jdbcType=VARCHAR}, 
+      #{systemChildTableType,jdbcType=VARCHAR}, #{systemChildTableName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_match_info
+    where system_child_table_code = #{systemChildTableCode,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_match_info
+    where system_child_table_code = #{systemChildTableCode,jdbcType=VARCHAR}
+  </select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Matchinfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_match_info
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_match_info
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Matchinfo" >
+    select count(*)
+    from t_match_info
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.Matchinfo" >
+    update t_match_info
+    <include refid="Base_Update_Set" />
+    where system_child_table_code = #{systemChildTableCode,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.Matchinfo" >
+    update t_match_info
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+   <!-- 加载数据到缓存-->
+   <select id="loadmatchinfo2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_match_info
+  </select>
+</mapper>

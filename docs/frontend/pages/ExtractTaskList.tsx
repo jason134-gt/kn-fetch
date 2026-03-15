@@ -12,9 +12,21 @@ import {
   PlayCircleOutlined, CloseCircleOutlined, DeleteOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { mockApi } from '../services/mockData';
-import type { ExtractTask } from '../services/mockData';
+import { extractApi } from '../services/api';
 import type { ColumnsType } from 'antd/es/table';
+
+// 类型定义
+interface ExtractTask {
+  taskId: string;
+  projectName: string;
+  projectPath: string;
+  languages: string[];
+  status: 'pending' | 'running' | 'completed' | 'failed' | 'paused';
+  progress: number;
+  entityCount: number;
+  relationCount: number;
+  createdAt: string;
+}
 
 const { Search } = Input;
 const { Option } = Select;
@@ -39,7 +51,7 @@ const ExtractTaskList: React.FC = () => {
   const loadTasks = async () => {
     setLoading(true);
     try {
-      const result = await mockApi.getExtractTasks({
+      const result = await extractApi.getTasks({
         status: filters.status === 'all' ? undefined : filters.status,
         keyword: filters.keyword || undefined,
         page: pagination.current,
@@ -66,7 +78,7 @@ const ExtractTaskList: React.FC = () => {
 
   const handleCreateTask = async (values: any) => {
     try {
-      await mockApi.createExtractTask(values);
+      await extractApi.createTask(values);
       message.success('任务创建成功');
       setCreateModalVisible(false);
       createForm.resetFields();
@@ -78,7 +90,7 @@ const ExtractTaskList: React.FC = () => {
 
   const handlePauseTask = async (taskId: string) => {
     try {
-      await mockApi.pauseExtractTask(taskId);
+      await extractApi.pauseTask(taskId);
       message.success('任务已暂停');
       loadTasks();
     } catch (error) {
@@ -88,7 +100,7 @@ const ExtractTaskList: React.FC = () => {
 
   const handleResumeTask = async (taskId: string) => {
     try {
-      await mockApi.resumeExtractTask(taskId);
+      await extractApi.resumeTask(taskId);
       message.success('任务已恢复');
       loadTasks();
     } catch (error) {
@@ -98,7 +110,7 @@ const ExtractTaskList: React.FC = () => {
 
   const handleCancelTask = async (taskId: string) => {
     try {
-      await mockApi.cancelExtractTask(taskId);
+      await extractApi.cancelTask(taskId);
       message.success('任务已取消');
       loadTasks();
     } catch (error) {
@@ -108,7 +120,7 @@ const ExtractTaskList: React.FC = () => {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      await mockApi.deleteExtractTask(taskId);
+      await extractApi.deleteTask(taskId);
       message.success('任务已删除');
       loadTasks();
     } catch (error) {

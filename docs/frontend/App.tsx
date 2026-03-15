@@ -177,13 +177,14 @@ const AppRoutes: React.FC = () => {
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route element={<MainLayout />}>
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/extract" element={<ExtractTaskList />} />
-        <Route path="/extract/:id" element={<ExtractTaskDetail />} />
-        <Route path="/refactor" element={<RefactorTaskList />} />
-        <Route path="/refactor/:id" element={<RefactorReport />} />
+        <Route path="/extract-tasks" element={<ExtractTaskList />} />
+        <Route path="/extract-tasks/:id" element={<ExtractTaskDetail />} />
+        <Route path="/refactor-tasks" element={<RefactorTaskList />} />
+        <Route path="/refactor-tasks/:id" element={<RefactorReport />} />
         <Route path="/feedback" element={<FeedbackSessionList />} />
         <Route path="/feedback/:sessionId" element={<ReviewWorkflow />} />
-        <Route path="/report" element={<ReportManagement />} />
+        <Route path="/review-workflow" element={<Navigate to="/feedback" replace />} />
+        <Route path="/reports" element={<ReportManagement />} />
         <Route path="/settings" element={<Settings />} />
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

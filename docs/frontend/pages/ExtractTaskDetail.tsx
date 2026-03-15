@@ -12,8 +12,8 @@ import {
   CheckCircleOutlined, ClockCircleOutlined
 } from '@ant-design/icons';
 import { useParams, useNavigate } from 'react-router-dom';
-import { mockApi } from '../services/mockData';
-import type { ExtractTaskDetail, KnowledgeEntity } from '../services/mockData';
+import { extractApi } from '../services/api';
+import type { ExtractTaskDetail, KnowledgeEntity } from '../api-types';
 
 const statusConfig: Record<string, { color: string; text: string }> = {
   pending: { color: 'default', text: '待处理' },
@@ -35,10 +35,10 @@ const ExtractTaskDetail: React.FC = () => {
       if (!id) return;
       setLoading(true);
       try {
-        const taskData = await mockApi.getExtractTaskDetail(id);
+        const taskData = await extractApi.getTaskDetail(id);
         setTask(taskData);
-        const entitiesData = await mockApi.getKnowledgeEntities(id);
-        setEntities(entitiesData);
+        const entitiesData = await extractApi.getEntities(id);
+        setEntities(entitiesData.items || []);
       } catch (error) {
         console.error('加载数据失败:', error);
       } finally {

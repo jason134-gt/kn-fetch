@@ -1,0 +1,142 @@
+package com.yfzx.service.hfunction;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.stock.common.constants.StockConstants;
+import com.stock.common.model.IndexMessage;
+import com.stock.common.util.DateUtil;
+import com.yfzx.service.agent.IndexValueAgent;
+import com.yfzx.service.db.IndexService;
+import com.yfzx.service.db.USubjectService;
+
+/**
+ * 计算某一段时间内的最高，最低值
+ * type:zg|zd|zz:中值,nd:天数
+ * $hlxnd(type,nd)
+ *      
+ * @author：杨真 
+ * @date：2014年10月20日
+ */
+public class HNdlhzService implements IFService{
+
+	private static HNdlhzService instance = new HNdlhzService();
+	Logger log = LoggerFactory.getLogger(this.getClass());
+
+	private HNdlhzService() {
+
+	}
+
+	public static HNdlhzService getInstance() {
+		return instance;
+	}
+
+	@Override
+	public Double doInvoke(IndexMessage req, List<String> vls) {
+		Double ret = 0.0;
+		if(vls!=null&&vls.size()>1)
+		{
+			String type = vls.get(0);
+			Integer nd = Integer.valueOf(vls.get(1));
+			ret = computeHndlhz(type,nd,req);
+		}
+		return ret;
+	}
+
+	/**
+	 * 计算某一段时间内的最高，最低值,以及中值
+	 * @param type
+	 * @param req
+	 * @return
+	 */
+	public Double computeHndlhz(String type, int nd,IndexMessage req) {
+		Date wetime = req.getTime();
+		wetime = DateUtil.getDayStartTime(wetime);
+		Calendar c = Calendar.getInstance();
+		c.setTime(wetime);
+		Date mintime = USubjectService.getInstance().getTradeIndexMinTime(req.getUidentify(),StockConstants.INDEX_CODE_TRADE_S);
+		if(mintime==null)
+			return 0.0;
+		Date maxtime = new Date();
+		//从前一天开始
+		c.add(Calendar.DAY_OF_MONTH, -1);
+		Double ret = 0.0;
+		Double zg=0.0;
+		Double zd=0.0;
+		Double zgs=0.0;//最高收盘
+		Double zds=0.0;//最低收盘
+		int dc=0;
+		while (c.getTime().compareTo(mintime) >= 0
+				&& c.getTime().compareTo(maxtime) <= 0&&dc<nd) {
+				Double czg = IndexValueAgent.getIndexValue(req.getCompanyCode(),
+						StockConstants.INDEX_CODE_TRADE_ZG, c.getTime());
+				if(czg==null||czg==0)
+				{
+					c.add(Calendar.DAY_OF_MONTH, -1);
+					continue;
+				}
+				if(czg>zg)
+				{
+					zg=czg;
+				}
+				Double czd = IndexValueAgent.getIndexValue(req.getCompanyCode(),
+						StockConstants.INDEX_CODE_TRADE_ZD, c.getTime());
+				if(czd==null||czd==0)
+				{
+					c.add(Calendar.DAY_OF_MONTH, -1);
+					continue;
+				}
+				if(zd==0||czd<zd)
+				{
+					zd=czd;
+				}
+				
+				Double hs = IndexValueAgent.getIndexValue(req.getCompanyCode(),
+						StockConstants.INDEX_CODE_TRADE_S, c.getTime());
+				if(hs==null||hs==0)
+				{
+					c.add(Calendar.DAY_OF_MONTH, -1);
+					continue;
+				}
+				if(hs>zgs)
+				{
+					zgs=hs;
+				}
+				if(zds==0||hs<zds)
+				{
+					zds=hs;
+				}
+			if (IndexService.getInstance().isTradeDate(c.getTime(),
+					req.getCompanyCode()))
+				dc++;
+			c.add(Calendar.DAY_OF_MONTH, -1);
+
+		}
+		if(type.equals("zg"))
+		{
+			ret = zg;
+		}
+		if(type.equals("zd"))
+		{
+			ret = zd;
+		}
+		if(type.equals("zz"))
+		{
+			ret = (zg+zd)/2;
+		}
+		
+		if(type.equals("zds"))
+		{
+			ret = zds;
+		}
+		if(type.equals("zgs"))
+		{
+			ret = zgs;
+		}
+		return ret;
+	}
+}

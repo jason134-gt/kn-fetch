@@ -12,9 +12,19 @@ import {
   BugOutlined, ClockCircleOutlined, WarningOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { mockApi } from '../services/mockData';
-import type { RefactorTask } from '../services/mockData';
+import { refactorApi } from '../services/api';
 import type { ColumnsType } from 'antd/es/table';
+
+// 类型定义
+interface RefactorTask {
+  taskId: string;
+  projectName: string;
+  status: 'pending' | 'analyzing' | 'completed' | 'failed';
+  problemCount: number;
+  highSeverityCount: number;
+  estimatedHours: number;
+  createdAt: string;
+}
 
 const { Search } = Input;
 const { Option } = Select;
@@ -38,7 +48,7 @@ const RefactorTaskList: React.FC = () => {
   const loadTasks = async () => {
     setLoading(true);
     try {
-      const result = await mockApi.getRefactorTasks({
+      const result = await refactorApi.getTasks({
         status: filters.status === 'all' ? undefined : filters.status,
         keyword: filters.keyword || undefined,
         page: pagination.current,
@@ -59,6 +69,7 @@ const RefactorTaskList: React.FC = () => {
 
   const handleCreateTask = async (values: any) => {
     try {
+      await refactorApi.createTask(values);
       message.success('任务创建成功');
       setCreateModalVisible(false);
       createForm.resetFields();
@@ -70,6 +81,7 @@ const RefactorTaskList: React.FC = () => {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
+      await refactorApi.deleteTask(taskId);
       message.success('任务已删除');
       loadTasks();
     } catch (error) {

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.stock.autoc.dao.tagrule.TagruleDao" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Tagrule" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+     <result column="rule_type" jdbcType="INTEGER" property="ruleType" />
+     <result column="time_interval" jdbcType="INTEGER" property="timeInterval" />
+    <result column="time_unit" jdbcType="VARCHAR" property="timeUnit" />
+    <result column="rule_original" property="ruleOriginal" jdbcType="LONGVARCHAR" />
+    <result column="rule" property="rule" jdbcType="LONGVARCHAR" />
+    <result column="tag_desc" property="tagDesc" jdbcType="VARCHAR" />
+    <result column="tsc" property="tsc" jdbcType="VARCHAR" />
+    <result column="industry_tag" property="industryTag" jdbcType="VARCHAR" />
+    <result column="chart_desc" property="chartDesc" jdbcType="VARCHAR" />
+    <result column="comments" property="comments" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rule_original,rule,tag_desc, chart_desc, create_time,tsc,industry_tag,type,rule_type,time_unit,time_interval,comments
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="id != null" >
+          and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="tagDesc != null" >
+          and tag_desc = #{tagDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="chartDesc != null" >
+          and chart_desc = #{chartDesc,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null" >
+          and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ruleOriginal != null" >
+          and rule_original = #{ruleOriginal,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="rule != null" >
+          and rule = #{rule,jdbcType=LONGVARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="tagDesc != null" >
+        tag_desc = #{tagDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="chartDesc != null" >
+        chart_desc = #{chartDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleOriginal != null" >
+        rule_original = #{ruleOriginal,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="rule != null" >
+        rule = #{rule,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="tsc != null" >
+        tsc = #{tsc,jdbcType=VARCHAR},
+      </if>
+      <if test="industryTag != null" >
+        industry_tag = #{industryTag,jdbcType=VARCHAR},
+      </if>
+       <if test="type != null" >
+         type = #{type,jdbcType=INTEGER},
+      </if>
+       <if test="comments != null" >
+         comments = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="timeUnit != null" >
+         time_unit = #{timeUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="timeInterval != null" >
+         time_interval = #{timeInterval,jdbcType=INTEGER}
+      </if>
+    </set>
+  </sql>
+  <insert id="insertTagrule" parameterType="com.stock.common.model.Tagrule" >
+    insert into t_tag_rule ( tag_desc, chart_desc, 
+      create_time, rule_original, rule,tsc,industry_tag,type,rule_type,time_unit,time_interval,comments
+      )
+    values ( #{tagDesc,jdbcType=VARCHAR}, #{chartDesc,jdbcType=VARCHAR}, 
+      now(), #{ruleOriginal,jdbcType=LONGVARCHAR},
+       #{rule,jdbcType=LONGVARCHAR}, #{tsc,jdbcType=VARCHAR}, #{industryTag,jdbcType=VARCHAR},
+       #{type,jdbcType=INTEGER},
+       #{ruleType,jdbcType=INTEGER},#{timeUnit,jdbcType=VARCHAR},#{timeInterval,jdbcType=INTEGER},#{comments,jdbcType=VARCHAR})
+  </insert>
+  <delete id="delTagruleById" parameterType="java.lang.Integer" >
+    delete from t_tag_rule
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="getTagruleById" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    *
+    from t_tag_rule
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryListByTagDesc" parameterType="map" resultMap="BaseResultMap">
+    select  * from t_tag_rule
+    where tag_desc like concat('%',#{tagDesc,jdbcType=VARCHAR},'%')
+  </select>
+
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Tagrule" >
+    select count(*)
+    from t_tag_rule
+    <include refid="Base_Where" />
+  </select>
+
+ 
+   <update id="modifyTagruleByid" parameterType="com.stock.common.model.Tagrule" >
+    update t_tag_rule
+    <include refid="Base_Update_Set" />
+     where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   
+    <select id="getTagrulesByTscFromDb" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select  * from t_tag_rule
+    where tsc like concat('%',#{tsc,jdbcType=VARCHAR},'%')
+  </select>
+  
+     <!-- 加载最新入库的指标-->
+   <select id="getLatestTagruleList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_tag_rule where 
+    <![CDATA[ 
+    	DATE(create_time) >= now() 
+		]]>
+   </select>
+  
+  <select id="queryAllTagrules" parameterType="map" resultMap="BaseResultMap">
+    select  * from t_tag_rule
+  </select>
+  
+   <select id="loadtagrule2cache" resultMap="BaseResultMap" parameterType="map" >
+    select  * from t_tag_rule
+  </select>
+  
+  <update id="updateCFRuleOfCompute" >
+    update t_tag_rule tc set tc.create_time = Date_add(now(), interval 1 day)
+  </update>
+  
+   
+</mapper>

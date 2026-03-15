@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问题详情 - {{ problem.id }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* 头部导航 */
+        .breadcrumb { padding: 10px 0; margin-bottom: 20px; }
+        .breadcrumb a { color: #667eea; text-decoration: none; }
+        .breadcrumb span { color: #999; margin: 0 10px; }
+        
+        /* 主布局 */
+        .main-grid { display: grid; grid-template-columns: 1fr 400px; gap: 20px; }
+        
+        /* 卡片 */
+        .card { background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .card-header { padding: 20px; border-bottom: 1px solid #eee; }
+        .card-header h2 { font-size: 18px; color: #333; }
+        .card-body { padding: 20px; }
+        
+        /* 问题标题 */
+        .problem-title { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+        .problem-title .id { font-size: 24px; font-weight: bold; color: #667eea; }
+        .severity { padding: 4px 12px; border-radius: 4px; font-size: 14px; font-weight: 500; }
+        .severity-high { background: #fde8e8; color: #e74c3c; }
+        .severity-medium { background: #fef3cd; color: #856404; }
+        .severity-low { background: #d4edda; color: #155724; }
+        
+        .meta-info { color: #666; font-size: 14px; }
+        .meta-info span { margin-right: 20px; }
+        
+        /* 章节 */
+        .section { margin-bottom: 30px; }
+        .section-title { font-size: 16px; font-weight: bold; color: #333; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #667eea; }
+        
+        /* 表格 */
+        .info-table { width: 100%; border-collapse: collapse; }
+        .info-table td { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .info-table td:first-child { color: #666; width: 120px; }
+        .info-table td:last-child { font-weight: 500; }
+        
+        /* 代码块 */
+        .code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 6px; padding: 15px; font-family: 'Monaco', 'Menlo', monospace; font-size: 13px; overflow-x: auto; white-space: pre; }
+        
+        /* 步骤 */
+        .step { margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px; }
+        .step-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .step-number { width: 28px; height: 28px; background: #667eea; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; }
+        .step-title { font-weight: bold; color: #333; }
+        .step-content { color: #666; line-height: 1.6; }
+        
+        /* 风险表格 */
+        .risk-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .risk-table th, .risk-table td { padding: 10px; text-align: left; border: 1px solid #eee; }
+        .risk-table th { background: #f8f9fa; color: #666; font-weight: 500; }
+        .risk-level { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .risk-level.high { background: #fde8e8; color: #e74c3c; }
+        .risk-level.medium { background: #fef3cd; color: #856404; }
+        .risk-level.low { background: #d4edda; color: #155724; }
+        
+        /* 方案卡片 */
+        .solution-card { border: 1px solid #eee; border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+        .solution-card.recommended { border-color: #667eea; }
+        .solution-header { padding: 15px; background: #f8f9fa; display: flex; justify-content: space-between; align-items: center; }
+        .solution-card.recommended .solution-header { background: #f0f4ff; }
+        .solution-name { font-weight: bold; }
+        .solution-badge { background: #667eea; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; }
+        .solution-body { padding: 15px; }
+        .solution-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; }
+        .solution-meta-item { text-align: center; }
+        .solution-meta-item .value { font-size: 18px; font-weight: bold; color: #333; }
+        .solution-meta-item .label { font-size: 12px; color: #666; }
+        
+        /* 反馈面板 */
+        .feedback-panel { position: sticky; top: 20px; }
+        .radio-group { margin-bottom: 15px; }
+        .radio-item { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; }
+        .radio-item:hover { background: #f8f9fa; }
+        .radio-item.selected { border-color: #667eea; background: #f0f4ff; }
+        .radio-item input { display: none; }
+        .radio-item .radio-circle { width: 20px; height: 20px; border: 2px solid #ddd; border-radius: 50%; position: relative; }
+        .radio-item.selected .radio-circle { border-color: #667eea; }
+        .radio-item.selected .radio-circle::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px; background: #667eea; border-radius: 50%; }
+        
+        .textarea { width: 100%; min-height: 100px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize: vertical; }
+        .textarea:focus { outline: none; border-color: #667eea; }
+        
+        /* 按钮 */
+        .btn { padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+        .btn-primary { background: #667eea; color: white; width: 100%; }
+        .btn-primary:hover { background: #5a6fd6; }
+        .btn-outline { background: white; border: 1px solid #ddd; color: #333; }
+        .btn-outline:hover { background: #f5f5f5; }
+        
+        /* 方案选择 */
+        .solution-select { margin-top: 20px; }
+        .solution-option { display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 8px; cursor: pointer; }
+        .solution-option.selected { border-color: #667eea; background: #f0f4ff; }
+        .stars { color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 面包屑导航 -->
+        <div class="breadcrumb">
+            <a href="/dashboard">报告列表</a>
+            <span>›</span>
+            <a href="/problems">问题列表</a>
+            <span>›</span>
+            <span>{{ problem.id }}</span>
+        </div>
+        
+        <div class="main-grid">
+            <!-- 左侧：问题详情 -->
+            <div class="problem-detail">
+                <!-- 问题标题 -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="problem-title">
+                            <span class="id">{{ problem.id }}</span>
+                            <span class="severity severity-{{ problem.severity }}">{{ problem.severity }}优先级</span>
+                        </div>
+                        <div class="meta-info">
+                            <span>📁 {{ problem.file_path }}</span>
+                            <span>📍 行 {{ problem.line_start }}-{{ problem.line_end }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 是什么 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📋 一、是什么（问题描述）</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="section">
+                            <div class="section-title">问题描述</div>
+                            <p>{{ problem.description }}</p>
+                        </div>
+                        
+                        <div class="section">
+                            <div class="section-title">当前状态</div>
+                            <table class="info-table">
+                                {% for key, value in problem.current_state.items() %}
+                                <tr>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                        
+                        <div class="section">
+                            <div class="section-title">代码上下文</div>
+                            <div class="code-block">{{ problem.code_context }}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 怎么修复 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>🔧 二、怎么修复</h2>
+                    </div>
+                    <div class="card-body">
+                        {% for step in problem.fix_steps %}
+                        <div class="step">
+                            <div class="step-header">
+                                <span class="step-number">{{ loop.index }}</span>
+                                <span class="step-title">{{ step.title }}</span>
+                            </div>
+                            <div class="step-content">{{ step.description }}</div>
+                            {% if step.fixed_code %}
+                            <div class="code-block" style="margin-top: 10px;">{{ step.fixed_code }}</div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <!-- 有什么风险 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>⚠️ 三、有什么风险</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="risk-table">
+                            <thead>
+                                <tr>
+                                    <th>风险类型</th>
+                                    <th>描述</th>
+                                    <th>可能性</th>
+                                    <th>影响</th>
+                                    <th>缓解措施</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for risk in problem.risks %}
+                                <tr>
+                                    <td>{{ risk.type }}</td>
+                                    <td>{{ risk.description }}</td>
+                                    <td><span class="risk-level {{ risk.probability }}">{{ risk.probability }}</span></td>
+                                    <td><span class="risk-level {{ risk.impact }}">{{ risk.impact }}</span></td>
+                                    <td>{{ risk.mitigation }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 6px;">
+                            <strong>整体风险等级:</strong> 
+                            <span class="risk-level {{ problem.risk_level }}">{{ problem.risk_level }}</span>
+                        </div>
+                        
+                        {% if problem.rollback_plan %}
+                        <div style="margin-top: 15px;">
+                            <strong>回滚方案:</strong> <code>{{ problem.rollback_plan }}</code>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- 有什么方案 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2>💡 四、有什么方案</h2>
+                    </div>
+                    <div class="card-body">
+                        {% for solution in problem.solutions %}
+                        <div class="solution-card {% if loop.index == problem.recommended_solution + 1 %}recommended{% endif %}">
+                            <div class="solution-header">
+                                <span class="solution-name">{{ solution.name }}</span>
+                                {% if loop.index == problem.recommended_solution + 1 %}
+                                <span class="solution-badge">⭐ 推荐</span>
+                                {% endif %}
+                            </div>
+                            <div class="solution-body">
+                                <p>{{ solution.description }}</p>
+                                
+                                {% if solution.pros or solution.cons %}
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                                    <div>
+                                        <strong style="color: #27ae60;">优点:</strong>
+                                        <ul style="margin-top: 5px; padding-left: 20px; color: #666;">
+                                            {% for pro in solution.pros %}
+                                            <li>{{ pro }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <strong style="color: #e74c3c;">缺点:</strong>
+                                        <ul style="margin-top: 5px; padding-left: 20px; color: #666;">
+                                            {% for con in solution.cons %}
+                                            <li>{{ con }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                
+                                <div class="solution-meta">
+                                    <div class="solution-meta-item">
+                                        <div class="value">{{ solution.work_hours }}h</div>
+                                        <div class="label">工作量</div>
+                                    </div>
+                                    <div class="solution-meta-item">
+                                        <div class="value">{{ solution.risk_level }}</div>
+                                        <div class="label">风险</div>
+                                    </div>
+                                    <div class="solution-meta-item">
+                                        <div class="value stars">{% for i in range(solution.recommendation) %}⭐{% endfor %}</div>
+                                        <div class="label">推荐度</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 右侧：反馈面板 -->
+            <div class="feedback-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>💬 用户反馈</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="radio-group" id="feedbackType">
+                            <label class="radio-item" onclick="selectFeedbackType('agree')">
+                                <input type="radio" name="feedback" value="agree">
+                                <span class="radio-circle"></span>
+                                <span>✅ 同意此问题</span>
+                            </label>
+                            <label class="radio-item" onclick="selectFeedbackType('disagree')">
+                                <input type="radio" name="feedback" value="disagree">
+                                <span class="radio-circle"></span>
+                                <span>❌ 不同意（请说明原因）</span>
+                            </label>
+                            <label class="radio-item" onclick="selectFeedbackType('modify')">
+                                <input type="radio" name="feedback" value="modify">
+                                <span class="radio-circle"></span>
+                                <span>✏️ 需要修改</span>
+                            </label>
+                        </div>
+                        
+                        <div style="margin-bottom: 15px;">
+                            <label style="font-weight: 500; margin-bottom: 8px; display: block;">修改说明:</label>
+                            <textarea class="textarea" id="feedbackContent" placeholder="请输入您的反馈意见..."></textarea>
+                        </div>
+                        
+                        <div class="solution-select">
+                            <label style="font-weight: 500; margin-bottom: 10px; display: block;">方案选择:</label>
+                            <div id="solutionSelect">
+                                {% for solution in problem.solutions %}
+                                <div class="solution-option {% if loop.index == problem.recommended_solution + 1 %}selected{% endif %}" onclick="selectSolution({{ loop.index0 }})">
+                                    <span class="radio-circle"></span>
+                                    <span>{{ solution.name }}</span>
+                                    <span class="stars">{% for i in range(solution.recommendation) %}⭐{% endfor %}</span>
+                                </div>
+                                {% endfor %}
+                                <div class="solution-option" onclick="selectSolution(-1)">
+                                    <span class="radio-circle"></span>
+                                    <span>自定义方案...</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="submitFeedback()">提交反馈</button>
+                        <button class="btn btn-outline" style="margin-top: 10px;" onclick="cancelFeedback()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedType = 'agree';
+        let selectedSolution = {{ problem.recommended_solution | default(0) }};
+        
+        function selectFeedbackType(type) {
+            selectedType = type;
+            document.querySelectorAll('.radio-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function selectSolution(index) {
+            selectedSolution = index;
+            document.querySelectorAll('.solution-option').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+        
+        function submitFeedback() {
+            const content = document.getElementById('feedbackContent').value;
+            
+            const feedback = {
+                problem_id: '{{ problem.id }}',
+                feedback_type: selectedType,
+                content: content,
+                solution_index: selectedSolution
+            };
+            
+            console.log('提交反馈:', feedback);
+            alert('反馈已提交！');
+            
+            // 返回问题列表
+            window.location.href = '/problems';
+        }
+        
+        function cancelFeedback() {
+            window.location.href = '/problems';
+        }
+        
+        // 初始化选中状态
+        document.querySelector('.radio-item').classList.add('selected');
+        document.querySelectorAll('.solution-option')[{{ problem.recommended_solution | default(0) }}].classList.add('selected');
+    </script>
+</body>
+</html>

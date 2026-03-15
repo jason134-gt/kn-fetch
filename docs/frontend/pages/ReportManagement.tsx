@@ -11,8 +11,8 @@ import {
   ReloadOutlined, EyeOutlined, DownloadOutlined,
   InboxOutlined, StarOutlined, StarFilled, FileTextOutlined
 } from '@ant-design/icons';
-import { mockApi } from '../services/mockData';
-import type { RefactorReport } from '../services/mockData';
+import { reportApi } from '../services/api';
+import type { Report, RefactorReport } from '../api-types';
 import type { ColumnsType } from 'antd/es/table';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,7 +41,7 @@ const ReportManagement: React.FC = () => {
   const loadReports = async () => {
     setLoading(true);
     try {
-      const result = await mockApi.getReports({
+      const result = await reportApi.getReports({
         status: filters.status === 'all' ? undefined : filters.status,
         keyword: filters.keyword || undefined,
         page: pagination.current,
@@ -67,13 +67,23 @@ const ReportManagement: React.FC = () => {
     totalProblems: reports.reduce((sum, r) => sum + r.summary.totalProblems, 0),
   };
 
-  const handleExport = (reportId: string) => {
-    message.success('报告导出任务已开始');
+  const handleExport = async (reportId: string) => {
+    try {
+      await reportApi.exportReport(reportId, 'markdown');
+      message.success('报告导出任务已开始');
+    } catch (error) {
+      message.error('导出报告失败');
+    }
   };
 
-  const handleArchive = (reportId: string) => {
-    message.success('报告已归档');
-    loadReports();
+  const handleArchive = async (reportId: string) => {
+    try {
+      await reportApi.archiveReport(reportId);
+      message.success('报告已归档');
+      loadReports();
+    } catch (error) {
+      message.error('归档报告失败');
+    }
   };
 
   const columns: ColumnsType<RefactorReport> = [

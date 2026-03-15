@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yz.stock.portal.dao.user.ThirdUserDao" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.user.ThirdUser" >
+    <result column="openId" property="openId" jdbcType="LONGVARCHAR" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="LONGVARCHAR" />
+    <result column="url" property="url" jdbcType="LONGVARCHAR" />
+    <result column="token" property="token" jdbcType="LONGVARCHAR" />
+    <result column="expireStr" property="expireStr" jdbcType="LONGVARCHAR" />
+	<result column="uid" property="uid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    openId,platform,nickname,url,token,expireStr,uid
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="openId != null" >
+          and openId = #{openId,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="platform != null" >
+          and platform = #{platform,jdbcType=INTEGER}
+      </if>
+      <if test="uid != null" >
+          and uid = #{uid,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="uid != null" >
+          uid = #{uid,jdbcType=BIGINT},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.user.ThirdUser">
+    insert into t_u_third (openId,platform,nickname,url,token,expireStr,uid)
+    values ( #{openId,jdbcType=LONGVARCHAR},#{platform,jdbcType=INTEGER},
+    #{nickname,jdbcType=LONGVARCHAR},#{url,jdbcType=LONGVARCHAR},#{token,jdbcType=LONGVARCHAR},
+    #{expireStr,jdbcType=LONGVARCHAR},#{uid,jdbcType=BIGINT})
+  </insert>
+  <select id="selectKey" parameterType="com.stock.common.model.user.ThirdUser" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />   
+    from t_u_third
+    where openId = #{openId,jdbcType=LONGVARCHAR} and platform = #{platform,jdbcType=INTEGER}
+  </select>
+  <select id="select" parameterType="com.stock.common.model.user.ThirdUser" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />   
+    from t_u_third
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" parameterType="map" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />   
+    from t_u_third
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.user.ThirdUser" >
+    select count(openId)
+    from t_u_third
+    <include refid="Base_Where" />
+  </select>
+  
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.user.ThirdUser" >
+    update t_u_third
+    <include refid="Base_Update_Set" />
+    where openId = #{openId,jdbcType=LONGVARCHAR} and  platform = #{platform,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getThirdUsersByUid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />   
+    from t_u_third
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>  
+  
+  <delete id="deleteThirdUserBind" parameterType="map">
+	delete from t_u_third where openId = #{openId,jdbcType=LONGVARCHAR} and uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteFromPlatformAndUid" parameterType="map">
+	delete from t_u_third where platform = #{platform,jdbcType=INTEGER} and uid = #{uid,jdbcType=BIGINT}
+  </delete>
+</mapper>

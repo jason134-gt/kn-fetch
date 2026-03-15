@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.base.Zjprofile" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.base.Zjprofile" >
+    <result column="OBJECTID" property="objectid" jdbcType="BIGINT" />
+    <result column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="SECNAME" property="secname" jdbcType="VARCHAR" />
+    <result column="DECLAREDATE" property="declaredate" jdbcType="TIMESTAMP" />
+    <result column="ENDDATE" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="F002V" property="f002v" jdbcType="VARCHAR" />
+    <result column="F003V" property="f003v" jdbcType="VARCHAR" />
+    <result column="F004V" property="f004v" jdbcType="VARCHAR" />
+    <result column="F005V" property="f005v" jdbcType="VARCHAR" />
+    <result column="F006N" property="f006n" jdbcType="DOUBLE" />
+    <result column="F007N" property="f007n" jdbcType="DOUBLE" />
+    <result column="F008N" property="f008n" jdbcType="DOUBLE" />
+    <result column="F009N" property="f009n" jdbcType="DOUBLE" />
+    <result column="F010N" property="f010n" jdbcType="DOUBLE" />
+    <result column="F011N" property="f011n" jdbcType="DOUBLE" />
+    <result column="F012N" property="f012n" jdbcType="DOUBLE" />
+    <result column="F013N" property="f013n" jdbcType="DOUBLE" />
+    <result column="F014N" property="f014n" jdbcType="DOUBLE" />
+    <result column="F015N" property="f015n" jdbcType="DOUBLE" />
+    <result column="F021N" property="f021n" jdbcType="DOUBLE" />
+    <result column="F022N" property="f022n" jdbcType="DOUBLE" />
+    <result column="F023N" property="f023n" jdbcType="DOUBLE" />
+    <result column="F024N" property="f024n" jdbcType="DOUBLE" />
+    <result column="F025N" property="f025n" jdbcType="DOUBLE" />
+    <result column="F026N" property="f026n" jdbcType="DOUBLE" />
+    <result column="F034N" property="f034n" jdbcType="DOUBLE" />
+    <result column="F036N" property="f036n" jdbcType="DOUBLE" />
+    <result column="F038N" property="f038n" jdbcType="DOUBLE" />
+    <result column="F039N" property="f039n" jdbcType="DOUBLE" />
+    <result column="F040N" property="f040n" jdbcType="DOUBLE" />
+    <result column="F042N" property="f042n" jdbcType="DOUBLE" />
+    <result column="F043N" property="f043n" jdbcType="DOUBLE" />
+    <result column="F044N" property="f044n" jdbcType="DOUBLE" />
+    <result column="F045N" property="f045n" jdbcType="DOUBLE" />
+    <result column="F046N" property="f046n" jdbcType="DOUBLE" />
+    <result column="F047N" property="f047n" jdbcType="DOUBLE" />
+    <result column="F048N" property="f048n" jdbcType="DOUBLE" />
+    <result column="F049N" property="f049n" jdbcType="DOUBLE" />
+    <result column="F050N" property="f050n" jdbcType="DOUBLE" />
+    <result column="F051N" property="f051n" jdbcType="DOUBLE" />
+    <result column="F052N" property="f052n" jdbcType="DOUBLE" />
+    <result column="F053N" property="f053n" jdbcType="DOUBLE" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="RECTIME" property="rectime" jdbcType="TIMESTAMP" />
+    <result column="MODTIME" property="modtime" jdbcType="TIMESTAMP" />
+    <result column="ISVALID" property="isvalid" jdbcType="CHAR" />
+    <result column="SEQID" property="seqid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OBJECTID, ORGID, ORGNAME, stock_code, company_code, SECNAME, DECLAREDATE, ENDDATE, 
+    time, F002V, F003V, F004V, F005V, F006N, F007N, F008N, F009N, F010N, F011N, F012N, 
+    F013N, F014N, F015N, F021N, F022N, F023N, F024N, F025N, F026N, F034N, F036N, F038N, 
+    F039N, F040N, F042N, F043N, F044N, F045N, F046N, F047N, F048N, F049N, F050N, F051N, 
+    F052N, F053N, MEMO, RECTIME, MODTIME, ISVALID, SEQID
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="objectid != null" >
+          and OBJECTID = #{objectid,jdbcType=BIGINT}
+      </if>
+      <if test="orgid != null" >
+          and ORGID = #{orgid,jdbcType=VARCHAR}
+      </if>
+      <if test="orgname != null" >
+          and ORGNAME = #{orgname,jdbcType=VARCHAR}
+      </if>
+      <if test="stockCode != null" >
+          and stock_code = #{stockCode,jdbcType=VARCHAR}
+      </if>
+      <if test="companyCode != null" >
+          and company_code = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="secname != null" >
+          and SECNAME = #{secname,jdbcType=VARCHAR}
+      </if>
+      <if test="declaredate != null" >
+          and DECLAREDATE = #{declaredate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="enddate != null" >
+          and ENDDATE = #{enddate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="time != null" >
+          and time = #{time,jdbcType=TIMESTAMP}
+      </if>
+      <if test="f002v != null" >
+          and F002V = #{f002v,jdbcType=VARCHAR}
+      </if>
+      <if test="f003v != null" >
+          and F003V = #{f003v,jdbcType=VARCHAR}
+      </if>
+      <if test="f004v != null" >
+          and F004V = #{f004v,jdbcType=VARCHAR}
+      </if>
+      <if test="f005v != null" >
+          and F005V = #{f005v,jdbcType=VARCHAR}
+      </if>
+      <if test="f006n != null" >
+          and F006N = #{f006n,jdbcType=DOUBLE}
+      </if>
+      <if test="f007n != null" >
+          and F007N = #{f007n,jdbcType=DOUBLE}
+      </if>
+      <if test="f008n != null" >
+          and F008N = #{f008n,jdbcType=DOUBLE}
+      </if>
+      <if test="f009n != null" >
+          and F009N = #{f009n,jdbcType=DOUBLE}
+      </if>
+      <if test="f010n != null" >
+          and F010N = #{f010n,jdbcType=DOUBLE}
+      </if>
+      <if test="f011n != null" >
+          and F011N = #{f011n,jdbcType=DOUBLE}
+      </if>
+      <if test="f012n != null" >
+          and F012N = #{f012n,jdbcType=DOUBLE}
+      </if>
+      <if test="f013n != null" >
+          and F013N = #{f013n,jdbcType=DOUBLE}
+      </if>
+      <if test="f014n != null" >
+          and F014N = #{f014n,jdbcType=DOUBLE}
+      </if>
+      <if test="f015n != null" >
+          and F015N = #{f015n,jdbcType=DOUBLE}
+      </if>
+      <if test="f021n != null" >
+          and F021N = #{f021n,jdbcType=DOUBLE}
+      </if>
+      <if test="f022n != null" >
+          and F022N = #{f022n,jdbcType=DOUBLE}
+      </if>
+      <if test="f023n != null" >
+          and F023N = #{f023n,jdbcType=DOUBLE}
+      </if>
+      <if test="f024n != null" >
+          and F024N = #{f024n,jdbcType=DOUBLE}
+      </if>
+      <if test="f025n != null" >
+          and F025N = #{f025n,jdbcType=DOUBLE}
+      </if>
+      <if test="f026n != null" >
+          and F026N = #{f026n,jdbcType=DOUBLE}
+      </if>
+      <if test="f034n != null" >
+          and F034N = #{f034n,jdbcType=DOUBLE}
+      </if>
+      <if test="f036n != null" >
+          and F036N = #{f036n,jdbcType=DOUBLE}
+      </if>
+      <if test="f038n != null" >
+          and F038N = #{f038n,jdbcType=DOUBLE}
+      </if>
+      <if test="f039n != null" >
+          and F039N = #{f039n,jdbcType=DOUBLE}
+      </if>
+      <if test="f040n != null" >
+          and F040N = #{f040n,jdbcType=DOUBLE}
+      </if>
+      <if test="f042n != null" >
+          and F042N = #{f042n,jdbcType=DOUBLE}
+      </if>
+      <if test="f043n != null" >
+          and F043N = #{f043n,jdbcType=DOUBLE}
+      </if>
+      <if test="f044n != null" >
+          and F044N = #{f044n,jdbcType=DOUBLE}
+      </if>
+      <if test="f045n != null" >
+          and F045N = #{f045n,jdbcType=DOUBLE}
+      </if>
+      <if test="f046n != null" >
+          and F046N = #{f046n,jdbcType=DOUBLE}
+      </if>
+      <if test="f047n != null" >
+          and F047N = #{f047n,jdbcType=DOUBLE}
+      </if>
+      <if test="f048n != null" >
+          and F048N = #{f048n,jdbcType=DOUBLE}
+      </if>
+      <if test="f049n != null" >
+          and F049N = #{f049n,jdbcType=DOUBLE}
+      </if>
+      <if test="f050n != null" >
+          and F050N = #{f050n,jdbcType=DOUBLE}
+      </if>
+      <if test="f051n != null" >
+          and F051N = #{f051n,jdbcType=DOUBLE}
+      </if>
+      <if test="f052n != null" >
+          and F052N = #{f052n,jdbcType=DOUBLE}
+      </if>
+      <if test="f053n != null" >
+          and F053N = #{f053n,jdbcType=DOUBLE}
+      </if>
+      <if test="memo != null" >
+          and MEMO = #{memo,jdbcType=VARCHAR}
+      </if>
+      <if test="rectime != null" >
+          and RECTIME = #{rectime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modtime != null" >
+          and MODTIME = #{modtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="isvalid != null" >
+          and ISVALID = #{isvalid,jdbcType=CHAR}
+      </if>
+      <if test="seqid != null" >
+          and SEQID = #{seqid,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="objectid != null" >
+        OBJECTID = #{objectid,jdbcType=BIGINT},
+      </if>
+      <if test="orgid != null" >
+        ORGID = #{orgid,jdbcType=VARCHAR},
+      </if>
+      <if test="orgname != null" >
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        company_code = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="secname != null" >
+        SECNAME = #{secname,jdbcType=VARCHAR},
+      </if>
+      <if test="declaredate != null" >
+        DECLAREDATE = #{declaredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        ENDDATE = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="f002v != null" >
+        F002V = #{f002v,jdbcType=VARCHAR},
+      </if>
+      <if test="f003v != null" >
+        F003V = #{f003v,jdbcType=VARCHAR},
+      </if>
+      <if test="f004v != null" >
+        F004V = #{f004v,jdbcType=VARCHAR},
+      </if>
+      <if test="f005v != null" >
+        F005V = #{f005v,jdbcType=VARCHAR},
+      </if>
+      <if test="f006n != null" >
+        F006N = #{f006n,jdbcType=DOUBLE},
+      </if>
+      <if test="f007n != null" >
+        F007N = #{f007n,jdbcType=DOUBLE},
+      </if>
+      <if test="f008n != null" >
+        F008N = #{f008n,jdbcType=DOUBLE},
+      </if>
+      <if test="f009n != null" >
+        F009N = #{f009n,jdbcType=DOUBLE},
+      </if>
+      <if test="f010n != null" >
+        F010N = #{f010n,jdbcType=DOUBLE},
+      </if>
+      <if test="f011n != null" >
+        F011N = #{f011n,jdbcType=DOUBLE},
+      </if>
+      <if test="f012n != null" >
+        F012N = #{f012n,jdbcType=DOUBLE},
+      </if>
+      <if test="f013n != null" >
+        F013N = #{f013n,jdbcType=DOUBLE},
+      </if>
+      <if test="f014n != null" >
+        F014N = #{f014n,jdbcType=DOUBLE},
+      </if>
+      <if test="f015n != null" >
+        F015N = #{f015n,jdbcType=DOUBLE},
+      </if>
+      <if test="f021n != null" >
+        F021N = #{f021n,jdbcType=DOUBLE},
+      </if>
+      <if test="f022n != null" >
+        F022N = #{f022n,jdbcType=DOUBLE},
+      </if>
+      <if test="f023n != null" >
+        F023N = #{f023n,jdbcType=DOUBLE},
+      </if>
+      <if test="f024n != null" >
+        F024N = #{f024n,jdbcType=DOUBLE},
+      </if>
+      <if test="f025n != null" >
+        F025N = #{f025n,jdbcType=DOUBLE},
+      </if>
+      <if test="f026n != null" >
+        F026N = #{f026n,jdbcType=DOUBLE},
+      </if>
+      <if test="f034n != null" >
+        F034N = #{f034n,jdbcType=DOUBLE},
+      </if>
+      <if test="f036n != null" >
+        F036N = #{f036n,jdbcType=DOUBLE},
+      </if>
+      <if test="f038n != null" >
+        F038N = #{f038n,jdbcType=DOUBLE},
+      </if>
+      <if test="f039n != null" >
+        F039N = #{f039n,jdbcType=DOUBLE},
+      </if>
+      <if test="f040n != null" >
+        F040N = #{f040n,jdbcType=DOUBLE},
+      </if>
+      <if test="f042n != null" >
+        F042N = #{f042n,jdbcType=DOUBLE},
+      </if>
+      <if test="f043n != null" >
+        F043N = #{f043n,jdbcType=DOUBLE},
+      </if>
+      <if test="f044n != null" >
+        F044N = #{f044n,jdbcType=DOUBLE},
+      </if>
+      <if test="f045n != null" >
+        F045N = #{f045n,jdbcType=DOUBLE},
+      </if>
+      <if test="f046n != null" >
+        F046N = #{f046n,jdbcType=DOUBLE},
+      </if>
+      <if test="f047n != null" >
+        F047N = #{f047n,jdbcType=DOUBLE},
+      </if>
+      <if test="f048n != null" >
+        F048N = #{f048n,jdbcType=DOUBLE},
+      </if>
+      <if test="f049n != null" >
+        F049N = #{f049n,jdbcType=DOUBLE},
+      </if>
+      <if test="f050n != null" >
+        F050N = #{f050n,jdbcType=DOUBLE},
+      </if>
+      <if test="f051n != null" >
+        F051N = #{f051n,jdbcType=DOUBLE},
+      </if>
+      <if test="f052n != null" >
+        F052N = #{f052n,jdbcType=DOUBLE},
+      </if>
+      <if test="f053n != null" >
+        F053N = #{f053n,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="rectime != null" >
+        RECTIME = #{rectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modtime != null" >
+        MODTIME = #{modtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null" >
+        ISVALID = #{isvalid,jdbcType=CHAR},
+      </if>
+      <if test="seqid != null" >
+        SEQID = #{seqid,jdbcType=BIGINT},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.base.Zjprofile" >
+    insert into t_finace0011 (OBJECTID, ORGID, ORGNAME, 
+      stock_code, company_code, SECNAME, 
+      DECLAREDATE, ENDDATE, time, 
+      F002V, F003V, F004V, 
+      F005V, F006N, F007N, 
+      F008N, F009N, F010N, 
+      F011N, F012N, F013N, 
+      F014N, F015N, F021N, 
+      F022N, F023N, F024N, 
+      F025N, F026N, F034N, 
+      F036N, F038N, F039N, 
+      F040N, F042N, F043N, 
+      F044N, F045N, F046N, 
+      F047N, F048N, F049N, 
+      F050N, F051N, F052N, 
+      F053N, MEMO, RECTIME, 
+      MODTIME, ISVALID, SEQID
+      )
+    values (#{objectid,jdbcType=BIGINT}, #{orgid,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, 
+      #{stockCode,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{secname,jdbcType=VARCHAR}, 
+      #{declaredate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, #{time,jdbcType=TIMESTAMP}, 
+      #{f002v,jdbcType=VARCHAR}, #{f003v,jdbcType=VARCHAR}, #{f004v,jdbcType=VARCHAR}, 
+      #{f005v,jdbcType=VARCHAR}, #{f006n,jdbcType=DOUBLE}, #{f007n,jdbcType=DOUBLE}, 
+      #{f008n,jdbcType=DOUBLE}, #{f009n,jdbcType=DOUBLE}, #{f010n,jdbcType=DOUBLE}, 
+      #{f011n,jdbcType=DOUBLE}, #{f012n,jdbcType=DOUBLE}, #{f013n,jdbcType=DOUBLE}, 
+      #{f014n,jdbcType=DOUBLE}, #{f015n,jdbcType=DOUBLE}, #{f021n,jdbcType=DOUBLE}, 
+      #{f022n,jdbcType=DOUBLE}, #{f023n,jdbcType=DOUBLE}, #{f024n,jdbcType=DOUBLE}, 
+      #{f025n,jdbcType=DOUBLE}, #{f026n,jdbcType=DOUBLE}, #{f034n,jdbcType=DOUBLE}, 
+      #{f036n,jdbcType=DOUBLE}, #{f038n,jdbcType=DOUBLE}, #{f039n,jdbcType=DOUBLE}, 
+      #{f040n,jdbcType=DOUBLE}, #{f042n,jdbcType=DOUBLE}, #{f043n,jdbcType=DOUBLE}, 
+      #{f044n,jdbcType=DOUBLE}, #{f045n,jdbcType=DOUBLE}, #{f046n,jdbcType=DOUBLE}, 
+      #{f047n,jdbcType=DOUBLE}, #{f048n,jdbcType=DOUBLE}, #{f049n,jdbcType=DOUBLE}, 
+      #{f050n,jdbcType=DOUBLE}, #{f051n,jdbcType=DOUBLE}, #{f052n,jdbcType=DOUBLE}, 
+      #{f053n,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, #{rectime,jdbcType=TIMESTAMP}, 
+      #{modtime,jdbcType=TIMESTAMP}, #{isvalid,jdbcType=CHAR}, #{seqid,jdbcType=BIGINT}
+      )
+  </insert>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.base.Zjprofile" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0011
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0011
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.base.Zjprofile" >
+    select count(*)
+    from t_finace0011
+    <include refid="Base_Where" />
+  </select>
+
+  <update id="update" parameterType="com.stock.common.model.base.Zjprofile" >
+    update t_finace0011
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+  <select id="queryZjProfileByCompanycode" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_finace0011
+    where company_code = #{companycode,jdbcType=VARCHAR}
+  </select>
+</mapper>

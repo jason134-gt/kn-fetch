@@ -1,0 +1,180 @@
+html  { 
+  background: #f9f9f9;
+  overflow:scroll;
+  overflow-x:hidden;
+  }
+body{margin:0;padding:0;}
+h2,h3,h4,h5{margin:0;border:0}
+p,h2,h3,h4,h5{padding:0 0 1em 0}
+table{border:0;margin:0;padding:0}
+h3,h4{display:inline}
+h1{color:white;font-size:3em;white-space:nowrap;text-align:center;margin-top:0px;}
+h2{font-size:1.6em;color:black;text-align:center;}
+h3{font-size:1.2em;line-height:1.4em;white-space:nowrap;font-family:Arial,Verdana,Sans-serif}
+p{margin:0;border:0}
+img,dl,dt,dd{margin:0;padding:0;border:0}
+ol,ul,li{margin:0;border:0}
+table,caption,tbody,tfoot,thead,tr,th,td,form,fieldset,embed,object,applet{margin:0;padding:0;border:0}
+body{font-size:62.5%;font-family:Arial,sans-serif;color:#000;background:#F2F5FE url(../design/bg3.gif) 0 0 repeat-x;}
+table{border-collapse:collapse;border-width:0;}
+ul{padding:0 0 1em 1em}
+ol{padding:0 0 1em 1.3em}
+li{line-height:1.5em;padding:0 0 .5em 0}
+h4,h5,table{font-size:1em}
+sup,sub{font-size:.7em}
+input,select,textarea,option{font-family:inherit;font-size:inherit}
+input:focus { background-color:#86a0e9;}
+ 
+img{border-style:none}
+a{outline:none}
+a,a:visited{color:#11C}
+a:active{color:#f00}
+
+.col-rule-main{margin:0 auto;width:100%;height:8%;font-size:1em;font-family:Arial,sans-serif;}
+.col-rule-left {width:20%;height:85%;float:left;white-space:nowrap;text-align:left;margin-top:20px}
+.col-rule-right {width:40%;height: 85%;float:left;white-space:nowrap;text-align:left;margin-right:0px}
+
+
+
+
+.gf-head{padding-top:10px}
+.gf-foot{border:1px solid #ddd;border-width:1px 0 0;clear:both;text-align:center;height: 4.8%;padding-top: 20px;padding-bottom:10px;}
+.col-real-right{margin-left: 0px;margin-top: 0px;padding: auto;}
+
+
+dl.left-border{margin:20px 0px; padding:0; list-style:none;line-height:2em;}
+dt.dthead{color:black;font-size:1.3em;font-weight:bold;cursor:pointer;}
+dd.ddlist{margin:0px 0px; padding:0; list-style:none;display:none;font-size:1.1em;}
+ul.ullist{margin:0px 10px; padding:0;list-style-image: url(../design/ico_archive2.gif);list-style-position: inside;}
+.left-border dt{margin:0; padding:0; border-bottom:1px solid #E0E8FA;}
+.ddlist li{margin:0; padding:0; border-bottom:1px solid #E0E8FA;}
+a.noactive:link{color:black;}
+a.noactive:hover {color:red;text-decoration: underline}
+a.noactive{line-height: 20px;font-family:Arial,Verdana,Sans-serif;text-decoration: none}
+.g-split .g-first{text-align:left}
+.g-unit .g-tpl-right-1 .g-first,.g-tpl-right-1 .g-first{display:inline;float:right;margin:0;width:300px;padding:20px 10px;}
+.fjfe-search{white-space:nowrap;text-align:center;}
+.fjfe-searchbox-button-wrapper{border-right:1px solid #e7e7e7;display:inline-block;height:32px;position:relative;z-index:100}
+.fjfe-searchbox-button-wrapper2{background:#eee;border:1px solid #999;border-top:1px solid #ccc;display:inline-block;height:22px}
+.fjfe-searchbox-button{background:url(/finance/images/sp11.png) -87px -36px;border:none;cursor:pointer;font-size:15px;height:30px;}
+.fjfe-searchbox-input{border:1px solid #ccc;border-bottom-color:#999;border-right:none;font-size:18px;height:32px;line-height:26px;width:200px;vertical-align:top;}
+.sfe-section{padding:6px 7px 15px;white-space:nowrap;text-align:left;}
+.hdg{background-color:#bfd0ea;height:1.6em;margin-top:2px;padding:.3em .5em 0 .5em;white-space:nowrap}
+.hdg{margin-top:0}
+a.fs:link {color: black}
+a.fs:hover {color: red;text-decoration: underline}
+a.fs{line-height: 20px;font-family:Arial,Verdana,Sans-serif;font-size:1em;text-decoration: none}
+a.footer{line-height: 20px;font-family:Arial,Verdana,Sans-serif;font-size:1em;text-decoration: none}
+a.footer:hover {color: red;text-decoration: underline}
+.fjfe-footer{font-size:1.2em;font-family:Times, TimesNR, 'New Century Schoolbook';}
+tr.lft1 td{text-align:left;background-color:#EAF2D3}
+tr.lft2 td{text-align:left;background-color:white}
+
+tr.financetable td{text-align:left;background-color:#EAF2D3}
+
+table,td,th {
+   background-color:#cfc;
+   padding:3px 2px 2px 7px;
+     
+   }
+  
+th {
+ font-size:1em;
+ text-align:left;
+ vertical-align:center;
+ padding-top:5px;
+ padding-bottom:8px;
+ height:10px;
+ background-color:#bfd0ea;
+ color:black;
+ }
+tr.alt1 td {
+   color:#000000;
+   background-color:#EAF2D3;
+   }    
+tr.alt2 td {
+   color:#000000;
+   background-color:white;
+   }     
+.datalist2{
+   border:1px solid #0058a3; /* 表格边框 */
+   font-family:Arial;
+   border-collapse:collapse; /* 边框重叠 */
+   background-color:#eaf5ff; /* 表格背景色 */
+   font-size:14px;
+   width:100%;
+   }
+.datalist2 caption{
+     padding-bottom:5px;
+     font:bold 1.4em;
+     text-align:center;
+     }
+.datalist2 th{
+    border:1px solid #0058a3; /* 行名称边框 */
+    background-color:#99CCFF; /* 行名称背景色 */
+    color:#FFFFFF;    /* 行名称颜色 */
+    font-weight:bold;
+    padding-top:4px; padding-bottom:4px;
+    padding-left:12px; padding-right:12px;
+
+    }
+.datalist2 td{
+    border:1px solid #0058a3; /* 单元格边框 */
+    text-align:left;
+    padding-top:4px; padding-bottom:4px;
+    padding-left:10px; padding-right:10px;
+    }
+.datalist2 tr:hover, .datalist2 tr.altrow{background-color:#EAF2D3; }/* 动态变色 */
+.datalist1{
+   font-family:Arial;
+   border-collapse:collapse; /* 边框重叠 */
+   background-color:#eaf5ff; /* 表格背景色 */
+   font-size:14px;
+   margin:0;
+   }
+.datalist1 caption{
+     padding-bottom:5px;
+     font:bold 1.4em;
+     text-align:center;
+     }
+.datalist1 th{
+    background-color:#4bacff; /* 行名称背景色 */
+    color:#FFFFFF;    /* 行名称颜色 */
+    font-weight:bold;
+    padding-top:4px; padding-bottom:4px;
+    padding-left:12px; padding-right:12px;
+    text-align:center;
+    }
+.datalist1 td{
+    text-align:left;
+    padding-top:4px; padding-bottom:4px;
+    padding-left:10px; padding-right:10px;
+    }
+.datalist1 tr:hover, .datalist1 tr.altrow{background-color:#EAF2D3; }/* 动态变色 */
+.datalist1{
+   font-family:Arial;
+   border-collapse:collapse; /* 边框重叠 */
+   background-color:#eaf5ff; /* 表格背景色 */
+   font-size:14px;
+   margin:0;
+   }
+.datalist1 caption{
+     padding-bottom:5px;
+     font:bold 1.4em;
+     text-align:center;
+     }
+.datalist1 th{
+    background-color:#4bacff; /* 行名称背景色 */
+    color:#FFFFFF;    /* 行名称颜色 */
+    font-weight:bold;
+    padding-top:4px; padding-bottom:4px;
+    padding-left:12px; padding-right:12px;
+    text-align:center;
+    }
+.datalist1 td{
+    text-align:left;
+    padding-top:4px; padding-bottom:4px;
+    padding-left:10px; padding-right:10px;
+    }
+.datalist1 tr:hover, .datalist1 tr.altrow{background-color:#EAF2D3; }/* 动态变色 */
+

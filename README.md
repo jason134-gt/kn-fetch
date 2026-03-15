@@ -181,6 +181,18 @@ kn-fetch/
 - **Web界面**：FastAPI + Jinja2 + TailwindCSS + Chart.js
 - **数据存储**：SQLite缓存 + JSON知识图谱
 
+## 更多文档
+
+- [开发规范](docs/DEVELOPMENT_STANDARDS.md) - 目录结构、模块划分、代码组织规范
+- [API参考](docs/API_REFERENCE.md) - API接口文档
+- [用户指南](docs/USER_GUIDE.md) - 详细使用说明
+
+## 文档
+
+- [开发规范](docs/DEVELOPMENT_STANDARDS.md) - 目录结构、模块划分、代码组织规范
+- [API参考](docs/API_REFERENCE.md) - API接口文档
+- [用户指南](docs/USER_GUIDE.md) - 详细使用说明
+
 ## 许可证
 
 MIT License

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.Fund0002" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.Fund0002" >
+    <id column="ENDDATE" property="enddate" jdbcType="TIMESTAMP" />
+    <id column="F004C" property="f004c" jdbcType="CHAR" />
+    <id column="FUNDCODE" property="fundcode" jdbcType="VARCHAR" />
+    <id column="ORGID" property="orgid" jdbcType="VARCHAR" />
+    <id column="STARTDATE" property="startdate" jdbcType="TIMESTAMP" />
+    <id column="company_code" property="companyCode" jdbcType="VARCHAR" />
+    <result column="OBJECTID" property="objectid" jdbcType="BIGINT" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="simple_name" property="simpleName" jdbcType="VARCHAR" />
+    <result column="FUNDNAME" property="fundname" jdbcType="VARCHAR" />
+    <result column="F001V" property="f001v" jdbcType="VARCHAR" />
+    <result column="F002V" property="f002v" jdbcType="VARCHAR" />
+    <result column="F003V" property="f003v" jdbcType="VARCHAR" />
+    <result column="F005N" property="f005n" jdbcType="DOUBLE" />
+    <result column="F006N" property="f006n" jdbcType="DOUBLE" />
+    <result column="F007N" property="f007n" jdbcType="DOUBLE" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="RECTIME" property="rectime" jdbcType="TIMESTAMP" />
+    <result column="MODTIME" property="modtime" jdbcType="TIMESTAMP" />
+    <result column="ISVALID" property="isvalid" jdbcType="CHAR" />
+    <result column="SEQID" property="seqid" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ENDDATE, F004C, FUNDCODE, STARTDATE, company_code, simple_name, 
+    FUNDNAME, F001V, F002V, F003V, F005N, F006N, F007N
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="enddate != null" >
+          and ENDDATE = #{enddate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="f004c != null" >
+          and F004C = #{f004c,jdbcType=CHAR}
+      </if>
+      <if test="fundcode != null" >
+          and FUNDCODE = #{fundcode,jdbcType=VARCHAR}
+      </if>
+      <if test="orgid != null" >
+          and ORGID = #{orgid,jdbcType=VARCHAR}
+      </if>
+      <if test="startdate != null" >
+          and STARTDATE = #{startdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="companyCode != null" >
+          and company_code = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="objectid != null" >
+          and OBJECTID = #{objectid,jdbcType=BIGINT}
+      </if>
+      <if test="orgname != null" >
+          and ORGNAME = #{orgname,jdbcType=VARCHAR}
+      </if>
+      <if test="simpleName != null" >
+          and simple_name = #{simpleName,jdbcType=VARCHAR}
+      </if>
+      <if test="fundname != null" >
+          and FUNDNAME = #{fundname,jdbcType=VARCHAR}
+      </if>
+      <if test="f001v != null" >
+          and F001V = #{f001v,jdbcType=VARCHAR}
+      </if>
+      <if test="f002v != null" >
+          and F002V = #{f002v,jdbcType=VARCHAR}
+      </if>
+      <if test="f003v != null" >
+          and F003V = #{f003v,jdbcType=VARCHAR}
+      </if>
+      <if test="f005n != null" >
+          and F005N = #{f005n,jdbcType=DOUBLE}
+      </if>
+      <if test="f006n != null" >
+          and F006N = #{f006n,jdbcType=DOUBLE}
+      </if>
+      <if test="f007n != null" >
+          and F007N = #{f007n,jdbcType=DOUBLE}
+      </if>
+      <if test="memo != null" >
+          and MEMO = #{memo,jdbcType=VARCHAR}
+      </if>
+      <if test="rectime != null" >
+          and RECTIME = #{rectime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modtime != null" >
+          and MODTIME = #{modtime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="isvalid != null" >
+          and ISVALID = #{isvalid,jdbcType=CHAR}
+      </if>
+      <if test="seqid != null" >
+          and SEQID = #{seqid,jdbcType=BIGINT}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="objectid != null" >
+        OBJECTID = #{objectid,jdbcType=BIGINT},
+      </if>
+      <if test="orgname != null" >
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="simpleName != null" >
+        simple_name = #{simpleName,jdbcType=VARCHAR},
+      </if>
+      <if test="fundname != null" >
+        FUNDNAME = #{fundname,jdbcType=VARCHAR},
+      </if>
+      <if test="f001v != null" >
+        F001V = #{f001v,jdbcType=VARCHAR},
+      </if>
+      <if test="f002v != null" >
+        F002V = #{f002v,jdbcType=VARCHAR},
+      </if>
+      <if test="f003v != null" >
+        F003V = #{f003v,jdbcType=VARCHAR},
+      </if>
+      <if test="f005n != null" >
+        F005N = #{f005n,jdbcType=DOUBLE},
+      </if>
+      <if test="f006n != null" >
+        F006N = #{f006n,jdbcType=DOUBLE},
+      </if>
+      <if test="f007n != null" >
+        F007N = #{f007n,jdbcType=DOUBLE},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="rectime != null" >
+        RECTIME = #{rectime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modtime != null" >
+        MODTIME = #{modtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null" >
+        ISVALID = #{isvalid,jdbcType=CHAR},
+      </if>
+      <if test="seqid != null" >
+        SEQID = #{seqid,jdbcType=BIGINT},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.Fund0002" >
+    insert into t_fund0002 (ENDDATE, F004C, FUNDCODE, 
+      ORGID, STARTDATE, company_code, 
+      OBJECTID, ORGNAME, simple_name, 
+      FUNDNAME, F001V, F002V, 
+      F003V, F005N, F006N, 
+      F007N, MEMO, RECTIME, 
+      MODTIME, ISVALID, SEQID
+      )
+    values (#{enddate,jdbcType=TIMESTAMP}, #{f004c,jdbcType=CHAR}, #{fundcode,jdbcType=VARCHAR}, 
+      #{orgid,jdbcType=VARCHAR}, #{startdate,jdbcType=TIMESTAMP}, #{companyCode,jdbcType=VARCHAR}, 
+      #{objectid,jdbcType=BIGINT}, #{orgname,jdbcType=VARCHAR}, #{simpleName,jdbcType=VARCHAR}, 
+      #{fundname,jdbcType=VARCHAR}, #{f001v,jdbcType=VARCHAR}, #{f002v,jdbcType=VARCHAR}, 
+      #{f003v,jdbcType=VARCHAR}, #{f005n,jdbcType=DOUBLE}, #{f006n,jdbcType=DOUBLE}, 
+      #{f007n,jdbcType=DOUBLE}, #{memo,jdbcType=VARCHAR}, #{rectime,jdbcType=TIMESTAMP}, 
+      #{modtime,jdbcType=TIMESTAMP}, #{isvalid,jdbcType=CHAR}, #{seqid,jdbcType=BIGINT}
+      )
+  </insert>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.Fund0002" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_fund0002
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_fund0002
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.Fund0002" >
+    select count(*)
+    from t_fund0002
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.Fund0002" >
+    update t_fund0002
+    <include refid="Base_Update_Set" />
+    where ENDDATE = #{enddate,jdbcType=TIMESTAMP}
+      and F004C = #{f004c,jdbcType=CHAR}
+      and FUNDCODE = #{fundcode,jdbcType=VARCHAR}
+      and ORGID = #{orgid,jdbcType=VARCHAR}
+      and STARTDATE = #{startdate,jdbcType=TIMESTAMP}
+      and company_code = #{companyCode,jdbcType=VARCHAR}
+  </update>
+  <update id="update" parameterType="com.stock.common.model.Fund0002" >
+    update t_fund0002
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+   <select id="queryLatestFund0002List" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_fund0002
+    where DATE_ADD(DATE(ENDDATE),INTERVAL 2 DAY) >= #{time,jdbcType=TIMESTAMP}
+  </select>
+  
+   
+  <select id="loadFundCountInfoFromDb" resultType="map" parameterType="map" >
+    select company_code,ENDDATE,count(*) as count from `t_fund0002` t where 
+    company_code = #{companyCode,jdbcType=VARCHAR} and DATE_ADD(DATE(ENDDATE),INTERVAL 2 DAY) >= #{uptime,jdbcType=TIMESTAMP}
+     group by t.ENDDATE order by t.ENDDATE desc;
+  </select>
+  
+  <select id="loadFundCountInfoFromDbV2" resultType="map" parameterType="map" >
+    select company_code,ENDDATE,count(*) as count from `t_fund0002` t where 
+    company_code = #{companyCode,jdbcType=VARCHAR} and (DATE(rectime) >= #{uptime,jdbcType=TIMESTAMP}
+    or DATE(modtime) >= #{uptime,jdbcType=TIMESTAMP})
+     group by t.ENDDATE order by t.ENDDATE desc;
+  </select>
+  
+   <select id="loadFundStockPercentFromDb" resultType="map" parameterType="map" >
+    select company_code,ENDDATE,sum(f005n) as sum from `t_fund0002` t where 
+    company_code = #{companyCode,jdbcType=VARCHAR} and DATE_ADD(DATE(ENDDATE),INTERVAL 2 DAY) >= #{uptime,jdbcType=TIMESTAMP}
+     group by t.ENDDATE order by t.ENDDATE desc;
+  </select>
+  
+   <select id="loadFundStockPercentFromDbV2" resultType="map" parameterType="map" >
+    select company_code,ENDDATE,sum(f005n) as sum from `t_fund0002` t where 
+    company_code = #{companyCode,jdbcType=VARCHAR} and (DATE(rectime) >= #{uptime,jdbcType=TIMESTAMP}
+    or DATE(modtime) >= #{uptime,jdbcType=TIMESTAMP})
+    group by t.ENDDATE order by t.ENDDATE desc;
+  </select>
+</mapper>

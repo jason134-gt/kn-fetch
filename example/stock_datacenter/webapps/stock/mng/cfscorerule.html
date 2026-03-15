@@ -1,0 +1,1037 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="js/jquery-autocomplete/jquery.autocomplete.css" />
+<script type="text/javascript" src="js/jquery/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type='text/javascript' src='js/jquery-autocomplete/jquery.autocomplete.js'></script>
+ <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection"/>
+<script type="text/javascript" language="javascript" src="js/jquery.dropdownPlain.js"></script>
+<script type="text/javascript" src="js/jquery.ichoose/plug.choose.js"></script>
+<script src="js/highcharts/js/highcharts.js" type="text/javascript"></script>
+ <script src="js/highcharts/js/highcharts-more.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery.ichoose/mod.udatas.js"></script>
+ <script type="text/javascript" src="js/myanalysis-common.js"></script>
+<script language="javascript" type="text/javascript">
+
+$(function() {
+	
+	queryCfscoreRule(1);
+	initIndexRule("add_index_0","add_index_1");
+	$("#cfsid").change(function(){
+		var id = $("#cfsid").val();
+		if(id=="-1") return;
+		queryCfscoreRule(id);
+	});	
+	$("#testcompany").click(function(){
+		$("#testcompany").val("");
+	});
+	initCompanysOfTag('testcompany','所有行业');
+	initAllTag("tag_input");
+});//end ready;
+
+function initIndexRule(id1,id2)
+{
+		var tscode = "ts_00003";
+		 $.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		 $.getScript("/cfirule/getCfiruleListByTidWithOutCache_V2?msg.tableSystemCode="+tscode, function(result){
+		  	if(retObj==null)
+				{
+					return;
+				}
+				var data = retObj.split(";");
+				if(data!=null)
+				{
+					var c_data = data;
+					$("#"+id1).flushCache();
+					$("#"+id1).autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					$("#"+id2).flushCache();
+					$("#"+id2).autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					
+					$("#variableIndexText").flushCache();
+					$("#variableIndexText").autocomplete(c_data, {
+					max: 12, //列表里的条目数
+					minChars: 0, //自动完成激活之前填入的最小字符
+					width: 150, //提示的宽度，溢出隐藏
+					scrollHeight: 300, //提示的高度，溢出显示滚动条
+					matchContains: true, //包含匹配，就是data参数里的数据，是否只要包含文本框里的数据就显示
+					autoFill: false //自动填充
+					});
+					
+				}
+
+	  });
+}
+function testTheCompany()
+{
+	var companys = $("#testcompany").val();
+	if(companys=="")
+	{
+		alert("公司不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var companycode = companys.split(":")[1];
+	testCompany(companycode);
+}
+function initCompanysOfTag(id,tag)
+{
+	var data={
+		tag:tag
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/company/getCompanyByTagWihtShort?"+$.param(data), function(result){
+		    var data = new Array(); 
+			var dataArr = retObj.split(";");
+				for(var i=0;i<dataArr.length;i++){
+					var item = dataArr[i].split(":");
+					data.push({"mid":item[1],"realname":item[0]});
+			}			
+			if(data!=null)
+			{
+				var c_data = data;
+				var option = {
+					max: 12, 
+					minChars: 0, 
+					width: 150,
+					scrollHeight: 300, 
+					matchContains: true, 
+					autoFill: false,
+					formatItem: function(item) {
+						return item.realname + ":" + item.mid;
+					},
+					formatMatch: function(item, i, max) { 
+						var newName = item.realname.replace(/[ ]/g,"");
+						return item.realname + " " + item.mid + " " +newName+" " +" " +ZhToPinyinMaster(newName) + " " + ZhToPinyin(newName);
+					}, 
+					formatResult: function(item) {
+						return item.realname + ":" + item.mid;
+					}
+				};
+				var obj = $("#"+id+"");
+				$("#"+id).flushCache();
+				obj.autocomplete(c_data, option).result(function(event, item) {
+					testCompany(item.mid);
+				});
+			}
+	  });	
+}
+function testCompany(companycode)
+{
+	var id = $("#cfsid").val();
+	queryCfscoreRule(id,companycode);
+	  
+	
+}
+function initIndustry(uid,prefix)
+{
+
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/industry/getYfzxAllIndustryJsonData", function(result){
+		  var si = yfzxjd;
+		  if(si==null||si=="")
+			  return ;
+		  indData = si;
+		  doInitIndustry("root",indData,0);	  
+	  });	
+}
+function doInitIndustry(uid,si,type)
+{
+	var name =  si.n;
+	var pid = name.split(":")[1];
+	var pindustryName = name.split(":")[0];
+	var liid = pid+"_li_"+type;
+	var ctag = "";
+	if(pid=="-1") 
+	{
+		liid = "root_li_"+type;
+		ctag = "所有行业";
+	}
+	$("#"+uid+"").append("<li id='"+liid+"' onclick=\"appendTags(event,'"+pindustryName+"');return false;\"><span style=\"width:100%\" >"+pindustryName+"</span></li>");
+	var child = si.c;
+	if(child!=null&&child.length>0)
+	{
+		var subid = pid+"_sub_"+type;
+		if(pid=="-1") 
+		 subid = "root_sub_"+type;
+		$("#"+liid+"").append("<ul class='sub_menu' id='"+subid+"' style='margin-left:-15'></ul>");
+		
+		for(var i=0;i<child.length;i++)
+		{
+			var csi = child[i];
+			doInitIndustry(subid,csi,type)	
+		}	
+	}
+}
+function stopBubble(e) {  
+    var e = e ? e : window.Event;  
+    if (window.Event) { // IE  
+        e.cancelBubble = true;   
+    } else { // FF  
+        //e.preventBubble();   
+        e.stopPropagation();   
+    }   
+} 
+function appendTags(event,industryName)
+{
+	stopBubble(event);
+	$("#tr_indtag").val(industryName);
+	$('ul',$("#root")).css("visibility","hidden");
+	var tag = $("#tr_indtag").val();
+	initCompanysOfTag('testcompany',tag);
+}
+function showVariablePanel(e,id,source)
+{
+	stopBubble(e);
+	if($("#"+id).is(":visible"))
+	{
+		$("#"+id).slideUp();
+		$("#show_xy").val(0);
+	}
+	else
+	{
+		showIndexPanel(id,source);
+	}
+}
+function showIndexPanel(id,source)
+{
+		//获取$("#deText")的位置
+		var ntop =  realOffset(source).y;
+		var nleft =  realOffset(source).x+678;
+		var id = "#"+id+"";
+		$(id).css({'position':'absolute','top':ntop,'left':nleft,'z-index':2});
+		$(id).slideDown();
+		$(id).focus();
+
+}
+//取对象的绝对位置
+function realOffset(o)
+{
+  var x = y = 0; 
+  do{
+  x += o.offsetLeft || 0; 
+  y += o.offsetTop || 0;
+  o = o.offsetParent;
+  }while(o);
+  return {"x" : x, "y" : y};
+}
+function hidenVarPanel()
+{
+	$("#variableBuildDiv").slideUp();
+	$("#showVarPanel").slideUp();
+}
+function stopBubble(e) {  
+    var e = e ? e : window.Event;  
+    if (window.Event) { // IE  
+        e.cancelBubble = true;   
+    } else { // FF  
+        //e.preventBubble();   
+        e.stopPropagation();   
+    }   
+}
+function clearObjectData(id)
+{
+	$("#"+id+"").val("");
+}
+//定义规则
+var exp = "";//规则表达式
+function appendS(o,vid)
+{
+	var dst ;
+	//区分事件发生在哪个面板
+
+	var id = vid;
+	dst = $("#"+id+"");
+	//光标的起始位置
+	var cx =0;
+	var variable = o;
+	if(exp=="")
+	{
+		exp+=variable;
+	}
+	else
+	{
+		//当输入区与缓存不相等时，则认为用户做了删除操作，则以输入区内容为准
+		if(dst.val()!=exp)
+		{
+			exp = dst.val();
+		}
+
+		//计算字符串的插入位置,并把新串插入到老串中
+	    cx = dst[0].selectionStart;
+		if(exp.length>cx+1)
+		{
+			exp = exp.substring(0,cx)+variable+exp.substring(cx,exp.length);
+		}
+		else
+		{
+			exp+=variable;
+		}
+		
+	}	
+	dst.val(exp);
+	//重置光标位置
+	dst[0].selectionStart = cx+variable.length;
+}
+function createIndexVariable()
+{
+	var index=$("#variableIndexText").val();
+	var interval=$("#v_interval_index").val();
+	if(index==null||index=="")
+	{
+		alert("指标不可以为空！");
+		$("#variableIndexText").focus();
+		return ;
+	}
+	var v=createVariable(index,interval);
+	appendS(v,'fz_condition');
+	
+}
+//拼装变量
+function createVariable(x,t)
+{
+	if(t=="0")
+	{
+		return "\${"+x+"}";
+	}
+	return "\${"+x+","+t+"}";
+}
+function createShowPara()
+{
+	var showxy=$("#show_xy").val();
+	var type=$("#show_type").val();
+	var showindex=$("#show_index").val();
+	if(showindex==null||showindex=="")
+	{
+		alert("指标不可以为空！");
+		$("#show_index").focus();
+		return ;
+	}
+	var indexcode = showindex.split(":")[1];
+	var t = showxy+"^"+type+"^"+indexcode+"~";
+	appendS(t,'tr_showDefine');
+}
+function initAllTag(id)
+{
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/industry/getAllTags", function(result){
+		  if(retobj==null||retobj=="")
+			{
+			  return;
+			}
+			var data = retobj.tags;
+			if(data!=null)
+			{
+				var c_data = data;
+				var option = {
+					max: 12, 
+					minChars: 0, 
+					width: 150,
+					scrollHeight: 300, 
+					matchContains: true, 
+					autoFill: false
+				};
+				var obj = $("#"+id+"");
+				obj.autocomplete(c_data, option).result(function(event, item) {
+					//reloadPage(item[0]);
+					return false;
+				 });;
+			}
+	  });	
+}
+
+function showChart()
+{
+		var id = "chartdiv";
+		var cs = $("#tr_showDefine").val();
+		if(cs=="") 
+		{
+			alert("展示方案内容为空！");
+			return;
+		}
+		var companys = $("#testcompany").val();
+		if(companys=="") 
+		{
+			alert("测试公司为空！");
+			$("#testcompany").focus();
+			return;
+		}
+		var xindexs="";
+		var yindexs="";
+		var csa = cs.split("~");
+		for(var i=0;i<csa.length;i++)
+		{
+			var si = csa[i].split("^");
+			if(si=="") continue;
+			var zi = si[0];
+			if(zi==0)
+				{
+					xindexs+=si[2];
+					xindexs+="^";
+				}
+			if(zi==1)
+				{
+					yindexs+=si[2];
+					yindexs+="^";
+				}
+		}
+		if(xindexs==""&&yindexs=="")
+		{
+			alert("展示方案解析出错！");
+			$("#tr_showDefine").focus();
+			return;
+		}
+		createTrendsAnalysis("chartdiv_0",companys,xindexs,yindexs,"2009-06-30","");
+		$("#chartdiv_1").empty();
+		$("#chartdiv_1").append("<span style='color:red' onclick='closeChartDiv()'>关闭</span>");
+		$("#chartdiv").show();
+		
+}
+function closeChartDiv()
+{
+	$("#chartdiv").hide();
+}
+
+function reset()
+{
+	$("#tr_id").val("");
+	 $("#tableSystem").val("");
+	 $("#tr_indtag").val("");
+	 $("#tr_title").val("");
+	 $("#tr_ruledefine").val("");
+	 $("#tr_showDefine").val("");
+	 $("#queryAllCompanysMZCondition").empty();
+}
+function queryAllCompanysMZCondition()
+{
+	var rule = $("#tr_ruledefine").val();
+	if(rule=="")
+	{
+		alert("规则不可以为空！");
+		$("#tr_ruledefine").focus();
+		return ;
+	}
+	var data = {
+		rule:rule
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/tagrule/testAllCompanyTagrule",data, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  var testAllCompanyTagrule = result.data;
+		  if(testAllCompanyTagrule!="")
+		  {
+			 $("#queryAllCompanysMZCondition").text(testAllCompanyTagrule);
+		  }
+		  else
+		  {
+				$("#queryAllCompanysMZCondition").text("没有相关的公司！");
+		  }
+	  });
+}
+function queryCfscoreRule(id,companycode)
+{
+	var ccode="";
+	if(typeof(companycode) != "undefined") 
+		ccode=companycode;
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/cfscore/getCfScoreRuleById?id="+id+"&companycode="+ccode, function(result){
+		  if(cfsret!=null)	 
+		  {
+			var cl = cfsret.cl;
+			var sum = cfsret.sum;
+			$("#tbody_0").empty();
+			$("#tbody_1").empty();
+			$("#tbody_2").empty();
+			if(typeof(sum) != "undefined")
+				$("#sumscore").text(sum.toFixed(2));
+			if(cl==null||cl.length==0) return;
+			for(var i=0;i<cl.length;i++)
+			{
+				var cfs = cl[i];
+				parseCfsrule(cfs);
+			}
+		  }
+		  
+	  });
+}
+function parseCfsrule(cfs)
+{
+	var type = cfs.type;
+	if(type==0||type==1)
+	{
+		var indexname = cfs.indexName;
+		var indexcode = cfs.indexCode;
+		var score = cfs.score;
+		var rule = cfs.rule;
+		var referValue=cfs.referValue;
+		var ra = rule.split("^");
+		var indexs=indexname+":"+indexcode;
+		var h = "<tr onclick='delRow(this,event,"+type+")'><td><input type='text' style='width:150' value='"+indexs+"'/></td><td>"+parseFloat(referValue).toFixed(7)+"</td><td><input type='text'  value='"+score+"'/></td><td><input type='text'  value='"+parseFloat(ra[0]).toFixed(7)+"'/></td>";
+			h += "<td><input type='text'  value='"+parseFloat(ra[1]).toFixed(7)+"'/></td>";
+			h += "<td><input type='text'  value='"+parseFloat(ra[2]).toFixed(7)+"'/></td>";
+			h += "<td><input type='text'  value='"+parseFloat(ra[3]).toFixed(7)+"'/></td>";
+			h += "<td><input type='text'  value='"+parseFloat(ra[4]).toFixed(7)+"'/></td>";
+			h += "<td><input type='text' style='color:blue' value='"+parseFloat(cfs.cValue).toFixed(3)+"'/></td>";
+			h += "<td><input type='text' style='color:green' value='"+parseFloat(cfs.weight).toFixed(3)+"'/></td>";
+			h += "<td><input type='text'  style='color:red'value='"+parseFloat(cfs.resultValue).toFixed(3)+"'/></td>";
+			h += "<td><span style='color:red;cursor:pointer' >X</span></td>";
+			h += "</tr>";
+		$("#tbody_"+type).append(h);
+	}
+	if(type==2)
+	{
+		var indexname = cfs.indexName;
+		var indexcode = cfs.indexCode;
+		var score = cfs.score;
+		var rule = cfs.rule;
+		var ra = rule.split("^");
+		var indexs=indexname+":"+indexcode;
+		var h = "<tr onclick='delRow(this,event,2)'>";
+		h+="<td><input type='text'  style='width:150' value='"+indexname+"'/></td>";
+		h+="<td><input type='text'  value='"+score+"'/></td>";
+		h+="<td><input type='text'  style='color:green' value='"+parseFloat(cfs.weight).toFixed(3)+"'/></td>";
+		h+="<td><input type='text'  style='color:red' value='"+parseFloat(cfs.resultValue).toFixed(3)+"'/></td>";
+		h += "<td><span style='color:red;cursor:pointer' >X</span>&nbsp|&nbsp<span onclick=\"modifyFz('"+indexname+"')\"  style='color:red;cursor:pointer' >M</span></td>";
+		h += "</tr>";
+		$("#tbody_2").append(h);
+	}
+}
+function modifyFz(name)
+{
+	var id = $("#cfsid").val();
+	var data={
+		name:name,
+		type:2,
+		id:id
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/cfscore/getCfScoreRuleByKey?"+$.param(data), function(result){
+			var cfs = cfsrret;
+			if(cfs!=null)	 
+			  {
+				reset_fz_condition();
+				var indexname = cfs.indexName;
+				var indexcode = cfs.indexCode;
+				var score = cfs.score;
+				$("#fz_name").val(indexname);
+				$("#fz_score").val(score);
+				var rule = cfs.rule;
+				var ra = rule.split("~");
+				for(var i=0;i<ra.length;i++)
+				{
+					if(ra[i]=="") continue;
+					var aa = ra[i].split("^");
+					var h = "";
+					for(var j=0;j<aa.length;j++)
+					{
+						var a = aa[j];
+						if(a=="") continue;
+						if(i==0)
+						{
+							 h+="<th onclick='delColumn(this,event)'><textarea  style='width:100px;height:80px'>"+a+"</textarea><span style='color:red;cursor:pointer' >X</span></th>";
+						}
+						else
+						{
+							if(j==0)
+							{
+								
+								h+="<td><input type='text'  placeholder='权重' value='"+a+"' /><span style='color:red;cursor:pointer' >X</span></td>";
+								continue;
+							}	
+							if(a==0)
+							{
+								h+="<td><select onchange='changeColor(this)'><option value='0' selected>否</option><option  value='1'>是</option></select></td>";
+							}
+							else
+							{
+								h+="<td><select onchange='changeColor(this)' style='color:red'><option value='0'>否</option><option value='1' selected>是</option></select></td>";
+							}
+							 
+						}
+					}
+					
+					if(i==0)
+						{
+							 $("#thead_3_tr").append(h);
+						}
+						else
+						{
+							$("#tbody_3").append("<tr>"+h+"</tr>");
+						}
+					
+				}
+				
+			  }
+		  });
+}
+function changeColor(obj)
+{
+	if($(obj).val()==1)
+		$(obj).css("color","red");
+	else
+	   $(obj).css("color","");
+}
+function reset_fz_condition()
+{
+	 $("#thead_3_tr").empty();
+	 $("#tbody_3").empty();
+	 $("#thead_3_tr").append("<th>权重</th>");
+	 $("#fz_name").val("");
+	 $("#fz_score").val("");
+	 $("#fz_condition").val("");
+}
+function addOneRow(type)
+{
+	if(type==0||type==1)
+	{
+		var indexs = $("#add_index_"+type).val();
+		if(indexs=="")
+		{
+			alert("请输入指标！");
+			$("#add_index_"+type).focus();
+			return 
+		}
+		var indexcode = indexs.split(":")[1];
+		var data ={
+			indexcode:indexcode,
+			tag:"所有行业"
+		};
+		$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		$.post("/cfscore/getIndexCodeReferValue",data, function(result){
+			  if(!result.success)	 
+			  {
+				alert("操作失败！");
+				return 
+			  }
+			  var rv = result.data;
+			  var h ="";
+			  if(rv==null) 
+			  {
+				 h = "<tr onclick='delRow(this,event,"+type+")'><td><input type='text' style='width:150' value='"+indexs+"'/></td><td></td><td><input type='text'  placeholder='权重'/></td>";
+				h +="<td><input type='text'  placeholder='参考值' /></td>";
+				h += "<td><input type='text'  placeholder='参考值' /></td>";
+				h += "<td><input type='text'  placeholder='参考值' /></td>";
+				h += "<td><input type='text'  placeholder='参考值' /></td>";
+				h += "<td><input type='text'  placeholder='参考值' /></td>";
+				h += "<td><input type='text'  placeholder='指标值'/></td>";
+				h += "<td><input type='text'  placeholder='匹配权重'/></td>";
+				h += "<td><input type='text'  placeholder='得分'/></td>";
+				h += "<td><span style='color:red;cursor:pointer' >X</span></td>";
+				h += "</tr>";
+			  }
+			  else
+			  {
+				  h = "<tr onclick='delRow(this,event,"+type+")'><td><input type='text' style='width:150' value='"+indexs+"'/></td><td>"+rv.toFixed(7)+"</td><td><input type='text'  placeholder='权重'/></td>";
+				h +="<td><input type='text'  placeholder='参考值' value='"+(rv*1.5).toFixed(7)+"'/></td>";
+				h += "<td><input type='text'  placeholder='参考值' value='"+(rv*1).toFixed(7)+"'/></td>";
+				h += "<td><input type='text'  placeholder='参考值' value='"+(rv*0.7).toFixed(7)+"'/></td>";
+				h += "<td><input type='text'  placeholder='参考值' value='"+(rv*0.5).toFixed(7)+"'/></td>";
+				h += "<td><input type='text'  placeholder='参考值' value='"+(rv*0.3).toFixed(7)+"'/></td>";
+				h += "<td><input type='text'  placeholder='指标值'/></td>";
+				h += "<td><input type='text'  placeholder='匹配权重'/></td>";
+				h += "<td><input type='text'  placeholder='得分'/></td>";
+				h += "<td><span style='color:red;cursor:pointer' >X</span></td>";
+				h += "</tr>";
+			  }
+			 
+			$("#tbody_"+type).append(h);
+		  });
+		
+		
+	}
+	if(type==3)
+	{
+		var num = $("#thead_"+type).find("textarea").size();
+		var rindex = $("#tbody_3").children().length;
+		var h = "<tr onclick='delRow(this,event,3)'>";
+		h+="<td><input type='text'  placeholder='权重'/><span style='color:red;cursor:pointer' >X</span></td>";
+		for(var i=0;i<num;i++)
+		{
+			h+="<td><select onchange='changeColor(this)'><option value='0' selected>否</option><option value='1'>是</option></select></td>";
+		}
+		h += "</tr>";
+		$("#tbody_"+type).append(h);
+	}
+	if(type==2)
+	{
+		var h = "<tr onclick='delRow(this,event,2)'>";
+		h+="<td><input type='text' style='width:150' placeholder='名称'/></td>";
+		h+="<td><input type='text'  placeholder='总分'/></td>";
+		h+="<td><input type='text'  placeholder='匹配权重'/></td>";
+		h+="<td><input type='text'  placeholder='得分'/></td>";
+		h += "<td><span style='color:red;cursor:pointer' >X</span>&nbsp|&nbsp<span style='color:red;cursor:pointer' >M</span></td>";
+		h += "</tr>";
+		$("#tbody_"+type).append(h);
+	}
+}
+function addFZCondition()
+{
+	var c = $("#fz_condition").val();
+	if(c=="") 
+	{
+		alert("条件不可以为空!");
+		return;
+	}
+	var cindex = $("#thead_3").find("textarea").size();
+	var h = "<th onclick='delColumn(this,event)'><textarea  style='width:100px;height:80px'>"+c+"</textarea><span style='color:red;cursor:pointer' >X</span></th>";
+	$("#thead_3_tr").append(h);
+	var ca = $("#tbody_3").children();
+	for(var i=0;i<ca.length;i++)
+	{
+		var cr = ca[i];
+		var hd="<td><select><option value='0' selected>否</option><option value='1'>是</option></select></td>";
+		$(cr).append(hd);
+	}
+	
+}
+function clearFZCondition()
+{
+	$("#fz_condition").val("");
+}
+function delColumn(obj,event)
+{
+	if(event.target.textContent=="X")
+	{
+		var colnum = $(obj).closest("th").prevAll("th").length+1;
+	   $("#tbody_3").find("tr td:nth-child(" + colnum + ")").remove();
+	   $(obj).remove();
+	}
+	
+}
+function delRow(obj,event,type)
+{
+	if(event.target.textContent=="X")
+	{
+		if(type==3) 
+		{
+			$(obj).remove();
+			return;
+		}
+		var name = $(obj).find("td:nth-child(1)")[0].firstChild.value;
+		if(name=="")
+		{
+			alert("删除项的名字不可以空");
+			return;
+		}
+		var id = $("#cfsid").val();
+		var data={
+			name:name.split(":")[0],
+			type:type,
+			id:id
+		};
+		$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+		$.post("/cfscore/delCfScoreRuleByKey",data, function(result){
+				if(!result.success)	 
+				  {
+					alert("操作失败！");
+					return 
+				  }
+				  else
+				  {
+					  alert("操作成功！"); 
+					  $(obj).remove();
+				  }
+			  });
+	}
+		
+}
+function saveCfscore(type)
+{
+	var id = $("#cfsid").val();
+	var bcfs = new Array();
+	if(type==1||type==0)
+	{
+		//取基本指标值
+		var bca = $("#tbody_"+type).children();
+		for(var i=0;i<bca.length;i++)
+		{
+			var cr = bca[i];
+			var indexs = $(cr).find("td")[0].firstChild.value;
+			var score = $(cr).find("td")[2].firstChild.value;
+			if(indexs==""||score=="") 
+			{
+				alert("指标名或分数不可以为空");
+				$("#fz_name").focus();
+				return;
+			}
+			var rule= $(cr).find("td")[3].firstChild.value+"^";
+				rule+=$(cr).find("td")[4].firstChild.value+"^";
+				rule+=$(cr).find("td")[5].firstChild.value+"^";
+				rule+=$(cr).find("td")[6].firstChild.value+"^";
+				rule+=$(cr).find("td")[7].firstChild.value;
+			bcfs.push({
+				id:id,
+				indexname : indexs.split(":")[0],
+				indexcode : indexs.split(":")[1],
+				score : score,
+				rule : rule,
+				type:type
+			});
+		}
+	}
+	if(type==3)
+	{
+		var name = $("#fz_name").val();
+		var score = $("#fz_score").val();
+		if(name==""||score=="") 
+		{
+			alert("项目名或分数不可以为空");
+			$("#fz_name").focus();
+			return;
+		}
+		var cl = $("#thead_3").find("textarea").size();
+		var fzrules="";
+		for(var j=0;j<cl;j++)
+		{
+			var cr = $("#thead_3").find("textarea")[j];
+			var rule = cr.value;
+			if(rule=="") continue;
+			fzrules+=rule;
+			fzrules+="^";
+		}
+		fzrules+="~";
+		var bca = $("#tbody_"+type).children();
+		for(var i=0;i<bca.length;i++)
+		{
+			var cr = bca[i];
+			var tda = $(cr).children();
+			var v0 = tda[0].firstChild.value;
+			if(v0=="") continue;
+			for(var k=0;k<tda.length;k++)
+			{
+				fzrules+=tda[k].firstChild.value;
+				fzrules+="^";
+			}
+			fzrules+="~";
+		}
+		bcfs.push({
+				id:id,
+				indexname : name,
+				indexcode : "",
+				score : score,
+				rule : fzrules,
+				type:2
+			});
+	}
+	var data = {
+		cfsrule:JSON.stringify(bcfs)
+	}
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.post("/cfscore/updateCfScoreRule",data, function(result){
+		  if(!result.success)	 
+		  {
+			alert("操作失败！");
+			return 
+		  }
+		  else
+		  {
+			  alert("操作成功！"); 
+			  var id = $("#cfsid").val();
+			  queryCfscoreRule(id);
+		  }
+	  });
+}
+function computeAllCompanyOfTag()
+{
+	var id = $("#cfsid").val();
+	var tag = $("#tag_input").val();
+	var data ={
+		tag:tag,
+		id:id
+	};
+	$.ajaxSetup({contentType:"application/x-www-form-urlencoded; charset=UTF-8"});
+	$.getScript("/cfscore/computeTagAllCompanysCfscore?"+$.param(data), function(result){
+		  if(allcfsret!=null)	 
+		  {
+			$("#result_all_companys").empty();
+			var ra = allcfsret;
+			for(var i=0;i<ra.length;i++)
+			{
+				var s = ra[i].result;
+				var name = ra[i].name;
+				var code = ra[i].code;
+				$("#result_all_companys").append((i+1)+".<a href='#' onclick=\"openUrl(0,'"+name+"','"+code+"');return false;\">"+s+"</a>&nbsp&nbsp<a href='#' onclick=\"openUrl(1,'"+name+"','"+code+"');return false;\">TX</a><br/>");
+			}
+			return 
+		  }
+		 
+	  });
+}
+function openUrl(type,companyname,companycode)
+{
+	if(type=='0')
+	{
+			var scompanycode = companycode.split(".")[0];
+			window.open("http://192.168.1.3:8888/company_main.html?companycode="+companycode+"&companyname="+escape(companyname));
+	}
+	if(type=='1')
+	{
+			var scompanycode = companycode.split(".")[0];
+			window.open("http://stockhtm.finance.qq.com/sstock/ggcx/"+scompanycode+".shtml");
+	}
+}
+</script>
+<style>
+table td{
+	border:1px solid #ccc
+}
+table th{
+	border:1px solid #ccc;
+	background:#3cf
+}
+table td input{
+	width:60
+}
+</style>
+</head>
+<body style="height:2000">
+<div id="header">
+</div>
+类型：<select id="cfsid" >
+						<option selected="" value="-1">所有评分</option>
+						<option selected="" value="1">盈利状况</option>
+						<option value="2">成长状况</option>
+						<option value="3">运营状况</option>
+						<option value="4">偿债能力</option>	
+</select>测试：<input type="text" id="testcompany" placeholder="请输入公司"/>总分：<strong style="color:red" id="sumscore"></strong><br/>
+
+<div  style="float:left;margin:10;border:1px solid #ccc;width:770px;" >
+<strong style="color:red">基本指标</strong>：<input type="text" id="add_index_0" placeholder="请输入指标"/><input type="button" onclick="addOneRow(0)" value="增加一行"/>
+<input type="button" onclick="saveCfscore(0)" style="color:red" value="保存"/><br/>
+	<div style="width:761px;margin:5">
+		<table style="width:100%;font-size:14px">
+		<thead id="thead_0">
+			<tr>
+				<th>指标</th><th>参考值</th><th>权重</th><th>优秀（1）</th><th>良好（0.8）</th><th>一般（0.6）</th><th>较差（0.4）</th><th>差（0.2）</th><th>指标值</th><th>匹配的权重</th><th>得分</th><th>操作</th>
+			</tr>
+		</thead>
+		<tbody id="tbody_0">
+			
+		</tbody>
+		</table>
+	</div>
+	<br/>
+</div><br/>
+
+<div  style="float:left;margin:10;border:1px solid #ccc;width:770px;">
+<strong style="color:red">微调指标：</strong><input type="text" id="add_index_1" placeholder="请输入指标"/><input type="button" onclick="addOneRow(1)" value="增加一行"/>
+<input type="button" onclick="saveCfscore(1)" style="color:red" value="保存"/><br/>
+	<div style="width:761px;margin:5">
+		<table style="width:100%;font-size:14px">
+			<thead id="thead_1">
+			<tr>
+				<th>指标</th><th>参考值</th><th>权重</th><th>优秀（1）</th><th>良好（0.8）</th><th>一般（0.6）</th><th>较差（0.4）</th><th>差（0.2）</th><th>指标值</th><th>匹配的权重</th><th>加权微调系数</th><th>操作</th>
+			</tr>
+			</thead>
+			<tbody id="tbody_1">
+				
+			</tbody>
+		</table>
+	</div>
+<br/>
+</div><br/>
+
+<div  style="float:left;margin:10;border:1px solid #ccc;width:770px;" >
+	<textarea  id="fz_condition" style="width:100%;height:100px" onclick="showVariablePanel(event,'variableBuildDiv',this)"></textarea> 
+	<input type="button" onclick="addFZCondition()" value="增加赋值运算条件"/>
+	<input type="button" onclick="clearFZCondition()" value="清空条件"/>
+	<input type="button" onclick="reset_fz_condition()" value="重置"/><br/>
+	<strong style="color:green">赋值表：</strong><input type="button" onclick="addOneRow(3)" style="color:green" value="增加一行"/><br/>
+	<div style="width:761px;margin:5">
+		<table style="width:100%;font-size:14px">
+		<thead id="thead_3">
+			<tr id="thead_3_tr">
+				<th>
+					权重
+				</th>
+			</tr>
+		</thead>
+		<tbody id="tbody_3">
+		</tbody>
+		</table>
+	</div>
+	项目名：<input type='text' id="fz_name"  placeholder='名称'/>
+	分数：<td><input type='text' id="fz_score"  placeholder='分数'/>
+	<input type="button" onclick="saveCfscore(3)" style="color:red" value="保存赋值表"/>
+	
+	<br/><br/>
+<strong style="color:red">赋值指标：</strong><br/>
+	<div style="width:761px;margin:5">
+		<table style="width:100%;font-size:14px">
+		<thead id="thead_2">
+			<tr>
+				<th>赋值项名</th><th>总分</th><th>匹配的权重</th><th>实际得分</th><th>操作</th>
+			</tr>
+		</thead>
+		<tbody id="tbody_2">
+		</tbody>
+		</table>
+	</div>
+	<!--<input type="button" onclick="addOneRow(3)" value="增加一行"/><br/>-->
+</div>
+<div id="variableBuildDiv" style="border-style:solid; border-width:1px;width:319px;display:none;background:gray">
+	指标:<input type="text" name="variableIndexText" id="variableIndexText"  placeholder="请输入指标"/>
+	间隔:<select name="v_interval_index" id="v_interval_index" >
+			<option value='-24'>-24</option>
+			<option value='-21'>-21</option>			
+			<option value='-18'>-18</option>		
+			<option value='-15'>-15</option>			
+			<option value='-12'>-12</option>				
+			<option value='-9'>-9</option>				
+			<option value='-6'>-6</option>
+			<option value='-3'>-3</option>
+			<option value='0' selected>0</option>
+			<option value='3'>3</option>
+			<option value='6'>6</option>
+			<option value='9'>9</option>
+			<option value='12'>12</option>
+			<option value='15'>15</option>
+			<option value='18'>18</option>
+			<option value='21'>21</option>
+			<option value='24'>24</option>	
+	</select>
+	<input type="button" id="createIndexVariable" onclick="createIndexVariable()" value="生成"/><br/>
+	<input type="button"  value="(" onclick="appendS('(','fz_condition')">
+	<input type="button"  value=")" onclick="appendS(')','fz_condition')">
+	<input type="button"  value="+" onclick="appendS('+','fz_condition')">
+	<input type="button"  value="-" onclick="appendS('-','fz_condition')">
+	<input type="button"  value="*" onclick="appendS('*','fz_condition')">
+	<input type="button"  value="/" onclick="appendS('/','fz_condition')">
+	<input type="button"  value="&gt" onclick="appendS('&gt','fz_condition')">
+	<input type="button"  value="&lt" onclick="appendS('&lt','fz_condition')">
+	<input type="button"  value="=" onclick="appendS('=','fz_condition')">
+	<input type="button"  value="or" onclick="appendS('||','fz_condition')">
+	<input type="button"  value="and" onclick="appendS('&&','fz_condition')"><br/>
+	
+</div>
+
+<div style="width:761px;margin:5">
+		
+		行业：<input type='text' id="tag_input"  placeholder='行业'/>
+		<input type="button" onclick="computeAllCompanyOfTag()" style="color:red" value="计算行业中所有公司"/><br/>
+		<div id="result_all_companys">
+		
+		</div>
+</div>
+</body>
+
+</html>

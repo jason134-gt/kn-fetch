@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stock.common.model.TableSystemCompanySub" >
+  <resultMap id="BaseResultMap" type="com.stock.common.model.TableSystemCompanySub" >
+    <result column="TABLE_SYSTEM_CODE" property="tableSystemCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TABLE_SYSTEM_CODE, COMPANY_CODE, COMPANY_NAME
+  </sql>
+  <sql id="Base_Where" >
+    <trim prefix=" where " prefixOverrides="AND|OR" >
+      <if test="tableSystemCode != null" >
+          and TABLE_SYSTEM_CODE = #{tableSystemCode,jdbcType=VARCHAR}
+      </if>
+      <if test="companyCode != null" >
+          and COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+      </if>
+      <if test="companyName != null" >
+          and COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+      </if>
+    </trim>
+  </sql>
+  <sql id="Base_Update_Set" >
+    <set >
+      <if test="tableSystemCode != null" >
+        TABLE_SYSTEM_CODE = #{tableSystemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+  <insert id="insert" parameterType="com.stock.common.model.TableSystemCompanySub" >
+    insert into t_table_system_company_sub (TABLE_SYSTEM_CODE, COMPANY_CODE, COMPANY_NAME
+      )
+    values (#{tableSystemCode,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.stock.common.model.TableSystemCompanySub" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_table_system_company_sub
+    <include refid="Base_Where" />
+  </select>
+  <select id="selectList" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_table_system_company_sub
+    <include refid="Base_Where" />
+    <if test="queryParam.sort != null" >
+       order by ${queryParam.sort} ${queryParam.dir} 
+    </if>
+     limit ${queryParam.start},${queryParam.limit} 
+  </select>
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="com.stock.common.model.TableSystemCompanySub" >
+    select count(*)
+    from t_table_system_company_sub
+    <include refid="Base_Where" />
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.stock.common.model.TableSystemCompanySub" >
+    update t_table_system_company_sub
+    <include refid="Base_Update_Set" />
+  </update>
+  <update id="update" parameterType="com.stock.common.model.TableSystemCompanySub" >
+    update t_table_system_company_sub
+    <include refid="Base_Update_Set" />
+    <include refid="Base_Where" />
+  </update>
+  
+   <!-- 加载数据到缓存-->
+   <select id="loadtableSystemCompanySub2cache" resultMap="BaseResultMap" parameterType="map" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_table_system_company_sub
+  </select>
+</mapper>
