@@ -1,0 +1,11 @@
+{
+  "defaultModel": "deepseek-v3",
+  "reasoningModel": "deepseek-r1",
+  "mcp.enabled": true,
+  "mcp.autoStart": true,
+  "sandbox.enabled": true,
+  "sandbox.autoAllowBashIfSandboxed": true,
+  "sandbox.network.allowLocalBinding": true,
+  "permissions.defaultMode": "acceptEdits",
+  "agents.autoLoad": true
+}

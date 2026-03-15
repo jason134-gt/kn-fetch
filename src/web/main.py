@@ -10,8 +10,8 @@ from datetime import datetime
 from typing import Dict, Any
 import json
 
-from src.infrastructure.config_manager import get_config_manager
-from src.core.workflow_engine import get_workflow_engine
+from src.extract.infrastructure.config_manager import get_config_manager
+from src.extract.core.workflow_engine import get_workflow_engine
 
 
 def create_web_app():
