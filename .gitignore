@@ -177,3 +177,4 @@ temp/
 /knowledge_graph.json
 .gitnexus_cache.db
 _*.md
+-e \"\n# Node.js\nnode_modules/\npackage-lock.json\n.vite/\ndist/\" 

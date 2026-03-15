@@ -1,0 +1,101 @@
+/* Dashboard 样式 */
+.dashboard {
+  padding: 0;
+}
+
+.statCard {
+  height: 100%;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.statCardContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statIcon {
+  font-size: 48px;
+  opacity: 0.8;
+}
+
+.statValue {
+  flex: 1;
+}
+
+.taskCard {
+  height: 100%;
+  
+  .ant-card-head {
+    border-bottom: none;
+  }
+  
+  .ant-card-body {
+    padding-top: 0;
+  }
+}
+
+.taskList {
+  .taskItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+/* RefactorReport 样式 */
+.refactorReport {
+  padding: 0;
+}
+
+.overviewCard {
+  margin-bottom: 16px;
+}
+
+.reportTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.reportMeta {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.problemListCard {
+  margin-top: 16px;
+}
+
+.filterBar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.changeLog {
+  margin-top: 16px;
+  padding: 16px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
